@@ -16,6 +16,9 @@ module.exports = {
         GreenHerb : "#A6D577",
         IjoRumput : "#85997D",
       },
+      backgroundImage: {
+        'gradient-radial' : 'radial-gradient(var(--tw-gradient-stops))',
+      },
     },
   },
   plugins: [],
