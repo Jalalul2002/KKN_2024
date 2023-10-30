@@ -56,7 +56,7 @@ export default function Home() {
             </div>
           </div>
           <ArrowLeftCircleIcon className="w-5 md:w-10 absolute top-[45%] opacity-10 hover:opacity-20 cursor-pointer left-5" onClick={prevSlide}/>
-          <ArrowRightCircleIcon className="w-5 md:w-10 absolute top-[45%] opacity-10 hover:opacity-20 cursor-pointer right-5" onClick={prevSlide}/>
+          <ArrowRightCircleIcon className="w-5 md:w-10 absolute top-[45%] opacity-10 hover:opacity-20 cursor-pointer right-5" onClick={nextSlide}/>
         </section>
 
         {/* Tengah */}
