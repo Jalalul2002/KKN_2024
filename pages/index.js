@@ -8,13 +8,16 @@ export default function Home() {
 
   const imageSlides = [
     {
-      url: "/images/uin.svg"
+      url: "/images/Kampus2Depan.jpeg"
     },
     {
-      url: "/images/1.png"
+      url: "/images/1.jpeg"
     },
     {
-      url: "/images/2.png"
+      url: "/images/2.jpg"
+    },
+    {
+      url: "/images/3.jpg"
     },
   ];
 
@@ -40,9 +43,9 @@ export default function Home() {
       <main className="py-12 px-4">
         {/* Atas */}
         <section className="mt-[-50px] mx-[-16px]">
-          <div className="h-[160px] w-full bg-gradient-to-b from-IjoRumput to-transparent absolute z-10"></div>
+          <div className="h-[240px] w-full bg-gradient-to-b from-IjoRumput to-transparent absolute z-10"></div>
           <div style={{ backgroundImage: `url(${imageSlides[currentIndex].url})` }} className="text-left p-4 md:text-right pt-32 md:pt-[360px] w-full bg-center bg-cover duration-300 relative">
-            <div className="absolute w-[320px] h-[220px]  bg-[#80B156]/40 blur-3xl md:w-[860px] md:h-[320px] md:ml-auto md:right-0 rounded-[10%]"></div>
+            <div className="absolute w-[320px] h-[220px]  bg-[#80B156]/30 blur-3xl md:w-[860px] md:h-[320px] md:ml-auto md:right-0 rounded-[10%]"></div>
             <div className="relative md:-mr-4 md:pr-12 md:py-10 md:w-[920px] md:ml-auto">
               <h1 className="font-bold md:font-extrabold text-6xl md:text-8xl text-white">Kuliah Kerja Nyata</h1>
               <h3 className="font-medium text-white flex flex-col text-base md:text-3xl leading-4 md:leading-9 mt-4 md:mt-9 pb-12 md:pb-4">
