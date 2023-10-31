@@ -2,6 +2,7 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { Bars3Icon } from "@heroicons/react/24/solid";
 import {XMarkIcon} from "@heroicons/react/24/solid"
+import Image from "next/image";
 
 export default function Header (){
     const [mobileNav, setMobileNav] = useState(false);
@@ -33,7 +34,12 @@ export default function Header (){
             <div className="py-1 md:py-2 px-4 max-w-screen-xl mx-auto flex flex-row flex-wrap justify-between items-center md:max-w-3xl xl:max-w-7xl">
                 <div >
                     <Link href="/" className="flex items-center py-2 space-x-2 md:space-x-4">
-                        <img src="/logo-uin.png" className="w-6 md:w-8 "/>
+                        <Image 
+                            src="/logo-uin.png"
+                            alt="Logo UIN"
+                            width={48}
+                            height={48}
+                        />
                         <span>
                         <p className="md:leading-5 text-[7px] md:text-[13px] font-semibold text-white">Lembaga Penelitian dan Pengabdian Kepada Masyarakat</p>
                         <p className="md:leading-3 text-[10px] md:text-lg font-extrabold text-white">UIN SUNAN GUNUNG DJATI BANDUNG</p>
