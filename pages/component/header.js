@@ -29,7 +29,7 @@ export default function Header (){
       }, []);
 
     return(
-        <header className="fixed w-full z-50 bg-GreenHerb shadow-sm md:bg-transparent md:shadow-none ">
+        <header className={navbarBackground ? 'fixed w-full z-50 bg-IjoRumput shadow-md transition ease-in-out duration-500': 'fixed w-full z-50 bg-transparent shadow-none transition ease-in-out duration-500'}>
             <div className="py-1 md:py-2 px-4 max-w-screen-xl mx-auto flex flex-row flex-wrap justify-between items-center md:max-w-3xl xl:max-w-7xl">
                 <div>
                     <Link href="/" className="flex items-center py-2 space-x-2 md:space-x-4">
