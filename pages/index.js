@@ -1,5 +1,5 @@
 import Map from "./component/Map";
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import Header from "./component/header";
 import { ArrowRightCircleIcon, ArrowLeftCircleIcon } from "@heroicons/react/24/solid"
 import Image from "next/image";
@@ -22,6 +22,7 @@ export default function Home() {
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [autoSLideInterval, setAutoSlideInterval] = useState(null);
 
   const prevSlide = ()=> {
     const isFirstSlide = currentIndex === 0;
@@ -35,6 +36,18 @@ export default function Home() {
     setCurrentIndex(newIndex);
   }
 
+  useEffect(() => {
+    const interval =setInterval(() => {
+      nextSlide();
+    }, 5000);
+
+    setAutoSlideInterval(interval);
+
+    return () => {
+      clearInterval(autoSLideInterval);
+    }
+
+  }, [currentIndex]);
 
   return (
     <>
@@ -55,8 +68,6 @@ export default function Home() {
               </h3>
             </div>
           </div>
-          <ArrowLeftCircleIcon className="w-5 md:w-10 absolute top-[45%] opacity-10 hover:opacity-20 cursor-pointer left-5" onClick={prevSlide}/>
-          <ArrowRightCircleIcon className="w-5 md:w-10 absolute top-[45%] opacity-10 hover:opacity-20 cursor-pointer right-5" onClick={nextSlide}/>
         </section>
 
         {/* Tengah */}
