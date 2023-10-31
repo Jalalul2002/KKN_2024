@@ -2,7 +2,6 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { Bars3Icon } from "@heroicons/react/24/solid";
 import {XMarkIcon} from "@heroicons/react/24/solid"
-import Image from "next/image";
 
 export default function Header (){
     const [mobileNav, setMobileNav] = useState(false);
@@ -32,14 +31,9 @@ export default function Header (){
     return(
         <header className={navbarBackground ? 'fixed w-full z-50 bg-IjoRumput shadow-md transition ease-in-out duration-500': 'fixed w-full z-50 bg-transparent shadow-none transition ease-in-out duration-500'}>
             <div className="py-1 md:py-2 px-4 max-w-screen-xl mx-auto flex flex-row flex-wrap justify-between items-center md:max-w-3xl xl:max-w-7xl">
-                <div >
+                <div>
                     <Link href="/" className="flex items-center py-2 space-x-2 md:space-x-4">
-                        <Image 
-                            src="/logo-uin.png"
-                            alt="Logo UIN"
-                            width={48}
-                            height={48}
-                        />
+                        <img src="/logo-uin.png" alt="Logo UIN" className="w-5 md:w-8"/>
                         <span>
                         <p className="md:leading-5 text-[7px] md:text-[13px] font-semibold text-white">Lembaga Penelitian dan Pengabdian Kepada Masyarakat</p>
                         <p className="md:leading-3 text-[10px] md:text-lg font-extrabold text-white">UIN SUNAN GUNUNG DJATI BANDUNG</p>
