@@ -1,7 +1,6 @@
 import Map from "./component/Map";
 import React, { useState, useEffect } from "react";
 import Header from "./component/header";
-import Image from "next/image";
 import Link from "next/link";
 import instagramIcon from "./component/svgs/instagram";
 import youtubeIcon from "./component/svgs/youtube";
@@ -55,7 +54,7 @@ export default function Home() {
 
   const icons = [
     {
-      href: "/",
+      href: "https://www.instagram.com/lp2m.sgdofficial/",
       icon: instagramIcon,
     },
     {
@@ -65,7 +64,24 @@ export default function Home() {
     {
       href: "/",
       icon: websiteIcon,
-    }
+    },
+  ];
+
+  const kampuss = [
+    {
+      kampus: "KAMPUS 1",
+      jalan:
+        "Jalan A.H. Nasution No. 105, Cipadung, Cibiru, Kota Bandung, Jawa Barat 40614",
+    },
+    {
+      kampus: "KAMPUS 2",
+      jalan:
+        "Jalan Cimencrang, Panyileukan, Cimencrang, Gedebage, Kota Bandung, Jawa Barat 40292",
+    },
+    {
+      kampus: "KAMPUS 3",
+      jalan: "Jalan Cileunyi Kabupaten Bandung, Jawa Barat 40292",
+    },
   ];
 
   return (
@@ -148,42 +164,31 @@ export default function Home() {
           </div>
         </section>
       </main>
-      <footer className="mt-5">
-        <div className="bg-IjoRumput flex flex-row flex-wrap px-4 py-10 space-y-6 md:space-y-0 xl:space-y-2 md:px-20 xl:px-32 xl:py-12 justify-between ">
+      <footer className="mt-5 text-base md:text-lg font-medium">
+        <div className="bg-IjoRumput flex flex-row flex-wrap px-6 py-10 space-y-6 md:space-y-0 xl:space-y-4 md:px-20 xl:px-32 xl:py-12 justify-between ">
           <div className="w-1/7">
-            <Image
+            <img
               src="/logo-uin.png"
-              width="153"
-              height="232"
-              alt="Logo UIN SGD BDG"
+              alt="Logo Uin Bandung"
+              className="w-24 md:w-40"
             />
           </div>
-          <div className="md:w-1/3 xl:w-1/2 md:pl-3 space-y-2 xl:space-y-5">
-            <div>
-              <h1>KAMPUS 1</h1>
-              <p>
-                Jalan A.H. Nasution No. 105, Cipadung, Cibiru, Kota Bandung,
-                Jawa Barat 40614
-              </p>
-            </div>
-            <div>
-              <h1>KAMPUS 2</h1>
-              <p>
-                Jalan Cimencrang, Panyileukan, Cimencrang, Gedebage, Kota
-                Bandung, Jawa Barat 40292
-              </p>
-            </div>
-            <div>
-              <h1>KAMPUS 3</h1>
-              <p>Jalan Cileunyi Kabupaten Bandung, Jawa Barat 40292</p>
-            </div>
+          <div className="md:w-1/3 xl:w-1/2 md:pl-3 space-y-2 xl:space-y-4">
+            {kampuss.map((kampus, index) => (
+              <div key={index}>
+                <h1 className="font-bold text-lg md:text-xl">{kampus.kampus}</h1>
+                <p className="text-base md:text-lg">{kampus.jalan}</p>
+              </div>
+            ))}
           </div>
-          <div className="w-1/3">
-            <h1>Media Sosial</h1>
-            <p>Ikuti sosial media kami untuk medapatkan informasi terbaru</p>
-            <div>
+          <div className="1/2 md:w-1/3">
+            <h1 className="font-bold text-lg md:text-xl">MEDIA SOSIAL</h1>
+            <p className="text-base md:text-lg">Ikuti sosial media kami untuk medapatkan informasi terbaru</p>
+            <div className="flex flex-row space-x-1 md:space-x-0 items-center py-1">
               {icons.map((icon, index) => (
-                <Link key={index} href={icon.href}><icon.icon/></Link>
+                <Link key={index} href={icon.href} >
+                  <icon.icon className="w-7 md:w-12"/>
+                </Link>
               ))}
             </div>
           </div>

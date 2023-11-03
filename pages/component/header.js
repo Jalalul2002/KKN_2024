@@ -49,7 +49,7 @@ export default function Header (){
                             <Link href={"/sebaran"} className={navbarBackground ? "text-white hover:text-[#8FBB63] px-2 py-3 transition ease-in-out duration-200" : "text-black hover:text-[#8FBB63] px-2 py-3 transition ease-in-out duration-200"}>Peta Sebaran</Link>
                         </li>
                     </ul>
-                    <Link href={"/login"} className={navbarBackground ? "text-black bg-white py-2 md:py-3 px-4 md:px-8 rounded-lg hover:bg-[#e5e2e2] text-[10px] md:text-lg transition ease-in-out duration-200" : "text-black bg-GreenHerb py-2 md:py-3 px-4 md:px-8 rounded-lg hover:bg-[#8FBB63] text-[10px] md:text-lg transition ease-in-out duration-200"}>Login</Link>
+                    <Link href={"/login"} className={navbarBackground ? "text-black bg-white py-1 md:py-3 px-3 md:px-8 rounded-lg hover:bg-[#e5e2e2] text-[10px] md:text-lg transition ease-in-out duration-200" : "text-black bg-GreenHerb py-1 md:py-3 px-3 md:px-8 rounded-lg hover:bg-[#8FBB63] text-[10px] md:text-lg transition ease-in-out duration-200"}>Login</Link>
                     <button className="md:hidden p-2 cursor-pointer" onClick={handleMobileNav}>
                         <Bars3Icon className="w-6 h-6"/>
                     </button>
