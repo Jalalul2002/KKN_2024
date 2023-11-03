@@ -33,7 +33,7 @@ export default function Header (){
             <div className="py-1 md:py-2 px-4 max-w-screen-xl mx-auto flex flex-row flex-wrap justify-between items-center md:max-w-3xl xl:max-w-7xl">
                 <div>
                     <Link href="/" className="flex items-center py-2 space-x-2 md:space-x-4">
-                        <img src="/logo-uin.png" alt="Logo UIN" className="w-5 md:w-8"/>
+                        <img src="/nav-logo.png" alt="Logo UIN" className="w-5 md:w-8"/>
                         <span>
                         <p className="md:leading-5 text-[7px] md:text-[13px] font-semibold text-white">Lembaga Penelitian dan Pengabdian Kepada Masyarakat</p>
                         <p className="md:leading-3 text-[10px] md:text-lg font-extrabold text-white">UIN SUNAN GUNUNG DJATI BANDUNG</p>
