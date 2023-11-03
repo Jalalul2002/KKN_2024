@@ -58,11 +58,11 @@ export default function Home() {
       icon: instagramIcon,
     },
     {
-      href: "/",
+      href: "https://www.youtube.com/@lp2muinsgdbandung791",
       icon: youtubeIcon,
     },
     {
-      href: "/",
+      href: "https://lp2m.uinsgd.ac.id/",
       icon: websiteIcon,
     },
   ];
@@ -186,7 +186,7 @@ export default function Home() {
             <p className="text-base md:text-lg">Ikuti sosial media kami untuk medapatkan informasi terbaru</p>
             <div className="flex flex-row space-x-1 md:space-x-0 items-center py-1">
               {icons.map((icon, index) => (
-                <Link key={index} href={icon.href} >
+                <Link key={index} href={icon.href} target="blank">
                   <icon.icon className="w-7 md:w-12"/>
                 </Link>
               ))}
