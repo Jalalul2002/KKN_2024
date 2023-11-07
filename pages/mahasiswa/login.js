@@ -1,5 +1,7 @@
 import Header from "../component/header";
 import Link from "next/link";
+import MyImage from "../../public/images/Group 9.png"
+import Image from "next/image";
 
 export default function Login (){
     
@@ -7,7 +9,7 @@ export default function Login (){
 
         <>
         <div className="h-full w-full flex">
-          <div className="h-[760px] w-1/4 bg-IjoRumput ">
+          <div className="h-screen relative z-0 w-full bg-IjoRumput ">
             
               <div className="pl-6 pt-8">
                <img
@@ -24,7 +26,7 @@ export default function Login (){
 
           </div>
 
-          <div className="h-[760px] w-full bg-[#D9D9D9]">
+          <div className="h-[680px] rounded-bl-md w-3/4 right-0 absolute z-10 bg-[#D9D9D9]">
 
             <div className="relative flex flex-col items-center justify-center min-h-screen overflow-hidden">
               {/* <div className="w-full p-6 bg-[#D9D9D9] rounded-md shadow-md lg:max-w-xl"> */}
@@ -37,13 +39,14 @@ export default function Login (){
                 <form className="mt-6 w-1/5">
                   <div className="mb-4">
                     <label
-                      htmlFor="email"
+                      htmlFor="username"
                       className="block text-sm font-semibold text-gray-800"
                     >
                       Username
                     </label>
                     <input
-                      type="email"
+                      type="text"
+                      placeholder="Username"
                       className="block w-full px-4 py-2 mt-2 text-gray-700 bg-[#D9D9D9] border rounded-md focus:border-gray-400 focus:ring-gray-300 focus:outline-none focus:ring focus:ring-opacity-40"
                     />
                   </div>
@@ -72,7 +75,7 @@ export default function Login (){
                   </div>
                 </form>
 
-                <p className="mt-4 text-sm text-center text-gray-700">
+                {/* <p className="mt-4 text-sm text-center text-gray-700">
                   Don't have an account?{" "}
                   <Link
                   href="/signup"
@@ -80,24 +83,17 @@ export default function Login (){
                   >
                     Sign up
                   </Link>
-                </p>
+                </p> */}
               {/* </div> */}
             </div>
 
           </div>
 
+          <div className="absolute z-20 translate-y-[300px] translate-x-32">
+            <Image src={MyImage} alt="" className="w-[530px] h-[394px]" />
+          </div>
+
         </div>
-          
-
-         
-
-
-          {/* <div style={{ backgroundImage: `url(/images/bg-mahasiswa.png)` }} className=" md:pt-[380px] w-full bg-center bg-cover duration-300 relative">
-            <div className="flex justify-center">
-                <img src="/images/user-logo.png" />
-                </div>
-          </div> */}
-          {/* <div className="w-full bg-[#85997D] h-[90px]"></div> */}
 
                 
 
