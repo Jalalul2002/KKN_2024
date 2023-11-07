@@ -1,15 +1,18 @@
-export default function Login (){
-    return(
-        <div>
-            <div>
-                <h1>KULIAH KERJA NYATA</h1>
-            </div>
-            <div>
+export default function MahasiswaLoginPage() {
 
-            </div>
+  return (
+      <div>
+        <h1>Mahasiswa Dashboard</h1>
+        <div>
+          {/* <button onClick={handleLogout}>Logout</button> */}
+          <div>
             <div>
-                KKN UIN SGD 2024
+              <h1>KULIAH KERJA NYATA</h1>
             </div>
+            <div></div>
+            <div>KKN UIN SGD 2024</div>
+          </div>
         </div>
-    );
+      </div>
+  );
 }
