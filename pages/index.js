@@ -28,12 +28,6 @@ export default function Home() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [autoSLideInterval, setAutoSlideInterval] = useState(null);
 
-  const prevSlide = () => {
-    const isFirstSlide = currentIndex === 0;
-    const newIndex = isFirstSlide ? imageSlides.length - 1 : currentIndex - 1;
-    setCurrentIndex(newIndex);
-  };
-
   const nextSlide = () => {
     const isLastSlide = currentIndex === imageSlides.length - 1;
     const newIndex = isLastSlide ? 0 : currentIndex + 1;
@@ -146,7 +140,6 @@ export default function Home() {
                   Apa itu KKN?
                 </h2>
                 <p>
-                  {" "}
                   KKN merupakan kepanjangan dari Kuliah Kerja Nyata. Ini
                   merupakan program mahasiswa untuk mengabdi kepada masyarakat
                   dengan pendekatan lintas keilmuan dan sektoral dalam kurun

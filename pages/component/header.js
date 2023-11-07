@@ -43,17 +43,17 @@ export default function Header (){
                 <div className="w-max flex items-center md:space-x-10 space-x-2 font-bold text-lg">
                     <ul className="hidden md:flex flex-row md:space-x-4">
                         <li>
-                            <Link href={"/"} className={navbarBackground ? "text-white hover:text-[#8FBB63] px-2 py-3 active:text-[#8FBB63] focus:text-[#8FBB63] transition ease-in-out duration-200" : "text-black hover:text-[#8FBB63] px-2 py-3 active:text-[#8FBB63] focus:text-[#8FBB63] transition ease-in-out duration-200"}>Beranda</Link>
+                            <Link href={"/"} className={navbarBackground ? "text-white hover:text-[#8FBB63] px-2 py-3 active:text-[#8FBB63] focus:text-[#8FBB63] transition ease-in-out duration-200 active" : "text-black hover:text-[#fff] px-2 py-3 active:text-[#fff] focus:text-[#8FBB63] transition ease-in-out duration-200 active"}>Beranda</Link>
                         </li>
                         <li>
-                            <Link href={"/sebaran"} className={navbarBackground ? "text-white hover:text-[#8FBB63] px-2 py-3 transition ease-in-out duration-200" : "text-black hover:text-[#8FBB63] px-2 py-3 transition ease-in-out duration-200"}>Peta Sebaran</Link>
+                            <Link href={"/sebaran"} className={navbarBackground ? "text-white hover:text-[#8FBB63] px-2 py-3 active:text-[#8FBB63] transition ease-in-out duration-200" : "text-black hover:text-[#fff] px-2 py-3 active:text-[#fff] transition ease-in-out duration-200"}>Peta Sebaran</Link>
                         </li>
                     </ul>
                     <Link href={"/login"} className={navbarBackground ? "text-black bg-white py-1 md:py-3 px-3 md:px-8 rounded-lg hover:bg-[#e5e2e2] text-[10px] md:text-lg transition ease-in-out duration-200" : "text-black bg-GreenHerb py-1 md:py-3 px-3 md:px-8 rounded-lg hover:bg-[#8FBB63] text-[10px] md:text-lg transition ease-in-out duration-200"}>Login</Link>
                     <button className="md:hidden p-2 cursor-pointer" onClick={handleMobileNav}>
                         <Bars3Icon className="w-6 h-6"/>
                     </button>
-                    <div className={mobileNav ? 'fixed bg-IjoRumput shadow-md right-0 top-0 w-screen h-screen ease-in duration-300 z-0' : 'absolute top-0 h-screen -right-96 ease-in duration-300 z-0'}>
+                    <div className={mobileNav ? 'fixed bg-IjoRumput shadow-md right-0 top-0 w-screen h-screen ease-in-out duration-200 z-0' : 'absolute top-0 w-screen h-screen -right-[1600px] ease-in-out duration-1000 z-0'}>
                         <div className="text-right px-4 py-3">
                             <button className="md:hidden p-2 cursor-pointer" onClick={handleMobileNav}>
                                 <XMarkIcon className="w-6 h-6 text-white"/>
