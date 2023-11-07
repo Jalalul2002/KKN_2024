@@ -166,12 +166,14 @@ export default function Home() {
       </main>
       <footer className="mt-5 text-base md:text-lg font-medium">
         <div className="bg-IjoRumput flex flex-row flex-wrap px-6 py-10 space-y-6 md:space-y-0 xl:space-y-4 md:px-20 xl:px-32 xl:py-12 justify-between ">
-          <div className="w-1/7">
-            <img
-              src="/logo-uin.png"
-              alt="Logo Uin Bandung"
-              className="w-24 md:w-40"
-            />
+          <div className="w-1/7 flex justify-start">
+            <div>
+              <img
+                src="/logo-uin.png"
+                alt="Logo Uin Bandung"
+                className="w-24 md:w-40 "
+              />
+            </div>
           </div>
           <div className="md:w-1/3 xl:w-1/2 md:pl-3 space-y-2 xl:space-y-4">
             {kampuss.map((kampus, index) => (
