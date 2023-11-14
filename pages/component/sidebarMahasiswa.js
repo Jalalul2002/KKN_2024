@@ -1,50 +1,56 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import dashboardIcon from "./svgs/dashboard";
+import docIcon from "./svgs/doc";
+import profilIcon from "./svgs/profil";
+import homeIcon from "./svgs/home";
+import libIcon from "./svgs/lib";
+import faqIcon from "./svgs/faq";
 
-export default function Sidebar() {
+export default function SidebarMahasiswa() {
   const mahasiswaMenus = [
     {
       id: 1,
       link: "/mahasiswa/dashboard",
       menu: "Dashboard",
-      icon: "Ini Icon",
+      icon: dashboardIcon,
     },
     {
       id: 2,
-      link: "/mahasiswa/dashboard",
+      link: "/mahasiswa/uploadPersyaratan",
       menu: "Upload Persayaratan",
-      icon: "Ini Icon",
+      icon: docIcon,
     },
     {
       id: 3,
-      link: "/mahasiswa/dashboard",
+      link: "/mahasiswa/pendaftaranKKN",
       menu: "Pendaftaran",
-      icon: "Ini Icon",
+      icon: profilIcon,
     },
     {
       id: 4,
-      link: "/mahasiswa/dashboard",
+      link: "/mahasiswa/KKN",
       menu: "KKN",
-      icon: "Ini Icon",
+      icon: homeIcon,
     },
     {
       id: 5,
-      link: "/mahasiswa/dashboard",
+      link: "/mahasiswa/laporan",
       menu: "Laporan KKN",
-      icon: "Ini Icon",
+      icon: libIcon,
     },
     {
       id: 6,
-      link: "/mahasiswa/dashboard",
+      link: "/mahasiswa/faq",
       menu: "FAQ",
-      icon: "Ini Icon",
+      icon: faqIcon,
     },
   ];
 
   return (
     <>
-      <div className="h-[600px] w-56 bg-AbuIjo rounded-e-xl shadow-md text-sm py-3 fixed z-50 mt-10">
+      <div className="md:h-[540px] xl:h-[600px] w-56 bg-iceGray rounded-e-xl shadow-md text-sm py-3 fixed z-50 mt-10">
         <div className="px-8 py-6 text-center">
           <img src="/nav-logo2.png" alt="Logo Uin" className="w-20 h-20 m-auto" />
           <div className="pt-5 px-2">
@@ -55,7 +61,8 @@ export default function Sidebar() {
         <ul>
           {mahasiswaMenus.map((menus, i) => (
             <Link key={i} id={menus.id} href={menus.link}>
-              <li className="px-8 py-3 my-1 font-bold hover:bg-gray-100">
+              <li className="px-8 py-3 my-1 font-medium hover:font-bold hover:bg-hoverGray flex flex-row items-center">
+                <menus.icon className="w-4 h-4 mr-2" />
                 {menus.menu}
               </li>
             </Link>

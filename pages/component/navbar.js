@@ -19,7 +19,7 @@ export default function Navbar() {
   };
 
   return (
-    <div className="absolute right-0 px-20 py-10">
+    <div className="absolute right-0 md:px-10 xl:px-20 py-10 z-50">
       {mahasiswaLogin.map((mahasiswa, i) => (
         <button key={i} onClick={handleProfilNav}>
           <div className="flex flex-row items-center space-x-4">

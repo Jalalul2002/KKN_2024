@@ -14,6 +14,7 @@ export default function Map() {
                 <Popup>
                     Kabupaten Bandung Barat
                 </Popup>
+                
             </Marker>
             <Marker position={[-6.562011114133785, 107.76093560600587]}>
                 <Popup>

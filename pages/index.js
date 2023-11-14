@@ -127,7 +127,7 @@ export default function Home() {
         {/* Bawah */}
         <section className="py-12 px-4">
           <div className="flex flex-row flex-wrap justify-center items-center text-justify space-x-4">
-            <div className="bg-[url('/images/help.png')] w-[240px] md:w-1/3 h-[240px] md:h-[500px] bg-no-repeat bg-contain"></div>
+            <div className="bg-[url('/images/help.png')] w-[240px] md:w-1/3 h-[240px] md:h-[420px] bg-no-repeat bg-contain"></div>
             <div className="w-screen md:w-[55%]">
               <div className="flex flex-row space-x-[2px] md:space-x-4 ml-1 md:ml-0">
                 <div className="w-1 h-1 md:w-4 md:h-4 bg-[#80B156] rounded-full"></div>
