@@ -159,7 +159,7 @@ export default function Home() {
         </section>
       </main>
       <footer className="mt-5 text-base md:text-lg font-medium">
-        <div className="bg-IjoRumput flex flex-row flex-wrap px-6 py-10 space-y-6 md:space-y-0 xl:space-y-4 md:px-20 xl:px-32 xl:py-12 justify-between ">
+        <div className="bg-IjoRumput flex flex-row flex-wrap px-6 py-10 space-y-6 md:space-y-0 xl:space-y-4 md:px-20 xl:px-32 xl:py-16 justify-between ">
           <div className="w-1/7 flex justify-start">
             <div>
               <img
@@ -169,11 +169,11 @@ export default function Home() {
               />
             </div>
           </div>
-          <div className="md:w-1/3 xl:w-1/2 md:pl-3 space-y-2 xl:space-y-4">
+          <div className="md:w-1/3 xl:w-1/2 md:pl-10 space-y-2 xl:space-y-4">
             {kampuss.map((kampus, index) => (
               <div key={index}>
-                <h1 className="font-bold text-lg md:text-xl">{kampus.kampus}</h1>
-                <p className="text-base md:text-lg">{kampus.jalan}</p>
+                <h1 className="font-bold text-base md:text-lg">{kampus.kampus}</h1>
+                <p className="text-sm md:text-base">{kampus.jalan}</p>
               </div>
             ))}
           </div>
