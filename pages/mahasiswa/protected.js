@@ -19,7 +19,8 @@ export default function Protected() {
     <div>
       Welcome, {session.user.name}! <br/>
       <button onClick={handleLogout}>Logout</button> <br/>
-      <Link href="/mahasiswa/display">Display</Link>
+      <Link href="/mahasiswa/display">Display</Link><br/>
+      <Link href="/mahasiswa/testing/editform">Edit Form</Link>
     </div>
     );
   }

@@ -13,7 +13,10 @@ const forgotPassword = () => {
             <Image src={StoriImage} alt="tetxt" />
             
             <div className="flex justify-center">
-                <h1 className="py-1 px-4 bg-[#85997D] text-[#FFFFFF] justify-items-center font-bold ">08279847502</h1>
+                <h1 className="py-1 px-4 bg-[#85997D] text-[#FFFFFF] justify-items-center font-bold ">082XXXXXXXXX</h1>
+            </div>
+            <div className="flex justify-center pt-5">
+            <Link href='../mahasiswa/login' className="bg-[#85997D] px-4 py-1  hover:bg-[#8FBB63]  justify-items-center font-bold">Kembali</Link>
             </div>
 
             <h6 className="flex justify-center py-9 font-bold font-serif">KKN UIN SGD 2024</h6>
