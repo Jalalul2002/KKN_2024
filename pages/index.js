@@ -96,7 +96,7 @@ export default function Home() {
                 Kuliah Kerja Nyata
               </h1>
               <h3 className="font-medium text-white flex flex-col text-base md:text-3xl leading-4 md:leading-9 mt-4 md:mt-9 pb-12 md:pb-4">
-                <span>Assalamu&apos;alaikum</span>
+                <span className="font-bold md:text-4xl">Assalamu&apos;alaikum</span>
                 <span>
                   Selamat Datang di Situs Resmi Kuliah Kerja Nyata (KKN)
                 </span>
@@ -136,7 +136,7 @@ export default function Home() {
                 <div className="w-1 h-1 md:w-4 md:h-4 bg-[#C1D95F] rounded-full"></div>
               </div>
               <div className="font-medium text-lg md:text-2xl">
-                <h2 className="font-extrabold text-3xl md:text-5xl mb-3 md:mb-7">
+                <h2 className="font-extrabold text-3xl md:text-4xl mb-3 md:mb-7">
                   Apa itu KKN?
                 </h2>
                 <p>
@@ -146,6 +146,7 @@ export default function Home() {
                   waktu tertentu. Biasanya KKN dilakukan selama 1 atau 2 bulan
                   di sebuah desa atau wilayah setingkat desa.
                 </p>
+                <br></br>
                 <p>
                   Program ini dilakukan oleh mahasiswa semester akhir seperti
                   semester 5 atau 6. Mereka akan menjalankan kegiatan belajar,
