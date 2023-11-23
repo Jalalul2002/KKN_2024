@@ -16,6 +16,10 @@ module.exports = {
       colors : {
         GreenHerb : "#A6D577",
         IjoRumput : "#85997D",
+        darkGreenHerb : "#5D6B58",
+        AbuIjo : "#C1C1C3",
+        iceGray : "#EBEBEB",
+        hoverGray : "#D9D9D9",
       },
       backgroundImage: {
         'gradient-radial' : 'radial-gradient(var(--tw-gradient-stops))',
