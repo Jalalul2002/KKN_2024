@@ -195,8 +195,8 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="bg-gray-900">
-          <h3 className="font-medium text-[8px] md:text-xs text-white text-center py-3 md:py-5">
+        <div className="bg-[#5D6B58]">
+          <h3 className="font-bold text-[8px] md:text-xs text-[#000000] text-center py-3 md:py-5">
             KKN UIN SUNAN GUNUNG DJATI BANDUNG 2024
           </h3>
         </div>
