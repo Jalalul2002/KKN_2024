@@ -6,6 +6,7 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 
 export default function Map() {
     return (
+        // Pakai Position dari Google Maps
         <MapContainer className="w-full h-64 md:h-96 lg:h-[680px] z-0" center={[-6.9303939446110805, 107.71769935278972]} zoom={4} scrollWheelZoom={true}>
             <TileLayer
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

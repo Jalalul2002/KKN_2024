@@ -5,6 +5,7 @@ import Link from "next/link";
 import instagramIcon from "./component/svgs/instagram";
 import youtubeIcon from "./component/svgs/youtube";
 import websiteIcon from "./component/svgs/website";
+import Copyright from "./component/copyright";
 
 export default function Home() {
   const imageSlides = [
@@ -37,7 +38,7 @@ export default function Home() {
   useEffect(() => {
     const interval = setInterval(() => {
       nextSlide();
-    }, 5000);
+    }, 6000);
 
     setAutoSlideInterval(interval);
 
@@ -151,7 +152,8 @@ export default function Home() {
                   Program ini dilakukan oleh mahasiswa semester akhir seperti
                   semester 5 atau 6. Mereka akan menjalankan kegiatan belajar,
                   mengabdi, mengajar, dan berbaur dengan masyarakat dimana
-                  mereka melakukan KKN. Untuk panduan KKN bisa lihat
+                  mereka melakukan KKN. Untuk panduan KKN bisa lihat pada 
+                  <Link href="/" className="underline"> halaman berikut.</Link>
                 </p>
               </div>
             </div>
@@ -189,11 +191,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="bg-gray-900">
-          <h3 className="font-medium text-[8px] md:text-xs text-white text-center py-3 md:py-5">
-            KKN UIN SUNAN GUNUNG DJATI BANDUNG 2024
-          </h3>
-        </div>
+        <Copyright/>
       </footer>
     </>
   );

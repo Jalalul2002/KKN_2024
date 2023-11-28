@@ -1,11 +1,11 @@
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { Bars3Icon } from "@heroicons/react/24/solid";
-import {XMarkIcon} from "@heroicons/react/24/solid"
+import {XMarkIcon} from "@heroicons/react/24/solid";
+import { useRouter } from "next/router";
 
 export default function Header (){
     const [mobileNav, setMobileNav] = useState(false);
-    
     const [navbarBackground, setNavBackground] = useState(false);
 
     const handleMobileNav = ()=> {
@@ -26,10 +26,12 @@ export default function Header (){
         return () => {
           window.removeEventListener('scroll', handleScroll);
         };
-      }, []);
+    }, []);
+
+    const router = useRouter();
 
     return(
-        <header className={navbarBackground ? 'fixed w-full z-50 bg-IjoRumput shadow-md transition ease-in-out duration-500': 'fixed w-full z-50 bg-transparent shadow-none transition ease-in-out duration-500'}>
+        <header className={navbarBackground ? 'fixed w-full z-50 bg-IjoRumput shadow-md transition ease-in-out duration-700': 'fixed w-full z-50 bg-transparent shadow-none transition ease-in-out duration-300'}>
             <div className={ navbarBackground ? "py-1 md:py-2 px-4 max-w-screen-xl mx-auto flex flex-row flex-wrap justify-between items-center md:max-w-3xl xl:max-w-7xl ease-in-out duration-500" : "py-1 md:py-2 px-4 max-w-screen-xl mx-auto flex flex-row flex-wrap justify-between items-center md:max-w-3xl xl:max-w-7xl md:translate-y-6 ease-in-out duration-500"}>
                 <div>
                     <Link href="/" className="flex items-center py-2 space-x-2 md:space-x-4">
@@ -43,13 +45,13 @@ export default function Header (){
                 <div className="w-max flex items-center md:space-x-10 space-x-2 font-bold text-lg">
                     <ul className="hidden md:flex flex-row md:space-x-4">
                         <Link href={"/"}>
-                            <li className={navbarBackground ? "text-white hover:text-[#8FBB63] px-2 py-3 active:text-[#8FBB63] focus:text-[#8FBB63] transition ease-in-out duration-200 active" : "text-black hover:text-[#fff] px-2 py-3 active:text-[#fff] focus:text-[#8FBB63] transition ease-in-out duration-200 active"}>Beranda</li>
+                            <li className={navbarBackground ? `text-white hover:text-[#000] hover:border-b-2 hover:border-black px-2 py-3 transition ease-in-out duration-200 ${router.pathname === '/' ? 'border-b-2 border-white' : 'border-b-0 border-white'}` : `hover:text-white hover:border-b-2 hover:border-white  px-2 py-3 transition ease-in-out duration-200 ${router.pathname === '/' ? 'text-white border-b-2 border-white' : 'border-b-0 border-white'}`}>Beranda</li>
                         </Link>
                         <Link href={"/sebaran"}>
-                            <li className={navbarBackground ? "text-white hover:text-[#8FBB63] px-2 py-3 active:text-[#8FBB63] transition ease-in-out duration-200" : "text-black hover:text-[#fff] px-2 py-3 active:text-[#fff] transition ease-in-out duration-200"}>Peta Sebaran</li>
+                            <li className={navbarBackground ? `text-white hover:text-[#000] hover:border-b-2 hover:border-black px-2 py-3 transition ease-in-out duration-200 ${router.pathname === '/sebaran' ? 'border-b-2 border-white' : 'border-b-0 border-white'}` : `hover:text-[#fff] hover:border-b-2 hover:border-white px-2 py-3 transition ease-in-out duration-200 ${router.pathname === '/sebaran' ? 'text-white border-b-2 border-white' : 'border-b-0 border-white'}`}>Peta Sebaran</li>
                         </Link>
                     </ul>
-                    <Link href={"/login"} className={navbarBackground ? "text-black bg-white py-1 md:py-2 px-3 md:px-8 rounded-full hover:bg-[#e5e2e2] text-[10px] md:text-lg transition ease-in-out duration-200" : "text-black bg-GreenHerb py-1 md:py-2 px-3 md:px-8 rounded-full hover:bg-[#8FBB63] text-[10px] md:text-lg transition ease-in-out duration-200"}>Login</Link>
+                    <Link href={"/login"} className={navbarBackground ? "text-black bg-white py-1 md:py-2 px-3 md:px-8 rounded-xl md:rounded-full hover:bg-[#e5e2e2] text-[10px] md:text-lg transition ease-in-out duration-200" : "text-black bg-GreenHerb py-1 md:py-2 px-3 md:px-8 rounded-xl md:rounded-full hover:bg-[#8FBB63] text-[10px] md:text-lg transition ease-in-out duration-200"}>Login</Link>
                     <button className="md:hidden p-2 cursor-pointer" onClick={handleMobileNav}>
                         <Bars3Icon className="w-6 h-6"/>
                     </button>
@@ -59,14 +61,14 @@ export default function Header (){
                                 <XMarkIcon className="w-6 h-6 text-white"/>
                             </button>
                         </div>
-                        <div>
-                            <h1 className="text-white font-extrabold tracking-wide text-2xl px-5 py-5 mb-5 border-b-2 border-white text-center">Menu</h1>
+                        <div className="md:hidden">
+                            <h1 className="text-white font-extrabold tracking-wide text-4xl px-5 py-5 mb-5 border-b-2 border-white text-center">Menu</h1>
                             <ul className="md:hidden space-y-6 text-center font-medium tracking-wide text-xl">
                                 <Link href={"/"}>
-                                    <li className="text-white text-sm hover:text-AbuIjo px-[40%] py-3 my-1 active:text-white focus:text-white transition ease-in-out duration-200">Beranda</li>
+                                    <li className="text-white text-lg hover:text-AbuIjo px-[40%] py-3 my-1 active:text-white focus:text-white transition ease-in-out duration-200">Beranda</li>
                                 </Link>
                                 <Link href={"/"}>
-                                    <li className="text-white text-sm hover:text-AbuIjo px-[35%] py-3 my-1 active:text-white focus:text-white transition ease-in-out duration-200">Peta Sebaran</li>
+                                    <li className="text-white text-lg hover:text-AbuIjo px-[35%] py-3 my-1 active:text-white focus:text-white transition ease-in-out duration-200">Peta Sebaran</li>
                                 </Link>
                             </ul>
                         </div>
