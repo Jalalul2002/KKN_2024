@@ -1,12 +1,15 @@
 import Link from "next/link";
 import React, { useState } from "react";
 
-export default function Navbar(props) {
+export default function Navbar() {
   const [profileNav, setProfileNav] = useState(false);
 
   const handleProfilNav = () => {
     setProfileNav(!profileNav);
   };
+
+  const nama = "Jalalul Mu'ti";
+  const image = "/images/1.jpeg";
 
   return (
     <>
@@ -29,11 +32,11 @@ export default function Navbar(props) {
         <button onClick={handleProfilNav}>
           <div className="flex flex-row items-center space-x-2 md:space-x-4">
             <span className="font-bold text-base md:text-lg">
-              {props.nama}
+              {nama}
             </span>
             <div
               className="w-10 h-10 md:w-16 md:h-16 rounded-full bg-cover border-2 border-white"
-              style={{ backgroundImage: `url(${props.img})` }}
+              style={{ backgroundImage: `url(${image})` }}
             ></div>
           </div>
         </button>
@@ -45,8 +48,8 @@ export default function Navbar(props) {
           }
         >
           <ul>
-            <Link href={"/mahasiswa/setting"}>
-              <li className="px-3 py-1 my-1 hover:bg-slate-200">Setting</li>
+            <Link href={"/mahasiswa/profil"}>
+              <li className="px-3 py-1 my-1 hover:bg-slate-200">Profil</li>
             </Link>
             <Link href={"/"}>
               <li className="px-3 py-1 my-1 hover:bg-slate-200">Logout</li>

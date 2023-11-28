@@ -29,15 +29,15 @@ export default function Dashboard() {
 
   return (
     <>
-      <Navbar nama={nama} img={image} />
+      <Navbar />
       <SidebarMahasiswa />
       <div className="top-0 left-0 m-0 p-0">
         <div className="bg-IjoRumput w-full h-72 relative -z-20">
-          <div className="absolute top-24 px-6 md:px-0 md:top-20 md:left-32 font-bold text-2xl md:text-5xl text-white">
+          <div className="absolute top-24 px-6 md:px-0 md:top-20 md:left-36 font-bold text-2xl md:text-5xl text-white">
             <h1>Dashboard</h1>
           </div>
         </div>
-        <div className="absolute px-3 md:left-28 md:right-12 top-36 md:top-40 pb-5">
+        <div className="absolute px-3 md:left-32 md:right-12 top-36 md:top-40 pb-5">
           <div className="p-3 md:p-6 bg-iceGray rounded-xl">
             <div>
               <h1 className="text-sm md:text-3xl font-semibold pb-1 md:pb-3">
