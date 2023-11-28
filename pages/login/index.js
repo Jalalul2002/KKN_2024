@@ -87,9 +87,8 @@ export default function Login (){
           <div className="h-[680px] rounded-bl-md w-3/4 right-0 absolute z-10 bg-[#EBEBEB]">
 
             <div className="relative flex flex-col items-center justify-center min-h-screen overflow-hidden">
-              
+            <h1 className="text-3xl font-bold text-center text-gray-700 mb-2">Login</h1>
               <div>
-              <h1 className="text-3xl font-bold text-center text-gray-700 ">Login</h1>
                 <button href="/login/mahasiswa"
                  style={{
                   backgroundColor: userType === 'mahasiswa' ? '#85997D' : 'initial',

@@ -42,7 +42,7 @@ export default function SidebarMahasiswa() {
     },
     {
       id: 6,
-      link: "/mahasiswa/faq",
+      link: "/mahasiswa/frequentlyAQ",
       menu: "FAQ",
       icon: faqIcon,
     },
