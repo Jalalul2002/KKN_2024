@@ -6,10 +6,12 @@ import React, { useState } from "react";
 import { basePath } from "@/next.config";
 import { FaEyeSlash, FaEye, FaToggleOff, FaToggleOn } from "react-icons/fa";
 import { FaUser } from "react-icons/fa";
-
+import { signIn } from "next-auth/react";
 
 export default function Login (){
   const [userType, setUserType] = useState ('mahasiswa');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleUserTypeChange = (type) => {
     setUserType(type);
@@ -43,6 +45,25 @@ export default function Login (){
       setOpen(!open)
     }
 
+    const handleLogin = async (e) => {
+      e.preventDefault();
+  
+      // Attempt to sign in using the Credentials provider
+      const result = await signIn("credentials", {
+        username,
+        password,
+        redirect: false, // Prevent automatic redirection
+      });
+  
+      if (!result.error) {
+        // Successful login
+        console.log("Session:", result.session);
+        window.location.href = "/mahasiswa/protected"; // Redirect to the protected page
+      } else {
+        // Handle login error
+        console.error("Login error:", result.error);
+      }
+    };
 
     return(
 
@@ -101,7 +122,7 @@ export default function Login (){
               </div>
 
               {userType === 'mahasiswa' ? (
-              <form className="mt-6 w-1/5 "> {/*form mahasiswa*/}
+              <form className="mt-6 w-1/5 " onSubmit={handleLogin}> {/*form mahasiswa*/}
                     <div className="mb-4">
                       <label
                         htmlFor="username"
@@ -114,6 +135,9 @@ export default function Login (){
                          <input
                             type="text"
                             placeholder="Username"
+                            name="username"
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
                             className="block w-full px-4 py-2 mt-2 text-gray-700 bg-[#D9D9D9] border rounded-md focus:border-gray-400 focus:ring-gray-300 focus:outline-none focus:ring focus:ring-opacity-40"
                           />
                         </div>
@@ -134,6 +158,9 @@ export default function Login (){
                           <input
                             type={(open === true)? 'password' : 'text'}
                             placeholder="Enter Your Password"
+                            name="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
                             className="block w-full px-4 py-2 mt-2 text-gray-700 bg-[#D9D9D9] border rounded-md focus:border-gray-400 focus:ring-gray-300 focus:outline-none focus:ring focus:ring-opacity-40"
                           />
                         </div>
@@ -228,9 +255,8 @@ export default function Login (){
           <div className="absolute z-20 translate-y-[300px] translate-x-32">
             <Image src={MyImage} alt="" className="w-[530px] h-[394px]" />
           </div>
-
         </div>     
-
+              
     </>
   );
 }

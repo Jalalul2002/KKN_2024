@@ -32,49 +32,7 @@
         },
       }),
     ],
-    session: {
+    session:{
       jwt: true,
-    }
-  //   callbacks: {
-  //     async signIn({ credentials }) {
-  //       const isAllowedToSignIn = true
-  //       if (isAllowedToSignIn) {
-  //         return true
-  //       } else {
-  //         // Return false to display a default error message
-  //         return false
-  //         // Or you can return a URL to redirect to:
-  //         // return '/unauthorized'
-  //       }
-  //     },
-  //     async redirect({ url, baseUrl }) {
-  //       return baseUrl
-  //     },
-  //     async session({ session, user, token }) {
-  //       return session
-  //     },
-  //     async jwt({ credentials, account, profile }) {
-  //         if (user) {
-  //           token.id = user.id;
-  //           token.name = user.name;
-  //         }
-  //         return token;
-  //     }
-  //   //   async jwt({ token, user, account, profile, isNewUser }) {
-  //   //     return token
-  //   // }
-  // }
-    // callbacks: {
-    //   async jwt(token, user) {
-    //     if (user) {
-    //       token.id = user.id;
-    //       token.name = user.name;
-    //     }
-    //     return token;
-    //   },
-  //     // async session(session, token) {
-  //     //   session.user = { id: token.id, name: token.name };
-  //     //   return session;
-  //     // },
-  //   // },
+    },
   });
