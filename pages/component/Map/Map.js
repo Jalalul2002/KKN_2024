@@ -6,7 +6,7 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 
 export default function Map() {
     return (
-        <MapContainer className="w-full h-64 md:h-96 lg:h-[680px] z-0" center={[-6.9303939446110805, 107.71769935278972]} zoom={4} scrollWheelZoom={false}>
+        <MapContainer className="w-full h-64 md:h-96 lg:h-[680px] z-0" center={[-6.9303939446110805, 107.71769935278972]} zoom={4} scrollWheelZoom={true}>
             <TileLayer
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
@@ -14,6 +14,7 @@ export default function Map() {
                 <Popup>
                     Kabupaten Bandung Barat
                 </Popup>
+                
             </Marker>
             <Marker position={[-6.562011114133785, 107.76093560600587]}>
                 <Popup>
