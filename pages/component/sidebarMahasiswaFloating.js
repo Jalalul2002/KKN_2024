@@ -64,7 +64,7 @@ export default function SidebarMahasiswa() {
   return (
     <>
       <button
-        className="md:hidden absolute px-5 py-4 cursor-pointer z-40"
+        className="md:hidden absolute px-5 py-4 cursor-pointer z-30"
         onClick={handleMobileNav}
       >
         <Bars3Icon className="w-6 h-6" />
@@ -78,8 +78,8 @@ export default function SidebarMahasiswa() {
       <button
         className={
           mobileNav
-            ? "absolute -left-16 top-36 hover:top-32 md:left-52 z-50 md:bg-iceGray px-0 hover:px-1 hover:pl-2 py-3 hover:py-7 rounded-r-xl hover:rounded-r-md ease-in-out duration-200"
-            : "absolute -left-16 md:fixed top-36 hover:top-32 md:left-16 z-50 md:bg-iceGray py-3 px-0 rounded-r-2xl hover:px-1 hover:pl-3 hover:py-7 hover:rounded-r-md ease-in-out duration-200"
+            ? "absolute -left-16 md:fixed top-32 md:left-52 z-50 md:bg-iceGray px-1 py-7 rounded-r-md ease-in-out duration-200"
+            : "absolute -left-16 md:fixed top-36 hover:top-32 md:left-16 z-50 md:bg-iceGray py-3 px-0 rounded-r-2xl hover:px-1 hover:pl-4 hover:py-7 hover:rounded-r-md ease-in-out duration-200"
         }
         onClick={handleMobileNav}
       >
@@ -92,8 +92,8 @@ export default function SidebarMahasiswa() {
       <div
         className={
           mobileNav
-            ? "fixed md:relative z-50 md:z-40 w-56 h-screen md:h-[540px] xl:h-[600px] bg-iceGray rounded-e-xl shadow-lg text-sm py-2 md:py-3 md:mt-10 ease-in-out duration-200 left-0 md:left-0"
-            : "fixed md:relative z-50 md:z-40 w-56 md:w-20 h-screen md:h-[540px] xl:h-[600px] bg-iceGray rounded-e-xl shadow-lg text-sm py-2 md:py-3 md:mt-10 -left-96 ease-in-out duration-200 md:left-0"
+            ? "absolute md:fixed z-40 w-56 h-screen md:h-[540px] xl:h-[600px] bg-iceGray rounded-e-xl shadow-lg text-sm py-7 md:py-3 md:mt-10 ease-in-out duration-200 left-0 md:left-0"
+            : "absolute md:fixed z-40 w-56 md:w-20 h-screen md:h-[540px] xl:h-[600px] bg-iceGray rounded-e-xl shadow-lg text-sm py-7 md:py-3 md:mt-10 -left-96 ease-in-out duration-200 md:left-0"
         }
       >
         <div className="px-3">
@@ -107,8 +107,8 @@ export default function SidebarMahasiswa() {
         <div
           className={
             mobileNav
-              ? "px-2 py-3 md:px-8 md:py-6 text-center cursor-pointer"
-              : "px-2 py-3 md:px-2 md:py-5 text-center cursor-pointer"
+              ? "px-8 py-6 text-center cursor-pointer"
+              : "px-2 py-5 text-center cursor-pointer"
           }
           onClick={handleMobileNav}
         >
@@ -171,7 +171,7 @@ export default function SidebarMahasiswa() {
           ))}
         </ul>
 
-        <div className="text-center mt-10 px-2">
+        <div className="w-full text-center mt-10 px-2">
           <h3>&copy; Made with KKN 2024</h3>
         </div>
       </div>
