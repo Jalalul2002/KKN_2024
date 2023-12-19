@@ -39,7 +39,7 @@ export default function FrequentlyAQ() {
       <SidebarMahasiswa/>
       <div className="top-0 left-0 m-0 p-0 w-full h-full">
         <div className="bg-IjoRumput w-full h-72 relative -z-10"></div>
-        <div className="md:left-72 md:right-14 top-40 absolute">
+        <div className="md:left-32 md:right-12 top-40 absolute">
           <div className="p-6 bg-iceGray rounded-xl">
             <h1 className="font-bold py-1 text-2xl text-center">FAQ</h1>
             <ul role="list" className="divide-y divide-white">
