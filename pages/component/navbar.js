@@ -1,3 +1,7 @@
+import {
+  AdjustmentsHorizontalIcon,
+  UserCircleIcon,
+} from "@heroicons/react/24/solid";
 import Link from "next/link";
 import React, { useState } from "react";
 
@@ -26,16 +30,22 @@ export default function Navbar() {
         <div
           className={
             profileNav
-              ? "bg-white shadow-md text-sm md:text-lg mt-2 font-medium absolute z-20 w-24 md:w-40 right-6 top-16 md:top-28 md:right-24"
+              ? "bg-white shadow-md text-sm md:text-lg mt-2 font-medium absolute z-20 w-24 md:w-40 right-6 top-16 md:top-28 md:right-11 xl:right-24 rounded-lg"
               : "hidden"
           }
         >
           <ul>
             <Link href={"/mahasiswa/profil"}>
-              <li className="px-3 py-1 my-1 hover:bg-slate-200">Profil</li>
+              <li className="px-4 py-3 hover:bg-slate-200 inline-flex items-center w-full hover:rounded-lg">
+                <UserCircleIcon className="w-5 h-5 mr-3" />
+                <span className="leading-3">Profil</span>
+              </li>
             </Link>
             <Link href={"/"}>
-              <li className="px-3 py-1 my-1 hover:bg-slate-200">Logout</li>
+              <li className="px-4 py-3 hover:bg-slate-200 inline-flex items-center w-full hover:rounded-lg">
+                <AdjustmentsHorizontalIcon className="w-5 h-5 mr-3" />
+                <span className="leading-3">Logout</span> 
+              </li>
             </Link>
           </ul>
         </div>

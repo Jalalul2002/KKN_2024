@@ -26,11 +26,11 @@ export default function Profil() {
         <div className="md:w-auto h-screen">
           <SidebarMahasiswa />
         </div>
-        <div className="overflow-y-scroll h-screen w-auto">
+        <div className="h-screen w-screen overflow-auto">
           <Navbar />
           <div className="px-6 pb-5 w-auto">
             <div className="mt-20 mb-5 md:mt-28 md:mb-10 font-bold text-2xl md:text-5xl text-white">
-              <h1>Profil</h1>
+              <h1>Profil Mahasiswa</h1>
             </div>
             <div className="p-4 md:p-9 bg-iceGray rounded-3xl shadow-sm">
               <div className="flex flex-col items-center md:px-4 md:flex-row md:flex-wrap md:place-items-end">

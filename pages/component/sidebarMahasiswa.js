@@ -15,6 +15,8 @@ import {
 } from "@heroicons/react/24/solid";
 
 export default function SidebarMahasiswa() {
+
+  // FrontEnd Function
   const mahasiswaMenus = [
     {
       id: 1,
@@ -64,22 +66,22 @@ export default function SidebarMahasiswa() {
   return (
     <>
       <button
-        className="md:hidden absolute px-5 py-4 cursor-pointer z-40"
+        className="lg:hidden absolute px-5 py-4 cursor-pointer z-40"
         onClick={handleMobileNav}
       >
         <Bars3Icon className="w-6 h-6" />
       </button>
       <div
         className={
-          mobileNav ? "w-full h-full absolute z-40 md:hidden" : "hidden"
+          mobileNav ? "w-full h-full absolute z-40 lg:hidden" : "hidden"
         }
         onClick={handleMobileNav}
       ></div>
       <button
         className={
           mobileNav
-            ? "absolute -left-16 top-36 hover:top-32 md:left-52 z-50 md:bg-iceGray px-0 hover:px-1 hover:pl-2 py-3 hover:py-7 rounded-r-xl hover:rounded-r-md ease-in-out duration-200"
-            : "absolute -left-16 md:fixed top-36 hover:top-32 md:left-16 z-50 md:bg-iceGray py-3 px-0 rounded-r-2xl hover:px-1 hover:pl-3 hover:py-7 hover:rounded-r-md ease-in-out duration-200"
+            ? "absolute -left-16 top-36 hover:top-32 lg:left-52 z-50 lg:bg-iceGray px-0 hover:px-1 hover:pl-2 py-3 hover:py-7 rounded-r-xl hover:rounded-r-lg ease-in-out duration-200"
+            : "absolute -left-16 lg:fixed top-36 hover:top-32 lg:left-16 z-50 lg:bg-iceGray py-3 px-0 rounded-r-2xl hover:px-1 hover:pl-3 hover:py-7 hover:rounded-r-lg ease-in-out duration-200"
         }
         onClick={handleMobileNav}
       >
@@ -92,13 +94,13 @@ export default function SidebarMahasiswa() {
       <div
         className={
           mobileNav
-            ? "fixed md:relative z-50 md:z-40 w-56 h-screen md:h-[540px] xl:h-[600px] bg-iceGray rounded-e-xl shadow-lg text-sm py-2 md:py-3 md:mt-10 ease-in-out duration-200 left-0 md:left-0"
-            : "fixed md:relative z-50 md:z-40 w-56 md:w-20 h-screen md:h-[540px] xl:h-[600px] bg-iceGray rounded-e-xl shadow-lg text-sm py-2 md:py-3 md:mt-10 -left-96 ease-in-out duration-200 md:left-0"
+            ? "fixed lg:relative z-50 lg:z-40 w-56 h-screen lg:h-auto bg-iceGray rounded-e-xl shadow-lg text-sm py-2 lg:py-3 lg:mt-10 ease-in-out duration-200 left-0 lg:left-0 lg:overflow-visible overflow-y-scroll"
+            : "fixed lg:relative z-50 lg:z-40 w-56 lg:w-20 h-screen lg:h-auto bg-iceGray rounded-e-xl shadow-lg text-sm py-2 lg:py-3 lg:mt-10 -left-96 ease-in-out duration-200 lg:left-0"
         }
       >
         <div className="px-3">
           <button
-            className="md:hidden p-2 cursor-pointer"
+            className="lg:hidden p-2 cursor-pointer"
             onClick={handleMobileNav}
           >
             <XMarkIcon className="w-6 h-6" />
@@ -107,8 +109,8 @@ export default function SidebarMahasiswa() {
         <div
           className={
             mobileNav
-              ? "px-2 py-3 md:px-8 md:py-6 text-center cursor-pointer"
-              : "px-2 py-3 md:px-2 md:py-5 text-center cursor-pointer"
+              ? "px-2 py-3 lg:px-8 lg:py-6 text-center cursor-pointer"
+              : "px-2 py-3 lg:px-2 lg:py-5 text-center cursor-pointer"
           }
           onClick={handleMobileNav}
         >
@@ -161,7 +163,7 @@ export default function SidebarMahasiswa() {
                   className={
                     mobileNav
                       ? "text-base ease-in-out duration-200"
-                      : "text-[0px] ease-in-out duration-200"
+                      : "text-[0px] ease-in-out duration-200 hover:text-xs"
                   }
                 >
                   {menus.menu}
