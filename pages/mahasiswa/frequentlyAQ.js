@@ -34,6 +34,22 @@ export default function FrequentlyAQ() {
 
   return (
     <>
+<<<<<<< HEAD
+      <Navbar />
+      <SidebarMahasiswa/>
+      <div className="top-0 left-0 m-0 p-0 w-full h-full">
+        <div className="bg-IjoRumput w-full h-72 relative -z-10"></div>
+        <div className="md:left-32 md:right-12 top-40 absolute">
+          <div className="p-6 bg-iceGray rounded-xl">
+            <h1 className="font-bold py-1 text-2xl text-center">FAQ</h1>
+            <ul role="list" className="divide-y divide-white">
+              {questionsFaq.map((question) => (
+              <li key={questionsFaq.id} className="flex justify-between py-2">
+                <div>
+                  <div className="flex min-w-0 gap-x-4">
+                    <div className="min-w-0 flex-auto">
+                      <p className="text-lg font-semibold text-gray-900">{question.qe}</p>
+=======
       <div className="absolute bg-IjoRumput w-full h-72 -z-20"></div>
       <div className="flex flex-row justify-start">
         <div className="md:w-auto h-screen">
@@ -63,6 +79,7 @@ export default function FrequentlyAQ() {
                       <div>
                         <p className="text-lg text-gray-900">{question.ans}</p>
                       </div>
+>>>>>>> a56e240e18791b44711ab986d132bcae75d345ca
                     </div>
                   </li>
                 ))}
