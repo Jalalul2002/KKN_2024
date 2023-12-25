@@ -4,7 +4,7 @@ import { Button, IconButton } from "@material-tailwind/react";
 import { ArrowRightIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
 import { useState } from 'react';
 import kelompok from '../settings/kelompok';
-import Lokasi from '../settings/lokasi';
+
 
  
 
@@ -28,9 +28,9 @@ export default function Identitas() {
         fakultas: "Sains dan Teknologi",
         jurusan: "Teknnik Informatika",
         jenis: "Sisdamas",
-        kelompok: "1",
+        kelompok: "Kelompok 1",
         angkatan: "2020",
-        Lokasi: "Kabupaten Bandung, Kec Paseh"
+        lokasi: "Kabupaten Bandung, Kec Paseh"
       },
       {
         id: "1",
@@ -39,9 +39,9 @@ export default function Identitas() {
         fakultas: "Sains dan Teknologi",
         jurusan: "Teknnik Informatika",
         jenis: "Sisdamas",
-        kelompok: "1",
+        kelompok: "Kelompok 1",
         angkatan: "2020",
-        Lokasi: "Kabupaten Bandung, Kec Paseh"
+        lokasi: "Kabupaten Bandung, Kec Paseh"
       },
       {
         id: "1",
@@ -50,9 +50,9 @@ export default function Identitas() {
         fakultas: "Sains dan Teknologi",
         jurusan: "Teknnik Informatika",
         jenis: "Sisdamas",
-        kelompok: "1",
+        kelompok: "Kelompok 1",
         angkatan: "2020",
-        Lokasi: "Kabupaten Bandung, Kec Paseh"
+        lokasi: "Kabupaten Bandung, Kec Paseh"
       },
       {
         id: "1",
@@ -61,11 +61,56 @@ export default function Identitas() {
         fakultas: "Sains dan Teknologi",
         jurusan: "Teknnik Informatika",
         jenis: "Sisdamas",
-        kelompok: "1",
+        kelompok: "Kelompok 1",
         angkatan: "2020",
-        Lokasi: "Kabupaten Bandung, Kec Paseh"
+        lokasi: "Kabupaten Bandung, Kec Paseh"
       },
-  ]);
+      {
+        id: "1",
+        name: "Iqbal",
+        nim: "1207050064",
+        fakultas: "Sains dan Teknologi",
+        jurusan: "Teknnik Informatika",
+        jenis: "Sisdamas",
+        kelompok: "Kelompok 1",
+        angkatan: "2020",
+        lokasi: "Kabupaten Bandung, Kec Paseh"
+      },
+      {
+        id: "1",
+        name: "Iqbal",
+        nim: "1207050064",
+        fakultas: "Sains dan Teknologi",
+        jurusan: "Teknnik Informatika",
+        jenis: "Sisdamas",
+        kelompok: "Kelompok 1",
+        angkatan: "2020",
+        lokasi: "Kabupaten Bandung, Kec Paseh"
+      },
+      {
+        id: "1",
+        name: "Iqbal",
+        nim: "1207050064",
+        fakultas: "Sains dan Teknologi",
+        jurusan: "Teknnik Informatika",
+        jenis: "Sisdamas",
+        kelompok: "Kelompok 1",
+        angkatan: "2020",
+        lokasi: "Kabupaten Bandung, Kec Paseh"
+      },
+      {
+        id: "1",
+        name: "Iqbal",
+        nim: "1207050064",
+        fakultas: "Sains dan Teknologi",
+        jurusan: "Teknnik Informatika",
+        jenis: "Sisdamas",
+        kelompok: "Kelompok 1",
+        angkatan: "2020",
+        lokasi: "Kabupaten Bandung, Kec Paseh"
+      },
+    ]
+  );
 
   // Fungsi untuk memotong data sesuai halaman aktif
   const displayData = () => {
@@ -92,14 +137,18 @@ export default function Identitas() {
   };
 
   const searchFilter = (item) => {
-    const { id, name, nim, fakultas, jurusan } = item;
+    const { id, name, nim, fakultas, jurusan, jenis, kelompok, angkatan, lokasi } = item;
     const searchText = searchTerm.toLowerCase();
     return (
       id.toLowerCase().includes(searchText) ||
       name.toLowerCase().includes(searchText) ||
       nim.toLowerCase().includes(searchText) ||
       fakultas.toLowerCase().includes(searchText) ||
-      jurusan.toLowerCase().includes(searchText)
+      jurusan.toLowerCase().includes(searchText) ||
+      jenis.toLowerCase().includes(searchText) ||
+      kelompok.toLowerCase().includes(searchText) ||
+      angkatan.toLowerCase().includes(searchText) ||
+      lokasi.toLowerCase().includes(searchText)
     );
   };
   
@@ -141,9 +190,9 @@ export default function Identitas() {
 
       </div>
 
-      <div className='w-full mt-4 bg-white overflow-x-auto'>
-        <table className=' text-lg text-left text-gray-500 dark:text-gray-400 min-w-full'>
-          <thead className=' text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400'>
+      <div className=' mt-4 bg-white overflow-x-auto'>
+        <table className=' text-lg text-gray-500 dark:text-gray-400 min-w-full'>
+          <thead className=' text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 text-left'>
             <tr className=''>
               <th scope='col' className='py-2 px-4'>No</th>
               <th scope='col' className='py-2 px-4'>Nama</th>
@@ -157,7 +206,7 @@ export default function Identitas() {
               <th scope='col' className='py-2 px-4'>Action</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className='text-left'>
             {displayData().map((table, i) => (
               <tr key={i}>
               <td scope='col' className='py-2 px-4'>{table.id}</td>
@@ -168,7 +217,7 @@ export default function Identitas() {
               <td scope='col' className='py-2 px-4'>{table.jenis}</td>
               <td scope='col' className='py-2 px-4'>{table.kelompok}</td>
               <td scope='col' className='py-2 px-4'>{table.angkatan}</td>
-              <td scope='col' className='py-2 px-4'>{table.Lokasi}</td>
+              <td scope='col' className='py-2 px-4'>{table.lokasi}</td>
               <td scope='col' className='py-2 px-4'>
                 <div className=''>
                     <button className='font-medium text-blue-400 dark:text-blue-500 hover:underline'>edit</button>
@@ -192,16 +241,20 @@ export default function Identitas() {
         </Button>
 
         <div className="flex items-center gap-2">
-          {Array.from({ length: Math.ceil(tables.length / itemsPerPage) }).map((_, index) => (
-            <IconButton
-              key={index}
-              {...getItemProps(index + 1)}
-              disabled={active === index + 1}
-            >
-              {index + 1}
-            </IconButton>
-          ))}
+          {Array.from({ length: Math.min(Math.ceil(tables.length / itemsPerPage), 5) }).map((_, index) => {
+            const pageNumber = active - 2 + index; // Hitung nomor halaman yang akan ditampilkan
+            return pageNumber > 0 && pageNumber <= Math.ceil(tables.length / itemsPerPage) ? (
+              <IconButton
+                key={index}
+                {...getItemProps(pageNumber)}
+                disabled={active === pageNumber}
+              >
+                {pageNumber}
+              </IconButton>
+            ) : null;
+          })}
         </div>
+
 
         <Button
           variant="text"
