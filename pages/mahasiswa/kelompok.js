@@ -111,24 +111,48 @@ export default function KelompokKKN() {
             <div className="mt-20 mb-5 md:mt-28 md:mb-10 font-bold text-2xl md:text-5xl text-white">
               <h1>Kelompok KKN</h1>
             </div>
-            <div className="flex flex-row space-x-4 box-border">
-              <div className="p-3 md:p-6 bg-iceGray rounded-xl w-4/5">
-                <div className="box-border mb-3">
-                  <h1 className="text-sm md:text-3xl font-bold">{jenisKKN}</h1>
-                  <h2 className="text-xl font-semibold">{kelompok}</h2>
+            <div className="md:flex flex-row space-y-3 md:space-y-0 md:space-x-2 lg:space-x-4 box-border">
+              <div className="md:hidden p-2 bg-iceGray rounded-xl">
+                <div className="flex flex-col justify-evenly w-full space-y-2">
+                  <div className="border border-slate-500 rounded-lg text-center p-1">
+                    <h1 className="font-bold text-base border-b-[1px] border-slate-400 mb-1">Ketua Kelompok</h1>
+                    <p className="font-semibold text-sm">{peserta[1].nama} - {peserta[1].jurusan} - {peserta[1].hp}</p>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={handleOpenModal}
+                    className="px-5 py-2 bg-sky-800 hover:bg-sky-900 font-bold text-white rounded-md text-base"
+                  >
+                    Pilih Ketua Kelompok
+                  </button>
+                  <div className="border border-slate-500 rounded-lg text-center font-semibold p-1">
+                    <h1 className="font-bold text-base border-b-[1px] border-slate-400 mb-1">Dosen Pembimbing</h1>
+                    <p className="text-sm">{dpl.nama}</p>
+                    <p className="text-sm">Kontak: {dpl.hp}</p>  
+                  </div>
                 </div>
-                <div className="box-border py-3 mb-3">
+              </div>
+              <div className="p-3 md:p-6 bg-iceGray rounded-xl md:w-4/5">
+                <div className="box-border mb-3">
+                  <h1 className="text-lg md:text-3xl font-bold">{jenisKKN}</h1>
+                  <h2 className="md:text-xl font-semibold">{kelompok}</h2>
+                </div>
+                <div className="box-border md:py-3 mb-3 lg:text-base text-sm overflow-x-auto">
                   <table className="w-full rounded-xl">
                     <thead>
-                      <tr>
-                        <th className="bg-IjoRumput rounded-tl-lg p-2 md:p-4">
+                      <tr className="bg-IjoRumput">
+                        <th className="rounded-tl-lg p-2 lg:p-4">
                           No
                         </th>
-                        <th className="bg-IjoRumput p-2 md:p-4">Profil</th>
-                        <th className="bg-IjoRumput p-2 md:p-4">Nama</th>
-                        <th className="bg-IjoRumput p-3 md:p-4">Jurusan</th>
-                        <th className="bg-IjoRumput p-3 md:p-4">Fakultas</th>
-                        <th className="bg-IjoRumput rounded-tr-lg p-3 md:p-4">
+                        <th className="px-6 p-2 lg:p-4">Profil</th>
+                        <th className="px-6 p-2 lg:p-4">Nama</th>
+                        <th className="px-6 p-3 lg:p-4">
+                          Program Studi
+                        </th>
+                        <th className="px-6 p-3 lg:p-4">
+                          Fakultas
+                        </th>
+                        <th className="rounded-tr-lg p-3 lg:p-4">
                           Nomor HP
                         </th>
                       </tr>
@@ -136,40 +160,42 @@ export default function KelompokKKN() {
                     <tbody className="text-center">
                       {peserta.map((item, i) => (
                         <tr key={i} className="border-y border-slate-300">
-                          <td className="mx-2 py-1 md:p-3">{i + 1}</td>
-                          <td className="mx-2 py-1 md:p-3 flex justify-center">
+                          <td className="py-1 px-1 lg:p-3">{i + 1}</td>
+                          <td className="py-2 lg:p-3 flex justify-center">
                             <img
                               src={item.foto}
-                              className="w-9 h-9 rounded-full "
+                              className="w-9 h-9 rounded-full"
                             />
                           </td>
-                          <td className="mx-2 py-1 md:p-3">{item.nama}</td>
-                          <td className="mx-2 py-1 md:p-3">{item.jurusan}</td>
-                          <td className="mx-2 py-1 md:p-3">{item.fakultas}</td>
-                          <td className="mx-2 py-1 md:p-3">{item.hp}</td>
+                          <td className="py-1 px-3 lg:p-3">{item.nama}</td>
+                          <td className="py-1 px-3 lg:p-3">{item.jurusan}</td>
+                          <td className="py-1 px-3 lg:p-3">{item.fakultas}</td>
+                          <td className="py-1 px-3 lg:p-3">{item.hp}</td>
                         </tr>
                       ))}
                     </tbody>
                   </table>
                 </div>
               </div>
-              <div className="p-5 bg-iceGray w-1/5 rounded-xl flex flex-col items-center">
-                <div className="mt-10 flex flex-col justify-center w-full">
+              <div className="hidden p-4 lg:p-5 bg-iceGray md:w-1/5 lg:2/5 rounded-xl md:flex flex-col items-center">
+                <div className="mt-5 lg:mt-10 flex flex-col justify-center w-full">
                   <button
                     type="button"
                     onClick={handleOpenModal}
-                    className="px-5 py-2 bg-IjoRumput hover:bg-darkGreenHerb font-bold text-white rounded-md"
+                    className="px-5 py-2 bg-sky-800 hover:bg-sky-900 font-bold text-white rounded-md md:text-base lg:text-xl"
                   >
                     Pilih Ketua Kelompok
                   </button>
-                  <div className="border border-slate-500 mt-3 w-auto h-24 rounded-lg text-center flex flex-col justify-center text-xl p-3 max-w-md">
-                    <h1 className="font-bold">Ketua Kelompok</h1>
-                    <p className="font-semibold text-lg">{peserta[1].nama}</p>
+                  <div className="border border-slate-500 mt-3 rounded-lg text-center text-base lg:text-xl p-3">
+                    <h1 className="font-bold mb-2 border-b-[1px] border-slate-400">Ketua Kelompok</h1>
+                    <p className="font-semibold text-sm">{peserta[1].nama}</p>
+                    <p className="font-semibold text-sm">{peserta[1].jurusan}</p>
+                    <p className="font-semibold text-sm">Kontak: {peserta[1].hp}</p>
                   </div>
-                  <div className="border border-slate-500 mt-3 w-auto h-24 rounded-lg text-center flex flex-col justify-center text-xl font-semibold p-3">
-                    <h1 className="font-bold">Dosen Pembimbing</h1>
-                    <h2 className="text-lg">{dpl.nama}</h2>
-                    <h2 className="text-lg">Nomor HP:{dpl.hp}</h2>
+                  <div className="border border-slate-500 mt-3 rounded-lg text-center text-base lg:text-xl font-semibold p-3">
+                    <h1 className="font-bold mb-2 border-b-[1px] border-slate-400">Dosen Pembimbing</h1>
+                    <p className="text-sm">{dpl.nama}</p>
+                    <p className="text-sm">Kontak: {dpl.hp}</p>
                   </div>
                 </div>
               </div>
