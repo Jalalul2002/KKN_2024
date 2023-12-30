@@ -105,7 +105,7 @@ export default function KelompokKKN() {
         <div className="w-auto h-screen">
           <SidebarMahasiswa />
         </div>
-        <div className="overflow-y-scroll h-screen grow">
+        <div className="overflow-auto h-screen grow">
           <Navbar />
           <div className="px-6 pb-5 w-auto font-medium">
             <div className="mt-20 mb-5 md:mt-28 md:mb-10 font-bold text-2xl md:text-5xl text-white">
