@@ -22,7 +22,7 @@ export default function Laporann() {
     [
       {
         id: "1",
-        nama: "Dr. Hadi Setiawan SE., MT.",
+        nama: "Dr. Setiawan SE., MT.",
         kelompok: "Kelompok 1, 2, 3 dan 4",
         jenis: "Sisdamas",
         lokasi: "Kabupaten Bandung",
@@ -30,7 +30,7 @@ export default function Laporann() {
       },
       {
         id: "2",
-        nama: "Dr. Muhamad Qosim SE., MT.",
+        nama: "Dr. Qosim SE., MT.",
         kelompok: "Kelompok 1, 2, 3 dan 4",
         jenis: "Sisdamas",
         lokasi: "Kabupaten Bandung",
@@ -38,7 +38,7 @@ export default function Laporann() {
       },
       {
         id: "3",
-        nama: "Dr. Abdul Latif SE., MT.",
+        nama: "Dr. Abdul SE., MT.",
         kelompok: "Kelompok 1, 2, 3 dan 4",
         jenis: "Sisdamas",
         lokasi: "Kabupaten Bandung",
@@ -46,7 +46,7 @@ export default function Laporann() {
       },
       {
         id: "4",
-        nama: "Dr. Hanna Sari SE., MT.",
+        nama: "Dr. Sari SE., MT.",
         kelompok: "Kelompok 1, 2, 3 dan 4",
         jenis: "Sisdamas",
         lokasi: "Kabupaten Bandung",
@@ -105,7 +105,7 @@ export default function Laporann() {
 
     <div className="bg-IjoRumput h-72 md:w-full -z-20">
       <div className="absolute ml-32 px-6 md:px-0 md:top-8 md:left-36 md:ml-32 sm:ml-0 font-bold text-2xl md:text-5xl text-white">
-        <h1>Laporan Kelompok</h1>
+        <h1>Nilai Kelompok KKN</h1>
       </div>
     </div>
 
@@ -157,7 +157,7 @@ export default function Laporann() {
                 <button
                   onClick={() => {
                     router.push({
-                      pathname: `/admin/dosen/detailLaporan/${table.id}`,
+                      pathname: `/admin/dosen/detailNilai/${table.id}`,
                       query: {
                         nama: table.nama,
                         kelompok: table.kelompok,

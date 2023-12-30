@@ -8,7 +8,7 @@ export default function SidebarAdmin() {
         {
             id: 1,
             menu: " Dashboard ",
-            link: "admin/dashboard",
+            link: "/admin/dashboard",
         },
         {
             id: 2,
@@ -32,11 +32,16 @@ export default function SidebarAdmin() {
                 },
                 {
                     id: 4,
+                    menu: " Laporan",
+                    link: "/admin/mahasiswa/laporan"
+                },
+                {
+                    id: 5,
                     menu: " Nilai ",
                     link: "/admin/mahasiswa/nilai"
                 },
                 {
-                    id: 5,
+                    id: 6,
                     menu: " FAQ ",
                     link: "/admin/mahasiswa/faq"
                 }
@@ -59,13 +64,13 @@ export default function SidebarAdmin() {
                 },
                 {
                     id: 3,
-                    menu: " Jadwal Kunjungan ",
-                    link: "/admin/dosen/kunjungan",
+                    menu: " Laporan ",
+                    link: "/admin/dosen/laporan",
                 },
                 {
                     id: 1,
-                    menu: " Laporan ",
-                    link: "/admin/dosen/laporan",
+                    menu: " Nilai ",
+                    link: "/admin/dosen/nilai",
                 }
             ],
         },
@@ -94,15 +99,22 @@ export default function SidebarAdmin() {
         {
             id: 5,
             menu: "SuperAdmin",
-            link: "/admin/superAdmin"
+            link: "/admin/superAdmin",
+            submenu: [
+                {
+                    id: 1,
+                    menu: "Admin",
+                    link: "/admin/superAdmin/admin"
+                },
+                {
+                    id: 2,
+                    menu: "Users",
+                    link: "/admin/superAdmin/users"
+                }
+            ]
         },
         {
             id: 6,
-            menu: "Publik",
-            link: "admin/publik"
-        },
-        {
-            id: 7,
             menu: "Logout ",
             link: "/.."
         }
@@ -123,34 +135,52 @@ export default function SidebarAdmin() {
     </div>
     <ul>
         {adminMenus.map((menu) => (
-        <li key={menu.id}>
-            <div
-            className="flex items-center justify-between px-4 py-2 hover:bg-gray-200 cursor-pointer"
-            onClick={() => setActiveMenu(activeMenu === menu.id ? null : menu.id)}
-            >
-                {/* Text */}
-                <span>{menu.menu}</span>
-                {/* Chevron Icon */}
-                {menu.submenu && (activeMenu === menu.id ? <FaChevronUp /> : <FaChevronDown />)}
-            </div>
-            {/* Submenu */}
-            {menu.submenu && activeMenu === menu.id && (
-            <ul className="ml-4">
-                {menu.submenu.map((sub) => (
-                <li key={sub.id}>
-                    <Link href={sub.link}>
-                        <p className="flex items-center justify-start px-4 py-2 hover:bg-gray-200">
-                            {/* Submenu Text */}
-                            <span>{sub.menu}</span>
-                        </p>
-                    </Link>
-                </li>
-                ))}
-            </ul>
-            )}
-        </li>
+            <React.Fragment key={menu.id}>
+                {/* Menu with no submenu */}
+                {!menu.submenu && (
+                    <li>
+                        <Link href={menu.link}>
+                            <p className="flex items-center justify-start px-4 py-2 hover:bg-gray-200 cursor-pointer">
+                                {/* Menu Text */}
+                                <span>{menu.menu}</span>
+                            </p>
+                        </Link>
+                    </li>
+                )}
+
+                {/* Menu with submenu */}
+                {menu.submenu && (
+                    <li>
+                        <div
+                            className="flex items-center justify-between px-4 py-2 hover:bg-gray-200 cursor-pointer"
+                            onClick={() => setActiveMenu(activeMenu === menu.id ? null : menu.id)}
+                        >
+                            {/* Text */}
+                            <span>{menu.menu}</span>
+                            {/* Chevron Icon */}
+                            {activeMenu === menu.id ? <FaChevronUp /> : <FaChevronDown />}
+                        </div>
+                        {/* Submenu */}
+                        {activeMenu === menu.id && (
+                            <ul className="ml-4">
+                                {menu.submenu.map((sub) => (
+                                    <li key={sub.id}>
+                                        <Link href={sub.link}>
+                                            <p className="flex items-center justify-start px-4 py-2 hover:bg-gray-200 cursor-pointer">
+                                                {/* Submenu Text */}
+                                                <span>{sub.menu}</span>
+                                            </p>
+                                        </Link>
+                                    </li>
+                                ))}
+                            </ul>
+                        )}
+                    </li>
+                )}
+            </React.Fragment>
         ))}
     </ul>
+
   </div>
 
   </>
