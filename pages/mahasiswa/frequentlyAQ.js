@@ -1,5 +1,6 @@
 import React from "react";
 import Navbar from "../component/navbar";
+import Link from "next/link";
 import SidebarMahasiswa from "../component/sidebarMahasiswa";
 
 export default function FrequentlyAQ() {
@@ -31,21 +32,8 @@ export default function FrequentlyAQ() {
     },
   ];
 
- 
   return (
     <>
-<<<<<<< HEAD
-          <div className="p-6 bg-iceGray rounded-xl">
-            <h1 className="font-bold py-1 text-2xl text-center">FAQ</h1>
-            <ul role="list" className="divide-y divide-white">
-              {questionsFaq.map((question) => (
-                <li key={question.id} className="flex justify-between py-2">
-                  <div>
-                    <div className="flex min-w-0 gap-x-4">
-                      <div className="min-w-0 flex-auto">
-                        <p className="text-lg font-semibold text-gray-900">{question.qe}</p>
-                      </div>
-=======
       <div className="absolute bg-IjoRumput w-full h-72 -z-20"></div>
       <div className="flex flex-row justify-start">
         <div className="md:w-auto h-screen">
@@ -75,17 +63,14 @@ export default function FrequentlyAQ() {
                       <div>
                         <p className="text-lg text-gray-900">{question.ans}</p>
                       </div>
->>>>>>> 04d5161a843b684dfdcffbca4230baebae48f79b
                     </div>
-                    <div>
-                      <p className="text-lg text-gray-900">{question.ans}</p>
-                    </div>
-                  </div>
-                </li>
-              ))}
-            </ul>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
-
+        </div>
+      </div>
     </>
   );
 }
