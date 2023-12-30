@@ -5,8 +5,7 @@ import { ArrowRightIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 
-
-export default function Laporann() {
+export default function Laporan() {
 
   const getItemProps = (index) =>
     ({
@@ -14,7 +13,7 @@ export default function Laporann() {
       color: "Gray",
       onClick: () => setActive(index),
     });
-  
+
   const router = useRouter();
   const [active, setActive] = useState(1);
   const [itemsPerPage] = useState(10); // Jumlah item per halaman
@@ -22,43 +21,19 @@ export default function Laporann() {
     [
       {
         id: "1",
-        nama: "Dr. Hadi Setiawan SE., MT.",
-        kelompok: "Kelompok 1, 2, 3 dan 4",
-        jenis: "Sisdamas",
-        lokasi: "Kabupaten Bandung",
-        notlp: "089743550386"
+        kelompok: "Kelompok 230",
+        jenis: "Sisdamas ",
+        dosen: "Dr. Hari SE., M.Kom",
+        lokasi: "Desa Margamulya, Kec Pasir Jambu, Kabupaten Bandung, Jawa Barat",
+
+        
       },
       {
-        id: "2",
-        nama: "Dr. Muhamad Qosim SE., MT.",
-        kelompok: "Kelompok 1, 2, 3 dan 4",
-        jenis: "Sisdamas",
-        lokasi: "Kabupaten Bandung",
-        notlp: "089745550386"
-      },
-      {
-        id: "3",
-        nama: "Dr. Abdul Latif SE., MT.",
-        kelompok: "Kelompok 1, 2, 3 dan 4",
-        jenis: "Sisdamas",
-        lokasi: "Kabupaten Bandung",
-        notlp: "089745590386"
-      },
-      {
-        id: "4",
-        nama: "Dr. Hanna Sari SE., MT.",
-        kelompok: "Kelompok 1, 2, 3 dan 4",
-        jenis: "Sisdamas",
-        lokasi: "Kabupaten Bandung",
-        notlp: "089745500386"
-      },
-      {
-        id: "5",
-        nama: "Dr. Hannum SE., MT.",
-        kelompok: "Kelompok 1, 2, 3 dan 4",
-        jenis: "Sisdamas",
-        lokasi: "Kabupaten Bandung",
-        notlp: "089745503186"
+        id: "1",
+        kelompok: "Kelompok 231",
+        jenis: "Tematik ",
+        dosen: "Dr. Sari SE., M.Pd",
+        lokasi: "Desa Margamulya, Kec Pasir Jambu, Kabupaten Bandung, Jawa Barat",
       },
   ]);
 
@@ -87,17 +62,16 @@ export default function Laporann() {
   };
 
   const searchFilter = (item) => {
-    const { id, kelompok, jenis, lokasi, nama } = item;
+    const { id, pertanyaan, jawaban} = item;
     const searchText = searchTerm.toLowerCase();
     return (
       id.toLowerCase().includes(searchText) ||
-      kelompok.toLowerCase().includes(searchText) ||
-      jenis.toLowerCase().includes(searchText) ||
-      lokasi.toLowerCase().includes(searchText) ||
-      nama.toLowerCase().includes(searchText)
+      pertanyaan.toLowerCase().includes(searchText) ||
+      jawaban.toLowerCase().includes(searchText) 
     );
   };
   
+
   
   return (
     <>
@@ -105,7 +79,7 @@ export default function Laporann() {
 
     <div className="bg-IjoRumput h-72 md:w-full -z-20">
       <div className="absolute ml-32 px-6 md:px-0 md:top-8 md:left-36 md:ml-32 sm:ml-0 font-bold text-2xl md:text-5xl text-white">
-        <h1>Laporan Kelompok</h1>
+        <h1>Laporan Mahasiswa</h1>
       </div>
     </div>
 
@@ -131,48 +105,46 @@ export default function Laporann() {
 
       </div>
 
-      <div className='relative mt-4 bg-white overflow-x-auto'>
-        <table className=' text-lg text-gray-500 dark:text-gray-400 w-full'>
-          <thead className=' text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 text-center'>
+      <div className=' mt-4 bg-white overflow-x-auto'>
+        <table className=' text-lg text-gray-500 dark:text-gray-400 min-w-full'>
+          <thead className=' text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 text-left'>
             <tr className=''>
-              <th scope='col' className='py-2 px-2'>No</th>
-              <th scope='col' className='py-2 px-2'>Nama Dosen</th>
-              <th scope='col' className='py-2 px-2'>No Telepon</th>
-              <th scope='col' className='py-2 px-2'>Kelompok</th>
-              <th scope='col' className='py-2 px-2'>Jenis</th>
-              <th scope='col' className='py-2 px-2'>Lokasi</th>
-              <th scope='col' className='py-2 px-2'>Action</th>
+              <th scope='col' className='py-2 px-4'>No</th>
+              <th scope='col' className='py-2 px-4'>Kelompok</th>
+              <th scope='col' className='py-2 px-4'>Jenis KKN</th>
+              <th scope='col' className='py-2 px-4'>Dosen Pembimbing</th>
+              <th scope='col' className='py-2 px-4'>Lokasi KKN</th>
+              <th scope='col' className='py-2 px-4'>Action</th>
+
             </tr>
           </thead>
-          <tbody className='text-center'>
+          <tbody className='text-left'>
             {displayData().map((table, i) => (
               <tr key={i}>
-              <td scope='col' className='py-1 px-2'>{table.id}</td>
-              <td scope='col' className='py-1 px-2'>{table.nama}</td>
-              <td scope='col' className='py-1 px-2'>{table.notlp}</td>
-              <td scope='col' className='py-1 px-2'>{table.kelompok}</td>
-              <td scope='col' className='py-1 px-2'>{table.jenis}</td>
-              <td scope='col' className='py-1 px-2'>{table.lokasi}</td>
-              <td scope='col' className='py-1 px-2'>
-                <button
-                  onClick={() => {
-                    router.push({
-                      pathname: `/admin/dosen/detailLaporan/${table.id}`,
-                      query: {
-                        nama: table.nama,
-                        kelompok: table.kelompok,
-                        jenis: table.jenis,
-                        lokasi: table.lokasi,
-                        peserta: table.peserta,
-                        notlp: table.notlp
-                      },
-                    });
-                  }}
-                >
-                  <span className='font-medium text-blue-400 dark:text-blue-500 hover:underline'>detail</span>
-                </button>
-              </td>
-            </tr>
+                <td scope='col' className='py-2 px-4'>{table.id}</td>
+                <td scope='col' className='py-2 px-4'>{table.kelompok}</td>
+                <td scope='col' className='py-2 px-4'>{table.jenis}</td>
+                <td scope='col' className='py-2 px-4'>{table.dosen}</td>
+                <td scope='col' className='py-2 px-4'>{table.lokasi}</td>
+                <td scope='col' className='py-2 px-4'>
+                  <button
+                    onClick={() => {
+                      router.push({
+                        pathname: `/admin/mahasiswa/detailLaporan/${table.id}`,
+                        query: {
+                          kelompok: table.kelompok,
+                          jenis: table.jenis,
+                          lokasi: table.lokasi,
+                          peserta: table.peserta,
+                          dosen: table.dosen,
+                        },
+                      });
+                    }}
+                  >
+                    <span className='font-medium text-blue-400 dark:text-blue-500 hover:underline'>detail</span>
+                  </button>                  
+                </td>
+              </tr>
             ))}
           </tbody>
         </table>
