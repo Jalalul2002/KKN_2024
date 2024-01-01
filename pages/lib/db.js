@@ -3,8 +3,8 @@ const mysql = require('mysql2');
 
 const con = mysql.createConnection({
   host: 'localhost',
-  user: 'Test1',
-  password: 'kpL27Iac99',
+  user: 'root',
+  password: '',
   database: 'nextjs_crud',
 });
 
