@@ -20,7 +20,10 @@ export default function Protected() {
       Welcome, {session.user.name}! <br/>
       <button onClick={handleLogout}>Logout</button> <br/>
       <Link href="/mahasiswa/display">Display</Link><br/>
-      <Link href="/mahasiswa/testing/editform">Edit Form</Link>
+      <Link href="/mahasiswa/testing/editform">Edit Form</Link><br/>
+      <Link href="../dosen/addform">Tambah Data Testing</Link><br/>
+      <Link href="../dosen/display">Data Test</Link><br/>
+      <Link href="../dosen/editform">Edit Data Testing</Link><br/>
     </div>
     );
   }
