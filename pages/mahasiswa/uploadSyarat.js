@@ -23,7 +23,7 @@ export default function UploadSyarat() {
                   Upload Surat Pernyataan
                 </h1>
               </div>
-              <div className="text-justify px-3">
+              <div className="text-justify px-3 text-sm md:text-lg">
                 <p className="mb-2">
                   Untuk memenuhi persyaratan pendaftaran KKN UIN Sunan Gunung
                   Djati Bandung Tahun 2023, Peserta wajib mengunggah surat
@@ -32,16 +32,16 @@ export default function UploadSyarat() {
                   oleh peserta di kemudian hari. Apabila ditemukan
                   ketidaksesuaian, konsekuensi ditanggung oleh peserta KKN.
                 </p>
-                <p className="mb-2">
-                  Adapun syarat mengikuti KKN UIN Sunan Gunung Djati Bandung
-                  Tahun 2024 adalah sebagai berikut:
+                <div className="mb-2">
+                  <p>Adapun syarat mengikuti KKN UIN Sunan Gunung Djati Bandung
+                  Tahun 2024 adalah sebagai berikut:</p>
                   <ol className="list-decimal pl-8">
                     <li>
                       Telah mengambil dan lulus 75% dari jumlah SKS keseluruhan
                     </li>
                     <li>Telah lunas UKT pada semester berjalan</li>
                   </ol>
-                </p>
+                </div>
                 <p>
                   Silahkan lampirkan bukti surat pernyataan dari jurusan
                   masing-masing pendaftar. Template Surat Pernyataan dapat
