@@ -74,17 +74,17 @@ export default function Login (){
                <img
                   src="/nav-logo.png" 
                   alt="Logo UIN"
-                  className="w-[55px] h-[65px]"
+                  className="w-10 md:w-[55px] md:h-[65px]"
                 />
               </div>
-              <div className="pl-9 pt-8 font-darkerGrotesque font-medium text-xl">
+              <div className="pl-9 pt-8 w-4 md:w-40 lg:w-56 xl:w-96 font-darkerGrotesque font-medium text-xl">
                 <p>Silahkan Login</p>
                 <p>Mahasiswa menggunakan NIM</p>
                 <p>Dosen menggunakan NIP</p>
               </div>
           </div>
 
-          <div className="h-[680px] rounded-bl-md w-3/4 right-0 absolute z-10 bg-[#EBEBEB]">
+          <div className="absolute h-[680px] rounded-bl-md w-3/4 right-0 z-10 bg-[#EBEBEB]">
 
             <div className="relative flex flex-col items-center justify-center min-h-screen overflow-hidden">
             <h1 className="text-3xl font-bold text-center text-gray-700 mb-2">Login</h1>
