@@ -4,6 +4,9 @@ import SidebarMahasiswa from "../component/sidebarMahasiswa";
 import ReactModal from "react-modal";
 
 export default function KelompokKKN() {
+  const nama = "Jalalul Mu'ti";
+  const fakultas = "Sains dan Teknologi";
+  const nomor = "081357630782";
   const jenisKKN = "KKN Sisdamas";
   const kelompok = "Kelompok 01";
   const dpl = {
@@ -115,20 +118,26 @@ export default function KelompokKKN() {
               <div className="md:hidden p-2 bg-iceGray rounded-xl">
                 <div className="flex flex-col justify-evenly w-full space-y-2">
                   <div className="border border-slate-500 rounded-lg text-center p-1">
-                    <h1 className="font-bold text-base border-b-[1px] border-slate-400 mb-1">Ketua Kelompok</h1>
-                    <p className="font-semibold text-sm">{peserta[1].nama} - {peserta[1].jurusan} - {peserta[1].hp}</p>
+                    <h1 className="font-bold text-base border-b-[1px] border-slate-400 mb-1">
+                      Ketua Kelompok
+                    </h1>
+                    <p className="font-semibold text-sm">
+                      {peserta[1].nama} - {peserta[1].jurusan} - {peserta[1].hp}
+                    </p>
                   </div>
                   <button
                     type="button"
                     onClick={handleOpenModal}
                     className="px-5 py-2 bg-sky-800 hover:bg-sky-900 font-bold text-white rounded-md text-base"
                   >
-                    Pilih Ketua Kelompok
+                    Ajukan Ketua Kelompok
                   </button>
                   <div className="border border-slate-500 rounded-lg text-center font-semibold p-1">
-                    <h1 className="font-bold text-base border-b-[1px] border-slate-400 mb-1">Dosen Pembimbing</h1>
+                    <h1 className="font-bold text-base border-b-[1px] border-slate-400 mb-1">
+                      Dosen Pembimbing
+                    </h1>
                     <p className="text-sm">{dpl.nama}</p>
-                    <p className="text-sm">Kontak: {dpl.hp}</p>  
+                    <p className="text-sm">Kontak: {dpl.hp}</p>
                   </div>
                 </div>
               </div>
@@ -141,20 +150,12 @@ export default function KelompokKKN() {
                   <table className="w-full rounded-xl">
                     <thead>
                       <tr className="bg-IjoRumput">
-                        <th className="rounded-tl-lg p-2 lg:p-4">
-                          No
-                        </th>
+                        <th className="rounded-tl-lg p-2 lg:p-4">No</th>
                         <th className="px-6 p-2 lg:p-4">Profil</th>
                         <th className="px-6 p-2 lg:p-4">Nama</th>
-                        <th className="px-6 p-3 lg:p-4">
-                          Program Studi
-                        </th>
-                        <th className="px-6 p-3 lg:p-4">
-                          Fakultas
-                        </th>
-                        <th className="rounded-tr-lg p-3 lg:p-4">
-                          Nomor HP
-                        </th>
+                        <th className="px-6 p-3 lg:p-4">Program Studi</th>
+                        <th className="px-6 p-3 lg:p-4">Fakultas</th>
+                        <th className="rounded-tr-lg p-3 lg:p-4">Nomor HP</th>
                       </tr>
                     </thead>
                     <tbody className="text-center">
@@ -184,16 +185,24 @@ export default function KelompokKKN() {
                     onClick={handleOpenModal}
                     className="px-5 py-2 bg-sky-800 hover:bg-sky-900 font-bold text-white rounded-md md:text-base lg:text-xl"
                   >
-                    Pilih Ketua Kelompok
+                    Ajukan Ketua Kelompok
                   </button>
                   <div className="border border-slate-500 mt-3 rounded-lg text-center text-base lg:text-xl p-3">
-                    <h1 className="font-bold mb-2 border-b-[1px] border-slate-400">Ketua Kelompok</h1>
+                    <h1 className="font-bold mb-2 border-b-[1px] border-slate-400">
+                      Ketua Kelompok
+                    </h1>
                     <p className="font-semibold text-sm">{peserta[1].nama}</p>
-                    <p className="font-semibold text-sm">{peserta[1].jurusan}</p>
-                    <p className="font-semibold text-sm">Kontak: {peserta[1].hp}</p>
+                    <p className="font-semibold text-sm">
+                      {peserta[1].jurusan}
+                    </p>
+                    <p className="font-semibold text-sm">
+                      Kontak: {peserta[1].hp}
+                    </p>
                   </div>
                   <div className="border border-slate-500 mt-3 rounded-lg text-center text-base lg:text-xl font-semibold p-3">
-                    <h1 className="font-bold mb-2 border-b-[1px] border-slate-400">Dosen Pembimbing</h1>
+                    <h1 className="font-bold mb-2 border-b-[1px] border-slate-400">
+                      Dosen Pembimbing
+                    </h1>
                     <p className="text-sm">{dpl.nama}</p>
                     <p className="text-sm">Kontak: {dpl.hp}</p>
                   </div>
@@ -206,7 +215,7 @@ export default function KelompokKKN() {
       <ReactModal
         isOpen={isChooseModal}
         onRequestClose={closeChooseModal}
-        contentLabel="Konfirmasi Pendaftaran"
+        contentLabel="Konfirmasi Pengajuan"
         style={{
           overlay: {
             zIndex: 1000,
@@ -221,17 +230,47 @@ export default function KelompokKKN() {
         }}
       >
         <div className="flex flex-col justify-center items-center font-medium text-lg">
-          <h1 className="font-bold">Pilih Ketua Kelompok</h1>
+          <h1 className="font-bold">Ketua Kelompok</h1>
           <form>
             <div className="p-3 mb-5">
-              <select className="w-52 rounded-md">
+              {/* <select className="w-52 rounded-md">
                 <option value="">-- Pilih Ketua --</option>
                 {peserta.map((item, i) => (
                   <option key={i} value={item.nim}>
                     {item.nama}
                   </option>
                 ))}
-              </select>
+              </select> */}
+              <div>
+                <label htmlFor="nama" className="block mb-1 font-semibold">
+                  Nama Ketua Kelompok
+                </label>
+                <input
+                  id="nama"
+                  className="disabled w-full rounded-md text-xs md:text-base"
+                  value={nama}
+                ></input>
+                <div>
+                  <label htmlFor="fakultas" className="block mb-1 font-semibold">
+                    Fakultas
+                  </label>
+                  <input
+                    id="fakultas"
+                    className="disabled w-full rounded-md text-xs md:text-base"
+                    value={fakultas}
+                  ></input>
+                </div>
+                <div>
+                  <label htmlFor="kontak" className="block mb-1 font-semibold">
+                    Kontak
+                  </label>
+                  <input
+                    id="kontak"
+                    className="disabled w-full rounded-md text-xs md:text-base"
+                    value={nomor}
+                  ></input>
+                </div>
+              </div>
             </div>
             <div className="flex flex-row space-x-3 justify-center">
               <button

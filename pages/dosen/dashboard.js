@@ -44,11 +44,10 @@ export default function Dashboard() {
               </div>
               <div className="mt-3 flex flex-row flex-wrap justify-around">
                 <div className="lg:w-6/12">
-                  <img
-                    src="/images/timeline.jpeg"
-                    alt="Timeline KKN Image"
-                    className=" xl:max-w-screen"
-                  />
+                  <div>
+                    <h1>Timeline</h1>
+                    <img src="" className="" />
+                  </div>
                 </div>
                 <div className="lg:w-5/12 text-justify mt-3 lg:mt-0">
                   <h2 className="font-extrabold text-sm md:text-4xl mb-1 md:mb-7">
