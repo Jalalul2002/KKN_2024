@@ -181,26 +181,38 @@ export default function LogbookKKN() {
                 <label htmlFor="Kegiatan" className="block mb-1 font-semibold">
                   Nama Kegiatan
                 </label>
-                <input id="tanggal" className="w-full rounded-md text-xs md:text-base"></input>
+                <input
+                  id="tanggal"
+                  className="w-full rounded-md text-xs md:text-base"
+                ></input>
               </div>
               <div>
                 <label htmlFor="target" className="block mb-1 font-semibold">
                   Target KKN
                 </label>
-                <input id="target" className="w-full rounded-md text-xs md:text-base"></input>
+                <input
+                  id="target"
+                  className="w-full rounded-md text-xs md:text-base"
+                ></input>
               </div>
             </div>
             <div className="max-w-lg mx-auto mb-3">
               <label htmlFor="deskripsi" className="block mb-1 font-semibold">
                 Deskripsi Kegiatan
               </label>
-              <textarea id="deskripsi" className="w-full rounded-md text-xs md:text-base"></textarea>
+              <textarea
+                id="deskripsi"
+                className="w-full rounded-md text-xs md:text-base"
+              ></textarea>
             </div>
             <div className="max-w-lg mx-auto mb-3">
               <label htmlFor="hadir" className="block mb-1 font-semibold">
                 Anggota Hadir
               </label>
-              <textarea id="hadir" className="w-full rounded-md text-xs md:text-base"></textarea>
+              <textarea
+                id="hadir"
+                className="w-full rounded-md text-xs md:text-base"
+              ></textarea>
             </div>
             <div className="max-w-lg mx-auto mb-3">
               <label htmlFor="dokumen" className="block mb-1 font-semibold">
@@ -253,7 +265,10 @@ export default function LogbookKKN() {
                     className="text-xs bg-sky-600 hover:bg-sky-700 py-2 px-2 md:px-4 font-bold text-white flex flex-row justify-center items-center space-x-1 md:space-x-2 rounded-sm"
                     onClick={handleOpenModal}
                   >
-                    <PlusIcon className="h-4 W-4 md:w-5 md:h-5" style={{ strokeWidth: 2 }} />{" "}
+                    <PlusIcon
+                      className="h-4 W-4 md:w-5 md:h-5"
+                      style={{ strokeWidth: 2 }}
+                    />{" "}
                     <span>Tambah Logbook</span>
                   </button>
                 </div>

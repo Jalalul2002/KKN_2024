@@ -221,15 +221,15 @@ export default function KelompokKKN() {
             zIndex: 1000,
           },
           content: {
-            width: "50%",
-            height: "50%",
+            width: "auto",
+            height: "auto",
             margin: "auto",
             display: "flex",
             justifyContent: "center",
           },
         }}
       >
-        <div className="flex flex-col justify-center items-center font-medium text-lg">
+        <div className="flex flex-col justify-center items-center font-medium text-lg mt-6">
           <h1 className="font-bold">Ketua Kelompok</h1>
           <form>
             <div className="p-3 mb-5">
@@ -242,7 +242,7 @@ export default function KelompokKKN() {
                 ))}
               </select> */}
               <div>
-                <label htmlFor="nama" className="block mb-1 font-semibold">
+                <label htmlFor="nama" className="block mb-1 font-semibold text-sm md:text-base">
                   Nama Ketua Kelompok
                 </label>
                 <input
@@ -251,7 +251,7 @@ export default function KelompokKKN() {
                   value={nama}
                 ></input>
                 <div>
-                  <label htmlFor="fakultas" className="block mb-1 font-semibold">
+                  <label htmlFor="fakultas" className="block mb-1 font-semibold text-sm md:text-base">
                     Fakultas
                   </label>
                   <input
@@ -261,7 +261,7 @@ export default function KelompokKKN() {
                   ></input>
                 </div>
                 <div>
-                  <label htmlFor="kontak" className="block mb-1 font-semibold">
+                  <label htmlFor="kontak" className="block mb-1 font-semibold text-sm md:text-base">
                     Kontak
                   </label>
                   <input
@@ -272,17 +272,17 @@ export default function KelompokKKN() {
                 </div>
               </div>
             </div>
-            <div className="flex flex-row space-x-3 justify-center">
+            <div className="flex flex-row space-x-3 justify-center mb-3">
               <button
                 type="button"
                 onClick={closeChooseModal}
-                className="bg-red-600 hover:bg-red-700 px-5 py-1 text-white rounded-lg"
+                className="bg-red-600 hover:bg-red-700 px-5 py-1 text-white rounded-lg text-sm md:text-lg"
               >
                 Batal
               </button>
               <button
                 type="submit"
-                className="bg-green-600 hover:bg-green-700 px-5 py-1 text-white rounded-lg"
+                className="bg-green-600 hover:bg-green-700 px-5 py-1 text-white rounded-lg text-sm md:text-lg"
               >
                 Input
               </button>
