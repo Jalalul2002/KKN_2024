@@ -23,6 +23,8 @@ export default function Dashboard() {
     },
   ];
 
+  const dataKelompok = [];
+
   return (
     <>
       <div className="absolute bg-IjoRumput w-full h-72 -z-20"></div>
@@ -41,6 +43,28 @@ export default function Dashboard() {
                 <h1 className="text-sm md:text-3xl font-semibold pb-1 md:pb-3">
                   Informasi Kelompok
                 </h1>
+                <div className="grid grid-cols-4">
+                  <div className="bg-gray-50 rounded-xl">
+                    <div className="flex flex-row justify-between px-6 pt-4 pb-2">
+                      <div>
+                        <h1>Kelompok 1</h1>
+                        <h2>Ketua: <span>Ucup Slankie</span></h2>
+                        <h2>Jumlah Anggota: <span>15</span></h2>
+                      </div>
+                      <div className="bg-pink-300 text-center">
+                        <h1>K1</h1>
+                      </div>
+                    </div>
+                    <div className="flex flex-row justify-between border-t">
+                      <div className="w-1/2">
+                        <p>Telp. 081356765421</p>
+                      </div>
+                      <div className="w-1/2 text-center">
+                        <Link href={"/dosen/detailKelompok?1"}>Detail</Link>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
               <div className="mt-3 flex flex-row flex-wrap justify-around">
                 <div className="lg:w-6/12">

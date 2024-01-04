@@ -57,7 +57,7 @@ export default function SidebarMahasiswa() {
   ];
 
   const router = useRouter();
-  const [mobileNav, setMobileNav] = useState(false);
+  const [mobileNav, setMobileNav] = useState(true);
 
   const handleMobileNav = () => {
     setMobileNav(!mobileNav);
