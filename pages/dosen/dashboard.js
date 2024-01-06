@@ -3,6 +3,7 @@ import SidebarDosen from "../component/sidebarDosen";
 import Navbar from "../component/navbar";
 import Link from "next/link";
 import { ArrowDownIcon } from "@heroicons/react/24/outline";
+import Head from "next/head";
 
 export default function Dashboard() {
   const downloadMenu = [
@@ -23,10 +24,57 @@ export default function Dashboard() {
     },
   ];
 
-  const dataKelompok = [];
+  const dataKelompok = [
+    {
+      id: "K1",
+      namakelompok: "Kelompok 1",
+      ketua: "Ucup Slankie",
+      telp: "081356765432",
+      anggota: "15",
+    },
+    {
+      id: "K2",
+      namakelompok: "Kelompok 2",
+      ketua: "Ucup Slankie",
+      telp: "081356765432",
+      anggota: "15",
+    },
+    {
+      id: "K3",
+      namakelompok: "Kelompok 3",
+      ketua: "Ucup Slankie",
+      telp: "081356765432",
+      anggota: "15",
+    },
+    {
+      id: "K4",
+      namakelompok: "Kelompok 4",
+      ketua: "Ucup Slankie",
+      telp: "081356765432",
+      anggota: "15",
+    },
+    {
+      id: "K4",
+      namakelompok: "Kelompok 4",
+      ketua: "Ucup Slankie",
+      telp: "081356765432",
+      anggota: "15",
+    },
+    {
+      id: "K4",
+      namakelompok: "Kelompok 4",
+      ketua: "Ucup Slankie",
+      telp: "081356765432",
+      anggota: "15",
+    },
+  ];
 
   return (
     <>
+      <Head>
+        <title>Dashboard</title>
+        <meta property="og:title" content="Dashboard" key="title" />
+      </Head>
       <div className="absolute bg-IjoRumput w-full h-72 -z-20"></div>
       <div className="flex flex-row justify-start">
         <div className="md:w-auto h-screen">
@@ -38,64 +86,69 @@ export default function Dashboard() {
             <div className="mt-20 mb-5 md:mt-28 md:mb-10 font-bold text-2xl md:text-5xl text-white">
               <h1>Dashboard</h1>
             </div>
-            <div className="p-3 md:p-6 bg-iceGray rounded-xl">
+            <div className="p-3 md:p-6 bg-iceGray rounded-xl w-full">
               <div>
                 <h1 className="text-sm md:text-3xl font-semibold pb-1 md:pb-3">
                   Informasi Kelompok
                 </h1>
-                <div className="grid grid-cols-4">
-                  <div className="bg-gray-50 rounded-xl">
-                    <div className="flex flex-row justify-between px-6 pt-4 pb-2">
-                      <div>
-                        <h1>Kelompok 1</h1>
-                        <h2>Ketua: <span>Ucup Slankie</span></h2>
-                        <h2>Jumlah Anggota: <span>15</span></h2>
+                <div className="grid md:grid-cols-2 xl:grid-cols-4 font-medium px-4 gap-4">
+                  {dataKelompok.map((item, i) => (
+                    <div className="bg-gray-50 rounded-xl shadow-md" key={i}>
+                      <div className="flex flex-row justify-between px-6 pt-4 pb-4">
+                        <div>
+                          <h1 className="text-2xl font-bold">
+                            {item.namakelompok}
+                          </h1>
+                          <h2>
+                            Ketua:{" "}
+                            <span className="font-semibold">{item.ketua}</span>
+                          </h2>
+                          <h2>
+                            Jumlah Anggota:{" "}
+                            <span className="font-semibold">
+                              {item.anggota}
+                            </span>
+                          </h2>
+                        </div>
+                        <div className="bg-IjoRumput text-center flex justify-center items-center font-extrabold text-white rounded-full text-3xl py-4 px-6">
+                          <h1>{item.id}</h1>
+                        </div>
                       </div>
-                      <div className="bg-pink-300 text-center">
-                        <h1>K1</h1>
+                      <div className="flex flex-row justify-between border-t">
+                        <div className="w-2/3 text-center py-2">
+                          <p>Telp. {item.telp}</p>
+                        </div>
+                        <div className="w-1/3 text-center bg-IjoRumput py-2 rounded-ee-lg text-white hover:bg-IjoRumput/80">
+                          <Link
+                            href={`/dosen/detailKelompok?${item.id}`}
+                            className="font-bold px-6 py-2"
+                          >
+                            Detail
+                          </Link>
+                        </div>
                       </div>
                     </div>
-                    <div className="flex flex-row justify-between border-t">
-                      <div className="w-1/2">
-                        <p>Telp. 081356765421</p>
-                      </div>
-                      <div className="w-1/2 text-center">
-                        <Link href={"/dosen/detailKelompok?1"}>Detail</Link>
-                      </div>
-                    </div>
-                  </div>
+                  ))}
                 </div>
               </div>
-              <div className="mt-3 flex flex-row flex-wrap justify-around">
-                <div className="lg:w-6/12">
-                  <div>
-                    <h1>Timeline</h1>
-                    <img src="" className="" />
+              <div className="mt-6 grid grid-cols-2 gap-4">
+                <div className="w-full">
+                  <h1 className="text-3xl font-semibold mb-2">
+                    Timeline
+                  </h1>
+                  <div className="px-4">
+                    <img src="/images/timeline.jpeg" className="w-full" />
                   </div>
                 </div>
-                <div className="lg:w-5/12 text-justify mt-3 lg:mt-0">
-                  <h2 className="font-extrabold text-sm md:text-4xl mb-1 md:mb-7">
-                    Apa itu KKN?
+                <div className="text-justify mt-3 lg:mt-0">
+                  <h2 className="font-semibold text-sm md:text-3xl mb-1 md:mb-2">
+                    Dokumen KKN
                   </h2>
-                  <p className="text-sm md:text-lg font-medium mb-3">
-                    KKN merupakan kepanjangan dari Kuliah Kerja Nyata. Ini
-                    merupakan program mahasiswa untuk mengabdi kepada masyarakat
-                    dengan pendekatan lintas keilmuan dan sektoral dalam kurun
-                    waktu tertentu. Biasanya KKN dilakukan selama 1 atau 2 bulan
-                    di sebuah desa atau wilayah setingkat desa.
-                  </p>
-                  <p className="text-sm md:text-lg font-medium">
-                    Program ini dilakukan oleh mahasiswa semester akhir seperti
-                    semester 5 atau 6. Mereka akan menjalankan kegiatan belajar,
-                    mengabdi, mengajar, dan berbaur dengan masyarakat dimana
-                    mereka melakukan KKN. Untuk panduan KKN bisa lihat pada link
-                    berikut:
-                  </p>
-                  <ul className="flex flex-row justify-center py-4 flex-wrap space-x-2 text-sm md:text-base">
+                  <ul className="flex flex-row justify-center py-2 flex-wrap space-x-2 text-sm md:text-base">
                     {downloadMenu.map((menus, i) => (
                       <Link key={i} href={menus.link}>
                         <li
-                          className={`flex flex-row content-center px-2 py-2 mt-2 items-center ${menus.color} hover:bg-opacity-80 text-white rounded-sm font-semibold`}
+                          className={`flex flex-row content-center mb-2 px-2 py-2 items-center ${menus.color} hover:bg-opacity-80 text-white rounded-sm font-semibold`}
                         >
                           <ArrowDownIcon className="w-4 h-4 mr-2 " />
                           {menus.item}

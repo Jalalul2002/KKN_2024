@@ -42,9 +42,9 @@ export default function SidebarDosen() {
     },
     {
       id: 5,
-      link: "/dosen/keluar",
-      menu: "Keluar",
-      icon: libIcon,
+      link: "/dosen/ajuan",
+      menu: "Ajuan Surat",
+      icon: docIcon,
     },
   ];
 
