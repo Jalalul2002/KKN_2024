@@ -148,14 +148,14 @@ export default function SidebarDosen() {
                   className={
                     mobileNav
                       ? "w-4 h-4 mr-2 ease-in-out duration-200"
-                      : "w-6 h-6 mr-0 ease-in-out duration-200"
+                      : "block w-6 h-6 mr-0 ease-in-out duration-200"
                   }
                 />
                 <span
                   className={
                     mobileNav
                       ? "text-base ease-in-out duration-200"
-                      : "text-[0px] ease-in-out duration-200 hover:text-xs"
+                      : "text-[0px] ease-in-out duration-200"
                   }
                 >
                   {menus.menu}
