@@ -23,7 +23,7 @@ export default function SyaratCompleted() {
                   Upload Surat Pernyataan
                 </h1>
               </div>
-              <div className="text-center px-3">
+              <div className="text-center px-3 text-sm md:text-lg">
                 <p className="mb-2">
                   Terimakasih, anda sudah mengupload surat pernyataan{" "}
                 </p>

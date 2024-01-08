@@ -109,7 +109,7 @@ export default function LogbookKKN() {
             zIndex: 1000,
           },
           content: {
-            width: "50%",
+            width: "auto",
             margin: "auto",
             display: "flex",
             justifyContent: "center",
@@ -117,19 +117,19 @@ export default function LogbookKKN() {
           },
         }}
       >
-        <div className="font-medium text-base overflow-auto w-full mt-16 pt-14">
-          <div className="w-full text-center mb-5 mt-10 border-b-2 pb-4">
-            <h1 className="font-bold text-3xl">Tambah Logbook</h1>
+        <div className="text-xs md:font-medium md:text-base overflow-auto w-full mt-5 md:mt-16 pt-14">
+          <div className="w-full text-center mb-2 md:mb-5 md:mt-10 border-b-2 pb-2 md:pb-4">
+            <h1 className="font-bold text-lg md:text-3xl">Tambah Logbook</h1>
           </div>
           <form className="mx-auto">
-            <div className="flex justify-center space-x-2 mb-3 px-5">
+            <div className="flex justify-center space-x-2 mb-3 md:px-5">
               <div className="max-w-xs w-full">
                 <label htmlFor="tanggal" className="block mb-1 font-semibold">
                   Hari, Tanggal
                 </label>
                 <input
                   id="tanggal"
-                  className="disabled w-full rounded-md"
+                  className="disabled w-full rounded-md text-xs md:text-base"
                   value={formattedDateTime}
                 ></input>
               </div>
@@ -139,19 +139,19 @@ export default function LogbookKKN() {
                 </label>
                 <input
                   id="jenis"
-                  className="disabled w-full rounded-md"
+                  className="disabled w-full rounded-md text-xs md:text-base"
                   value={jenisKKN}
                 ></input>
               </div>
             </div>
-            <div className="flex justify-center space-x-2 mb-3 px-5">
+            <div className="flex justify-center space-x-2 mb-3 md:px-5">
               <div>
                 <label htmlFor="nama" className="block mb-1 font-semibold">
                   Nama Kelompok
                 </label>
                 <input
                   id="nama"
-                  className="disabled w-full rounded-md"
+                  className="disabled w-full rounded-md text-xs md:text-base"
                   value={kelompok}
                 ></input>
               </div>
@@ -161,7 +161,7 @@ export default function LogbookKKN() {
                 </label>
                 <input
                   id="dosen"
-                  className="disabled w-full rounded-md"
+                  className="disabled w-full rounded-md text-xs md:text-base"
                   value={dosen}
                 ></input>
               </div>
@@ -172,35 +172,47 @@ export default function LogbookKKN() {
               </label>
               <input
                 id="lokasi"
-                className="disabled w-full rounded-md"
+                className="disabled w-full rounded-md text-xs md:text-base"
                 value={lokasi}
               ></input>
             </div>
-            <div className="flex justify-center space-x-2 mb-3 px-5">
+            <div className="flex justify-center space-x-2 mb-3 md:px-5">
               <div className="max-w-xs w-full">
                 <label htmlFor="Kegiatan" className="block mb-1 font-semibold">
                   Nama Kegiatan
                 </label>
-                <input id="tanggal" className="w-full rounded-md"></input>
+                <input
+                  id="tanggal"
+                  className="w-full rounded-md text-xs md:text-base"
+                ></input>
               </div>
               <div>
                 <label htmlFor="target" className="block mb-1 font-semibold">
                   Target KKN
                 </label>
-                <input id="target" className="w-full rounded-md"></input>
+                <input
+                  id="target"
+                  className="w-full rounded-md text-xs md:text-base"
+                ></input>
               </div>
             </div>
             <div className="max-w-lg mx-auto mb-3">
               <label htmlFor="deskripsi" className="block mb-1 font-semibold">
                 Deskripsi Kegiatan
               </label>
-              <textarea id="deskripsi" className="w-full rounded-md"></textarea>
+              <textarea
+                id="deskripsi"
+                className="w-full rounded-md text-xs md:text-base"
+              ></textarea>
             </div>
             <div className="max-w-lg mx-auto mb-3">
               <label htmlFor="hadir" className="block mb-1 font-semibold">
                 Anggota Hadir
               </label>
-              <textarea id="hadir" className="w-full rounded-md"></textarea>
+              <textarea
+                id="hadir"
+                className="w-full rounded-md text-xs md:text-base"
+              ></textarea>
             </div>
             <div className="max-w-lg mx-auto mb-3">
               <label htmlFor="dokumen" className="block mb-1 font-semibold">
@@ -247,22 +259,25 @@ export default function LogbookKKN() {
                   <h1 className="text-lg md:text-3xl font-bold">{jenisKKN}</h1>
                   <h2 className="md:text-xl font-semibold">{kelompok}</h2>
                 </div>
-                <div className="flex flex-col justify-end px-2 py-1">
+                <div className="flex flex-col justify-center md:justify-end px-2 py-1">
                   <button
                     type="button"
-                    className="bg-sky-600 hover:bg-sky-700 py-2 px-4 font-bold text-white flex flex-row justify-center items-center space-x-2 rounded-sm"
+                    className="text-xs bg-sky-600 hover:bg-sky-700 py-2 px-2 md:px-4 font-bold text-white flex flex-row justify-center items-center space-x-1 md:space-x-2 rounded-sm"
                     onClick={handleOpenModal}
                   >
-                    <PlusIcon className="w-5 h-5" style={{ strokeWidth: 2 }} />{" "}
+                    <PlusIcon
+                      className="h-4 W-4 md:w-5 md:h-5"
+                      style={{ strokeWidth: 2 }}
+                    />{" "}
                     <span>Tambah Logbook</span>
                   </button>
                 </div>
               </div>
-              <div className="box-border md:py-3 md:px-2 mb-3 lg:text-base text-sm overflow-x-auto font-medium">
+              <div className="box-border md:py-3 md:px-2 mb-3 lg:text-base text-xs md:text-sm overflow-x-auto font-medium">
                 <table className="w-full rounded-xl">
                   <thead>
                     <tr className="bg-IjoRumput">
-                      <th className="rounded-tl-lg p-2 lg:p-4">No</th>
+                      <th className="rounded-tl-lg p-1 lg:p-4">No</th>
                       <th className="px-6 p-2 lg:p-4">Hari, Tanggal</th>
                       <th className="px-6 p-2 lg:p-4">Lokasi</th>
                       <th className="px-6 p-3 lg:p-4">Kegiatan</th>
@@ -276,13 +291,13 @@ export default function LogbookKKN() {
                   <tbody className="text-center">
                     {currentItem.map((item, i) => (
                       <tr key={i} className="border-y border-slate-300">
-                        <td className="py-1 px-1 lg:p-3">{i + 1}</td>
+                        <td className="py-1 px-0 lg:p-3">{i + 1}</td>
                         <td className="py-1 px-1 lg:p-3">{item.hari}</td>
-                        <td className="py-1 px-3 lg:p-3">{item.lokasi}</td>
-                        <td className="py-1 px-3 lg:p-3">{item.judul}</td>
-                        <td className="py-1 px-3 lg:p-3">{item.target}</td>
-                        <td className="py-1 px-3 lg:p-3">{item.deskripsi}</td>
-                        <td className="py-1 px-3 lg:p-3">
+                        <td className="py-1 px-2 lg:p-3">{item.lokasi}</td>
+                        <td className="py-1 px-2 lg:p-3">{item.judul}</td>
+                        <td className="py-1 px-2 lg:p-3">{item.target}</td>
+                        <td className="py-1 px-2 lg:p-3">{item.deskripsi}</td>
+                        <td className="py-1 px-2 lg:p-3">
                           {item.anggotahadir}
                         </td>
                         <td className="py-2 lg:p-3 flex justify-center">
@@ -292,7 +307,7 @@ export default function LogbookKKN() {
                           <Link href={"/hapus"}>
                             <div className="bg-red-600 hover:bg-red-700 flex items-center p-2 text-white cursor-pointer rounded-lg">
                               <TrashIcon
-                                className="w-5 h-5"
+                                className="w-3 h-3 md:w-5 md:h-5"
                                 style={{ strokeWidth: 2 }}
                               />
                             </div>

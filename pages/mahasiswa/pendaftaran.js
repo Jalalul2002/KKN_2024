@@ -493,6 +493,12 @@ export default function PendaftaranKKN() {
                   </dl>
                 </div>
               </div>
+              
+              {/* Jika tidak memenuhi syarat */}
+              <div className="w-full text-center mt-24 mb-12">
+                <Link href={"/mahasiswa/uploadSyarat"} className="px-10 py-2 bg-IjoRumput hover:bg-IjoRumput/80 text-xl text-white font-bold">Upload Persyaratan</Link>
+              </div>
+              
               <section className="py-2 md:mt-2">
                 <form
                   method="post"

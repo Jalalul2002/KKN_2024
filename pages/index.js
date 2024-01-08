@@ -6,6 +6,7 @@ import instagramIcon from "./component/svgs/instagram";
 import youtubeIcon from "./component/svgs/youtube";
 import websiteIcon from "./component/svgs/website";
 import Copyright from "./component/copyright";
+import Head from "next/head";
 
 export default function Home() {
   const imageSlides = [
@@ -81,6 +82,10 @@ export default function Home() {
 
   return (
     <>
+      <Head>
+        <link rel="icon" href="/nav-logo2.png" />
+        <title>KKN UIN SUNAN GUNUNG DJATI BANDUNG</title>
+      </Head>
       <Header />
 
       <main>
@@ -97,7 +102,9 @@ export default function Home() {
                 Kuliah Kerja Nyata
               </h1>
               <h3 className="font-medium text-white flex flex-col text-base md:text-3xl leading-4 md:leading-9 mt-4 md:mt-9 pb-12 md:pb-4">
-                <span className="font-bold md:text-4xl">Assalamu&apos;alaikum</span>
+                <span className="font-bold md:text-4xl">
+                  Assalamu&apos;alaikum
+                </span>
                 <span>
                   Selamat Datang di Situs Resmi Kuliah Kerja Nyata (KKN)
                 </span>
@@ -152,8 +159,11 @@ export default function Home() {
                   Program ini dilakukan oleh mahasiswa semester akhir seperti
                   semester 5 atau 6. Mereka akan menjalankan kegiatan belajar,
                   mengabdi, mengajar, dan berbaur dengan masyarakat dimana
-                  mereka melakukan KKN. Untuk panduan KKN bisa lihat pada 
-                  <Link href="/" className="underline"> halaman berikut.</Link>
+                  mereka melakukan KKN. Untuk panduan KKN bisa lihat pada
+                  <Link href="/" className="underline">
+                    {" "}
+                    halaman berikut.
+                  </Link>
                 </p>
               </div>
             </div>
@@ -174,24 +184,28 @@ export default function Home() {
           <div className="md:w-1/3 xl:w-1/2 md:pl-10 space-y-2 xl:space-y-4">
             {kampuss.map((kampus, index) => (
               <div key={index}>
-                <h1 className="font-bold text-base md:text-lg">{kampus.kampus}</h1>
+                <h1 className="font-bold text-base md:text-lg">
+                  {kampus.kampus}
+                </h1>
                 <p className="text-sm md:text-base">{kampus.jalan}</p>
               </div>
             ))}
           </div>
           <div className="1/2 md:w-1/3">
             <h1 className="font-bold text-lg md:text-xl">MEDIA SOSIAL</h1>
-            <p className="text-base md:text-lg">Ikuti sosial media kami untuk medapatkan informasi terbaru</p>
+            <p className="text-base md:text-lg">
+              Ikuti sosial media kami untuk medapatkan informasi terbaru
+            </p>
             <div className="flex flex-row space-x-1 md:space-x-0 items-center py-1">
               {icons.map((icon, index) => (
                 <Link key={index} href={icon.href} target="blank">
-                  <icon.icon className="w-7 md:w-12"/>
+                  <icon.icon className="w-7 md:w-12" />
                 </Link>
               ))}
             </div>
           </div>
         </div>
-        <Copyright/>
+        <Copyright />
       </footer>
     </>
   );
