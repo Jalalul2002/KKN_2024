@@ -30,10 +30,10 @@ export default function DetailKelompok() {
 
     <>
     <div class="absolute px-5 bg-IjoRumput h-auto w-full ">
-        <div className='mx-2 mt-4'>
+        <div className='absolute mx-2 mt-4 bg-white p-2 rounded-full drop-shadow-xl'>
             <Link href='/admin/dosen/kelompok' className="text-xl"><IoPlayBack /></Link>
         </div>
-        <h1 className='flex justify-center items-center text-black text-4xl font-bold'>Detail Kelompok</h1> 
+        <h1 className='flex justify-center items-center text-white text-4xl font-bold mt-8 mb-4'>Detail Kelompok</h1> 
         <div className='bg-white h-full w-full flex justify-between items-center rounded-lg px-8'>
             <div className='font-bold text-3xl flex items-center justify-center my-4'>
                 <img src="/nav-logo2.png" alt="Logo UIN" className="md:w-[90px]"/>
@@ -61,8 +61,8 @@ export default function DetailKelompok() {
         </div>
 
 
-        <div className='flex justify-between items-center space-x-8'>
-            <div className='bg-white w-1/2 grid justify-center items-center py-8 my-8 rounded-xl'>
+        <div className=' grid md:grid-cols-4 xl:grid-cols-2 px-4 gap-6 mt-8'>
+            <div className='bg-white grid justify-center items-center py-8 mt-4 rounded-xl'>
                 <h1 className='font-bold text-4xl mb-3 text-center'>Kelompok 1</h1>
                 <div className='relative overflow-x-auto overflow-y-auto bg-white max-h-80'>
                     <table className=' text-lg text-gray-500 dark:text-gray-400 min-w-full w-full text-left rtl:text-right '>
@@ -98,7 +98,7 @@ export default function DetailKelompok() {
                 </div>
             </div>
 
-            <div className='bg-white w-1/2 grid justify-center items-center py-8 my-8 rounded-xl'>
+            <div className='bg-white grid justify-center items-center py-8 mt-4 rounded-xl'>
                 <h1 className='font-bold text-4xl mb-3 text-center'>Kelompok 2</h1>
                 <div className='relative overflow-x-auto overflow-y-auto bg-white max-h-80'>
                     <table className=' text-lg text-gray-500 dark:text-gray-400 min-w-full w-full text-left rtl:text-right '>
@@ -133,10 +133,8 @@ export default function DetailKelompok() {
                     </table>
                 </div>
             </div>
-        </div>
 
-        <div className='flex justify-between items-center space-x-8'>
-            <div className='bg-white w-2/3 grid justify-center items-center py-8 my-8 rounded-xl'>
+            <div className='bg-white grid justify-center items-center py-8 mt-4 rounded-xl'>
                 <h1 className='font-bold text-4xl mb-3 text-center'>Kelompok 3</h1>
                 <div className='relative overflow-x-auto overflow-y-auto bg-white max-h-80'>
                     <table className=' text-lg text-gray-500 dark:text-gray-400 min-w-full w-full text-left rtl:text-right '>
@@ -172,7 +170,7 @@ export default function DetailKelompok() {
                 </div>
             </div>
 
-            <div className='bg-white w-2/3 grid justify-center items-center py-8 my-8 rounded-xl'>
+            <div className='bg-white grid justify-center items-center py-8 mt-4 rounded-xl'>
                 <h1 className='font-bold text-4xl mb-3 text-center'>Kelompok 4</h1>
                 <div className='relative overflow-x-auto overflow-y-auto bg-white max-h-80'>
                     <table className=' text-lg text-gray-500 dark:text-gray-400 min-w-full w-full text-left rtl:text-right '>
@@ -209,6 +207,8 @@ export default function DetailKelompok() {
             </div>
 
         </div>
+
+            
         
       </div>
     </>

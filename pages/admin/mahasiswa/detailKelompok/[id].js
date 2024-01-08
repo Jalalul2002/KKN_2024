@@ -29,10 +29,10 @@ export default function DetailKelompok() {
 
     <>
     <div className='absolute bg-IjoRumput h-screen w-screen'>
-      <div className='mx-2 mt-4'>
+      <div className='absolute mx-2 mt-4 bg-white rounded-full p-2 drop-shadow-xl'>
         <Link href='/admin/mahasiswa/kelompok' className="text-xl"><IoPlayBack /></Link>
       </div>
-      <div className='flex justify-center items-center'>
+      <div className='flex justify-center items-center mt-8'>
         <h1 className='text-white text-4xl font-bold'>Detail Kelompok</h1>
       </div>
       <div class="absolute px-5 md:left-32 md:right-32 md:top-24 py-2 rounded-xl bg-iceGray">

@@ -36,11 +36,11 @@ export default function DetailLaporan() {
     <>
       <div className='bg-IjoRumput w-screen h-screen flex justify-center'>
         <div class="absolute px-5  w-full ">
-          <div className='mx-2 mt-4'>
+          <div className='absolute mx-2 mt-4 bg-white p-2 rounded-full drop-shadow-xl'>
             <Link href='/admin/dosen/laporan' className="text-xl"><IoPlayBack /></Link>
           </div>
-          <h1 className='flex justify-center items-center text-black text-4xl font-bold'>Detail Laporan</h1> 
-            <div className='bg-white h-full w-full flex justify-between items-center rounded-lg px-8'>
+          <h1 className='flex justify-center items-center text-white text-4xl font-bold mt-8'>Detail Laporan</h1> 
+            <div className='bg-white h-auto w-auto flex justify-between items-center rounded-lg px-8 my-4'>
                 <div className='font-bold text-3xl flex items-center justify-center my-4'>
                     <img src="/nav-logo2.png" alt="Logo UIN" className="md:w-[90px]"/>
                 </div>
@@ -67,8 +67,8 @@ export default function DetailLaporan() {
             </div>
 
 
-            <div className='flex justify-between items-center space-x-8'>
-                <div className='bg-white w-1/2 grid justify-center items-center py-8 my-8 rounded-xl'>
+            <div className=' grid justify-center items-center grid-cols-4 font-medium px-4 gap-6 mt-8'>
+                <div className='bg-white grid justify-center items-center py-8 mt-4 rounded-xl'>
                     <h1 className='font-bold text-4xl mb-3 text-center'>Kelompok 1</h1>
                     <button 
                 className='font-semibold text-blue-400 dark:text-blue-500 hover:underline' 
@@ -78,7 +78,7 @@ export default function DetailLaporan() {
                 </button>
                 </div>
 
-                <div className='bg-white w-1/2 grid justify-center items-center py-8 my-8 rounded-xl'>
+                <div className='bg-white  grid justify-center items-center py-8 mt-4 rounded-xl'>
                     <h1 className='font-bold text-4xl mb-3 text-center'>Kelompok 2</h1>
                     <button 
                 className='font-semibold text-blue-400 dark:text-blue-500 hover:underline' 
@@ -88,7 +88,7 @@ export default function DetailLaporan() {
                 </button>
                 </div>
 
-                <div className='bg-white w-1/2 grid justify-center items-center py-8 my-8 rounded-xl'>
+                <div className='bg-white  grid justify-center items-center py-8 mt-4 rounded-xl'>
                     <h1 className='font-bold text-4xl mb-3 text-center'>Kelompok 3</h1>
                     <button 
                 className='font-semibold text-blue-400 dark:text-blue-500 hover:underline' 
@@ -98,7 +98,7 @@ export default function DetailLaporan() {
                 </button>
                 </div>
 
-                <div className='bg-white w-1/2 grid justify-center items-center py-8 my-8 rounded-xl'>
+                <div className='bg-white grid justify-center items-center py-8 mt-4 rounded-xl'>
                     <h1 className='font-bold text-4xl mb-3 text-center'>Kelompok 4</h1>
                     <button 
                 className='font-semibold text-blue-400 dark:text-blue-500 hover:underline' 
