@@ -1,4 +1,7 @@
 import { useRouter } from 'next/router';
+import Link from 'next/link';
+import { IoPlayBack } from 'react-icons/io5';
+
 
 export default function DetailNilai() {
   const router = useRouter();
@@ -27,8 +30,11 @@ export default function DetailNilai() {
 
     <>
     <div className='absolute bg-IjoRumput h-screen w-screen'>
-      <h1 className='flex justify-center items-center text-white text-4xl font-bold mt-5'>Detail Nilai Mahasiswa</h1>
-      <div class="absolute px-5 md:left-32 md:right-32 md:top-20 py-5 rounded-xl bg-iceGray flex justify-between h-auto w-auto">
+      <div className='mx-2 mt-4'>
+        <Link href='/admin/mahasiswa/nilai' className="text-xl"><IoPlayBack /></Link>
+      </div>
+      <h1 className='flex justify-center items-center text-white text-4xl font-bold'>Detail Nilai Mahasiswa</h1>
+      <div class="absolute px-5 md:left-32 md:right-32 md:top-24 py-5 rounded-xl bg-iceGray flex justify-between h-auto w-auto">
 
         <div className='bg-white h-full w-1/3 grid justify-center items-center rounded-lg py-3 px-3 my-8'>
           <div className='font-bold text-3xl flex items-center justify-center my-4'>

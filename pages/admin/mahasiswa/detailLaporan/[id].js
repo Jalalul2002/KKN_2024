@@ -1,4 +1,6 @@
 import { useRouter } from 'next/router';
+import Link from 'next/link';
+import { IoPlayBack } from 'react-icons/io5';
 
 export default function detailLaporan() {
   const router = useRouter();
@@ -27,10 +29,12 @@ export default function detailLaporan() {
 
     <>
     <div className='absolute bg-IjoRumput h-screen w-screen'>
-      <h1 className='flex justify-center items-center text-white text-4xl font-bold mt-5'>Detail Laporan Mahasiswa</h1>
-
-      <div class="absolute px-5 md:left-24 md:right-24 md:top-14  rounded-xl flex justify-center space-x-8 h-auto w-auto">
-
+      <div className='mt-4 ml-2'>
+        <Link href='/admin/mahasiswa/laporan' className="text-xl"><IoPlayBack /></Link>
+        <h1 className='flex justify-center text-white text-4xl font-bold '>Detail Laporan Mahasiswa</h1>
+      </div>
+        
+      <div class="absolute px-5 md:left-24 md:right-24 md:top-20 bg-iceGray rounded-xl flex justify-center space-x-8 h-auto w-auto">
         <div className='bg-white h-full w-1/3 grid justify-center items-center rounded-lg py-3 px-3 my-8'>
           <div className='font-bold text-3xl flex items-center justify-center my-4'>
             <img src="/nav-logo2.png" alt="Logo UIN" className="md:w-[90px]"/>

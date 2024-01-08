@@ -1,4 +1,7 @@
 import { useRouter } from 'next/router';
+import Link from 'next/link';
+import { IoPlayBack } from 'react-icons/io5';
+
 
 export default function DetailKelompok() {
   const router = useRouter();
@@ -26,8 +29,11 @@ export default function DetailKelompok() {
     // </div>
 
     <>
-      <div class="absolute px-5 bg-IjoRumput h-auto w-full ">
-        <h1 className='flex justify-center items-center text-black text-4xl font-bold py-5'>Detail Kelompok</h1> 
+    <div class="absolute px-5 bg-IjoRumput h-auto w-full ">
+        <div className='mx-2 mt-4'>
+            <Link href='/admin/dosen/kelompok' className="text-xl"><IoPlayBack /></Link>
+        </div>
+        <h1 className='flex justify-center items-center text-black text-4xl font-bold'>Detail Kelompok</h1> 
         <div className='bg-white h-full w-full flex justify-between items-center rounded-lg px-8'>
             <div className='font-bold text-3xl flex items-center justify-center my-4'>
                 <img src="/nav-logo2.png" alt="Logo UIN" className="md:w-[90px]"/>
@@ -201,8 +207,9 @@ export default function DetailKelompok() {
                     </table>
                 </div>
             </div>
-        </div>
 
+        </div>
+        
       </div>
     </>
   );

@@ -93,30 +93,18 @@ export default function SidebarAdmin() {
                     id: 3,
                     menu: " DPL ",
                     link: "/admin/settings/dpl"
+                },
+                {
+                    id: 4,
+                    menu: " Pengguna ",
+                    link: "/admin/settings/pengguna"
                 }
             ]
         },
         {
             id: 5,
-            menu: "SuperAdmin",
-            link: "/admin/superAdmin",
-            submenu: [
-                {
-                    id: 1,
-                    menu: "Admin",
-                    link: "/admin/superAdmin/admin"
-                },
-                {
-                    id: 2,
-                    menu: "Users",
-                    link: "/admin/superAdmin/users"
-                }
-            ]
-        },
-        {
-            id: 6,
             menu: "Logout ",
-            link: "/.."
+            link: "/"
         }
     ]
 
@@ -125,7 +113,7 @@ export default function SidebarAdmin() {
 
   return (
   <>
-  <div className="md:h-[540px] xl:h-[650px] w-56 bg-iceGray rounded-e-xl shadow-md text-sm py-3 fixed z-50 mt-10">
+  <div className="md:h-auto w-56 bg-iceGray rounded-e-xl shadow-md text-sm py-6 fixed z-50 mt-14">
     <div className="px-8 py-6 text-center">
         <img src="/nav-logo2.png" alt="Logo Uin" className="w-20 h-20 m-auto" />
         <div className="pt-5 px-2">
@@ -180,6 +168,10 @@ export default function SidebarAdmin() {
             </React.Fragment>
         ))}
     </ul>
+
+    <div className="text-center mt-10 px-2">
+      <h3>&copy; Made with KKN 2024</h3>
+    </div>
 
   </div>
 

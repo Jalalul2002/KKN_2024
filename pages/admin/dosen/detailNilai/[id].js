@@ -1,6 +1,8 @@
 import Modal from '@/pages/component/admin/modal';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
+import Link from 'next/link';
+import { IoPlayBack } from 'react-icons/io5';
 
 
 export default function DetailLaporan() {
@@ -33,8 +35,11 @@ export default function DetailLaporan() {
     <>
       <div className='bg-IjoRumput w-screen h-screen flex justify-center'>
         <div class="absolute px-5  w-full ">
-            <h1 className='flex justify-center items-center text-black text-4xl font-bold py-5'>Detail Nilai</h1> 
-            <div className='bg-white h-full w-full flex justify-between items-center rounded-lg px-8'>
+          <div className='mx-2 mt-4'>
+            <Link href='/admin/dosen/nilai' className="text-xl"><IoPlayBack /></Link>
+          </div>
+          <h1 className='flex justify-center items-center text-black text-4xl font-bold'>Detail Nilai</h1> 
+          <div className='bg-white h-full w-full flex justify-between items-center rounded-lg px-8'>
                 <div className='font-bold text-3xl flex items-center justify-center my-4'>
                     <img src="/nav-logo2.png" alt="Logo UIN" className="md:w-[90px]"/>
                 </div>

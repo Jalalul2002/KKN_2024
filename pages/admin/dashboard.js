@@ -176,13 +176,8 @@ export default function Admin() {
 
       <div className='bg-white py-8 px-8 rounded-xl mx-8 '>
         <div className='flex '>
-          <div>
-            <div className="">
-              <BarChart />
-            </div>
-            <div className="mt-8">
-              <PieChart />
-            </div>
+          <div>  
+            <PieChart />
           </div>
           <div className='font-bold ml-24'>
             Lokasi KKN 2024 UIN SGD Bandung
