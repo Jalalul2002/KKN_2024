@@ -3,7 +3,7 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import Navbar from "@/pages/component/navbar";
 import Link from 'next/link';
-import { IoPlayBack } from "react-icons/io5";
+import { IoChevronBackOutline } from "react-icons/io5";
 
 
 export default function DetailLaporan() {
@@ -20,7 +20,7 @@ export default function DetailLaporan() {
       <div className="flex flex-row bg-IjoRumput justify-start">
         <div className="h-screen w-screen overflow-auto grow">
             <div className='absolute my-2 mx-4 md:my-6 md:mx-6 bg-white p-2 rounded-full drop-shadow-xl z-40'>
-                <Link href='/dosen/laporan' className="text-xl"><IoPlayBack /></Link>
+                <Link href='/dosen/laporan' className="text-xl"><IoChevronBackOutline /></Link>
             </div>
             <Navbar />
             <div className="mt-14 mb-2 ml-6 md:ml-10 md:mt-6 md:mb-10 font-bold text-2xl md:text-5xl text-white flex justify-center">

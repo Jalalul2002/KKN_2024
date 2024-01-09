@@ -79,9 +79,9 @@ export default function Kelompok() {
             <div className="mt-20 mb-5 md:mt-28 md:mb-10 font-bold text-2xl md:text-5xl text-white">
               <h1>Kelompok Binaan</h1>
             </div>
-            <div className="p-3 md:p-6 bg-iceGray rounded-xl w-full">
+            <div className="px-3 py-8 md:p-6 bg-iceGray rounded-xl w-full">
               <div>
-                <h3 className="text-sm md:text-xl font-semibold pb-1 md:pb-3 flex justify-end">
+                <h3 className="text-sm md:text-xl font-semibold pb-1 md:pb-3 md:flex justify-end hidden ">
                   Lokasi: Desa Cibodas, Kec. Ibun, Kab Bandung, Jawa Barat
                 </h3>
                 <div className="grid md:grid-cols-4 xl:grid-cols-4 font-medium px-4 gap-6">

@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import { IoPlayBack } from 'react-icons/io5';
+import { IoChevronBackOutline } from 'react-icons/io5';
 
 
 export default function DetailKelompok() {
@@ -31,7 +31,7 @@ export default function DetailKelompok() {
     <>
     <div class="absolute px-5 bg-IjoRumput h-auto w-full ">
         <div className='absolute mx-2 mt-4 bg-white p-2 rounded-full drop-shadow-xl'>
-            <Link href='/admin/dosen/kelompok' className="text-xl"><IoPlayBack /></Link>
+            <Link href='/admin/dosen/kelompok' className="text-xl"><IoChevronBackOutline /></Link>
         </div>
         <h1 className='flex justify-center items-center text-white text-4xl font-bold mt-8 mb-4'>Detail Kelompok</h1> 
         <div className='bg-white h-full w-full flex justify-between items-center rounded-lg px-8'>

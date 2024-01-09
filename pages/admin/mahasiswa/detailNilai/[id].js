@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import { IoPlayBack } from 'react-icons/io5';
+import { IoChevronBackOutline } from 'react-icons/io5';
 
 
 export default function DetailNilai() {
@@ -31,7 +31,7 @@ export default function DetailNilai() {
     <>
     <div className='absolute bg-IjoRumput h-screen w-screen'>
       <div className='absolute mx-2 mt-4 bg-white p-2 rounded-full drop-shadow-xl'>
-        <Link href='/admin/mahasiswa/nilai' className="text-xl"><IoPlayBack /></Link>
+        <Link href='/admin/mahasiswa/nilai' className="text-xl"><IoChevronBackOutline /></Link>
       </div>
       <h1 className='flex justify-center items-center text-white text-4xl font-bold mt-8'>Detail Nilai Mahasiswa</h1>
       <div class="absolute px-5 md:left-32 md:right-32 md:top-24 py-5 rounded-xl bg-iceGray flex justify-between h-auto w-auto">

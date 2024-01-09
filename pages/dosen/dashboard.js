@@ -4,70 +4,72 @@ import Navbar from "../component/navbar";
 import Link from "next/link";
 import { ArrowDownIcon } from "@heroicons/react/24/outline";
 import Head from "next/head";
+import { DocumentText } from "@heroicons/react/24/outline";
+
 
 export default function Dashboard() {
   const downloadMenu = [
     {
-      item: "Unduh Juknis KKN",
+      item: "Juknis KKN",
       link: "/",
       color: "bg-[#C70039]",
     },
     {
-      item: "Unduh Timeline KKN",
+      item: "Timeline KKN",
       link: "/",
       color: "bg-[#F39F5A]",
     },
     {
-      item: "Unduh Juknis Pelaporan KKN",
+      item: "Juknis Pelaporan KKN",
       link: "/",
       color: "bg-[#26577C]",
     },
   ];
 
-  const dataKelompok = [
-    {
-      id: "K1",
-      namakelompok: "Kelompok 1",
-      ketua: "Ucup Slankie",
-      telp: "081356765432",
-      anggota: "15",
-    },
-    {
-      id: "K2",
-      namakelompok: "Kelompok 2",
-      ketua: "Ucup Slankie",
-      telp: "081356765432",
-      anggota: "15",
-    },
-    {
-      id: "K3",
-      namakelompok: "Kelompok 3",
-      ketua: "Ucup Slankie",
-      telp: "081356765432",
-      anggota: "15",
-    },
-    {
-      id: "K4",
-      namakelompok: "Kelompok 4",
-      ketua: "Ucup Slankie",
-      telp: "081356765432",
-      anggota: "15",
-    },
-    {
-      id: "K4",
-      namakelompok: "Kelompok 4",
-      ketua: "Ucup Slankie",
-      telp: "081356765432",
-      anggota: "15",
-    },
-    {
-      id: "K4",
-      namakelompok: "Kelompok 4",
-      ketua: "Ucup Slankie",
-      telp: "081356765432",
-      anggota: "15",
-    },
-  ];
+  // const dataKelompok = [
+  //   {
+  //     id: "K1",
+  //     namakelompok: "Kelompok 1",
+  //     ketua: "Ucup Slankie",
+  //     telp: "081356765432",
+  //     anggota: "15",
+  //   },
+  //   {
+  //     id: "K2",
+  //     namakelompok: "Kelompok 2",
+  //     ketua: "Ucup Slankie",
+  //     telp: "081356765432",
+  //     anggota: "15",
+  //   },
+  //   {
+  //     id: "K3",
+  //     namakelompok: "Kelompok 3",
+  //     ketua: "Ucup Slankie",
+  //     telp: "081356765432",
+  //     anggota: "15",
+  //   },
+  //   {
+  //     id: "K4",
+  //     namakelompok: "Kelompok 4",
+  //     ketua: "Ucup Slankie",
+  //     telp: "081356765432",
+  //     anggota: "15",
+  //   },
+  //   {
+  //     id: "K4",
+  //     namakelompok: "Kelompok 4",
+  //     ketua: "Ucup Slankie",
+  //     telp: "081356765432",
+  //     anggota: "15",
+  //   },
+  //   {
+  //     id: "K4",
+  //     namakelompok: "Kelompok 4",
+  //     ketua: "Ucup Slankie",
+  //     telp: "081356765432",
+  //     anggota: "15",
+  //   },
+  // ];
 
   return (
     <>
@@ -87,7 +89,7 @@ export default function Dashboard() {
               <h1>Dashboard</h1>
             </div>
             <div className="p-3 md:p-6 bg-iceGray rounded-xl w-full">
-              <div>
+              {/* <div>
                 <h1 className="text-sm md:text-3xl font-semibold pb-1 md:pb-3">
                   Informasi Kelompok
                 </h1>
@@ -130,30 +132,31 @@ export default function Dashboard() {
                     </div>
                   ))}
                 </div>
-              </div>
-              <div className="mt-6 grid grid-cols-2 gap-4">
-                <div className="w-full">
-                  <h1 className="text-3xl font-semibold mb-2">
+              </div> */}
+
+              <div className="mt-6 grid md:grid-cols-3  gap-2 ">
+                <div className="md:col-span-2">
+                  <h1 className="md:text-3xl font-semibold mb-2 text-center">
                     Timeline
                   </h1>
-                  <div className="px-4">
+                  <div className="px-4 pt-2">
                     <img src="/images/timeline.jpeg" className="w-full" />
                   </div>
                 </div>
-                <div className="text-justify mt-3 lg:mt-0">
+
+                <div className="text-center mt-3 lg:mt-0 ">
                   <h2 className="font-semibold text-sm md:text-3xl mb-1 md:mb-2">
                     Dokumen KKN
                   </h2>
-                  <ul className="flex flex-row justify-center py-2 flex-wrap space-x-2 text-sm md:text-base">
+                  <ul className="md:flex flex-col py-2 flex-wrap text-xs md:text-base md:mx-auto ">
                     {downloadMenu.map((menus, i) => (
-                      <Link key={i} href={menus.link}>
-                        <li
-                          className={`flex flex-row content-center mb-2 px-2 py-2 items-center ${menus.color} hover:bg-opacity-80 text-white rounded-sm font-semibold`}
-                        >
-                          <ArrowDownIcon className="w-4 h-4 mr-2 " />
-                          {menus.item}
-                        </li>
-                      </Link>
+                      <li
+                        key={i}
+                        className={`mb-4 px-5 py-4 ${menus.color} text-white rounded-lg font-semibold drop-shadow-md `}
+                      >
+                        <h1 className="md:text-2xl text-sm mb-3 text-left">{menus.item}</h1>
+                        <Link href={menus.link} className="flex flex-row justify-center items-center bg-white  text-gray-800 py-2 rounded-md"><ArrowDownIcon className="w-4 h-4 mr-2 " /> Unduh Dokumen</Link>
+                      </li>
                     ))}
                   </ul>
                 </div>

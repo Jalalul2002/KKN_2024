@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import { IoPlayBack } from 'react-icons/io5';
+import { IoChevronBackOutline } from 'react-icons/io5';
 
 export default function detailLaporan() {
   const router = useRouter();
@@ -30,7 +30,7 @@ export default function detailLaporan() {
     <>
     <div className='absolute bg-IjoRumput h-screen w-screen'>
       <div className='absolute mt-4 ml-2 bg-white p-2 rounded-full drop-shadow-xl'>
-        <Link href='/admin/mahasiswa/laporan' className="text-xl"><IoPlayBack /></Link>
+        <Link href='/admin/mahasiswa/laporan' className="text-xl"><IoChevronBackOutline /></Link>
       </div>
       <h1 className='flex justify-center text-white text-4xl font-bold mt-8'>Detail Laporan Mahasiswa</h1>
         

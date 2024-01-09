@@ -1,7 +1,7 @@
 import Modal from '@/pages/component/admin/modal';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import { IoPlayBack } from 'react-icons/io5';
+import { IoChevronBackOutline } from 'react-icons/io5';
 import Link from 'next/link'
 
 
@@ -37,7 +37,7 @@ export default function DetailLaporan() {
       <div className='bg-IjoRumput w-screen h-screen flex justify-center'>
         <div class="absolute px-5  w-full ">
           <div className='absolute mx-2 mt-4 bg-white p-2 rounded-full drop-shadow-xl'>
-            <Link href='/admin/dosen/laporan' className="text-xl"><IoPlayBack /></Link>
+            <Link href='/admin/dosen/laporan' className="text-xl"><IoChevronBackOutline /></Link>
           </div>
           <h1 className='flex justify-center items-center text-white text-4xl font-bold mt-8'>Detail Laporan</h1> 
             <div className='bg-white h-auto w-auto flex justify-between items-center rounded-lg px-8 my-4'>
