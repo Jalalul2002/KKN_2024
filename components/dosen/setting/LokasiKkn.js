@@ -6,9 +6,9 @@ import { useState } from 'react';
 import Modal from '@/pages/component/admin/modal';
 import useSWR from 'swr';
 
-export default function KelompokKkn() {
-  const fetcher = (...args) => fetch(...args).then((res) => res.json());
-  const { data : tables = [], error } = useSWR("/api/admin/setting/kelompokQuery", fetcher);
+export default function LokasiKkn() {
+    const fetcher = (...args) => fetch(...args).then((res) => res.json());
+    const { data, error } = useSWR('/api/admin/setting/lokasiQuery', fetcher);
 
   const getItemProps = (index) =>
     ({
@@ -45,18 +45,14 @@ export default function KelompokKkn() {
   };
 
   const searchFilter = (item) => {
-    const { id, name, lokasi_kecamatan, lokasi_kota, dosen_nama, ketua_nama, dosen_nip, lokasi_id, mahasiswa_nim } = item;
+    const { id, desa, kec, kabkot, prov } = item;
     const searchText = searchTerm.toLowerCase();
     return (
-      (typeof id === 'string' && id.toLowerCase().includes(searchText)) ||
-      (typeof name === 'string' && name.toLowerCase().includes(searchText)) ||
-      (typeof lokasi_kecamatan === 'string' && lokasi_kecamatan.toLowerCase().includes(searchText)) ||
-      (typeof lokasi_kota === 'string' && lokasi_kota.toLowerCase().includes(searchText)) ||
-      (typeof dosen_nama === 'string' && dosen_nama.toLowerCase().includes(searchText)) ||
-      (typeof ketua_nama === 'string' && ketua_nama.toLowerCase().includes(searchText)) ||
-      (typeof dosen_nip === 'string' && dosen_nip.toLowerCase().includes(searchText)) ||
-      (typeof lokasi_id === 'string' && lokasi_id.toLowerCase().includes(searchText)) ||
-      (typeof mahasiswa_nim === 'string' && mahasiswa_nim.toLowerCase().includes(searchText))
+      id.toLowerCase().includes(searchText) ||
+      desa.toLowerCase().includes(searchText) ||
+      kec.toLowerCase().includes(searchText) ||
+      kabkot.toLowerCase().includes(searchText) ||
+      prov.toLowerCase().includes(searchText) 
     );
   };
 
@@ -64,18 +60,18 @@ export default function KelompokKkn() {
    const [ showModal, setShowModal ] = useState(false);
    const [ showModal2, setShowModal2 ] = useState(false);
    const [ showModal3, setShowModal3 ] = useState(false);
-
-   const [id, setId] = useState("");
-   const [name, setName] = useState("");
-   const [dosennip, setdosenNip] = useState("");
-   const [lokasiid, setlokasiId] = useState("");
-   const [mahasiswanim, mahasiswaNim] = useState("");
-   const [lokasi_kecamatan, setLokasiKecamatan] = useState("");
-   const [lokasi_kota, setLokasiKota] = useState("");
-   const [dosen_nama, setDosenNama] = useState("");
-   const [ketua_nama, setKetuaNama] = useState("");
  
    const [ editingData, setEditingData ] = useState(null)
+
+   // Render loading state
+  if (!data && !error) {
+    return <div>Loading...</div>;
+  }
+
+  // Render error state
+  if (error) {
+    return <div>Error fetching data: {error.message}</div>;
+  }
   
   return (
     <>
@@ -83,7 +79,7 @@ export default function KelompokKkn() {
 
     <div className="bg-IjoRumput h-72 md:w-full -z-20">
       <div className="absolute ml-32 px-6 md:px-0 md:top-8 md:left-36 md:ml-32 sm:ml-0 font-bold text-2xl md:text-5xl text-white">
-        <h1>Daftar Kelompok KKN</h1>
+        <h1>Daftar Lokasi KKN</h1>
       </div>
     </div>
 
@@ -111,7 +107,7 @@ export default function KelompokKkn() {
           <button 
           className='bg-IjoRumput p-2 rounded-md font-semibold hover:bg-darkGreenHerb' 
           onClick={() =>
-          setShowModal(true)}>Tambah Kelompok  </button>
+          setShowModal(true)}>Tambah Lokasi</button>
         </div>
 
       </div>
@@ -121,21 +117,21 @@ export default function KelompokKkn() {
           <thead className=' text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 text-center'>
             <tr className=''>
               <th scope='col' className='py-2 px-4'>No</th>
-              <th scope='col' className='py-2 px-4'>ID / Nama Kelompok</th>
-              <th scope='col' className='py-2 px-4'>Dosen Pembimbing</th>
-              <th scope='col' className='py-2 px-4'>Ketua Kelompok</th>
-              <th scope='col' className='py-2 px-4'>Lokasi (Kecatama/Kota)</th>
+              <th scope='col' className='py-2 px-4'>Desa</th>
+              <th scope='col' className='py-2 px-4'>Kecamatan</th>
+              <th scope='col' className='py-2 px-4'>Kabupaten/Kota</th>
+              <th scope='col' className='py-2 px-4'>Provinsi</th>
               <th scope='col' className='py-2 px-4'>Action</th>
             </tr>
           </thead>
           <tbody className='text-center'>
             {displayData().map((item, i) => (
-              <tr key={i}>
-              <td scope='col' className='py-2 px-4'>{i+1}</td>
-              <td scope='col' className='py-2 px-4'>{`${item.id} / ${item.name}`}</td>
-              <td scope='col' className='py-2 px-4'>{item.dosen_nama || 'Belum Ditentukan'}</td>
-              <td scope='col' className='py-2 px-4'>{item.ketua_nama || 'Belum Ditentukan'}</td>
-              <td scope='col' className='py-2 px-4'>{`${item.lokasi_kecamatan || 'Belum Ditentukan'} / ${item.lokasi_kota || 'Belum Ditentukan'}`}</td>
+              <tr key={item.id}>
+              <td scope='col' className='py-2 px-4'>{item.id}</td>
+              <td scope='col' className='py-2 px-4'>{item.kelurahan}</td>
+              <td scope='col' className='py-2 px-4'>{item.kecamatan}</td>
+              <td scope='col' className='py-2 px-4'>{item.kota}</td>
+              <td scope='col' className='py-2 px-4'>{item.provinsi}</td>
               <td scope='col' className='py-2 px-4'>
                 <div className='space-x-2'>
                   <button 
@@ -204,20 +200,24 @@ export default function KelompokKkn() {
       <Modal isVisible={showModal} onClose={() => setShowModal(false)}>
       <div class="px-6 pb-2 lg:px-8 text-left">
         <h3 class="text-xl font-semibold text-gray-900 dark:text-white flex justify-center items-center mb-4">
-          Tambah Data Kelompok
+          Tambah Data Lokasi
         </h3>
         <form class="space-y-4" action="#">
           
           <div className=''>
-            <label for="name" class="block text-lg font-medium text-gray-900 dark:text-white">Kelompok</label>
+            <label for="name" class="block text-lg font-medium text-gray-900 dark:text-white">Desa</label>
             <input type="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"/>
           </div>
           <div className=''>
-            <label for="nim" class="block text-lg font-medium text-gray-900 dark:text-white">Jenis</label>
+            <label for="nim" class="block text-lg font-medium text-gray-900 dark:text-white">Kecamatan</label>
             <input type=""  id="nim"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" />
           </div>
           <div>
-            <label for="nim" class="block text-lg font-medium text-gray-900 dark:text-white">Lokasi</label>
+            <label for="nim" class="block text-lg font-medium text-gray-900 dark:text-white">Kabupaten/Kota</label>
+            <input type=""  id="nim"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" />
+          </div>
+          <div>
+            <label for="nim" class="block text-lg font-medium text-gray-900 dark:text-white">Provinsi</label>
             <input type=""  id="nim"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" />
           </div>
 
@@ -243,38 +243,50 @@ export default function KelompokKkn() {
     <Modal isVisible={showModal2} onClose={() => setShowModal2(false)}>
       <div class="px-6 pb-2 text-left">
         <h3 class="text-xl font-semibold text-gray-900 dark:text-white flex justify-center items-center mb-4">
-          Edit Data Kelompok
+          Edit Data Lokasi
         </h3>
         {editingData && (
           <form className='space-y-4'>
               <div className=''>
-                <label for="name" class="block text-lg font-medium text-gray-900 dark:text-white">Kelompok</label>
+                <label for="name" class="block text-lg font-medium text-gray-900 dark:text-white">Desa</label>
                 <input
                   type="text"
                   id="name"
-                  value={editingData.kelompok}
-                  onChange={(e) => setEditingData({ ...editingData, kelompok: e.target.value })}
+                  value={editingData.desa}
+                  onChange={(e) => setEditingData({ ...editingData, desa: e.target.value })}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                 />
               </div>
+
               <div className=''>
-                <label for="name" class="block text-lg font-medium text-gray-900 dark:text-white">Jenis</label>
+                <label for="name" class="block text-lg font-medium text-gray-900 dark:text-white">Kecamatan</label>
                 <input
                   type="string"
                   id="nim"
-                  value={editingData.jenis}
-                  onChange={(e) => setEditingData({ ...editingData, jenis: e.target.value })}
+                  value={editingData.kec}
+                  onChange={(e) => setEditingData({ ...editingData, kec: e.target.value })}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                 />
               </div>
             
             <div className=''>
-                <label for="name" class="block text-lg font-medium text-gray-900 dark:text-white">Lokasi</label>
+                <label for="name" class="block text-lg font-medium text-gray-900 dark:text-white">Kabupaten/Kota</label>
                 <input
                   type="text"
                   id="lokasi"
-                  value={editingData.lokasi}
-                  onChange={(e) => setEditingData({ ...editingData, lokasi: e.target.value })}
+                  value={editingData.kabkot}
+                  onChange={(e) => setEditingData({ ...editingData, kabkot: e.target.value })}
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                />
+              </div>
+
+              <div className=''>
+                <label for="name" class="block text-lg font-medium text-gray-900 dark:text-white">Provinsi</label>
+                <input
+                  type="text"
+                  id="lokasi"
+                  value={editingData.prov}
+                  onChange={(e) => setEditingData({ ...editingData, prov: e.target.value })}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                 />
               </div>
@@ -308,12 +320,12 @@ export default function KelompokKkn() {
       <Modal isVisible={showModal3} onClose={() => setShowModal3(false)}>
       <div class="px-6 pb-2 lg:px-8 text-left">
         <h3 class="text-xl font-semibold text-gray-900 dark:text-white flex justify-center items-center mb-4">
-          Hapus Data Kelompok
+          Hapus Data Lokasi
         </h3>
         {/* {editingData && ( */}
           <div class="space-y-4">
             <p class="text-gray-700 dark:text-gray-300">
-              Apakah Anda yakin ingin menghapus data kelompok ini?
+              Apakah Anda yakin ingin menghapus data lokasi ini?
             </p>
             <div class="flex justify-end space-x-4">
               <button

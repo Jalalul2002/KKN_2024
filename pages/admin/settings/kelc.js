@@ -4,11 +4,8 @@ import { Button, IconButton } from "@material-tailwind/react";
 import { ArrowRightIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
 import { useState } from 'react';
 import Modal from '@/pages/component/admin/modal';
-import useSWR from 'swr';
 
 export default function KelompokKkn() {
-  const fetcher = (...args) => fetch(...args).then((res) => res.json());
-  const { data : tables = [], error } = useSWR("/api/admin/setting/kelompokQuery", fetcher);
 
   const getItemProps = (index) =>
     ({
@@ -19,6 +16,51 @@ export default function KelompokKkn() {
 
   const [active, setActive] = useState(1);
   const [itemsPerPage] = useState(10); // Jumlah item per halaman
+  const [tables] = useState(
+    [
+      {
+        id: "1",
+        kelompok: "Kelompok 1",
+        jenis: "Sisdamas",
+        lokasi: "Kabupaten Bandung",
+      },
+      {
+        id: "2",
+        kelompok: "Kelompok 2",
+        jenis: "Sisdamas",
+        lokasi: "Kabupaten Bandung",
+      },
+      {
+        id: "3",
+        kelompok: "Kelompok 3",
+        jenis: "Sisdamas",
+        lokasi: "Kabupaten Bandung",
+      },
+      {
+        id: "4",
+        kelompok: "Kelompok 4",
+        jenis: "Sisdamas",
+        lokasi: "Kabupaten Bandung",
+      },
+      {
+        id: "5",
+        kelompok: "Kelompok 5",
+        jenis: "Sisdamas",
+        lokasi: "Kabupaten Bandung",
+      },
+      {
+        id: "6",
+        kelompok: "Kelompok 6",
+        jenis: "Sisdamas",
+        lokasi: "Kabupaten Bandung",
+      },
+      {
+        id: "7",
+        kelompok: "Kelompok 7",
+        jenis: "Sisdamas",
+        lokasi: "Kabupaten Bandung",
+      },
+  ]);
 
   // Fungsi untuk memotong data sesuai halaman aktif
   const displayData = () => {
@@ -45,18 +87,13 @@ export default function KelompokKkn() {
   };
 
   const searchFilter = (item) => {
-    const { id, name, lokasi_kecamatan, lokasi_kota, dosen_nama, ketua_nama, dosen_nip, lokasi_id, mahasiswa_nim } = item;
+    const { id, kelompok, jenis, lokasi } = item;
     const searchText = searchTerm.toLowerCase();
     return (
-      (typeof id === 'string' && id.toLowerCase().includes(searchText)) ||
-      (typeof name === 'string' && name.toLowerCase().includes(searchText)) ||
-      (typeof lokasi_kecamatan === 'string' && lokasi_kecamatan.toLowerCase().includes(searchText)) ||
-      (typeof lokasi_kota === 'string' && lokasi_kota.toLowerCase().includes(searchText)) ||
-      (typeof dosen_nama === 'string' && dosen_nama.toLowerCase().includes(searchText)) ||
-      (typeof ketua_nama === 'string' && ketua_nama.toLowerCase().includes(searchText)) ||
-      (typeof dosen_nip === 'string' && dosen_nip.toLowerCase().includes(searchText)) ||
-      (typeof lokasi_id === 'string' && lokasi_id.toLowerCase().includes(searchText)) ||
-      (typeof mahasiswa_nim === 'string' && mahasiswa_nim.toLowerCase().includes(searchText))
+      id.toLowerCase().includes(searchText) ||
+      kelompok.toLowerCase().includes(searchText) ||
+      jenis.toLowerCase().includes(searchText) ||
+      lokasi.toLowerCase().includes(searchText) 
     );
   };
 
@@ -64,16 +101,6 @@ export default function KelompokKkn() {
    const [ showModal, setShowModal ] = useState(false);
    const [ showModal2, setShowModal2 ] = useState(false);
    const [ showModal3, setShowModal3 ] = useState(false);
-
-   const [id, setId] = useState("");
-   const [name, setName] = useState("");
-   const [dosennip, setdosenNip] = useState("");
-   const [lokasiid, setlokasiId] = useState("");
-   const [mahasiswanim, mahasiswaNim] = useState("");
-   const [lokasi_kecamatan, setLokasiKecamatan] = useState("");
-   const [lokasi_kota, setLokasiKota] = useState("");
-   const [dosen_nama, setDosenNama] = useState("");
-   const [ketua_nama, setKetuaNama] = useState("");
  
    const [ editingData, setEditingData ] = useState(null)
   
@@ -121,21 +148,19 @@ export default function KelompokKkn() {
           <thead className=' text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 text-center'>
             <tr className=''>
               <th scope='col' className='py-2 px-4'>No</th>
-              <th scope='col' className='py-2 px-4'>ID / Nama Kelompok</th>
-              <th scope='col' className='py-2 px-4'>Dosen Pembimbing</th>
-              <th scope='col' className='py-2 px-4'>Ketua Kelompok</th>
-              <th scope='col' className='py-2 px-4'>Lokasi (Kecatama/Kota)</th>
+              <th scope='col' className='py-2 px-4'>Kelompok</th>
+              <th scope='col' className='py-2 px-4'>Jenis</th>
+              <th scope='col' className='py-2 px-4'>Lokasi</th>
               <th scope='col' className='py-2 px-4'>Action</th>
             </tr>
           </thead>
           <tbody className='text-center'>
-            {displayData().map((item, i) => (
+            {displayData().map((table, i) => (
               <tr key={i}>
-              <td scope='col' className='py-2 px-4'>{i+1}</td>
-              <td scope='col' className='py-2 px-4'>{`${item.id} / ${item.name}`}</td>
-              <td scope='col' className='py-2 px-4'>{item.dosen_nama || 'Belum Ditentukan'}</td>
-              <td scope='col' className='py-2 px-4'>{item.ketua_nama || 'Belum Ditentukan'}</td>
-              <td scope='col' className='py-2 px-4'>{`${item.lokasi_kecamatan || 'Belum Ditentukan'} / ${item.lokasi_kota || 'Belum Ditentukan'}`}</td>
+              <td scope='col' className='py-2 px-4'>{table.id}</td>
+              <td scope='col' className='py-2 px-4'>{table.kelompok}</td>
+              <td scope='col' className='py-2 px-4'>{table.jenis}</td>
+              <td scope='col' className='py-2 px-4'>{table.lokasi}</td>
               <td scope='col' className='py-2 px-4'>
                 <div className='space-x-2'>
                   <button 
