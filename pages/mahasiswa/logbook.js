@@ -262,7 +262,7 @@ export default function LogbookKKN() {
                 <div className="flex flex-col justify-center md:justify-end px-2 py-1">
                   <button
                     type="button"
-                    className="text-xs bg-sky-600 hover:bg-sky-700 py-2 px-2 md:px-4 font-bold text-white flex flex-row justify-center items-center space-x-1 md:space-x-2 rounded-sm"
+                    className="text-xs md:text-base bg-sky-600 hover:bg-sky-700 py-2 px-2 md:px-4 font-bold text-white flex flex-row justify-center items-center space-x-1 md:space-x-2 rounded-sm"
                     onClick={handleOpenModal}
                   >
                     <PlusIcon
