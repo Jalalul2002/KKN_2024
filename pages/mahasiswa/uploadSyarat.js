@@ -2,10 +2,15 @@ import React from "react";
 import SidebarMahasiswa from "../component/sidebarMahasiswa";
 import Navbar from "../component/navbar";
 import Link from "next/link";
+import Head from "next/head";
 
 export default function UploadSyarat() {
   return (
     <>
+      <Head>
+        <title>Upload Syarat</title>
+        <meta property="og:title" content="Upload Syarat" key="title" />
+      </Head>
       <div className="absolute bg-IjoRumput w-full h-72 -z-20"></div>
       <div className="flex flex-row justify-start">
         <div className="md:w-auto h-screen">
@@ -33,8 +38,10 @@ export default function UploadSyarat() {
                   ketidaksesuaian, konsekuensi ditanggung oleh peserta KKN.
                 </p>
                 <div className="mb-2">
-                  <p>Adapun syarat mengikuti KKN UIN Sunan Gunung Djati Bandung
-                  Tahun 2024 adalah sebagai berikut:</p>
+                  <p>
+                    Adapun syarat mengikuti KKN UIN Sunan Gunung Djati Bandung
+                    Tahun 2024 adalah sebagai berikut:
+                  </p>
                   <ol className="list-decimal pl-8">
                     <li>
                       Telah mengambil dan lulus 75% dari jumlah SKS keseluruhan
@@ -59,8 +66,13 @@ export default function UploadSyarat() {
                   SP_1207050002.pdf
                 </p>
                 <form className="mt-5 flex flex-row justify-center items-center">
-                    <input type="file"></input>
-                    <button type="submit" className="bg-green-500 hover:bg-green-700 px-5 py-1 rounded-sm text-white font-bold">Submit</button>
+                  <input type="file"></input>
+                  <button
+                    type="submit"
+                    className="bg-green-500 hover:bg-green-700 px-5 py-1 rounded-sm text-white font-bold"
+                  >
+                    Submit
+                  </button>
                 </form>
               </div>
             </div>

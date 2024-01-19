@@ -7,6 +7,7 @@ import { basePath } from "@/next.config";
 import { FaEyeSlash, FaEye, FaToggleOff, FaToggleOn } from "react-icons/fa";
 import { FaUser } from "react-icons/fa";
 import { signIn } from "next-auth/react";
+import Head from "next/head";
 
 export default function Login() {
   const [userType, setUserType] = useState("mahasiswa");
@@ -67,6 +68,10 @@ export default function Login() {
 
   return (
     <>
+      <Head>
+        <title>Login</title>
+        <meta property="og:title" content="Login" key="title" />
+      </Head>
       <div className="h-full w-full flex">
         <div className="h-screen relative z-0 w-full bg-IjoRumput">
           <div className="pl-9 pt-8">

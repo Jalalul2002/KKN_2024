@@ -2,10 +2,15 @@ import React from "react";
 import SidebarMahasiswa from "../component/sidebarMahasiswa";
 import Navbar from "../component/navbar";
 import Link from "next/link";
+import Head from "next/head";
 
 export default function SyaratCompleted() {
   return (
     <>
+      <Head>
+        <title>Syarat Diupload</title>
+        <meta property="og:title" content="Syarat Diupload" key="title" />
+      </Head>
       <div className="absolute bg-IjoRumput w-full h-72 -z-20"></div>
       <div className="flex flex-row justify-start">
         <div className="md:w-auto h-screen">
@@ -32,7 +37,16 @@ export default function SyaratCompleted() {
                   pernyataan muncul kembali, itu artinya surat pernyataan yang
                   telah anda kirim sebelumnya telah ditolak
                 </p>
-                <p>Silahkan untuk melanjutkan pendaftaran melalui <Link href={"/mahasiswa/pendaftaran"} className="text-blue-500 hover:text-blue-400">tautan ini</Link>.</p>
+                <p>
+                  Silahkan untuk melanjutkan pendaftaran melalui{" "}
+                  <Link
+                    href={"/mahasiswa/pendaftaran"}
+                    className="text-blue-500 hover:text-blue-400"
+                  >
+                    tautan ini
+                  </Link>
+                  .
+                </p>
               </div>
             </div>
           </div>

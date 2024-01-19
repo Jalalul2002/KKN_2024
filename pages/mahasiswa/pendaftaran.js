@@ -10,6 +10,7 @@ import {
 } from "@heroicons/react/24/outline";
 
 import Modal from "react-modal";
+import Head from "next/head";
 
 export default function PendaftaranKKN() {
   const nim = "1207050055";
@@ -429,6 +430,10 @@ export default function PendaftaranKKN() {
 
   return (
     <>
+      <Head>
+        <title>Pendaftaran KKN</title>
+        <meta property="og:title" content="Pendaftaran KKN" key="title" />
+      </Head>
       <div className="absolute bg-IjoRumput w-full h-72 -z-20"></div>
       <div className="flex flex-row justify-start">
         <div className="w-auto h-screen">
@@ -493,12 +498,17 @@ export default function PendaftaranKKN() {
                   </dl>
                 </div>
               </div>
-              
+
               {/* Jika tidak memenuhi syarat */}
               <div className="w-full text-center mt-24 mb-12">
-                <Link href={"/mahasiswa/uploadSyarat"} className="px-10 py-2 bg-IjoRumput hover:bg-IjoRumput/80 text-xl text-white font-bold">Upload Persyaratan</Link>
+                <Link
+                  href={"/mahasiswa/uploadSyarat"}
+                  className="px-10 py-2 bg-IjoRumput hover:bg-IjoRumput/80 text-xl text-white font-bold"
+                >
+                  Upload Persyaratan
+                </Link>
               </div>
-              
+
               <section className="py-2 md:mt-2">
                 <form
                   method="post"

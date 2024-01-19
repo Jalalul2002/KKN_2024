@@ -1,6 +1,7 @@
 import React from "react";
 import Navbar from "../component/navbar";
 import SidebarMahasiswa from "../component/sidebarMahasiswa";
+import Head from "next/head";
 
 export default function LaporanKKN() {
   const jenisKKN = "KKN Sisdamas";
@@ -8,6 +9,10 @@ export default function LaporanKKN() {
 
   return (
     <>
+      <Head>
+        <title>Laporan Mahasiswa</title>
+        <meta property="og:title" content="Laporan Mahasiswa" key="title" />
+      </Head>
       <div className="absolute bg-IjoRumput w-full h-72 -z-20"></div>
       <div className="flex flex-row justify-start">
         <div className="h-screen">
@@ -48,7 +53,10 @@ export default function LaporanKKN() {
                     />
                   </div>
                   <div className="text-center mt-5">
-                    <button type="submit" className="px-8 py-2 bg-green-600 hover:bg-green-800 text-white font-bold rounded-lg">
+                    <button
+                      type="submit"
+                      className="px-8 py-2 bg-green-600 hover:bg-green-800 text-white font-bold rounded-lg"
+                    >
                       Upload
                     </button>
                   </div>

@@ -4,6 +4,7 @@ import SidebarMahasiswa from "../component/sidebarMahasiswa";
 import Link from "next/link";
 import { PlusIcon, TrashIcon } from "@heroicons/react/24/outline";
 import ReactModal from "react-modal";
+import Head from "next/head";
 
 export default function LogbookKKN() {
   const jenisKKN = "KKN Sisdamas";
@@ -100,6 +101,10 @@ export default function LogbookKKN() {
 
   return (
     <>
+      <Head>
+        <title>Logbook Mahasiswa</title>
+        <meta property="og:title" content="Logbook Mahasiswa" key="title" />
+      </Head>
       <ReactModal
         isOpen={isInputModal}
         onRequestClose={closeInputModal}

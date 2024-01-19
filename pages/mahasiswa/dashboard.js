@@ -3,6 +3,7 @@ import SidebarMahasiswa from "../component/sidebarMahasiswa";
 import Navbar from "../component/navbar";
 import Link from "next/link";
 import { ArrowDownTrayIcon } from "@heroicons/react/24/solid";
+import Head from "next/head";
 
 export default function Dashboard() {
   const nama = "Jalalul Mu'ti";
@@ -28,6 +29,10 @@ export default function Dashboard() {
 
   return (
     <>
+      <Head>
+        <title>Dashboard</title>
+        <meta property="og:title" content="Dashboard" key="title" />
+      </Head>
       <div className="absolute bg-IjoRumput w-full h-72 -z-20"></div>
       <div className="flex flex-row justify-start">
         <div className="md:w-auto h-screen">

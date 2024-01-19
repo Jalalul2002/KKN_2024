@@ -62,7 +62,7 @@ export default function Kelompok() {
   return (
     <>
       <Head>
-        <title>Nilai Kelompopk</title>
+        <title>Nilai Kelompok</title>
         <meta property="og:title" content="Dashboard" key="title" />
       </Head>
 

@@ -62,7 +62,7 @@ export default function Laporan() {
   return (
     <>
       <Head>
-        <title>Laporan Kelompopk</title>
+        <title>Laporan Kelompok</title>
         <meta property="og:title" content="Dashboard" key="title" />
       </Head>
 

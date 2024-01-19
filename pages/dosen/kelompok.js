@@ -62,7 +62,7 @@ export default function Kelompok() {
   return (
     <>
       <Head>
-        <title>Kelompopk Binaan</title>
+        <title>Kelompok Binaan</title>
         <meta property="og:title" content="Dashboard" key="title" />
       </Head>
 

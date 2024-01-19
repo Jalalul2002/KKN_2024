@@ -2,6 +2,7 @@ import React from "react";
 import Navbar from "../component/navbar";
 import SidebarMahasiswa from "../component/sidebarMahasiswa";
 import Link from "next/link";
+import Head from "next/head";
 
 export default function Profil() {
   const nama = "Jalalul Mu'ti";
@@ -21,6 +22,10 @@ export default function Profil() {
 
   return (
     <>
+      <Head>
+        <title>Profil Mahasiswa</title>
+        <meta property="og:title" content="Profil Mahasiswa" key="title" />
+      </Head>
       <div className="absolute bg-IjoRumput w-full h-72 -z-20"></div>
       <div className="flex flex-row justify-start">
         <div className="md:w-auto h-screen">
