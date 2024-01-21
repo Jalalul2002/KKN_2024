@@ -94,8 +94,8 @@ export default function SidebarMahasiswa() {
       <div
         className={
           mobileNav
-            ? "fixed lg:relative z-50 lg:z-40 w-56 h-screen lg:h-auto bg-iceGray rounded-e-xl shadow-lg text-sm py-2 lg:py-3 lg:mt-10 ease-in-out duration-200 left-0 lg:left-0 lg:overflow-visible overflow-y-scroll"
-            : "fixed lg:relative z-50 lg:z-40 w-56 lg:w-20 h-screen lg:h-auto bg-iceGray rounded-e-xl shadow-lg text-sm py-2 lg:py-3 lg:mt-10 -left-96 ease-in-out duration-200 lg:left-0"
+            ? "fixed lg:relative z-50 lg:z-40 w-56 h-screen lg:h-auto bg-iceGray rounded-e-xl shadow-lg text-sm py-2 lg:py-3 lg:mt-10 ease-in-out duration-200 -left-96  lg:left-0 lg:overflow-visible overflow-y-scroll"
+            : "fixed lg:relative z-50 lg:z-40 w-56 lg:w-20 h-screen lg:h-auto bg-iceGray rounded-e-xl shadow-lg text-sm py-2 lg:py-3 lg:mt-10 ease-in-out left-0 duration-200 lg:left-0"
         }
       >
         <div className="px-3">
@@ -120,7 +120,7 @@ export default function SidebarMahasiswa() {
             className={
               mobileNav
                 ? "w-20 h-20 m-auto ease-in-out duration-200"
-                : "w-12 h-12 m-auto ease-in-out duration-200"
+                : "w-20 h-20 lg:w-12 lg:h-12 m-auto ease-in-out duration-200"
             }
           />
           <div className="pt-5 px-2">
@@ -128,7 +128,7 @@ export default function SidebarMahasiswa() {
               className={
                 mobileNav
                   ? "font-black text-lg leading-3"
-                  : "font-black text-base leading-3"
+                  : "font-black text-lg lg:text-base leading-3"
               }
             >
               KKN UIN
@@ -137,7 +137,7 @@ export default function SidebarMahasiswa() {
               className={
                 mobileNav
                   ? "font-bold text-base italic"
-                  : "font-bold text-[10px] italic"
+                  : "font-bold text-base lg:text-[10px] italic"
               }
             >
               Mahasiswa
@@ -156,14 +156,14 @@ export default function SidebarMahasiswa() {
                   className={
                     mobileNav
                       ? "w-4 h-4 mr-2 ease-in-out duration-200"
-                      : "w-6 h-6 mr-0 ease-in-out duration-200"
+                      : "w-4 h-4 mr-2 lg:mr-0 ease-in-out duration-200"
                   }
                 />
                 <span
                   className={
                     mobileNav
                       ? "text-base ease-in-out duration-200"
-                      : "text-[0px] ease-in-out duration-200 hover:text-xs"
+                      : "text-base lg:text-[0px] ease-in-out duration-200 hover:text-xs"
                   }
                 >
                   {menus.menu}
