@@ -83,7 +83,6 @@ export default function Home() {
   return (
     <>
       <Head>
-        <link rel="icon" href="/nav-logo2.png" />
         <title>KKN UIN SUNAN GUNUNG DJATI BANDUNG</title>
       </Head>
       <Header />

@@ -4,9 +4,11 @@ import { Button, IconButton } from "@material-tailwind/react";
 import { ArrowRightIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-
+import useSWR from 'swr';
 
 export default function Nilai() {
+  const fetcher = (...args) => fetch(...args).then((res) => res.json());
+  const { data = [], error } = useSWR('/api/admin/mahasiswa/nilaiQuery', fetcher);
 
   const getItemProps = (index) =>
     ({
@@ -18,27 +20,10 @@ export default function Nilai() {
   const router = useRouter()
   const [active, setActive] = useState(1);
   const [itemsPerPage] = useState(3); // Jumlah item per halaman
-  const [tables] = useState(
-    [
-      {
-        id: "1",
-        kelompok: "Kelompok 441",
-        jenis: "Sisdamas ",
-        lokasi: "Desa Margamulya, Kec Pasir Jambu, Kabupaten Bandung, Jawa Barat",
-        dosen: "Dr. Firman Utina SE., MT."
-      },
-      {
-        id: "1",
-        kelompok: "Kelompok 442",
-        jenis: "Tematik ",
-        lokasi: "Desa Margamulya, Kec Pasir Jambu, Kabupaten Bandung, Jawa Barat",
-        dosen: "Dr. Anggi Putri MT."
-      },
-  ]);
 
   // Fungsi untuk memotong data sesuai halaman aktif
   const displayData = () => {
-    const filteredData = tables.filter(searchFilter)
+    const filteredData = data.filter(searchFilter)
 
     const startIndex = (active - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
@@ -49,7 +34,7 @@ export default function Nilai() {
 
 
   const next = () => {
-    if (active < Math.ceil(tables.length / itemsPerPage)) {
+    if (active < Math.ceil(data.length / itemsPerPage)) {
       setActive(active + 1);
     }
   };
@@ -61,12 +46,16 @@ export default function Nilai() {
   };
 
   const searchFilter = (item) => {
-    const { id, pertanyaan, jawaban} = item;
+    const { id, name, nama, kelurahan, kecamatan, kota, provinsi} = item;
     const searchText = searchTerm.toLowerCase();
     return (
-      id.toLowerCase().includes(searchText) ||
-      pertanyaan.toLowerCase().includes(searchText) ||
-      jawaban.toLowerCase().includes(searchText) 
+      (typeof id === 'string' && id.toLowerCase().includes(searchText)) ||
+      name?.toLowerCase().includes(searchText) ||
+      nama?.toLowerCase().includes(searchText) ||
+      kelurahan?.toLowerCase().includes(searchText) ||
+      kecamatan?.toLowerCase().includes(searchText) ||
+      kota?.toLowerCase().includes(searchText) ||
+      provinsi?.toLowerCase().includes(searchText) 
     );
   };
   
@@ -87,8 +76,8 @@ export default function Nilai() {
 
         <div className='static'>
           <div className='relative mt-6'>
-            <div class="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">
-              <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+            <div className="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">
+              <svg className="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
               </svg>
             </div>
@@ -109,22 +98,24 @@ export default function Nilai() {
           <thead className=' text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 text-left'>
             <tr className=''>
               <th scope='col' className='py-2 px-4'>No</th>
-              <th scope='col' className='py-2 px-4'>Kelompok</th>
+              <th scope='col' className='py-2 px-4'>ID Kelompok</th>
+              <th scope='col' className='py-2 px-4'>Nama Kelompok</th>
               <th scope='col' className='py-2 px-4'>Jenis KKN</th>
               <th scope='col' className='py-2 px-4'>Dosen Pembimbing</th>
-              <th scope='col' className='py-2 px-4'>Lokasi KKN</th>
+              <th scope='col' className='py-2 px-4'>Lokasi KKN (Kelurahan/Desa, Kecamatan, Kota/Kabupaten, Provinsi)</th>
               <th scope='col' className='py-2 px-4'>Action</th>
 
             </tr>
           </thead>
           <tbody className='text-left'>
-            {displayData().map((table, i) => (
-              <tr key={i}>
-                <td scope='col' className='py-2 px-4'>{table.id}</td>
-                <td scope='col' className='py-2 px-4'>{table.kelompok}</td>
-                <td scope='col' className='py-2 px-4'>{table.jenis}</td>
-                <td scope='col' className='py-2 px-4'>{table.dosen}</td>
-                <td scope='col' className='py-2 px-4'>{table.lokasi}</td>
+            {displayData().map((item, i) => (
+              <tr key={item.id}>
+                <td scope='col' className='py-2 px-4'>{i + 1}</td>
+                <td scope='col' className='py-2 px-4'>{item.id}</td>
+                <td scope='col' className='py-2 px-4'>{item.name}</td>
+                <td scope='col' className='py-2 px-4'>SISDAMAS</td>
+                <td scope='col' className='py-2 px-4'>{item.nama}</td>
+                <td scope='col' className='py-2 px-4'>{`${item.kelurahan}, ${item.kecamatan}, ${item.kota}, ${item.provinsi}`}</td>
                 <td scope='col' className='py-2 px-4'>
                   <button
                     onClick={() => {
@@ -160,9 +151,9 @@ export default function Nilai() {
         </Button>
 
         <div className="flex items-center gap-2">
-          {Array.from({ length: Math.min(Math.ceil(tables.length / itemsPerPage), 5) }).map((_, index) => {
+          {Array.from({ length: Math.min(Math.ceil(data.length / itemsPerPage), 5) }).map((_, index) => {
             const pageNumber = active - 2 + index; // Hitung nomor halaman yang akan ditampilkan
-            return pageNumber > 0 && pageNumber <= Math.ceil(tables.length / itemsPerPage) ? (
+            return pageNumber > 0 && pageNumber <= Math.ceil(data.length / itemsPerPage) ? (
               <IconButton
                 key={index}
                 {...getItemProps(pageNumber)}
@@ -179,7 +170,7 @@ export default function Nilai() {
           variant="text"
           className="flex items-center gap-2"
           onClick={next}
-          disabled={active === Math.ceil(tables.length / itemsPerPage)}>
+          disabled={active === Math.ceil(data.length / itemsPerPage)}>
           Next
           <ArrowRightIcon strokeWidth={2} className="h-4 w-4" />
         </Button>

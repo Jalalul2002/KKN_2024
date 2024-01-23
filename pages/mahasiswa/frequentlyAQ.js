@@ -2,6 +2,7 @@ import React from "react";
 import Navbar from "../component/navbar";
 import Link from "next/link";
 import SidebarMahasiswa from "../component/sidebarMahasiswa";
+import Head from "next/head";
 
 export default function FrequentlyAQ() {
   const questionsFaq = [
@@ -34,6 +35,10 @@ export default function FrequentlyAQ() {
 
   return (
     <>
+      <Head>
+        <title>FAQ</title>
+        <meta property="og:title" content="FAQ" key="title" />
+      </Head>
       <div className="absolute bg-IjoRumput w-full h-72 -z-20"></div>
       <div className="flex flex-row justify-start">
         <div className="md:w-auto h-screen">

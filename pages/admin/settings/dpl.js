@@ -4,8 +4,11 @@ import { Button, IconButton } from "@material-tailwind/react";
 import { ArrowRightIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
 import { useState } from 'react';
 import Modal from '@/pages/component/admin/modal';
+import useSWR from 'swr';
 
 export default function DosenPembimbing() {
+  const fetcher = (...args) => fetch(...args).then((res) => res.json());
+  const { data: tables = [], error } = useSWR('/api/admin/setting/dosenQuery', fetcher);
 
   const getItemProps = (index) =>
     ({
@@ -16,65 +19,6 @@ export default function DosenPembimbing() {
 
   const [active, setActive] = useState(1);
   const [itemsPerPage] = useState(10); // Jumlah item per halaman
-  const [tables] = useState(
-    [
-      {
-        id: "1",
-        nama: "Muhamad",
-        nip: "1207050063",
-        fakultas: "Sains dan Teknologi",
-        jurusan: "Teknik Informatika",
-        notlp: "089687576293",
-      },
-      {
-        id: "2",
-        nama: "Ahmad",
-        nip: "1207050097",
-        fakultas: "Sains dan Teknologi",
-        jurusan: "Teknik Elektro",
-        notlp: "089687576673",
-      },
-      {
-        id: "3",
-        nama: "Hanna",
-        nip: "1207050123",
-        fakultas: "Sains dan Teknologi",
-        jurusan: "Matematika ",
-        notlp: "089687426293",
-      },
-      {
-        id: "4",
-        nama: "Kamila",
-        nip: "1207050993",
-        fakultas: "Ilmu Sosial dan Politik",
-        jurusan: "Sosiologi",
-        notlp: "085687006293",
-      },
-      {
-        id: "5",
-        nama: "Rusmayanti",
-        nip: "1207050019",
-        fakultas: "Adab dan Humaniora",
-        jurusan: "Sastra Arab",
-        notlp: "089610176293",
-      },
-      {
-        id: "6",
-        nama: "Najmi",
-        nip: "1218750063",
-        fakultas: "Adab dan Humaniora",
-        jurusan: "Sastra Inggris",
-        notlp: "089680076293",
-      },
-      {
-        id: "7",
-        nama: "Shihab",
-        nip: "1207510063",
-        fakultas: "Psikologi",
-        jurusan: "Psikologi",
-        notlp: "089680076293",
-      }
-  ]);
 
   // Fungsi untuk memotong data sesuai halaman aktif
   const displayData = () => {
@@ -86,7 +30,6 @@ export default function DosenPembimbing() {
   };
 
   const [searchTerm, setSearchTerm] = useState("");
-
 
   const next = () => {
     if (active < Math.ceil(tables.length / itemsPerPage)) {
@@ -101,15 +44,14 @@ export default function DosenPembimbing() {
   };
 
   const searchFilter = (item) => {
-    const { id, nama, nip, fakultas, jurusan, notlp } = item;
+    const { nip, nama, jurusan_dosen, fakultas_dosen, telpon_dosen } = item;
     const searchText = searchTerm.toLowerCase();
     return (
-      id.toLowerCase().includes(searchText) ||
+      (typeof nip === 'string' && nip.toLowerCase().includes(searchText)) ||
       nama.toLowerCase().includes(searchText) ||
-      nip.toLowerCase().includes(searchText) ||
-      fakultas.toLowerCase().includes(searchText) ||
-      jurusan.toLowerCase().includes(searchText) ||
-      notlp.toLowerCase().includes(searchText)  
+      jurusan_dosen.toLowerCase().includes(searchText) ||
+      fakultas_dosen.toLowerCase().includes(searchText) ||
+      (typeof telpon_dosen === 'string' && telpon_dosen.toLowerCase().includes(searchText))
     );
   };
 
@@ -117,7 +59,114 @@ export default function DosenPembimbing() {
    const [ showModal, setShowModal ] = useState(false);
    const [ showModal2, setShowModal2 ] = useState(false);
    const [ showModal3, setShowModal3 ] = useState(false);
- 
+
+   const [nip, setNip] = useState("");
+   const [nama, setNama] = useState("");
+   const [jurusanDosen, setJurusanDosen] = useState("");
+   const [fakultasDosen, setFakultasDosen] = useState("");
+   const [telponDosen, setTelponDosen] = useState("");
+
+   const handleConfirmAdd = async () => {
+    try {
+      const response = await fetch("/api/admin/setting/dosenAdd", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          nip: nip,
+          nama: nama,
+          jurusan_dosen: jurusanDosen,
+          fakultas_dosen: fakultasDosen,
+          telpon_dosen: telponDosen,
+        }),
+      });
+
+      if (response.ok) {
+        // Handle successful submission (e.g., show a success message)
+        console.log("Data added successfully.");
+
+        // Reset form fields
+        setNama("");
+        setNip("");
+        setJurusanDosen("");
+        setFakultasDosen("");
+        setTelponDosen("");
+
+        // Refresh the page
+        window.location.reload();
+
+        // Close the add modal
+        setShowModal(false);
+      } else {
+        // Handle submission error
+        console.error("Error adding data:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error adding data:", error);
+    }
+  };
+
+   const handleEdit = async () => {
+    try {
+      const response = await fetch("/api/admin/setting/dosenEdit", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(editingData),
+      });
+
+      if (response.ok) {
+        // Handle successful submission (e.g., show a success message)
+        console.log("Data updated successfully.");
+        // Reset the form fields
+        setNama("");
+        setNip("");
+        setJurusanDosen("");
+        setFakultasDosen("");
+        setTelponDosen("");
+
+        // Refresh the page
+        window.location.reload();
+
+        // Close the add modal
+        setShowModal(false);
+      } else {
+        // Handle submission error
+        console.error("Error updating data:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error updating data:", error);
+    }
+  };
+
+  const handleDelete = async () => {
+    try {
+      const response = await fetch("/api/admin/setting/dosenDelete", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ nip:editingData.nip }), // Assuming you have an 'id' state for the Dosen entry
+      });
+
+      if (response.ok) {
+        // Handle successful deletion (e.g., show a success message)
+        console.log("Data deleted successfully.");
+        // Optionally, you may want to perform additional actions after successful deletion
+
+        // Close the delete modal or perform any other actions
+        setShowModal3(false);
+      } else {
+        // Handle deletion error
+        console.error("Error deleting data:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error deleting data:", error);
+    }
+  };
+  
    const [ editingData, setEditingData ] = useState(null)
   
   return (
@@ -173,29 +222,31 @@ export default function DosenPembimbing() {
             </tr>
           </thead>
           <tbody className='text-center'>
-            {displayData().map((table, i) => (
-              <tr key={i}>
-              <td scope='col' className='py-2 px-4'>{table.id}</td>
-              <td scope='col' className='py-2 px-4'>{table.nama}</td>
-              <td scope='col' className='py-2 px-4'>{table.nip}</td>
-              <td scope='col' className='py-2 px-4'>{table.fakultas}</td>
-              <td scope='col' className='py-2 px-4'>{table.jurusan}</td>
-              <td scope='col' className='py-2 px-4'>{table.notlp}</td>
+            {displayData().map((item, i) => (
+              <tr key={item.nip}>
+              <td scope='col' className='py-2 px-4'>{i+1}</td>
+              <td scope='col' className='py-2 px-4'>{item.nama}</td>
+              <td scope='col' className='py-2 px-4'>{item.nip}</td>
+              <td scope='col' className='py-2 px-4'>{item.fakultas_dosen}</td>
+              <td scope='col' className='py-2 px-4'>{item.jurusan_dosen}</td>
+              <td scope='col' className='py-2 px-4'>{item.telpon_dosen}</td>
               <td scope='col' className='py-2 px-4'>
                 <div className='space-x-2'>
                   <button 
                   className='font-medium text-blue-400 dark:text-blue-500 hover:underline'
                   onClick={() => {
                     setShowModal2(true);
-                    setEditingData(table); //set data table
+                    setEditingData(item); //set data table
                     }}
                   >
                     edit
                   </button>
                   <button 
                   className='font-medium text-blue-400 dark:text-blue-500 hover:underline'
-                  onClick={() =>
-                    setShowModal3(true)}
+                  onClick={() => {
+                    setShowModal3(true)
+                    setEditingData(item) // set data to be deleted
+                  }}
                   >
                     delete
                   </button>
@@ -252,42 +303,66 @@ export default function DosenPembimbing() {
           Tambah Data Dosen Pembimbing
         </h3>
         <form class="space-y-4" action="#">
-          
           <div className=''>
-            <label for="name" class="block text-lg font-medium text-gray-900 dark:text-white">Nama</label>
-            <input type="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"/>
+            <label for="nip" class="block text-lg font-medium text-gray-900 dark:text-white">NIP</label>
+            <input 
+              type="text" 
+              id="nip"
+              value={nip}
+              onChange={(e) => setNip(e.target.value)}
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" />
           </div>
           <div className=''>
-            <label for="nim" class="block text-lg font-medium text-gray-900 dark:text-white">NIP</label>
-            <input type=""  id="nim"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" />
+            <label for="name" class="block text-lg font-medium text-gray-900 dark:text-white">Nama</label>
+            <input 
+              type="text" 
+              id="name"
+              value={nama}
+              onChange={(e) => setNama(e.target.value)}
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" />
           </div>
           <div>
             <label for="nim" class="block text-lg font-medium text-gray-900 dark:text-white">Fakultas</label>
-            <input type=""  id="nim"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" />
+            <input 
+              type="text" 
+              id="nim"  
+              value={fakultasDosen}
+              onChange={(e) => setFakultasDosen(e.target.value)}
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" />
           </div>
           <div>
             <label for="nim" class="block text-lg font-medium text-gray-900 dark:text-white">Jurusan</label>
-            <input type=""  id="nim"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" />
+            <input 
+              type="text" 
+              id="nim"  
+              value={jurusanDosen}
+              onChange={(e) => setJurusanDosen(e.target.value)}
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" />
           </div>
           <div>
             <label for="nim" class="block text-lg font-medium text-gray-900 dark:text-white">No Telepon</label>
-            <input type=""  id="nim"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" />
+            <input 
+              type="text" 
+              id="nim"  
+              value={telponDosen}
+              onChange={(e) => setTelponDosen(e.target.value)}
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" />
           </div>
 
           <div className='flex justify-center space-x-5'>
             <button 
-            type="submit" 
-            class="w-[1/2]  text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-md text-lg px-5 py-1 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+              type="submit" 
+              onClick={handleConfirmAdd}
+              class="w-[1/2] text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-md text-lg px-5 py-1 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
               Tambah
             </button>
             <button
-            onClick={() => setShowModal(false)}
-            class="w[1/2] font-medium text-lg px-5 py-1 text-center bg-gray-400 text-white rounded-md hover:bg-gray-500 focus:outline-none focus:ring focus:ring-gray-300"
+              onClick={() => setShowModal(false)}
+              class="w-[1/2] font-medium text-lg px-5 py-1 text-center bg-gray-400 text-white rounded-md hover:bg-gray-500 focus:outline-none focus:ring focus:ring-gray-300"
             >
               Batal
             </button>
           </div>
-                    
         </form>
       </div>
     </Modal>
@@ -327,8 +402,8 @@ export default function DosenPembimbing() {
                 <input
                   type="text"
                   id="lokasi"
-                  value={editingData.fakultas}
-                  onChange={(e) => setEditingData({ ...editingData, fakultas: e.target.value })}
+                  value={editingData.fakultas_dosen}
+                  onChange={(e) => setEditingData({ ...editingData, fakultas_dosen: e.target.value })}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                 />
               </div>
@@ -338,8 +413,8 @@ export default function DosenPembimbing() {
                 <input
                   type="text"
                   id="lokasi"
-                  value={editingData.jurusan}
-                  onChange={(e) => setEditingData({ ...editingData, jurusan: e.target.value })}
+                  value={editingData.jurusan_dosen}
+                  onChange={(e) => setEditingData({ ...editingData, jurusan_dosen: e.target.value })}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                 />
               </div>
@@ -349,8 +424,8 @@ export default function DosenPembimbing() {
                 <input
                   type="text"
                   id="lokasi"
-                  value={editingData.notlp}
-                  onChange={(e) => setEditingData({ ...editingData, notlp: e.target.value })}
+                  value={editingData.telpon_dosen}
+                  onChange={(e) => setEditingData({ ...editingData, telpon_dosen: e.target.value })}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                 />
               </div>
@@ -358,12 +433,7 @@ export default function DosenPembimbing() {
             <div className=' flex justify-center space-x-5'>
               <button
                 type="button"
-                onClick={() => {
-                  // aksi yang diperlukan saat tombol Simpan ditekan
-                  // Misalnya, menyimpan data yang diedit ke server atau mengubah state lainnya
-                  // Kemudian tutup modal
-                  setShowModal2(false);
-                }}
+                onClick={handleEdit}
                 className="w-[1/2] mt-4 place-self-end text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-lg px-5 py-1 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
               >
                 Simpan
@@ -393,12 +463,7 @@ export default function DosenPembimbing() {
             </p>
             <div class="flex justify-end space-x-4">
               <button
-                // onClick={() => {
-                //   // Lakukan aksi penghapusan data di sini
-                //   // Misalnya, panggil fungsi untuk menghapus data dari server atau mengubah state lainnya
-                //   // Setelah itu, tutup modal
-                //   setShowModal3(false);
-                // }}
+                onClick={handleDelete}
                 class="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 focus:outline-none focus:ring focus:ring-red-300"
               >
                 Hapus

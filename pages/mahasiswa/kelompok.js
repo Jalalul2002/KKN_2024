@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Navbar from "../component/navbar";
 import SidebarMahasiswa from "../component/sidebarMahasiswa";
 import ReactModal from "react-modal";
+import Head from "next/head";
 
 export default function KelompokKKN() {
   const nama = "Jalalul Mu'ti";
@@ -103,6 +104,10 @@ export default function KelompokKKN() {
 
   return (
     <>
+      <Head>
+        <title>Kelompok Mahasiswa</title>
+        <meta property="og:title" content="Kelompok Mahasiswa" key="title" />
+      </Head>
       <div className="absolute bg-IjoRumput w-full h-72 -z-20"></div>
       <div className="flex flex-row justify-start">
         <div className="w-auto h-screen">
@@ -242,7 +247,10 @@ export default function KelompokKKN() {
                 ))}
               </select> */}
               <div>
-                <label htmlFor="nama" className="block mb-1 font-semibold text-sm md:text-base">
+                <label
+                  htmlFor="nama"
+                  className="block mb-1 font-semibold text-sm md:text-base"
+                >
                   Nama Ketua Kelompok
                 </label>
                 <input
@@ -251,7 +259,10 @@ export default function KelompokKKN() {
                   value={nama}
                 ></input>
                 <div>
-                  <label htmlFor="fakultas" className="block mb-1 font-semibold text-sm md:text-base">
+                  <label
+                    htmlFor="fakultas"
+                    className="block mb-1 font-semibold text-sm md:text-base"
+                  >
                     Fakultas
                   </label>
                   <input
@@ -261,7 +272,10 @@ export default function KelompokKKN() {
                   ></input>
                 </div>
                 <div>
-                  <label htmlFor="kontak" className="block mb-1 font-semibold text-sm md:text-base">
+                  <label
+                    htmlFor="kontak"
+                    className="block mb-1 font-semibold text-sm md:text-base"
+                  >
                     Kontak
                   </label>
                   <input

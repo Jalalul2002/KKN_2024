@@ -4,6 +4,7 @@ import SidebarMahasiswa from "../component/sidebarMahasiswa";
 import Link from "next/link";
 import { PlusIcon, TrashIcon } from "@heroicons/react/24/outline";
 import ReactModal from "react-modal";
+import Head from "next/head";
 
 export default function LogbookKKN() {
   const jenisKKN = "KKN Sisdamas";
@@ -101,6 +102,10 @@ export default function LogbookKKN() {
 
   return (
     <>
+      <Head>
+        <title>Logbook Mahasiswa</title>
+        <meta property="og:title" content="Logbook Mahasiswa" key="title" />
+      </Head>
       <ReactModal
         isOpen={isInputModal}
         onRequestClose={closeInputModal}
@@ -263,7 +268,7 @@ export default function LogbookKKN() {
                 <div className="flex flex-col justify-center md:justify-end px-2 py-1">
                   <button
                     type="button"
-                    className="text-xs bg-sky-600 hover:bg-sky-700 py-2 px-2 md:px-4 font-bold text-white flex flex-row justify-center items-center space-x-1 md:space-x-2 rounded-sm"
+                    className="text-xs md:text-base bg-sky-600 hover:bg-sky-700 py-2 px-2 md:px-4 font-bold text-white flex flex-row justify-center items-center space-x-1 md:space-x-2 rounded-sm"
                     onClick={handleOpenModal}
                   >
                     <PlusIcon

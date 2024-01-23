@@ -2,10 +2,14 @@ import React from "react";
 import Header from "./component/header";
 import Copyright from "./component/copyright";
 import Map from "./component/Map/Map";
+import Head from "next/head";
 
 export default function Sebaran() {
   return (
     <>
+      <Head>
+        <title>KKN UIN SUNAN GUNUNG DJATI BANDUNG</title>
+      </Head>
       <Header />
       <div className="w-full h-[320px] bg-gradient-to-b from-IjoRumput absolute to-transparent z-30"></div>
       <div
@@ -54,7 +58,9 @@ export default function Sebaran() {
                     KKN Nusantara Moderasi Beragama
                   </th>
                   <td class="px-6 py-4">Tana Toraja, Sulawesi Sulatan</td>
-                  <td class="px-6 py-4">KKN kolaborasi PTKIN Seluruh Indonesia</td>
+                  <td class="px-6 py-4">
+                    KKN kolaborasi PTKIN Seluruh Indonesia
+                  </td>
                   <td class="px-6 py-4">6 Orang Perwakilan UIN Bandung</td>
                   <td class="px-6 py-4 text-right">
                     <a

@@ -2,6 +2,7 @@ import React from "react";
 import Navbar from "../component/navbar";
 import SidebarMahasiswa from "../component/sidebarMahasiswa";
 import Link from "next/link";
+import Head from "next/head";
 
 export default function Profil() {
   const nama = "Jalalul Mu'ti";
@@ -21,6 +22,10 @@ export default function Profil() {
 
   return (
     <>
+      <Head>
+        <title>Profil Mahasiswa</title>
+        <meta property="og:title" content="Profil Mahasiswa" key="title" />
+      </Head>
       <div className="absolute bg-IjoRumput w-full h-72 -z-20"></div>
       <div className="flex flex-row justify-start">
         <div className="md:w-auto h-screen">
@@ -32,7 +37,7 @@ export default function Profil() {
             <div className="mt-20 mb-5 md:mt-28 md:mb-10 font-bold text-2xl md:text-5xl text-white">
               <h1>Profil Mahasiswa</h1>
             </div>
-            <div className="p-4 md:p-9 bg-iceGray rounded-3xl shadow-sm">
+            <div className="p-4 md:p-9 bg-iceGray rounded-3xl shadow-sm flex justify-between">
               <div className="flex flex-col items-center md:px-4 md:flex-row md:flex-wrap md:place-items-end">
                 <div
                   className="w-32 h-32 rounded-full border-IjoRumput border-4 bg-cover text-right \"
@@ -45,6 +50,7 @@ export default function Profil() {
                   </h2>
                 </div>
               </div>
+              <Link href={"/mahasiswa/editprofil"} className="pr-4 font-semibold hover:text-IjoRumput">Edit Profil</Link>
             </div>
             <div className="flex flex-wrap space-y-3 md:space-y-0 md:space-x-2 justify-around py-3 md:py-5">
               <div className="md:w-[49%] bg-iceGray rounded-3xl shadow-sm text-base md:text-lg font-medium p-6">
