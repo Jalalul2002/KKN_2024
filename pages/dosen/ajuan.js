@@ -26,13 +26,32 @@ export default function Ajuan() {
                 <form className="max-w-lg mx-auto my-3">
                   <div className="my-2">
                     <label htmlFor="ajuan">
-                      Upload Surat Pengajuan
+                      Hari/Tanggal 
                     </label>
                     <input
-                      className="block w-full text-gray-900 border border-gray-300 cursor-pointer bg-gray-50 rounded-sm"
-                      id="ajuan"
-                      type="file"
-                      accept=".pdf"
+                      className="block w-full text-gray-900 border border-gray-300 bg-gray-50 rounded-sm"
+                      id="tanggal"
+                      type="text"
+                    />
+                  </div>
+                  <div className="my-2">
+                    <label htmlFor="ajuan">
+                      Perihal 
+                    </label>
+                    <input
+                      className="block w-full text-gray-900 border border-gray-300 bg-gray-50 rounded-sm"
+                      id="perihal"
+                      type="text"
+                    />
+                  </div>
+                  <div className="my-2">
+                    <label htmlFor="ajuan">
+                      Lokasi 
+                    </label>
+                    <input
+                      className="block w-full text-gray-900 border border-gray-300 bg-gray-50 rounded-sm"
+                      id="lokasi"
+                      type="text"
                     />
                   </div>
 

@@ -82,7 +82,7 @@ export default function Kelompok() {
             <div className="px-3 py-8 md:p-6 bg-iceGray rounded-xl w-full">
               <div>
                 <h3 className="text-sm md:text-xl font-semibold pb-1 md:pb-3 md:flex justify-end hidden ">
-                  Lokasi: Desa Cibodas, Kec. Ibun, Kab Bandung, Jawa Barat
+                  Lokasi: Kabupaten Bandung, Jawa Barat
                 </h3>
                 <div className="grid md:grid-cols-4 xl:grid-cols-4 font-medium px-4 gap-6">
                   {dataKelompok.map((item, i) => (
@@ -102,16 +102,24 @@ export default function Kelompok() {
                               {item.anggota}
                             </span>
                           </h2>
+                          <h2>
+                            Lokasi:{" "}
+                            <span className="font-semibold">
+                              Desa Cibodas, Kecamatan Ibun
+                            </span>
+                          </h2>
                         </div>
-                        <div className="bg-IjoRumput text-center flex justify-center items-center font-extrabold text-white rounded-full text-3xl py-4 px-6">
-                          <h1>{item.id}</h1>
+                        <div className="flex justify-center items-center">
+                          <div className="bg-[#26577C] text-center flex justify-center items-center font-extrabold text-white rounded-full text-3xl py-6 px-6">
+                            <h1>{item.id}</h1>
+                          </div>
                         </div>
                       </div>
                       <div className="flex flex-row justify-between border-t">
                         <div className="w-2/3 text-center py-2">
                           <p>Telp. {item.telp}</p>
                         </div>
-                        <div className="w-1/3 text-center bg-IjoRumput py-2 rounded-ee-lg text-white hover:bg-IjoRumput/80">
+                        <div className="w-1/3 text-center bg-[#26577C] py-2 rounded-ee-lg text-white hover:bg-[#26577C]/80">
                             <button
                                 onClick={() => {
                                     router.push({

@@ -7,24 +7,7 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 
 
-export default function Laporan() {
-  const downloadMenu = [
-    {
-      item: "Unduh Juknis KKN",
-      link: "/",
-      color: "bg-[#C70039]",
-    },
-    {
-      item: "Unduh Timeline KKN",
-      link: "/",
-      color: "bg-[#F39F5A]",
-    },
-    {
-      item: "Unduh Juknis Pelaporan KKN",
-      link: "/",
-      color: "bg-[#26577C]",
-    },
-  ];
+export default function Logbook() {
 
   const dataKelompok = [
     {
@@ -62,7 +45,7 @@ export default function Laporan() {
   return (
     <>
       <Head>
-        <title>Laporan Kelompopk</title>
+        <title>Logbook Kelompok</title>
         <meta property="og:title" content="Dashboard" key="title" />
       </Head>
 
@@ -77,11 +60,11 @@ export default function Laporan() {
           <Navbar />
           <div className="px-6 pb-5 w-auto">
             <div className="mt-20 mb-5 md:mt-28 md:mb-10 font-bold text-2xl md:text-5xl text-white">
-              <h1>Laporan Kelompok</h1>
+              <h1>Logbook Kelompok</h1>
             </div>
-            <div className="p-3 md:p-6 bg-iceGray rounded-xl w-full">
+            <div className="px-3 py-8 md:p-6 bg-iceGray rounded-xl w-full">
               <div>
-                <h3 className="text-sm md:text-xl font-semibold pb-1 md:pb-3 flex justify-end">
+                <h3 className="text-sm md:text-xl font-semibold pb-1 md:pb-3 md:flex justify-end hidden ">
                   Lokasi: Kabupaten Bandung, Jawa Barat
                 </h3>
                 <div className="grid md:grid-cols-4 xl:grid-cols-4 font-medium px-4 gap-6">
@@ -110,7 +93,7 @@ export default function Laporan() {
                           </h2>
                         </div>
                         <div className="flex justify-center items-center">
-                          <div className="bg-[#9d892f] text-center flex justify-center items-center font-extrabold text-white rounded-full text-3xl py-6 px-6">
+                          <div className="bg-[#b36f38] text-center flex justify-center items-center font-extrabold text-white rounded-full text-3xl py-6 px-6">
                             <h1>{item.id}</h1>
                           </div>
                         </div>
@@ -119,11 +102,11 @@ export default function Laporan() {
                         <div className="w-2/3 text-center py-2">
                           <p>Telp. {item.telp}</p>
                         </div>
-                        <div className="w-1/3 text-center bg-[#9d892f] py-2 rounded-ee-lg text-white hover:bg-[#bea63a]/80">
+                        <div className="w-1/3 text-center bg-[#b36f38] py-2 rounded-ee-lg text-white hover:bg-[#b36f38]/80">
                             <button
                                 onClick={() => {
                                     router.push({
-                                    pathname: `/dosen/detailLaporan/${item.id}`,
+                                    pathname: `/dosen/detailLogbook/${item.id}`,
                                     query: {
                                         namakelompok: item.namakelompok,
                                         ketua: item.ketua,

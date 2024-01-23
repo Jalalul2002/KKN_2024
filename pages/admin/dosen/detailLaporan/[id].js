@@ -127,7 +127,7 @@ export default function DetailLaporan() {
             <thead className=' text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 text-center'>
               <tr className=''>
                 <th scope='col' className='py-2 px-2'>No</th>
-                <th scope='col' className='py-2 px-2'>Jenis Laporan</th>
+                <th scope='col' className='py-2 px-2'>Judul Laporan</th>
                 <th scope='col' className='py-2 px-2'>URL</th>
                 <th scope='col' className='py-2 px-2'>Action</th>
               </tr>
@@ -135,28 +135,7 @@ export default function DetailLaporan() {
             <tbody className='text-center'>
                 <tr>
                     <td scope='col' className='py-1 px-2'>1</td>
-                    <td scope='col' className='py-1 px-2'>Artikel</td>
-                    <td scope='col' className='py-1 px-2'>http://</td>
-                    <td scope='col' className='py-1 px-2'>
-                        <div className='space-x-1'>
-                            <button 
-                            className='font-medium text-blue-400 dark:text-blue-500 hover:underline'
-                            onClick={'/'}
-                            >
-                                Download
-                            </button>
-                            <button 
-                            className='font-medium text-blue-400 dark:text-blue-500 hover:underline'
-                            onClick={'/'}
-                            >
-                                View
-                            </button>
-                        </div>
-                    </td>
-              </tr>
-              <tr>
-                    <td scope='col' className='py-1 px-2'>2</td>
-                    <td scope='col' className='py-1 px-2'>Logbook</td>
+                    <td scope='col' className='py-1 px-2'>Pemberdayaan Masyarakat Terhadap Kelestarian Tanaman Melalui Program Penanaman Cengkih</td>
                     <td scope='col' className='py-1 px-2'>http://</td>
                     <td scope='col' className='py-1 px-2'>
                         <div className='space-x-1'>

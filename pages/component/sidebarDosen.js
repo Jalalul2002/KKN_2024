@@ -14,6 +14,7 @@ import {
   XMarkIcon,
 } from "@heroicons/react/24/solid";
 
+
 export default function SidebarDosen() {
   const dosenMenus = [
     {
@@ -30,18 +31,24 @@ export default function SidebarDosen() {
     },
     {
       id: 3,
+      link: "/dosen/logbook",
+      menu: "Logbook",
+      icon: faqIcon,
+    },
+    {
+      id: 4,
       link: "/dosen/laporan",
       menu: "Laporan",
       icon: libIcon,
     },
     {
-      id: 4,
+      id: 5,
       link: "/dosen/nilai",
       menu: "Nilai",
       icon: homeIcon,
     },
     {
-      id: 5,
+      id: 6,
       link: "/dosen/ajuan",
       menu: "Ajuan Surat",
       icon: docIcon,

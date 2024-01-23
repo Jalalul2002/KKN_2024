@@ -8,47 +8,48 @@ import ReactModal from "react-modal";
 export default function LogbookKKN() {
   const jenisKKN = "KKN Sisdamas";
   const kelompok = "Kelompok 1";
+  const nama = "Ahmad";
   const lokasi = "Desa Cibiru Hilir, Kec. Cileunyi, Kab. Bandung";
   const ketua = "Ubed";
   const dosen = "Dr. Sriyanti, S.T., M.Kom.";
   const logbook = [
     {
       hari: "Senin, 1/1/2024",
+      nama: "Ahmad",
       lokasi: "Desa Cibiru Hilir, Kec. Cileunyi, Kab. Bandung",
       judul: "Pembukaan KKN",
       target: "Masysarakat Desa",
-      deskripsi:
-        "Pembukaan sekaligus pengenalan peserta KKN kepada masyarakat sekitar",
+      link: "https://",
       anggotahadir: "Opet, Saritem, Mandala, Sahira",
       dok: "/images/1.jpeg",
     },
     {
       hari: "Senin, 1/1/2024",
+      nama: "Ahmad",
       lokasi: "Desa Cibiru Hilir, Kec. Cileunyi, Kab. Bandung",
       judul: "Pembukaan KKN",
       target: "Masysarakat Desa",
-      deskripsi:
-        "Pembukaan sekaligus pengenalan peserta KKN kepada masyarakat sekitar",
+      link: "https://",
       anggotahadir: "Opet, Saritem, Mandala, Sahira",
       dok: "/images/1.jpeg",
     },
     {
       hari: "Senin, 1/1/2024",
+      nama: "Ahmad",
       lokasi: "Desa Cibiru Hilir, Kec. Cileunyi, Kab. Bandung",
       judul: "Pembukaan KKN",
       target: "Masysarakat Desa",
-      deskripsi:
-        "Pembukaan sekaligus pengenalan peserta KKN kepada masyarakat sekitar",
+      link: "https://",
       anggotahadir: "Opet, Saritem, Mandala, Sahira",
       dok: "/images/1.jpeg",
     },
     {
       hari: "Senin, 1/1/2024",
+      nama: "Ahmad",
       lokasi: "Desa Cibiru Hilir, Kec. Cileunyi, Kab. Bandung",
       judul: "Pembukaan KKN",
       target: "Masysarakat Desa",
-      deskripsi:
-        "Pembukaan sekaligus pengenalan peserta KKN kepada masyarakat sekitar",
+      link: "https://",
       anggotahadir: "Opet, Saritem, Mandala, Sahira",
       dok: "/images/1.jpeg",
     },
@@ -167,6 +168,16 @@ export default function LogbookKKN() {
               </div>
             </div>
             <div className="max-w-lg mx-auto mb-3">
+              <label htmlFor="name" className="block mb-1 font-semibold">
+                Nama
+              </label>
+              <input
+                id="name"
+                className="disabled w-full rounded-md text-xs md:text-base"
+                value={nama}
+              ></input>
+            </div>
+            <div className="max-w-lg mx-auto mb-3">
               <label htmlFor="lokasi" className="block mb-1 font-semibold">
                 Lokasi KKN
               </label>
@@ -197,12 +208,12 @@ export default function LogbookKKN() {
               </div>
             </div>
             <div className="max-w-lg mx-auto mb-3">
-              <label htmlFor="deskripsi" className="block mb-1 font-semibold">
-                Deskripsi Kegiatan
+              <label htmlFor="kegiatan" className="block mb-1 font-semibold">
+                Link Logbook
               </label>
               <textarea
-                id="deskripsi"
-                className="w-full rounded-md text-xs md:text-base"
+                id="link"
+                className=" w-full rounded-md text-xs md:text-base"
               ></textarea>
             </div>
             <div className="max-w-lg mx-auto mb-3">
@@ -213,16 +224,6 @@ export default function LogbookKKN() {
                 id="hadir"
                 className="w-full rounded-md text-xs md:text-base"
               ></textarea>
-            </div>
-            <div className="max-w-lg mx-auto mb-3">
-              <label htmlFor="dokumen" className="block mb-1 font-semibold">
-                Dokumentasi
-              </label>
-              <input
-                className="block w-full cursor-pointer border border-slate-500 rounded-md"
-                id="laporan"
-                type="file"
-              />
             </div>
             <div className="flex flex-row space-x-3 justify-center mt-6">
               <button
@@ -282,9 +283,8 @@ export default function LogbookKKN() {
                       <th className="px-6 p-2 lg:p-4">Lokasi</th>
                       <th className="px-6 p-3 lg:p-4">Kegiatan</th>
                       <th className="px-6 p-3 lg:p-4">Target</th>
-                      <th className="px-6 p-3 lg:p-4">Deskripsi Kegiatan</th>
+                      <th className="px-6 p-3 lg:p-4">Link</th>
                       <th className="px-6 p-3 lg:p-4">Anggota Hadir</th>
-                      <th className="px-6 p-3 lg:p-4">Dokumentasi</th>
                       <th className="rounded-tr-lg p-3 lg:p-4">Act</th>
                     </tr>
                   </thead>
@@ -296,13 +296,8 @@ export default function LogbookKKN() {
                         <td className="py-1 px-2 lg:p-3">{item.lokasi}</td>
                         <td className="py-1 px-2 lg:p-3">{item.judul}</td>
                         <td className="py-1 px-2 lg:p-3">{item.target}</td>
-                        <td className="py-1 px-2 lg:p-3">{item.deskripsi}</td>
-                        <td className="py-1 px-2 lg:p-3">
-                          {item.anggotahadir}
-                        </td>
-                        <td className="py-2 lg:p-3 flex justify-center">
-                          <img src={item.dok} className="h-12" />
-                        </td>
+                        <td className="py-1 px-2 lg:p-3">{item.link}</td>
+                        <td className="py-1 px-2 lg:p-3">{item.anggotahadir}</td>
                         <td className="py-1 px-3 lg:p-3">
                           <Link href={"/hapus"}>
                             <div className="bg-red-600 hover:bg-red-700 flex items-center p-2 text-white cursor-pointer rounded-lg">

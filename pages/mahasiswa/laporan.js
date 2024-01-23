@@ -28,23 +28,32 @@ export default function LaporanKKN() {
               </div>
               <div className="w-full font-medium text-sm md:text-lg px-4 md:px-0">
                 <form className="max-w-lg mx-auto my-3">
+                <div className="my-2">
+                    <label htmlFor="laporan">
+                      Judul Artikel
+                    </label>
+                    <input
+                      className="block w-full text-gray-900 border border-gray-300 bg-gray-50 rounded-md"
+                      id="judul"
+                      type="text"
+                    />
+                  </div>
+                  <div className="my-2 hidden">
+                    <label htmlFor="laporan">Link Google Drive</label>
+                    <input
+                      type="text"
+                      className="block w-full text-gray-900 border border-gray-300 bg-gray-50 rounded-md"
+                    />
+                  </div>
                   <div className="my-2">
                     <label htmlFor="laporan">
                       Laporan Berupa Artikel Pengabdian atau Artikel Penelitian
                     </label>
                     <input
-                      className="block w-full text-gray-900 border border-gray-300 cursor-pointer bg-gray-50 rounded-sm"
+                      className="block w-full text-gray-900 border border-gray-300 cursor-pointer bg-gray-50 rounded-md"
                       id="laporan"
                       type="file"
                       accept=".pdf"
-                    />
-                  </div>
-
-                  <div className="my-2">
-                    <label htmlFor="laporan">Link Google Drive</label>
-                    <input
-                      type="text"
-                      className="block w-full text-gray-900 border border-gray-300 bg-gray-50 rounded-md"
                     />
                   </div>
                   <div className="text-center mt-5">

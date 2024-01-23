@@ -1,22 +1,22 @@
-import { useRouter } from 'next/router';
-import Link from 'next/link';
-import { IoChevronBackOutline } from 'react-icons/io5';
-import { useState } from 'react';
+import React, { useEffect, useState } from "react";
+import Link from "next/link";
+import { IoChevronBackOutline } from "react-icons/io5";
+import { useRouter } from "next/router";
 
 
-export default function DetailLogbook() {
-  const router = useRouter();
-  const { id, kelompok, jenis, lokasi, peserta, dosen } = router.query; // Mengakses nilai dari query parameter 'id'
+export default function LogbookKKN() {
 
-  // Gunakan nilai 'id' untuk mendapatkan data terkait dari tabel atau sumber data lainnya
+    const router = useRouter();
+    const { id, namakelompok, ketua, anggota, telp} = router.query;
 
-  // Pastikan peserta yang diterima merupakan array
-  const participants = Array.isArray(peserta) ? peserta : [peserta];
-
+  const jenisKKN = "KKN Sisdamas";
+  const kelompok = "Kelompok 1";
+  const lokasi = "Desa Cibiru Hilir, Kec. Cileunyi, Kab. Bandung";
+  const dosen = "Dr. Sriyanti, S.T., M.Kom.";
   const logbook = [
     {
       hari: "Senin, 1/1/2024",
-      nama: "Iqbal",
+      nama: "Ahmad",
       lokasi: "Desa Cibiru Hilir, Kec. Cileunyi, Kab. Bandung",
       judul: "Pembukaan KKN",
       target: "Masysarakat Desa",
@@ -26,7 +26,7 @@ export default function DetailLogbook() {
     },
     {
       hari: "Senin, 1/1/2024",
-      nama: "Iqbal",
+      nama: "Ahmad",
       lokasi: "Desa Cibiru Hilir, Kec. Cileunyi, Kab. Bandung",
       judul: "Pembukaan KKN",
       target: "Masysarakat Desa",
@@ -36,7 +36,7 @@ export default function DetailLogbook() {
     },
     {
       hari: "Senin, 1/1/2024",
-      nama: "Iqbal",
+      nama: "Ahmad",
       lokasi: "Desa Cibiru Hilir, Kec. Cileunyi, Kab. Bandung",
       judul: "Pembukaan KKN",
       target: "Masysarakat Desa",
@@ -46,7 +46,7 @@ export default function DetailLogbook() {
     },
     {
       hari: "Senin, 1/1/2024",
-      nama: "Iqbal",
+      nama: "Ahmad",
       lokasi: "Desa Cibiru Hilir, Kec. Cileunyi, Kab. Bandung",
       judul: "Pembukaan KKN",
       target: "Masysarakat Desa",
@@ -65,57 +65,28 @@ export default function DetailLogbook() {
 
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
-  };
+  }; 
+
   return (
-    // <div>
-    //   <h1>Detail Kelompok Mahasiswa {id} </h1>
-    //   <p>kelompok: {kelompok}</p>
-    //   <p>jenis: {jenis}</p>
-    //   <p>lokasi: {lokasi}</p>
-    //   <h2>Peserta:</h2>
-    //   <ul>
-    //     {participants.map((participant, i) => (
-    //       <li key={i}>
-    //         Nama: {participant.nama}, Kelamin: {participant.kelamin}
-    //       </li>
-    //     ))}
-    //   </ul>
-    // </div>
-
     <>
-    <div className='absolute bg-IjoRumput h-60 w-full'>
-      <div className='absolute mx-2 mt-4 bg-white p-2 rounded-full drop-shadow-xl'>
-        <Link href='/admin/mahasiswa/logbook' className="text-xl"><IoChevronBackOutline /></Link>
-      </div>
-      <h1 className='flex justify-center items-center text-white text-4xl font-bold mt-8'>Detail Logbook Mahasiswa</h1>
-      <div class="absolute px-5 md:left-8 md:right-8 md:top-24 rounded-xl bg-iceGray">
-
-        <div className=' flex justify-between items-center rounded-lg py-3 px-3 my-4'>
-          <div className='font-bold text-3xl flex items-center justify-center my-4'>
-            <img src="/nav-logo2.png" alt="Logo UIN" className="md:w-[90px]"/>
-          </div>
-          <div>
-            <h1 className='font-bold text-4xl flex items-center justify-center mb-3 text-center'>{kelompok}</h1>
-          </div>
-          <div>
-            <h2 className='text-xl font-semibold flex items-center justify-center text-center'>Jenis KKN</h2>
-            <p className='text-lg flex items-center justify-center text-center'>{jenis}</p>
-          </div>
-          <div>
-            <h2 className='text-xl font-semibold flex items-center justify-center text-center'>Lokasi KKN</h2>
-            <p className='text-lg flex items-center justify-center text-center'>{lokasi}</p>
-          </div>
-          <div>
-            <h2 className='text-xl font-semibold flex items-center justify-center text-center'>Dosen Pembimbing:</h2>
-            <p className='text-lg flex items-center justify-center text-center'>{dosen}</p>
-          </div>
-          <div>
-            <h2 className='text-xl font-semibold flex items-center justify-center text-center'>No Telepon:</h2>
-            <p className='text-lg flex items-center justify-center text-center'>089645272874</p>
-          </div>
-        </div>
-
-        <div className="box-border md:py-3 md:px-2 mb-3 lg:text-base text-xs md:text-sm overflow-x-auto rounded-lg font-medium">
+      <div className="absolute bg-IjoRumput w-full h-72 -z-20"></div>
+      <div className="flex flex-row justify-start">
+        <div className="overflow-auto h-screen grow">
+            <div className='absolute my-2 mx-4 md:my-4 md:mx-6 bg-white p-2 rounded-full drop-shadow-xl z-40'>
+                <Link href='/dosen/logbook' className="text-xl"><IoChevronBackOutline /></Link>
+            </div>
+          <div className="px-6 pb-5 w-auto">
+            <div className="mt-8 text-center mb-5 md:mt-8 md:mb-10 font-bold text-2xl md:text-5xl text-white">
+              <h1 className="md:text-center">Logbook KKN</h1>
+            </div>
+            <div className="p-3 md:p-6 bg-iceGray rounded-xl">
+              <div className="mt-3 ml-4 md:ml-5 flex flex-row justify-center items-center md:flex md:justify-center md:items-center">
+                <div className="box-border mb-3">
+                  <h1 className="text-lg md:text-3xl font-bold grid justify-center md:grid md:justify-center md:items-center">{jenisKKN}</h1>
+                  <h2 className="md:text-xl font-semibold grid justify-center items-center md:grid md:justify-center md:items-center">{kelompok}</h2>
+                </div> 
+              </div>
+              <div className="box-border md:py-3 md:px-2 mb-3 lg:text-base text-xs md:text-sm overflow-x-auto rounded-lg font-medium">
                 <table className="w-full rounded-xl bg-white">
                   <thead className="bg-gray-50">
                     <tr className="">
@@ -168,9 +139,10 @@ export default function DetailLogbook() {
                   </nav>
                 </div>
               </div>
-          
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
     </>
   );
 }
