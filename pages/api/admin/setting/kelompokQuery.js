@@ -25,6 +25,7 @@ export default async function handler(req, res) {
       id: row.id,
       nip: row.nip,
       name: row.name,
+      jenis_kelompok: row.jenis_kelompok,
       jurusan_dosen: row.jurusan_dosen,
       fakultas_dosen: row.fakultas_dosen,
       telpon_dosen: row.telpon_dosen,

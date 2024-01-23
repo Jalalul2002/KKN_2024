@@ -1,4 +1,3 @@
-// pages/api/admin/mahasiswa/nilaiDetailQuery.js
 import condb from "@/pages/lib/connectDatabase";
 
 export default async function handler(req, res) {
@@ -8,10 +7,23 @@ export default async function handler(req, res) {
     const [result] = await condb
       .promise()
       .query(
-        `
-        SELECT mahasiswa.nim, mahasiswa.name, mahasiswa.gender, mahasiswa.jurusan, mahasiswa.fakultas, mahasiswa.nilai FROM mahasiswa JOIN kelompok_mahasiswa ON mahasiswa.nim = kelompok_mahasiswa.mahasiswa_id 
-        JOIN kelompok ON kelompok_mahasiswa.kelompok_id = kelompok.id 
-        WHERE kelompok.id = ?;
+        ` SELECT
+            d.nip,
+            d.nama AS dosen_name,
+            d.telpon_dosen,            
+            GROUP_CONCAT(k.id) AS kelompok_ids,
+            GROUP_CONCAT(DISTINCT k.jenis_kelompok) AS jenis_kelompok,
+            GROUP_CONCAT(DISTINCT l.provinsi) AS lokasi_provinsi
+        FROM
+            dosen d
+        JOIN
+            kelompok k ON d.nip = k.id_dosen
+        LEFT JOIN
+            lokasi l ON k.id_lokasi = l.id
+        WHERE
+            d.nip = ?
+        GROUP BY
+            d.nip, d.nama, d.telpon_dosen;    
       `,
         [id]
       );

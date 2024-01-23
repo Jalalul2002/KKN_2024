@@ -1,20 +1,21 @@
-// pages/api/admin/mahasiswa/nilaiDetailQuery.js
 import condb from "@/pages/lib/connectDatabase";
 
 export default async function handler(req, res) {
-  const { id } = req.query;
-
   try {
     const [result] = await condb
       .promise()
       .query(
         `
-        SELECT mahasiswa.nim, mahasiswa.name, mahasiswa.gender, mahasiswa.jurusan, mahasiswa.fakultas, mahasiswa.nilai FROM mahasiswa JOIN kelompok_mahasiswa ON mahasiswa.nim = kelompok_mahasiswa.mahasiswa_id 
-        JOIN kelompok ON kelompok_mahasiswa.kelompok_id = kelompok.id 
-        WHERE kelompok.id = ?;
-      `,
-        [id]
-      );
+        SELECT
+            km.kelompok_id,
+            COUNT(CASE WHEN m.gender = 'male' THEN 1 END) AS male_count,
+            COUNT(CASE WHEN m.gender = 'female' THEN 1 END) AS female_count
+        FROM
+            kelompok_mahasiswa km
+            JOIN mahasiswa m ON km.mahasiswa_id = m.nim
+        GROUP BY
+            km.kelompok_id;
+        `,);
 
     if (result.length === 0) {
       res.status(404).json({ error: 'Group not found' });

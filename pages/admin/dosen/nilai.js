@@ -4,9 +4,12 @@ import { Button, IconButton } from "@material-tailwind/react";
 import { ArrowRightIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-
+import useSWR from 'swr';
+import Link from 'next/link';
 
 export default function Laporann() {
+  const fetcher = (...args) => fetch(...args).then((res) => res.json());
+  const { data : tables = [], error } = useSWR('/api/admin/dosen/kelompokQuery', fetcher);
 
   const getItemProps = (index) =>
     ({
@@ -18,49 +21,6 @@ export default function Laporann() {
   const router = useRouter();
   const [active, setActive] = useState(1);
   const [itemsPerPage] = useState(10); // Jumlah item per halaman
-  const [tables] = useState(
-    [
-      {
-        id: "1",
-        nama: "Dr. Setiawan SE., MT.",
-        kelompok: "Kelompok 1, 2, 3 dan 4",
-        jenis: "Sisdamas",
-        lokasi: "Kabupaten Bandung",
-        notlp: "089743550386"
-      },
-      {
-        id: "2",
-        nama: "Dr. Qosim SE., MT.",
-        kelompok: "Kelompok 1, 2, 3 dan 4",
-        jenis: "Sisdamas",
-        lokasi: "Kabupaten Bandung",
-        notlp: "089745550386"
-      },
-      {
-        id: "3",
-        nama: "Dr. Abdul SE., MT.",
-        kelompok: "Kelompok 1, 2, 3 dan 4",
-        jenis: "Sisdamas",
-        lokasi: "Kabupaten Bandung",
-        notlp: "089745590386"
-      },
-      {
-        id: "4",
-        nama: "Dr. Sari SE., MT.",
-        kelompok: "Kelompok 1, 2, 3 dan 4",
-        jenis: "Sisdamas",
-        lokasi: "Kabupaten Bandung",
-        notlp: "089745500386"
-      },
-      {
-        id: "5",
-        nama: "Dr. Hannum SE., MT.",
-        kelompok: "Kelompok 1, 2, 3 dan 4",
-        jenis: "Sisdamas",
-        lokasi: "Kabupaten Bandung",
-        notlp: "089745503186"
-      },
-  ]);
 
   // Fungsi untuk memotong data sesuai halaman aktif
   const displayData = () => {
@@ -87,17 +47,17 @@ export default function Laporann() {
   };
 
   const searchFilter = (item) => {
-    const { id, kelompok, jenis, lokasi, nama } = item;
+    const { nip, dosen_name, telpon_dosen, jenis_kelompok } = item;
     const searchText = searchTerm.toLowerCase();
+
     return (
-      id.toLowerCase().includes(searchText) ||
-      kelompok.toLowerCase().includes(searchText) ||
-      jenis.toLowerCase().includes(searchText) ||
-      lokasi.toLowerCase().includes(searchText) ||
-      nama.toLowerCase().includes(searchText)
+        (nip && typeof nip === 'string' && nip.toLowerCase().includes(searchText)) ||
+        (dosen_name && dosen_name.toLowerCase().includes(searchText)) ||
+        (telpon_dosen && telpon_dosen.toLowerCase().includes(searchText)) ||
+        (jenis_kelompok && jenis_kelompok.toLowerCase().includes(searchText))
     );
   };
-  
+
   
   return (
     <>
@@ -133,43 +93,31 @@ export default function Laporann() {
 
       <div className='relative mt-4 bg-white overflow-x-auto'>
         <table className=' text-lg text-gray-500 dark:text-gray-400 w-full'>
-          <thead className=' text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 text-center'>
+        <thead className=' text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 text-center'>
             <tr className=''>
               <th scope='col' className='py-2 px-2'>No</th>
               <th scope='col' className='py-2 px-2'>Nama Dosen</th>
+              <th scope='col' className='py-2 px-2'>NIP</th>
               <th scope='col' className='py-2 px-2'>No Telepon</th>
               <th scope='col' className='py-2 px-2'>Kelompok</th>
               <th scope='col' className='py-2 px-2'>Jenis</th>
-              <th scope='col' className='py-2 px-2'>Lokasi</th>
               <th scope='col' className='py-2 px-2'>Action</th>
             </tr>
           </thead>
           <tbody className='text-center'>
             {displayData().map((table, i) => (
               <tr key={i}>
-              <td scope='col' className='py-1 px-2'>{table.id}</td>
-              <td scope='col' className='py-1 px-2'>{table.nama}</td>
-              <td scope='col' className='py-1 px-2'>{table.notlp}</td>
-              <td scope='col' className='py-1 px-2'>{table.kelompok}</td>
-              <td scope='col' className='py-1 px-2'>{table.jenis}</td>
-              <td scope='col' className='py-1 px-2'>{table.lokasi}</td>
+              <td scope='col' className='py-1 px-2'>{i+1}</td>
+              <td scope='col' className='py-1 px-2'>{table.dosen_name}</td>
+              <td scope='col' className='py-1 px-2'>{table.nip}</td>
+              <td scope='col' className='py-1 px-2'>{table.telpon_dosen || "-"}</td>
+              <td scope='col' className='py-1 px-2'>{"Kelompok " + table.kelompok_ids}</td>
+              <td scope='col' className='py-1 px-2'>{table.jenis_kelompok}</td>
               <td scope='col' className='py-1 px-2'>
-                <button
-                  onClick={() => {
-                    router.push({
-                      pathname: `/admin/dosen/detailNilai/${table.id}`,
-                      query: {
-                        nama: table.nama,
-                        kelompok: table.kelompok,
-                        jenis: table.jenis,
-                        lokasi: table.lokasi,
-                        peserta: table.peserta,
-                        notlp: table.notlp
-                      },
-                    });
-                  }}
-                >
+                <button>
+                  <Link href={`/admin/dosen/detailNilai/${table.nip}`}>
                   <span className='font-medium text-blue-400 dark:text-blue-500 hover:underline'>detail</span>
+                  </Link>
                 </button>
               </td>
             </tr>

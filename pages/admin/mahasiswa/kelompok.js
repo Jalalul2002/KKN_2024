@@ -4,9 +4,21 @@ import { Button, IconButton } from "@material-tailwind/react";
 import { ArrowRightIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-
+import useSWR from 'swr';
+import Link from 'next/link';
 
 export default function Kelompok() {
+  const fetcher = (...args) => fetch(...args).then((res) => res.json());
+  const { data : tables = [], error } = useSWR('/api/admin/mahasiswa/kelompokDetailQuery', fetcher);
+  const { data : tables2 = [], error2 } = useSWR('/api/admin/mahasiswa/kelompokMemberCountQuery', fetcher);
+
+  if (error || error2 ) {
+    return <div>Error loading group details</div>;
+  }
+
+  if (!tables || !tables2) {
+    return <div>Loading... Data Error</div>;
+  }
 
   const getItemProps = (index) =>
     ({
@@ -18,75 +30,6 @@ export default function Kelompok() {
   const router = useRouter();
   const [active, setActive] = useState(1);
   const [itemsPerPage] = useState(10); // Jumlah item per halaman
-  const [tables] = useState(
-    [
-      {
-        id: 1,
-        kelompok: "Kelompok 1",
-        jenis: "Sisdamas",
-        dosen: "Dr. Nabil Kusuma SE., MT",
-        lokasi: "Kabupaten Bandung",
-        peserta: [
-          {
-            id: 1,
-            nama: "Muhamad ",
-            kelamin: "laki-laki",
-            notlp: "809764526320"
-          },
-          {
-            id: 2,
-            nama: "iqbal ",
-            kelamin: "laki-laki",
-            notlp: "809764526320"
-          },
-          {
-            id: 3,
-            nama: "silva",
-            kelamin: "perempuan",
-            notlp: "809764526320"
-          },
-          {
-            id: 4,
-            nama: "diana ",
-            kelamin: "perempuan",
-            notlp: "809764526320"
-          },
-        ]
-      },
-      {
-        id: 2,
-        kelompok: "Kelompok 2",
-        jenis: "Sisdamas",
-        dosen: "Dr. Hasbi Fahkroji SE., MT",
-        lokasi: "Kabupaten Bandung",
-        peserta: [
-          {
-            id: 1,
-            nama: "Muhamad ",
-            kelamin: "laki-laki",
-            notlp: "809764526320"
-          },
-          {
-            id: 2,
-            nama: "iqbal ",
-            kelamin: "laki-laki",
-            notlp: "809764526320"
-          },
-          {
-            id: 3,
-            nama: "hanna",
-            kelamin: "perempuan",
-            notlp: "809764526320"
-          },
-          {
-            id: 4,
-            nama: "nadia",
-            kelamin: "perempuan",
-            notlp: "809764526320"
-          },
-        ]
-      },
-  ]);
 
   // Fungsi untuk memotong data sesuai halaman aktif
   const displayData = () => {
@@ -113,17 +56,19 @@ export default function Kelompok() {
   };
 
   const searchFilter = (item) => {
-    const { kelompok, jenis, lokasi, peserta, dosen } = item;
+    const { id, kelompok_name, kota, dosen_name, ketua_name, jenis_kelompok } = item;
     const searchText = searchTerm.toLowerCase();
+
     return (
-      kelompok.toLowerCase().includes(searchText) ||
-      jenis.toLowerCase().includes(searchText) ||
-      lokasi.toLowerCase().includes(searchText) ||
-      peserta.toLowerCase().includes(searchText) ||
-      dosen.toLowerCase().includes(searchText)
+        (typeof id === 'string' && id.toLowerCase().includes(searchText)) ||
+        (kelompok_name && kelompok_name.toLowerCase().includes(searchText)) ||
+        (kota && kota.toLowerCase().includes(searchText)) ||
+        (dosen_name && dosen_name.toLowerCase().includes(searchText)) ||
+        (ketua_name && ketua_name.toLowerCase().includes(searchText)) ||
+        (jenis_kelompok && jenis_kelompok.toLowerCase().includes(searchText))
     );
   };
-  
+
   
   return (
     <>
@@ -165,43 +110,38 @@ export default function Kelompok() {
               <th scope='col' className='py-2 px-4'>Kelompok</th>
               <th scope='col' className='py-2 px-4'>Jenis</th>
               <th scope='col' className='py-2 px-4'>Dosen Pembimbing</th>
+              <th scope='col' className='py-2 px-4'>Ketua Kelompok</th>
               <th scope='col' className='py-2 px-4'>Lokasi</th>
               <th scope='col' className='py-2 px-4'>Anggota</th>
               <th scope='col' className='py-2 px-4'>Action</th>
             </tr>
           </thead>
           <tbody className='text-center'>
-            {displayData().map((table, i) => (
-              <tr key={i}>
+          {displayData().map((table, i) => {
+          // Find the corresponding entry in tables2 based on kelompok_id
+          const associatedTable2 = tables2.find(item => item.kelompok_id === table.id);
+
+          return (
+            <tr key={i}>
               <td scope='col' className='py-2 px-4'>{table.id}</td>
-              <td scope='col' className='py-2 px-4'>{table.kelompok}</td>
-              <td scope='col' className='py-2 px-4'>{table.jenis}</td>
-              <td scope='col' className='py-2 px-4'>{table.dosen}</td>
-              <td scope='col' className='py-2 px-4'>{table.lokasi}</td>
+              <td scope='col' className='py-2 px-4'>{table.kelompok_name}</td>
+              <td scope='col' className='py-2 px-4'>{table.jenis_kelompok}</td>
+              <td scope='col' className='py-2 px-4'>{table.dosen_name || "Belum Ditentukan"}</td>
+              <td scope='col' className='py-2 px-4'>{table.ketua_name || "Belum Ditentukan"}</td>
+              <td scope='col' className='py-2 px-4'>{table.kota}</td>
               <td scope='col' className='py-2 px-4'>
-              L: {table.peserta.filter((peserta) => peserta.kelamin === 'laki-laki').length} / 
-              P: {table.peserta.filter((peserta) => peserta.kelamin === 'perempuan').length}
+                {associatedTable2 ? `L: ${associatedTable2.male_count}/ P: ${associatedTable2.female_count}` : 'Not Available'}
               </td>
               <td scope='col' className='py-2 px-4'>
-                <button
-                  onClick={() => {
-                    router.push({
-                      pathname: `/admin/mahasiswa/detailKelompok/${table.id}`,
-                      query: {
-                        kelompok: table.kelompok,
-                        jenis: table.jenis,
-                        lokasi: table.lokasi,
-                        peserta: table.peserta,
-                        dosen: table.dosen,
-                      },
-                    });
-                  }}
-                >
+                <button>
+                  <Link href={`/admin/mahasiswa/detailKelompok/${table.id}`}>
                   <span className='font-medium text-blue-400 dark:text-blue-500 hover:underline'>detail</span>
+                  </Link>
                 </button>
               </td>
             </tr>
-            ))}
+            );
+            })}
           </tbody>
         </table>
       </div>

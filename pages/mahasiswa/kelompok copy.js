@@ -3,24 +3,92 @@ import Navbar from "../component/navbar";
 import SidebarMahasiswa from "../component/sidebarMahasiswa";
 import ReactModal from "react-modal";
 import Head from "next/head";
-import useSWR from "swr";
 
 export default function KelompokKKN() {
-  const fetcher = (...args) => fetch(...args).then((res) => res.json());
-  const { data : peserta = [], error } = useSWR(`/api/admin/mahasiswa/kelompokMahasiswaDetailQuery?id=1`, fetcher);
-  const { data: data2 = [], error: error2 } = useSWR(`/api/admin/setting/kelompokDetailQuery?id=1`, fetcher);
-
-  if (error || error2 ) {
-    return <div>Error loading group details</div>;
-  }
-
-  if (!peserta || !data2 ) {
-    return <div>Loading... Data Error</div>;
-  }
-
   const nama = "Jalalul Mu'ti";
   const fakultas = "Sains dan Teknologi";
   const nomor = "081357630782";
+  const jenisKKN = "KKN Sisdamas";
+  const kelompok = "Kelompok 01";
+  const dpl = {
+    nama: "Edward Elrick, Ph.D.",
+    nip: "19720902389029",
+    hp: "081456789098",
+  };
+  const peserta = [
+    {
+      nim: 1207050055,
+      foto: "/images/3.jpg",
+      nama: "Nita",
+      jurusan: "Ilmu Hukum",
+      fakultas: "Syariah dan Hukum",
+      hp: "085765234523",
+    },
+    {
+      nim: 1207050056,
+      foto: "/images/3.jpg",
+      nama: "Asep",
+      jurusan: "Ilmu Hukum",
+      fakultas: "Syariah dan Hukum",
+      hp: "085765234523",
+    },
+    {
+      nim: 1207050057,
+      foto: "/images/3.jpg",
+      nama: "Epul",
+      jurusan: "Ilmu Hukum",
+      fakultas: "Syariah dan Hukum",
+      hp: "085765234523",
+    },
+    {
+      nim: 1207050057,
+      foto: "/images/3.jpg",
+      nama: "Epul",
+      jurusan: "Ilmu Hukum",
+      fakultas: "Syariah dan Hukum",
+      hp: "085765234523",
+    },
+    {
+      nim: 1207050057,
+      foto: "/images/3.jpg",
+      nama: "Epul",
+      jurusan: "Ilmu Hukum",
+      fakultas: "Syariah dan Hukum",
+      hp: "085765234523",
+    },
+    {
+      nim: 1207050057,
+      foto: "/images/3.jpg",
+      nama: "Epul",
+      jurusan: "Ilmu Hukum",
+      fakultas: "Syariah dan Hukum",
+      hp: "085765234523",
+    },
+    {
+      nim: 1207050057,
+      foto: "/images/3.jpg",
+      nama: "Epul",
+      jurusan: "Ilmu Hukum",
+      fakultas: "Syariah dan Hukum",
+      hp: "085765234523",
+    },
+    {
+      nim: 1207050057,
+      foto: "/images/3.jpg",
+      nama: "Epul",
+      jurusan: "Ilmu Hukum",
+      fakultas: "Syariah dan Hukum",
+      hp: "085765234523",
+    },
+    {
+      nim: 1207050057,
+      foto: "/images/3.jpg",
+      nama: "Epul",
+      jurusan: "Ilmu Hukum",
+      fakultas: "Syariah dan Hukum",
+      hp: "085765234523",
+    },
+  ];
 
   const [isChooseModal, setChooseModal] = useState(false);
 
@@ -33,9 +101,6 @@ export default function KelompokKKN() {
   const handleOpenModal = () => {
     openChooseModal();
   };
-
-    // Destructure specific properties from data2
-  const { jenis_kelompok, kelompok_name, ketua_name, ketua_jurusan, ketua_telpon, dosen_name, telpon_dosen } = data2;
 
   return (
     <>
@@ -61,13 +126,9 @@ export default function KelompokKKN() {
                     <h1 className="font-bold text-base border-b-[1px] border-slate-400 mb-1">
                       Ketua Kelompok
                     </h1>
-                    {data2.map((data2, i) => (
-                      <div key={i}>
-                        <p className="font-semibold text-sm">
-                          {data2.ketua_name||"-"} - {data2.ketua_jurusan||"-"} - {data2.ketua_telpon||"-"}
-                        </p>
-                      </div>
-                    ))}
+                    <p className="font-semibold text-sm">
+                      {peserta[1].nama} - {peserta[1].jurusan} - {peserta[1].hp}
+                    </p>
                   </div>
                   <button
                     type="button"
@@ -80,23 +141,15 @@ export default function KelompokKKN() {
                     <h1 className="font-bold text-base border-b-[1px] border-slate-400 mb-1">
                       Dosen Pembimbing
                     </h1>
-                    {data2.map((data2, i) => (
-                      <div key={i}>
-                    <p className="text-sm">{data2.dosen_name || "-"}</p>
-                    <p className="text-sm">Kontak: {data2.telpon_dosen || "-"}</p>
-                    </div>
-                    ))}
+                    <p className="text-sm">{dpl.nama}</p>
+                    <p className="text-sm">Kontak: {dpl.hp}</p>
                   </div>
                 </div>
               </div>
               <div className="p-3 md:p-6 bg-iceGray rounded-xl md:w-4/5">
                 <div className="box-border mb-3">
-                {data2.map((data2, i) => (
-                      <div key={i}>
-                  <h1 className="text-lg md:text-3xl font-bold">{data2.jenis_kelompok || "-"}</h1>
-                  <h2 className="md:text-xl font-semibold">{data2.kelompok_name|| "-"}</h2>
-                  </div>
-                    ))}
+                  <h1 className="text-lg md:text-3xl font-bold">{jenisKKN}</h1>
+                  <h2 className="md:text-xl font-semibold">{kelompok}</h2>
                 </div>
                 <div className="box-border md:py-3 mb-3 lg:text-base text-sm overflow-x-auto">
                   <table className="w-full rounded-xl">
@@ -120,10 +173,10 @@ export default function KelompokKKN() {
                               className="w-9 h-9 rounded-full"
                             />
                           </td>
-                          <td className="py-1 px-3 lg:p-3">{item.name}</td>
+                          <td className="py-1 px-3 lg:p-3">{item.nama}</td>
                           <td className="py-1 px-3 lg:p-3">{item.jurusan}</td>
                           <td className="py-1 px-3 lg:p-3">{item.fakultas}</td>
-                          <td className="py-1 px-3 lg:p-3">{item.telpon || "-"}</td>
+                          <td className="py-1 px-3 lg:p-3">{item.hp}</td>
                         </tr>
                       ))}
                     </tbody>
@@ -132,37 +185,32 @@ export default function KelompokKKN() {
               </div>
               <div className="hidden p-4 lg:p-5 bg-iceGray md:w-1/5 lg:2/5 rounded-xl md:flex flex-col items-center">
                 <div className="mt-5 lg:mt-10 flex flex-col justify-center w-full">
-                  {data2.map((data2, i) => (
-                    <div key={i}>
-                      <button
-                        type="button"
-                        onClick={handleOpenModal}
-                        className="px-5 py-2 bg-sky-800 hover:bg-sky-900 font-bold text-white rounded-md md:text-base lg:text-xl"
-                      >
-                        Ajukan Ketua Kelompok
-                      </button>
-                      
-                      <div className="border border-slate-500 mt-3 rounded-lg text-center text-base lg:text-xl p-3">
-                        <h1 className="font-bold mb-2 border-b-[1px] border-slate-400">
-                          Ketua Kelompok
-                        </h1>
-                        <p className="font-semibold text-sm">{data2.ketua_name}</p>
-                        <p className="font-semibold text-sm">
-                          {data2.ketua_jurusan}
-                        </p>
-                        <p className="font-semibold text-sm">
-                          Kontak: {data2.ketua_telpon}
-                        </p>
-                      </div>
-                      <div className="border border-slate-500 mt-3 rounded-lg text-center text-base lg:text-xl font-semibold p-3">
-                        <h1 className="font-bold mb-2 border-b-[1px] border-slate-400">
-                          Dosen Pembimbing
-                        </h1>
-                        <p className="text-sm">{data2.dosen_name}</p>
-                        <p className="text-sm">Kontak: {data2.telpon_dosen}</p>
-                      </div>
-                      </div>
-                    ))}
+                  <button
+                    type="button"
+                    onClick={handleOpenModal}
+                    className="px-5 py-2 bg-sky-800 hover:bg-sky-900 font-bold text-white rounded-md md:text-base lg:text-xl"
+                  >
+                    Ajukan Ketua Kelompok
+                  </button>
+                  <div className="border border-slate-500 mt-3 rounded-lg text-center text-base lg:text-xl p-3">
+                    <h1 className="font-bold mb-2 border-b-[1px] border-slate-400">
+                      Ketua Kelompok
+                    </h1>
+                    <p className="font-semibold text-sm">{peserta[1].nama}</p>
+                    <p className="font-semibold text-sm">
+                      {peserta[1].jurusan}
+                    </p>
+                    <p className="font-semibold text-sm">
+                      Kontak: {peserta[1].hp}
+                    </p>
+                  </div>
+                  <div className="border border-slate-500 mt-3 rounded-lg text-center text-base lg:text-xl font-semibold p-3">
+                    <h1 className="font-bold mb-2 border-b-[1px] border-slate-400">
+                      Dosen Pembimbing
+                    </h1>
+                    <p className="text-sm">{dpl.nama}</p>
+                    <p className="text-sm">Kontak: {dpl.hp}</p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -199,49 +247,43 @@ export default function KelompokKKN() {
                 ))}
               </select> */}
               <div>
-                {/* {data2.map((data2, i) => (
-                <div key={i}> */}
-
+                <label
+                  htmlFor="nama"
+                  className="block mb-1 font-semibold text-sm md:text-base"
+                >
+                  Nama Ketua Kelompok
+                </label>
+                <input
+                  id="nama"
+                  className="disabled w-full rounded-md text-xs md:text-base"
+                  value={nama}
+                ></input>
+                <div>
                   <label
-                    htmlFor="nama"
+                    htmlFor="fakultas"
                     className="block mb-1 font-semibold text-sm md:text-base"
                   >
-                    Nama Ketua Kelompok
+                    Fakultas
                   </label>
                   <input
-                    id="nama"
+                    id="fakultas"
                     className="disabled w-full rounded-md text-xs md:text-base"
-                    value={nama}
+                    value={fakultas}
                   ></input>
-                  <div>
-                    <label
-                      htmlFor="fakultas"
-                      className="block mb-1 font-semibold text-sm md:text-base"
-                    >
-                      Fakultas
-                    </label>
-                    <input
-                      id="fakultas"
-                      className="disabled w-full rounded-md text-xs md:text-base"
-                      value={fakultas}
-                    ></input>
-                  </div>
-                  <div>
-                    <label
-                      htmlFor="kontak"
-                      className="block mb-1 font-semibold text-sm md:text-base"
-                    >
-                      Kontak
-                    </label>
-                    <input
-                      id="kontak"
-                      className="disabled w-full rounded-md text-xs md:text-base"
-                      value={nomor}
-                    ></input>
-                  </div>
-                
-                {/* </div>
-                ))} */}
+                </div>
+                <div>
+                  <label
+                    htmlFor="kontak"
+                    className="block mb-1 font-semibold text-sm md:text-base"
+                  >
+                    Kontak
+                  </label>
+                  <input
+                    id="kontak"
+                    className="disabled w-full rounded-md text-xs md:text-base"
+                    value={nomor}
+                  ></input>
+                </div>
               </div>
             </div>
             <div className="flex flex-row space-x-3 justify-center mb-3">
