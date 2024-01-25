@@ -38,7 +38,7 @@ export default function DetailKelompok() {
 
   return (
     <>
-    <div class="absolute px-5 bg-IjoRumput h-auto w-full ">
+    <div className="absolute px-5 bg-IjoRumput h-auto w-full ">
         <div className='absolute mx-2 mt-4 bg-white p-2 rounded-full drop-shadow-xl'>
             <Link href='/admin/dosen/kelompok' className="text-xl"><IoChevronBackOutline /></Link>
         </div>

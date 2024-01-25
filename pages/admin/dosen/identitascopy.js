@@ -129,21 +129,21 @@ export default function IdentitasDosen() {
       </div>
     </div>
 
-    <div class="absolute ml-32 px-3 md:left-32 md:right-12  md:top-24 pb-5 rounded-xl bg-iceGray">
+    <div className="absolute ml-32 px-3 md:left-32 md:right-12  md:top-24 pb-5 rounded-xl bg-iceGray">
       <div className='flex justify-between'>
 
         <div className='static'>
           <div className='relative mt-6'>
-            <div class="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">
-              <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+            <div className="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">
+              <svg className="w-4 h-4 text-gray-500 dark:text-gray-400" ariaHidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
               </svg>
             </div>
             <input 
             type='text' 
             id='table-search' 
             className='block pt-1 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50  "' 
-            placeholder="Search for items"
+            placeholder="Search HTMLfor items"
             value={searchTerm}
             onChange={(e) => setSearchTerm (e.target.value)} />
           </div>
@@ -250,58 +250,58 @@ export default function IdentitasDosen() {
       
       {/* Tambah Dosen */}
     <Modal isVisible={showModal} onClose={() => setShowModal(false)}>
-      <div class="px-6 pb-2 lg:px-8 text-left">
-        <h3 class="text-xl font-semibold text-gray-900 dark:text-white flex justify-center items-center mb-4">
+      <div className="px-6 pb-2 lg:px-8 text-left">
+        <h3 className="text-xl font-semibold text-gray-900 dark:text-white flex justify-center items-center mb-4">
           Tambah Data Dosen
         </h3>
-        <form class="space-y-4" action="#">
+        <form className="space-y-4" action="#">
           <div className='flex justify-between space-x-2'>
             <div className='w-1/2'>
-              <label for="name" class="block text-lg font-medium text-gray-900 dark:text-white">Nama</label>
-              <input type="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"/>
+              <label HTMLfor="name" className="block text-lg font-medium text-gray-900 dark:text-white">Nama</label>
+              <input type="name" id="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"/>
             </div>
             <div className='w-1/2'>
-              <label for="nim" class="block text-lg font-medium text-gray-900 dark:text-white">NIP</label>
-              <input type=""  id="nim"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" />
+              <label HTMLfor="nim" className="block text-lg font-medium text-gray-900 dark:text-white">NIP</label>
+              <input type=""  id="nim"  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" />
             </div>
           </div>
                   
           <div className='flex justify-between space-x-2'>
             <div className='w-1/2'>
-              <label for="name" class="block  text-lg font-medium text-gray-900 dark:text-white">Fakultas</label>
-              <input type="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"/>
+              <label HTMLfor="name" className="block  text-lg font-medium text-gray-900 dark:text-white">Fakultas</label>
+              <input type="name" id="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"/>
             </div>
             <div className='w-1/2'>
-              <label for="nim" class="block text-lg font-medium text-gray-900 dark:text-white">Jurusan</label>
-              <input type=""  id="nim"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" />
+              <label HTMLfor="nim" className="block text-lg font-medium text-gray-900 dark:text-white">Jurusan</label>
+              <input type=""  id="nim"  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" />
             </div>
           </div>
                   
           <div className='flex justify-between space-x-2'>
             <div className='w-1/2'>
-              <label for="nim" class="block text-lg font-medium text-gray-900 dark:text-white">Kelompok</label>
-              <input type=""  id="nim"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" />
+              <label HTMLfor="nim" className="block text-lg font-medium text-gray-900 dark:text-white">Kelompok</label>
+              <input type=""  id="nim"  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" />
             </div>
             <div className='w-1/2'>
-              <label for="nim" class="block text-lg font-medium text-gray-900 dark:text-white">No Telepon</label>
-              <input type=""  id="nim"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" />
+              <label HTMLfor="nim" className="block text-lg font-medium text-gray-900 dark:text-white">No Telepon</label>
+              <input type=""  id="nim"  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" />
             </div>
           </div>
                     
           <div>
-            <label for="nim" class="block text-lg font-medium text-gray-900 dark:text-white">Lokasi</label>
-            <input type=""  id="nim"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" />
+            <label HTMLfor="nim" className="block text-lg font-medium text-gray-900 dark:text-white">Lokasi</label>
+            <input type=""  id="nim"  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" />
           </div>
 
           <div className='flex justify-center space-x-5'>
             <button 
             type="submit" 
-            class="w-[1/2]  text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-md text-lg px-5 py-1 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+            className="w-[1/2]  text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-md text-lg px-5 py-1 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
               Tambah
             </button>
             <button
             onClick={() => setShowModal(false)}
-            class="w[1/2] font-medium text-lg px-5 py-1 text-center bg-gray-400 text-white rounded-md hover:bg-gray-500 focus:outline-none focus:ring focus:ring-gray-300"
+            className="w[1/2] font-medium text-lg px-5 py-1 text-center bg-gray-400 text-white rounded-md hover:bg-gray-500 focus:outline-none focus:ring focus:ring-gray-300"
             >
               Batal
             </button>
@@ -313,15 +313,15 @@ export default function IdentitasDosen() {
 
       {/* Edit Dosen */}
     <Modal isVisible={showModal2} onClose={() => setShowModal2(false)}>
-      <div class="px-6 pb-2 text-left">
-        <h3 class="text-xl font-semibold text-gray-900 dark:text-white flex justify-center items-center mb-4">
+      <div className="px-6 pb-2 text-left">
+        <h3 className="text-xl font-semibold text-gray-900 dark:text-white flex justify-center items-center mb-4">
           Edit Data Dosen
         </h3>
         {editingData && (
           <form>
             <div className='flex justify-between space-x-2'>
               <div className='w-1/2'>
-                <label for="name" class="block text-lg font-medium text-gray-900 dark:text-white">Nama</label>
+                <label HTMLfor="name" className="block text-lg font-medium text-gray-900 dark:text-white">Nama</label>
                 <input
                   type="text"
                   id="name"
@@ -331,7 +331,7 @@ export default function IdentitasDosen() {
                 />
               </div>
               <div className='w-1/2'>
-                <label for="name" class="block text-lg font-medium text-gray-900 dark:text-white">NIP</label>
+                <label HTMLfor="name" className="block text-lg font-medium text-gray-900 dark:text-white">NIP</label>
                 <input
                   type="string"
                   id="nim"
@@ -344,7 +344,7 @@ export default function IdentitasDosen() {
 
             <div className='flex justify-between space-x-2'>
               <div className='w-1/2'>
-                <label for="name" class="block text-lg font-medium text-gray-900 dark:text-white">Fakultas</label>
+                <label HTMLfor="name" className="block text-lg font-medium text-gray-900 dark:text-white">Fakultas</label>
                 <input
                   type="text"
                   id="fakultas"
@@ -354,7 +354,7 @@ export default function IdentitasDosen() {
                 />
               </div>
               <div className='w-1/2'>
-                <label for="name" class="block text-lg font-medium text-gray-900 dark:text-white">Jurusan</label>
+                <label HTMLfor="name" className="block text-lg font-medium text-gray-900 dark:text-white">Jurusan</label>
                 <input
                   type="text"
                   id="jurusan"
@@ -367,7 +367,7 @@ export default function IdentitasDosen() {
 
             <div className='flex justify-between space-x-2'>
               <div className='w-1/2'>
-                <label for="name" class="block text-lg font-medium text-gray-900 dark:text-white">Kelompok</label>
+                <label HTMLfor="name" className="block text-lg font-medium text-gray-900 dark:text-white">Kelompok</label>
                 <input
                   type="text"
                   id="kelompok"
@@ -377,7 +377,7 @@ export default function IdentitasDosen() {
                 />
               </div>
               <div className='w-1/2'>
-                <label for="name" class="block text-lg font-medium text-gray-900 dark:text-white">No Tlp</label>
+                <label HTMLfor="name" className="block text-lg font-medium text-gray-900 dark:text-white">No Tlp</label>
                 <input
                   type="text"
                   id="angkatan"
@@ -389,7 +389,7 @@ export default function IdentitasDosen() {
             </div>
             
             <div className=''>
-                <label for="name" class="block text-lg font-medium text-gray-900 dark:text-white">Lokasi</label>
+                <label HTMLfor="name" className="block text-lg font-medium text-gray-900 dark:text-white">Lokasi</label>
                 <input
                   type="text"
                   id="lokasi"
@@ -414,7 +414,7 @@ export default function IdentitasDosen() {
               </button>
               <button
                 onClick={() => setShowModal3(false)}
-                class="w[1/2] mt-4 px-5 py-1 font-medium text-lg  text-center bg-gray-400 text-white rounded-md hover:bg-gray-500 focus:outline-none focus:ring focus:ring-gray-300"
+                className="w[1/2] mt-4 px-5 py-1 font-medium text-lg  text-center bg-gray-400 text-white rounded-md hover:bg-gray-500 focus:outline-none focus:ring focus:ring-gray-300"
                 >
                 Batal
               </button>
@@ -426,16 +426,16 @@ export default function IdentitasDosen() {
 
       {/* Hapus Mahasiswa */}
       <Modal isVisible={showModal3} onClose={() => setShowModal3(false)}>
-      <div class="px-6 pb-2 lg:px-8 text-left">
-        <h3 class="text-xl font-semibold text-gray-900 dark:text-white flex justify-center items-center mb-4">
+      <div className="px-6 pb-2 lg:px-8 text-left">
+        <h3 className="text-xl font-semibold text-gray-900 dark:text-white flex justify-center items-center mb-4">
           Hapus Data Dosen
         </h3>
         {/* {editingData && ( */}
-          <div class="space-y-4">
-            <p class="text-gray-700 dark:text-gray-300">
+          <div className="space-y-4">
+            <p className="text-gray-700 dark:text-gray-300">
               Apakah Anda yakin ingin menghapus data dosen ini?
             </p>
-            <div class="flex justify-end space-x-4">
+            <div className="flex justify-end space-x-4">
               <button
                 // onClick={() => {
                 //   // Lakukan aksi penghapusan data di sini
@@ -443,13 +443,13 @@ export default function IdentitasDosen() {
                 //   // Setelah itu, tutup modal
                 //   setShowModal3(false);
                 // }}
-                class="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 focus:outline-none focus:ring focus:ring-red-300"
+                className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 focus:outline-none focus:ring focus:ring-red-300"
               >
                 Hapus
               </button>
               <button
                 onClick={() => setShowModal3(false)}
-                class="px-4 py-2 bg-gray-400 text-white rounded-md hover:bg-gray-500 focus:outline-none focus:ring focus:ring-gray-300"
+                className="px-4 py-2 bg-gray-400 text-white rounded-md hover:bg-gray-500 focus:outline-none focus:ring focus:ring-gray-300"
               >
                 Batal
               </button>
