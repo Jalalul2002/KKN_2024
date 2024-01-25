@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import Navbar from "@/pages/component/navbar";
+import Navbar from "@/components/navbar";
 import Link from 'next/link';
 import { IoChevronBackOutline } from "react-icons/io5";
 import { PlusIcon, TrashIcon } from "@heroicons/react/24/outline";
-import Modal from "@/pages/component/admin/modal";
+import Modal from "@/components/admin/modal";
 
 export default function DetailKelompok() {
 

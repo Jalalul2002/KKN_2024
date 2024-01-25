@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import SidebarMahasiswa from "../component/sidebarMahasiswa";
-import Navbar from "../component/navbar";
+import SidebarMahasiswa from "../../components/sidebarMahasiswa";
+import Navbar from "../../components/navbar";
 import Link from "next/link";
 import {
   ChevronDoubleLeftIcon,

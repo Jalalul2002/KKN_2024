@@ -1,7 +1,7 @@
 import Head from "next/head";
 import React from "react";
-import SidebarDosen from "../component/sidebarDosen";
-import Navbar from "../component/navbar";
+import SidebarDosen from "../../components/sidebarDosen";
+import Navbar from "../../components/navbar";
 
 export default function Ajuan() {
   return (

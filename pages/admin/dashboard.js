@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import SidebarAdmin from '../component/sidebarAdmin'
-import Navbar from '../component/navbar'
-import BarChart from '../component/barchart'
-import PieChart from '../component/piechart'
+import SidebarAdmin from '../../components/sidebarAdmin'
+import Navbar from '../../components/navbar'
+import BarChart from '../../components/barchart'
+import PieChart from '../../components/piechart'
 import { FaLocationDot } from "react-icons/fa6";
  
 export default function Admin() {

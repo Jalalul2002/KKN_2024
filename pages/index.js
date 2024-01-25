@@ -1,11 +1,11 @@
-import Map from "./component/Map";
+import Map from "../components/Map";
 import React, { useState, useEffect } from "react";
-import Header from "./component/header";
+import Header from "../components/header";
 import Link from "next/link";
-import instagramIcon from "./component/svgs/instagram";
-import youtubeIcon from "./component/svgs/youtube";
-import websiteIcon from "./component/svgs/website";
-import Copyright from "./component/copyright";
+import instagramIcon from "../components/svgs/instagram";
+import youtubeIcon from "../components/svgs/youtube";
+import websiteIcon from "../components/svgs/website";
+import Copyright from "../components/copyright";
 import Head from "next/head";
 
 export default function Home() {

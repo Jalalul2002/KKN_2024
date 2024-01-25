@@ -1,6 +1,6 @@
 import React from "react";
-import SidebarDosen from "../component/sidebarDosen";
-import Navbar from "../component/navbar";
+import SidebarDosen from "../../components/sidebarDosen";
+import Navbar from "../../components/navbar";
 import Link from "next/link";
 import { ArrowDownIcon } from "@heroicons/react/24/outline";
 import Head from "next/head";
@@ -84,7 +84,7 @@ export default function Kelompok() {
                 <h3 className="text-sm md:text-xl font-semibold pb-1 md:pb-3 md:flex justify-end hidden ">
                   Lokasi: Kabupaten Bandung, Jawa Barat
                 </h3>
-                <div className="grid md:grid-cols-4 xl:grid-cols-4 font-medium px-4 gap-6">
+                <div className="grid md:grid-cols-2 xl:grid-cols-4 font-medium px-4 gap-6">
                   {dataKelompok.map((item, i) => (
                     <div className="bg-gray-50 rounded-xl shadow-md" key={i}>
                       <div className="flex flex-row justify-between px-6 pt-4 pb-4">

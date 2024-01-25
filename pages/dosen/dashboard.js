@@ -1,6 +1,6 @@
 import React from "react";
-import SidebarDosen from "../component/sidebarDosen";
-import Navbar from "../component/navbar";
+import SidebarDosen from "../../components/sidebarDosen";
+import Navbar from "../../components/navbar";
 import Link from "next/link";
 import { ArrowDownIcon } from "@heroicons/react/24/outline";
 import Head from "next/head";

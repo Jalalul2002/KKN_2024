@@ -1,7 +1,7 @@
 import React from "react";
-import Navbar from "../component/navbar";
+import Navbar from "../../components/navbar";
 import Link from "next/link";
-import SidebarMahasiswa from "../component/sidebarMahasiswa";
+import SidebarMahasiswa from "../../components/sidebarMahasiswa";
 import Head from "next/head";
 
 export default function FrequentlyAQ() {

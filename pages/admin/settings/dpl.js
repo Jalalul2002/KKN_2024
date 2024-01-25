@@ -1,9 +1,9 @@
-import SidebarAdmin from '@/pages/component/sidebarAdmin'
+import SidebarAdmin from '@/components/sidebarAdmin'
 import React from 'react'
 import { Button, IconButton } from "@material-tailwind/react";
 import { ArrowRightIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
 import { useState } from 'react';
-import Modal from '@/pages/component/admin/modal';
+import Modal from '@/components/admin/modal';
 import useSWR from 'swr';
 
 export default function DosenPembimbing() {

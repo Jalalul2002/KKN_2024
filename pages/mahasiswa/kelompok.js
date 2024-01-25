@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Navbar from "../component/navbar";
-import SidebarMahasiswa from "../component/sidebarMahasiswa";
+import Navbar from "../../components/navbar";
+import SidebarMahasiswa from "../../components/sidebarMahasiswa";
 import ReactModal from "react-modal";
 import Head from "next/head";
 import useSWR from "swr";

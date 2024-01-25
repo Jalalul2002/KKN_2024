@@ -1,6 +1,6 @@
 import React from "react";
-import Navbar from "../component/navbar";
-import SidebarMahasiswa from "../component/sidebarMahasiswa";
+import Navbar from "../../components/navbar";
+import SidebarMahasiswa from "../../components/sidebarMahasiswa";
 import Link from "next/link";
 import Head from "next/head";
 
@@ -50,7 +50,12 @@ export default function Profil() {
                   </h2>
                 </div>
               </div>
-              <Link href={"/mahasiswa/editprofil"} className="pr-4 font-semibold hover:text-IjoRumput">Edit Profil</Link>
+              <Link
+                href={"/mahasiswa/editProfil"}
+                className="pr-4 font-semibold hover:text-IjoRumput"
+              >
+                Edit Profil
+              </Link>
             </div>
             <div className="flex flex-wrap space-y-3 md:space-y-0 md:space-x-2 justify-around py-3 md:py-5">
               <div className="md:w-[49%] bg-iceGray rounded-3xl shadow-sm text-base md:text-lg font-medium p-6">
@@ -130,68 +135,85 @@ export default function Profil() {
                   </dl>
                 </div>
               </div>
-              <div className="md:w-[49%] bg-iceGray rounded-3xl shadow-sm text-base md:text-lg font-medium p-6">
-                <h1 className="text-xl md:text-2xl font-bold mb-3">
-                  Informasi KKN
-                </h1>
-                <div className="border-t border-gray-100">
-                  <dl className="divide-y divide-gray-100">
-                    <div className="md:px-4 md:py-3 grid grid-cols-3 gap-4 px-0">
-                      <dt className="font-semibold leading-6 text-gray-900">
-                        Kelompok
-                      </dt>
-                      <dd className="mt-1 leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                        {kelompok}
-                      </dd>
+              <div className="md:w-[49%] text-base md:text-lg font-medium">
+                <div className="bg-iceGray rounded-3xl shadow-sm p-6 mb-4">
+                  <h1 className="text-xl  md:text-2xl font-bold mb-3">
+                    Nilai KKN
+                  </h1>
+                  <div className="flex justify-center space-x-2 flex-wrap">
+                    <div className="p-5 border-white border rounded-md text-center">
+                      <h1 className="font-semibold">Nilai Angka :</h1>
+                      <h2 className="text-3xl font-light">0</h2>
                     </div>
-                  </dl>
-                </div>
-                <div className="border-t border-gray-100">
-                  <dl className="divide-y divide-gray-100">
-                    <div className="md:px-4 md:py-3 grid grid-cols-3 gap-4 px-0">
-                      <dt className="font-semibold leading-6 text-gray-900">
-                        Jenis KKN
-                      </dt>
-                      <dd className="mt-1 leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                        {jenis}
-                      </dd>
+                    <div className="p-5 border-white border rounded-md text-center">
+                      <h1 className="font-semibold">Nilai Huruf :</h1>
+                      <h2 className="text-3xl font-light">E</h2>
                     </div>
-                  </dl>
+                  </div>
                 </div>
+                <div className="bg-iceGray rounded-3xl shadow-sm p-6">
+                  <h1 className="text-xl md:text-2xl font-bold mb-3">
+                    Informasi KKN
+                  </h1>
+                  <div className="border-t border-gray-100">
+                    <dl className="divide-y divide-gray-100">
+                      <div className="md:px-4 md:py-3 grid grid-cols-3 gap-4 px-0">
+                        <dt className="font-semibold leading-6 text-gray-900">
+                          Kelompok
+                        </dt>
+                        <dd className="mt-1 leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+                          {kelompok}
+                        </dd>
+                      </div>
+                    </dl>
+                  </div>
+                  <div className="border-t border-gray-100">
+                    <dl className="divide-y divide-gray-100">
+                      <div className="md:px-4 md:py-3 grid grid-cols-3 gap-4 px-0">
+                        <dt className="font-semibold leading-6 text-gray-900">
+                          Jenis KKN
+                        </dt>
+                        <dd className="mt-1 leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+                          {jenis}
+                        </dd>
+                      </div>
+                    </dl>
+                  </div>
 
-                <div className="border-t border-gray-100">
-                  <dl className="divide-y divide-gray-100">
-                    <div className="md:px-4 md:py-3 grid grid-cols-3 gap-4 px-0">
-                      <dt className="font-semibold leading-6 text-gray-900">
-                        Angkatan
-                      </dt>
-                      <dd className="mt-1 leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                        {angkatan}
-                      </dd>
-                    </div>
-                  </dl>
-                </div>
-                <div className="border-t border-gray-100">
-                  <dl className="divide-y divide-gray-100">
-                    <div className="md:px-4 md:py-3 grid grid-cols-3 gap-4 px-0">
-                      <dt className="font-semibold leading-6 text-gray-900">
-                        Lokasi KKN
-                      </dt>
-                      <dd className="mt-1 leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                        {lokasi}
-                      </dd>
-                    </div>
-                  </dl>
-                </div>
-                <div className="border-t border-gray-100">
-                  <dl className="divide-y divide-gray-100 text-right py-4">
-                    <Link
-                      href={"/mahasiswa/kelompok"}
-                      className="px-5 py-2 bg-IjoRumput rounded-md text-white hover:bg-IjoRumput/80"
-                    >
-                      Lihat Detail Kelompok
-                    </Link>
-                  </dl>
+                  {/* <div className="border-t border-gray-100">
+                    <dl className="divide-y divide-gray-100">
+                      <div className="md:px-4 md:py-3 grid grid-cols-3 gap-4 px-0">
+                        <dt className="font-semibold leading-6 text-gray-900">
+                          Angkatan
+                        </dt>
+                        <dd className="mt-1 leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+                          {angkatan}
+                        </dd>
+                      </div>
+                    </dl>
+                  </div> */}
+                  <div className="border-t border-gray-100">
+                    <dl className="divide-y divide-gray-100">
+                      <div className="md:px-4 md:py-3 grid grid-cols-3 gap-4 px-0">
+                        <dt className="font-semibold leading-6 text-gray-900">
+                          Lokasi KKN
+                        </dt>
+                        <dd className="mt-1 leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+                          {lokasi}
+                        </dd>
+                      </div>
+                    </dl>
+                  </div>
+                  <div className="border-t border-gray-100">
+                    <dl className="divide-y divide-gray-100 text-right py-4">
+                      <Link
+                        href={"/mahasiswa/kelompok"}
+                        className="px-5 py-2 bg-IjoRumput rounded-md text-white hover:bg-IjoRumput/80"
+                      >
+                        Lihat Detail Kelompok
+                      </Link>
+                    </dl>
+                  </div>
                 </div>
               </div>
             </div>

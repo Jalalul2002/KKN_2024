@@ -1,4 +1,4 @@
-import Modal from '@/pages/component/admin/modal';
+import Modal from '@/components/admin/modal';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { IoChevronBackOutline } from 'react-icons/io5';

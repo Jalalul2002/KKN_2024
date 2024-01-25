@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Navbar from "../component/navbar";
+import Navbar from "../../components/navbar";
 import SidebarMahasiswa from "../component/sidebarMahasiswa";
 import ReactModal from "react-modal";
 import Head from "next/head";
