@@ -143,11 +143,11 @@ export default function Profil() {
                   <div className="flex justify-center space-x-2 flex-wrap">
                     <div className="p-5 border-white border rounded-md text-center">
                       <h1 className="font-semibold">Nilai Angka :</h1>
-                      <h2 className="text-3xl font-light">0</h2>
+                      <h2 className="text-3xl font-light">92</h2>
                     </div>
                     <div className="p-5 border-white border rounded-md text-center">
                       <h1 className="font-semibold">Nilai Huruf :</h1>
-                      <h2 className="text-3xl font-light">E</h2>
+                      <h2 className="text-3xl font-light">A</h2>
                     </div>
                   </div>
                 </div>
