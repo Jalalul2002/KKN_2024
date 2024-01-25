@@ -172,14 +172,14 @@ export default function LokasiKkn() {
       </div>
     </div>
 
-    <div class="absolute ml-32 px-3 md:left-32 md:right-12  md:top-24 pb-5 rounded-xl bg-iceGray">
+    <div className="absolute ml-32 px-3 md:left-32 md:right-12  md:top-24 pb-5 rounded-xl bg-iceGray">
       <div className='flex justify-between'>
 
         <div className='static'>
           <div className='relative mt-6'>
-            <div class="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">
-              <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+            <div className="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">
+              <svg className="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
               </svg>
             </div>
             <input 
@@ -291,59 +291,59 @@ export default function LokasiKkn() {
 
          {/* Tambah kelompok */}
       <Modal isVisible={showModal} onClose={() => setShowModal(false)}>
-      <div class="px-6 pb-2 lg:px-8 text-left">
-        <h3 class="text-xl font-semibold text-gray-900 dark:text-white flex justify-center items-center mb-4">
+      <div className="px-6 pb-2 lg:px-8 text-left">
+        <h3 className="text-xl font-semibold text-gray-900 dark:text-white flex justify-center items-center mb-4">
           Tambah Data Lokasi
         </h3>
-        <form class="space-y-4" action="#">
+        <form className="space-y-4" action="#">
           
           <div className=''>
-            <label for="name" class="block text-lg font-medium text-gray-900 dark:text-white">Desa/Kelurahan</label>
+            <label for="name" className="block text-lg font-medium text-gray-900 dark:text-white">Desa/Kelurahan</label>
             <input 
               type="text" 
               id="kelurahan"
               value={kelurahan}
               onChange={(e) => setKelurahan(e.target.value)}
-              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" />
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" />
           </div>
           <div className=''>
-            <label for="nim" class="block text-lg font-medium text-gray-900 dark:text-white">Kecamatan</label>
+            <label for="nim" className="block text-lg font-medium text-gray-900 dark:text-white">Kecamatan</label>
             <input 
               type="text" 
               id="kecamatan"
               value={kecamatan}
               onChange={(e) => setKecamatan(e.target.value)}
-              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" />
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" />
           </div>
           <div>
-            <label for="nim" class="block text-lg font-medium text-gray-900 dark:text-white">Kabupaten/Kota</label>
+            <label for="nim" className="block text-lg font-medium text-gray-900 dark:text-white">Kabupaten/Kota</label>
             <input 
               type="text" 
               id="kota"
               value={kota}
               onChange={(e) => setKota(e.target.value)}
-              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" />
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" />
           </div>
           <div>
-            <label for="nim" class="block text-lg font-medium text-gray-900 dark:text-white">Provinsi</label>
+            <label for="nim" className="block text-lg font-medium text-gray-900 dark:text-white">Provinsi</label>
             <input 
               type="text" 
               id="provinsi"
               value={provinsi}
               onChange={(e) => setProvinsi(e.target.value)}
-              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"/>
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"/>
           </div>
 
           <div className='flex justify-center space-x-5'>
             <button 
             type="submit" 
             onClick={handleConfirmAdd}
-            class="w-[1/2]  text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-md text-lg px-5 py-1 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+            className="w-[1/2]  text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-md text-lg px-5 py-1 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
               Tambah
             </button>
             <button
             onClick={() => setShowModal(false)}            
-            class="w[1/2] font-medium text-lg px-5 py-1 text-center bg-gray-400 text-white rounded-md hover:bg-gray-500 focus:outline-none focus:ring focus:ring-gray-300"
+            className="w[1/2] font-medium text-lg px-5 py-1 text-center bg-gray-400 text-white rounded-md hover:bg-gray-500 focus:outline-none focus:ring focus:ring-gray-300"
             >
               Batal
             </button>
@@ -355,14 +355,14 @@ export default function LokasiKkn() {
 
       {/* Edit kelompok */}
     <Modal isVisible={showModal2} onClose={() => setShowModal2(false)}>
-      <div class="px-6 pb-2 text-left">
-        <h3 class="text-xl font-semibold text-gray-900 dark:text-white flex justify-center items-center mb-4">
+      <div className="px-6 pb-2 text-left">
+        <h3 className="text-xl font-semibold text-gray-900 dark:text-white flex justify-center items-center mb-4">
           Edit Data Lokasi
         </h3>
         {editingData && (
           <form className='space-y-4'>
               <div className=''>
-                <label for="name" class="block text-lg font-medium text-gray-900 dark:text-white">Kelurahan</label>
+                <label for="name" className="block text-lg font-medium text-gray-900 dark:text-white">Kelurahan</label>
                 <input
                   type="text"
                   id="name"
@@ -373,7 +373,7 @@ export default function LokasiKkn() {
               </div>
 
               <div className=''>
-                <label for="name" class="block text-lg font-medium text-gray-900 dark:text-white">Kecamatan</label>
+                <label for="name" className="block text-lg font-medium text-gray-900 dark:text-white">Kecamatan</label>
                 <input
                   type="string"
                   id="nim"
@@ -384,7 +384,7 @@ export default function LokasiKkn() {
               </div>
             
             <div className=''>
-                <label for="name" class="block text-lg font-medium text-gray-900 dark:text-white">Kabupaten/Kota</label>
+                <label for="name" className="block text-lg font-medium text-gray-900 dark:text-white">Kabupaten/Kota</label>
                 <input
                   type="text"
                   id="lokasi"
@@ -395,7 +395,7 @@ export default function LokasiKkn() {
               </div>
 
               <div className=''>
-                <label for="name" class="block text-lg font-medium text-gray-900 dark:text-white">Provinsi</label>
+                <label for="name" className="block text-lg font-medium text-gray-900 dark:text-white">Provinsi</label>
                 <input
                   type="text"
                   id="lokasi"
@@ -415,7 +415,7 @@ export default function LokasiKkn() {
               </button>
               <button
                 onClick={() => setShowModal3(false)}
-                class="w[1/2] mt-4 px-5 py-1 font-medium text-lg  text-center bg-gray-400 text-white rounded-md hover:bg-gray-500 focus:outline-none focus:ring focus:ring-gray-300"
+                className="w[1/2] mt-4 px-5 py-1 font-medium text-lg  text-center bg-gray-400 text-white rounded-md hover:bg-gray-500 focus:outline-none focus:ring focus:ring-gray-300"
                 >
                 Batal
               </button>
@@ -438,19 +438,13 @@ export default function LokasiKkn() {
             </p>
             <div class="flex justify-end space-x-4">
               <button onClick={handleDelete}
-                // onClick={() => {
-                //   // Lakukan aksi penghapusan data di sini
-                //   // Misalnya, panggil fungsi untuk menghapus data dari server atau mengubah state lainnya
-                //   // Setelah itu, tutup modal
-                //   setShowModal3(false);
-                // }}
-                class="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 focus:outline-none focus:ring focus:ring-red-300"
+                className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 focus:outline-none focus:ring focus:ring-red-300"
               >
                 Hapus
               </button>
               <button
                 onClick={() => setShowModal3(false)}
-                class="px-4 py-2 bg-gray-400 text-white rounded-md hover:bg-gray-500 focus:outline-none focus:ring focus:ring-gray-300"
+                className="px-4 py-2 bg-gray-400 text-white rounded-md hover:bg-gray-500 focus:outline-none focus:ring focus:ring-gray-300"
               >
                 Batal
               </button>

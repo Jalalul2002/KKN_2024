@@ -97,14 +97,15 @@ export default function DetailKelompok() {
                 </div>
             )}
 
+        <div className=' grid md:grid-cols-4 xl:grid-cols-2 px-4 gap-6 mt-8'>
         {tablesList && tablesList.length>0 ? (tablesList.map((item2) => (
         <div key={item2.kelompok_id}>
 
-            <div className=' grid md:grid-cols-4 xl:grid-cols-2 px-4 gap-6 mt-8'>
+            
                 <div className='bg-white grid justify-center items-center py-8 mt-4 rounded-xl'>
-                    <h1 className='font-bold text-4xl mb-3 text-center'>{item2.kelompok_name}</h1>
-                    <h5 className='font-bold text-1xl mb-3 text-center'>Ketua : {item2.ketua_name}</h5>
-                    <h5 className='font-bold text-1xl mb-3 text-center'>Lokasi : {item2.lokasi_kota || item2.Lokasi_negara}</h5>
+                    <h1 className='font-bold text-4xl mb-3 text-center'>{item2.kelompok_name || "-"}</h1>
+                    <h5 className='font-bold text-1xl mb-3 text-center'>Ketua : {item2.ketua_name || "-"}</h5>
+                    <h5 className='font-bold text-1xl mb-3 text-center'>Lokasi : {item2.lokasi_kota || item2.Lokasi_negara || "-"}</h5>
                     <div className='relative overflow-x-auto overflow-y-auto bg-white max-h-80'>
                         <table className=' text-lg text-gray-500 dark:text-gray-400 min-w-full w-full text-left rtl:text-right '>
                         <thead className=' text-gray-700  bg-gray-50 dark:bg-gray-700 dark:text-gray-400 text-center'>
@@ -118,27 +119,36 @@ export default function DetailKelompok() {
                             </tr>
                         </thead>
                         <tbody className='text-center'>
-                        {mahasiswaData.map((item3, j) => (
-                            <tr key={item3.kelompok_name}>
-                                <td scope='col' className='px-4'>{j+1}</td>
-                                <td scope='col' className='px-4'>{item3.mahasiswa_name}</td>
-                                <td scope='col' className='px-4'>{item3.nim}</td>
-                                <td scope='col' className='px-4'>{item3.mahasiswa_jurusan}</td>
-                                <td scope='col' className='px-4'>{item3.mahasiswa_fakultas}</td>
-                                <td scope='col' className='px-4'>{item3.mahasiswa_telpon}</td>
-                            </tr>
-                        ))}
+                        {mahasiswaData && mahasiswaData.length>0?(mahasiswaData
+                            .filter((item3) => item3.kelompok_name === item2.kelompok_name)
+                            .map((filteredItem, j) => (
+                              <tr key={filteredItem.nim}>
+                                <td scope='col' className='px-4'>{j + 1}</td>
+                                <td scope='col' className='px-4'>{filteredItem.mahasiswa_name}</td>
+                                <td scope='col' className='px-4'>{filteredItem.nim}</td>
+                                <td scope='col' className='px-4'>{filteredItem.mahasiswa_jurusan}</td>
+                                <td scope='col' className='px-4'>{filteredItem.mahasiswa_fakultas}</td>
+                                <td scope='col' className='px-4'>{filteredItem.mahasiswa_telpon}</td>
+                              </tr>
+                        ))):(
+                            <tr>
+                                <td scope='col' className='px-4'>-</td>
+                                <td scope='col' className='px-4'>-</td>
+                                <td scope='col' className='px-4'>-</td>
+                                <td scope='col' className='px-4'>-</td>
+                                <td scope='col' className='px-4'>-</td>
+                                <td scope='col' className='px-4'>-</td>
+                              </tr>
+                        )}
                         </tbody>
                         </table>
                     </div>
                 </div>
             </div>
             
-        </div>
+        
         ))):(
             <div>
-
-            <div className=' grid md:grid-cols-4 xl:grid-cols-2 px-4 gap-6 mt-8'>
                 <div className='bg-white grid justify-center items-center py-8 mt-4 rounded-xl'>
                     <h1 className='font-bold text-4xl mb-3 text-center'>Kelompok -</h1>
                     <h5 className='font-bold text-1xl mb-3 text-center'>Ketua : -</h5>
@@ -178,12 +188,11 @@ export default function DetailKelompok() {
                         </tbody>
                         </table>
                     </div>
-                </div>
             </div>
             
         </div>
         )}            
-        
+        </div>
       </div>
     </>
   );
