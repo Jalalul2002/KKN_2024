@@ -8,22 +8,27 @@ export default async function handler(req, res) {
       .promise()
       .query(
         `SELECT
-          k.id AS kelompok_id,
-          k.name AS kelompok_name,
-          l.kota AS lokasi_kota,
-          l.negara AS lokasi_negara,
-          m.name AS ketua_name,
-          m.telpon AS ketua_telpon
+            k.id AS kelompok_id,
+            k.name AS kelompok_name,
+            l.kota AS lokasi_kota,
+            l.negara AS lokasi_negara,
+            m.name AS ketua_name,
+            m.telpon AS ketua_telpon,
+            COUNT(km.mahasiswa_id) AS jumlah_mahasiswa
         FROM
-          dosen d
+            dosen d
         JOIN
-          kelompok k ON d.nip = k.id_dosen
+            kelompok k ON d.nip = k.id_dosen
         JOIN
-          lokasi l ON k.id_lokasi = l.id
-        JOIN
-          mahasiswa m ON k.id_ketua = m.nim
+            lokasi l ON k.id_lokasi = l.id
+        LEFT JOIN
+            mahasiswa m ON k.id_ketua = m.nim
+        LEFT JOIN
+            kelompok_mahasiswa km ON k.id = km.kelompok_id
         WHERE
-          d.nip = ?;`,
+            d.nip = ?
+        GROUP BY
+            k.id, k.name, l.kota, l.negara, m.name, m.telpon;`,
         [id]
       );
 

@@ -7,7 +7,7 @@ import { useRouter } from 'next/router';
 import useSWR from 'swr';
 import Link from 'next/link';
 
-export default function Laporann() {
+export default function Laporan() {
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
   const { data : tables = [], error } = useSWR('/api/admin/dosen/kelompokQuery', fetcher);
 
