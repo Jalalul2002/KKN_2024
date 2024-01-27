@@ -1,14 +1,23 @@
-import SidebarAdmin from '@/pages/component/sidebarAdmin'
+import SidebarAdmin from '@/components/sidebarAdmin'
 import React from 'react'
 import { Button, IconButton } from "@material-tailwind/react";
 import { ArrowRightIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import useSWR from 'swr';
+import Link from 'next/link';
 
 export default function Nilai() {
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
-  const { data = [], error } = useSWR('/api/admin/mahasiswa/nilaiQuery', fetcher);
+  const { data = [], error } = useSWR('/api/admin/setting/kelompokQuery', fetcher);
+
+  if (error ) {
+    return <div>Error loading group details</div>;
+  }
+
+  if (!data ) {
+    return <div>Loading... Data Error</div>;
+  }
 
   const getItemProps = (index) =>
     ({
@@ -19,7 +28,7 @@ export default function Nilai() {
 
   const router = useRouter()
   const [active, setActive] = useState(1);
-  const [itemsPerPage] = useState(3); // Jumlah item per halaman
+  const [itemsPerPage] = useState(5); // Jumlah item per halaman
 
   // Fungsi untuk memotong data sesuai halaman aktif
   const displayData = () => {
@@ -46,18 +55,22 @@ export default function Nilai() {
   };
 
   const searchFilter = (item) => {
-    const { id, name, nama, kelurahan, kecamatan, kota, provinsi} = item;
+    const { id, name, lokasi_kecamatan, lokasi_kota, dosen_nama, ketua_nama, dosen_nip, lokasi_id, mahasiswa_nim } = item;
     const searchText = searchTerm.toLowerCase();
+
     return (
-      (typeof id === 'string' && id.toLowerCase().includes(searchText)) ||
-      name?.toLowerCase().includes(searchText) ||
-      nama?.toLowerCase().includes(searchText) ||
-      kelurahan?.toLowerCase().includes(searchText) ||
-      kecamatan?.toLowerCase().includes(searchText) ||
-      kota?.toLowerCase().includes(searchText) ||
-      provinsi?.toLowerCase().includes(searchText) 
+        (typeof id === 'string' && id.toLowerCase().includes(searchText)) ||
+        (typeof name === 'string' && name.toLowerCase().includes(searchText)) ||
+        (typeof lokasi_kecamatan === 'string' && lokasi_kecamatan.toLowerCase().includes(searchText)) ||
+        (typeof lokasi_kota === 'string' && lokasi_kota.toLowerCase().includes(searchText)) ||
+        (typeof dosen_nama === 'string' && dosen_nama.toLowerCase().includes(searchText)) ||
+        (typeof ketua_nama === 'string' && ketua_nama.toLowerCase().includes(searchText)) ||
+        (typeof dosen_nip === 'string' && dosen_nip.toLowerCase().includes(searchText)) ||
+        (typeof lokasi_id === 'string' && lokasi_id.toLowerCase().includes(searchText)) ||
+        (typeof mahasiswa_nim === 'string' && mahasiswa_nim.toLowerCase().includes(searchText))
     );
-  };
+};
+
   
 
   
@@ -71,14 +84,14 @@ export default function Nilai() {
       </div>
     </div>
 
-    <div class="absolute ml-32 px-3 md:left-32 md:right-12  md:top-24 pb-5 rounded-xl bg-iceGray">
+    <div className="absolute ml-32 px-3 md:left-32 md:right-12  md:top-24 pb-5 rounded-xl bg-iceGray">
       <div className='flex justify-between'>
 
         <div className='static'>
           <div className='relative mt-6'>
             <div className="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">
               <svg className="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
               </svg>
             </div>
             <input 
@@ -104,7 +117,6 @@ export default function Nilai() {
               <th scope='col' className='py-2 px-4'>Dosen Pembimbing</th>
               <th scope='col' className='py-2 px-4'>Lokasi KKN (Kelurahan/Desa, Kecamatan, Kota/Kabupaten, Provinsi)</th>
               <th scope='col' className='py-2 px-4'>Action</th>
-
             </tr>
           </thead>
           <tbody className='text-left'>
@@ -114,24 +126,13 @@ export default function Nilai() {
                 <td scope='col' className='py-2 px-4'>{item.id}</td>
                 <td scope='col' className='py-2 px-4'>{item.name}</td>
                 <td scope='col' className='py-2 px-4'>SISDAMAS</td>
-                <td scope='col' className='py-2 px-4'>{item.nama}</td>
-                <td scope='col' className='py-2 px-4'>{`${item.kelurahan}, ${item.kecamatan}, ${item.kota}, ${item.provinsi}`}</td>
+                <td scope='col' className='py-2 px-4'>{item.dosen_nama || 'Belum Ditentukan'}</td>
+                <td scope='col' className='py-2 px-4'>{`${item.lokasi_kelurahan}, ${item.lokasi_kecamatan}, ${item.lokasi_kota}, ${item.lokasi_provinsi}`}</td>
                 <td scope='col' className='py-2 px-4'>
-                  <button
-                    onClick={() => {
-                      router.push({
-                        pathname: `/admin/mahasiswa/detailNilai/${table.id}`,
-                        query: {
-                          kelompok: table.kelompok,
-                          jenis: table.jenis,
-                          lokasi: table.lokasi,
-                          peserta: table.peserta,
-                          dosen: table.dosen
-                        },
-                      });
-                    }}
-                  >
+                  <button>
+                    <Link href={`/admin/mahasiswa/detailNilai/${item.id}`}>
                     <span className='font-medium text-blue-400 dark:text-blue-500 hover:underline'>detail</span>
+                    </Link>
                   </button>
                 </td>
               </tr>

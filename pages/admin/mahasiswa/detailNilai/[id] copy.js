@@ -5,36 +5,25 @@ import useSWR from 'swr';
 
 export default function DetailNilai() {
   const router = useRouter();
-  const { id, kelompok, jenis, lokasi, peserta, dosen } = router.query; // Mengakses nilai dari query parameter 'id'
+  const { id } = router.query;
 
-  // Gunakan nilai 'id' untuk mendapatkan data terkait dari tabel atau sumber data lainnya
+  const { data, error } = useSWR(id ? `/api/admin/mahasiswa/detail/${id}` : null);
+  if (error) {
+    return <div>Error loading group details</div>;
+  }
 
-  // Pastikan peserta yang diterima merupakan array
-  const participants = Array.isArray(peserta) ? peserta : [peserta];
+  if (!data) {
+    return <div>Loading...</div>;
+  }
 
   return (
-    // <div>
-    //   <h1>Detail Kelompok Mahasiswa {id} </h1>
-    //   <p>kelompok: {kelompok}</p>
-    //   <p>jenis: {jenis}</p>
-    //   <p>lokasi: {lokasi}</p>
-    //   <h2>Peserta:</h2>
-    //   <ul>
-    //     {participants.map((participant, i) => (
-    //       <li key={i}>
-    //         Nama: {participant.nama}, Kelamin: {participant.kelamin}
-    //       </li>
-    //     ))}
-    //   </ul>
-    // </div>
-
     <>
     <div className='absolute bg-IjoRumput h-screen w-screen'>
       <div className='absolute mx-2 mt-4 bg-white p-2 rounded-full drop-shadow-xl'>
         <Link href='/admin/mahasiswa/nilai' className="text-xl"><IoChevronBackOutline /></Link>
       </div>
       <h1 className='flex justify-center items-center text-white text-4xl font-bold mt-8'>Detail Nilai Mahasiswa</h1>
-      <div class="absolute px-5 md:left-32 md:right-32 md:top-24 py-5 rounded-xl bg-iceGray flex justify-between h-auto w-auto">
+      <div className="absolute px-5 md:left-32 md:right-32 md:top-24 py-5 rounded-xl bg-iceGray flex justify-between h-auto w-auto">
 
         <div className='bg-white h-full w-1/3 grid justify-center items-center rounded-lg py-3 px-3 my-8'>
           <div className='font-bold text-3xl flex items-center justify-center my-4'>
@@ -75,14 +64,16 @@ export default function DetailNilai() {
                 </tr>
               </thead>
               <tbody className='text-center'>
-                <tr>
-                  <td scope='col' className='px-4'>1</td>
-                  <td scope='col' className='px-4'>Muhamad Ramdan</td>
-                  <td scope='col' className='px-4'>1207050179</td>
-                  <td scope='col' className='px-4'>Teknik Informatika</td>
-                  <td scope='col' className='px-4'>Sains dan Teknologi</td>
-                  <td scope='col' className='px-4'>90</td>
-                </tr>
+              {data.map((item, index) => (
+                    <tr key={index}>
+                      <td scope='col' className='px-4'>{index + 1}</td>
+                      <td scope='col' className='px-4'>{item.name}</td>
+                      <td scope='col' className='px-4'>{item.nim}</td>
+                      <td scope='col' className='px-4'>{item.jurusan}</td>
+                      <td scope='col' className='px-4'>{item.fakultas}</td>
+                      <td scope='col' className='px-4'>{item.nilai}</td>
+                    </tr>
+                  ))}
               </tbody>
             </table>
           </div>

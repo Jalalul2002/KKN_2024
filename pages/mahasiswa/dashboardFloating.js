@@ -1,7 +1,7 @@
 import React from "react";
-import SidebarMahasiswa from "../component/sidebarMahasiswaFloating";
-import Navbar from "../component/navbar";
-import Copyright from "../component/copyright";
+import SidebarMahasiswa from "../../components/sidebarMahasiswaFloating";
+import Navbar from "../../components/navbar";
+import Copyright from "../../components/copyright";
 import Link from "next/link";
 import { ArrowDownTrayIcon } from "@heroicons/react/24/solid";
 

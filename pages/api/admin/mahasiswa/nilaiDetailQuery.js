@@ -9,25 +9,9 @@ export default async function handler(req, res) {
       .promise()
       .query(
         `
-        SELECT
-          kelompok.id,
-          kelompok.name,
-          jenis_kkn.name AS jenis,
-          lokasi.kelurahan,
-          lokasi.kecamatan,
-          lokasi.kota,
-          lokasi.provinsi,
-          dosen.nama AS dosen
-        FROM
-          kelompok
-        JOIN
-          lokasi ON kelompok.id_lokasi = lokasi.id
-        JOIN
-          dosen ON kelompok.id_dosen = dosen.id_dosen
-        JOIN
-          jenis_kkn ON kelompok.id_jenis_kkn = jenis_kkn.id
-        WHERE
-          kelompok.id = ?
+        SELECT mahasiswa.nim, mahasiswa.name, mahasiswa.gender, mahasiswa.jurusan, mahasiswa.fakultas, mahasiswa.nilai FROM mahasiswa JOIN kelompok_mahasiswa ON mahasiswa.nim = kelompok_mahasiswa.mahasiswa_id 
+        JOIN kelompok ON kelompok_mahasiswa.kelompok_id = kelompok.id 
+        WHERE kelompok.id = ?;
       `,
         [id]
       );
@@ -35,7 +19,7 @@ export default async function handler(req, res) {
     if (result.length === 0) {
       res.status(404).json({ error: 'Group not found' });
     } else {
-      res.status(200).json(result[0]);
+      res.status(200).json(result); // Return the entire result array
     }
   } catch (error) {
     console.error('Error fetching group details from MySQL:', error);

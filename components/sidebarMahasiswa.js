@@ -73,7 +73,7 @@ export default function SidebarMahasiswa() {
       </button>
       <div
         className={
-          mobileNav ? "w-full h-full absolute z-40 lg:hidden" : "hidden"
+          mobileNav ? "hidden" : "w-full h-full absolute z-40 lg:hidden"
         }
         onClick={handleMobileNav}
       ></div>

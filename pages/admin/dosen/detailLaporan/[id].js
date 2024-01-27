@@ -1,4 +1,4 @@
-import Modal from '@/pages/component/admin/modal';
+import Modal from '@/components/admin/modal';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { IoChevronBackOutline } from 'react-icons/io5';
@@ -35,7 +35,7 @@ export default function DetailLaporan() {
 
     <>
       <div className='bg-IjoRumput w-screen h-screen flex justify-center'>
-        <div class="absolute px-5  w-full ">
+        <div className="absolute px-5  w-full ">
           <div className='absolute mx-2 mt-4 bg-white p-2 rounded-full drop-shadow-xl'>
             <Link href='/admin/dosen/laporan' className="text-xl"><IoChevronBackOutline /></Link>
           </div>
@@ -112,8 +112,8 @@ export default function DetailLaporan() {
       </div>
 
       <Modal isVisible={showModal} onClose={() => setShowModal(false)}>
-      <div class="px-6 pb-2 lg:px-8 text-left">
-        <h1 class="text-xl font-semibold text-gray-900 dark:text-white flex justify-center items-center mb-4">
+      <div className="px-6 pb-2 lg:px-8 text-left">
+        <h1 className="text-xl font-semibold text-gray-900 dark:text-white flex justify-center items-center mb-4">
           Detail Laporan
         </h1>
         <div>

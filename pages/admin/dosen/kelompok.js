@@ -1,12 +1,23 @@
-import SidebarAdmin from '@/pages/component/sidebarAdmin'
+import SidebarAdmin from '@/components/sidebarAdmin'
 import React from 'react'
 import { Button, IconButton } from "@material-tailwind/react";
 import { ArrowRightIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-
+import useSWR from 'swr';
+import Link from 'next/link';
 
 export default function KelompokDosen() {
+  const fetcher = (...args) => fetch(...args).then((res) => res.json());
+  const { data : tables = [], error } = useSWR('/api/admin/dosen/kelompokQuery', fetcher);
+
+  if (error ) {
+    return <div>Error loading group details</div>;
+  }
+
+  if (!tables ) {
+    return <div>Loading... Data Error</div>;
+  }
 
   const getItemProps = (index) =>
     ({
@@ -18,49 +29,6 @@ export default function KelompokDosen() {
   const router = useRouter();
   const [active, setActive] = useState(1);
   const [itemsPerPage] = useState(10); // Jumlah item per halaman
-  const [tables] = useState(
-    [
-      {
-        id: "1",
-        nama: "Dr. Budi Nugraha SE., MT.",
-        kelompok: "Kelompok 1, 2, 3 dan 4",
-        jenis: "Sisdamas",
-        lokasi: "Kabupaten Bandung",
-        notlp: "089743550386"
-      },
-      {
-        id: "2",
-        nama: "Dr. Iqbal Setiawan SE., MT.",
-        kelompok: "Kelompok 1, 2, 3 dan 4",
-        jenis: "Sisdamas",
-        lokasi: "Kabupaten Bandung",
-        notlp: "089745550386"
-      },
-      {
-        id: "3",
-        nama: "Dr. Latif Abdul SE., MT.",
-        kelompok: "Kelompok 1, 2, 3 dan 4",
-        jenis: "Sisdamas",
-        lokasi: "Kabupaten Bandung",
-        notlp: "089745590386"
-      },
-      {
-        id: "4",
-        nama: "Dr. Hanna Wulan SE., MT.",
-        kelompok: "Kelompok 1, 2, 3 dan 4",
-        jenis: "Sisdamas",
-        lokasi: "Kabupaten Bandung",
-        notlp: "089745500386"
-      },
-      {
-        id: "5",
-        nama: "Dr. Nugraha SE., MT.",
-        kelompok: "Kelompok 1, 2, 3 dan 4",
-        jenis: "Sisdamas",
-        lokasi: "Kabupaten Bandung",
-        notlp: "089745503186"
-      },
-  ]);
 
   // Fungsi untuk memotong data sesuai halaman aktif
   const displayData = () => {
@@ -87,17 +55,22 @@ export default function KelompokDosen() {
   };
 
   const searchFilter = (item) => {
-    const { id, kelompok, jenis, lokasi, nama } = item;
+    const { nip, dosen_name, telpon_dosen, jenis_kelompok } = item;
     const searchText = searchTerm.toLowerCase();
+
     return (
-      id.toLowerCase().includes(searchText) ||
-      kelompok.toLowerCase().includes(searchText) ||
-      jenis.toLowerCase().includes(searchText) ||
-      lokasi.toLowerCase().includes(searchText) ||
-      nama.toLowerCase().includes(searchText)
+        (nip && typeof nip === 'string' && nip.toLowerCase().includes(searchText)) ||
+        (dosen_name && dosen_name.toLowerCase().includes(searchText)) ||
+        (telpon_dosen && telpon_dosen.toLowerCase().includes(searchText)) ||
+        (jenis_kelompok && jenis_kelompok.toLowerCase().includes(searchText)) ||
+        (!nip && "-".toLowerCase().includes(searchText)) ||
+        (!dosen_name && "-".toLowerCase().includes(searchText)) ||
+        (!telpon_dosen && "-".toLowerCase().includes(searchText)) ||
+        (!jenis_kelompok && "-".toLowerCase().includes(searchText))
     );
-  };
-  
+};
+
+
   
   return (
     <>
@@ -109,13 +82,13 @@ export default function KelompokDosen() {
       </div>
     </div>
 
-    <div class="absolute ml-32 px-3 md:left-32 md:right-12  md:top-24 pb-5 rounded-xl bg-iceGray">
+    <div className="absolute ml-32 px-3 md:left-32 md:right-12  md:top-24 pb-5 rounded-xl bg-iceGray">
       <div className='flex justify-between'>
 
         <div className='static'>
           <div className='relative mt-6'>
-            <div class="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">
-              <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+            <div className="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">
+              <svg className="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
               </svg>
             </div>
@@ -137,39 +110,27 @@ export default function KelompokDosen() {
             <tr className=''>
               <th scope='col' className='py-2 px-2'>No</th>
               <th scope='col' className='py-2 px-2'>Nama Dosen</th>
+              <th scope='col' className='py-2 px-2'>NIP</th>
               <th scope='col' className='py-2 px-2'>No Telepon</th>
               <th scope='col' className='py-2 px-2'>Kelompok</th>
               <th scope='col' className='py-2 px-2'>Jenis</th>
-              <th scope='col' className='py-2 px-2'>Lokasi</th>
               <th scope='col' className='py-2 px-2'>Action</th>
             </tr>
           </thead>
           <tbody className='text-center'>
             {displayData().map((table, i) => (
               <tr key={i}>
-              <td scope='col' className='py-1 px-2'>{table.id}</td>
-              <td scope='col' className='py-1 px-2'>{table.nama}</td>
-              <td scope='col' className='py-1 px-2'>{table.notlp}</td>
-              <td scope='col' className='py-1 px-2'>{table.kelompok}</td>
-              <td scope='col' className='py-1 px-2'>{table.jenis}</td>
-              <td scope='col' className='py-1 px-2'>{table.lokasi}</td>
+              <td scope='col' className='py-1 px-2'>{i+1}</td>
+              <td scope='col' className='py-1 px-2'>{table.dosen_name}</td>
+              <td scope='col' className='py-1 px-2'>{table.nip}</td>
+              <td scope='col' className='py-1 px-2'>{table.telpon_dosen || "-"}</td>
+              <td scope='col' className='py-1 px-2'>{table.kelompok_ids ? "Kelompok " + table.kelompok_ids : "-"}</td>
+              <td scope='col' className='py-1 px-2'>{table.jenis_kelompok}</td>
               <td scope='col' className='py-1 px-2'>
-                <button
-                  onClick={() => {
-                    router.push({
-                      pathname: `/admin/dosen/detailKelompok/${table.id}`,
-                      query: {
-                        nama: table.nama,
-                        kelompok: table.kelompok,
-                        jenis: table.jenis,
-                        lokasi: table.lokasi,
-                        peserta: table.peserta,
-                        notlp: table.notlp
-                      },
-                    });
-                  }}
-                >
+                <button>
+                  <Link href={`/admin/dosen/detailKelompok/${table.nip}`}>
                   <span className='font-medium text-blue-400 dark:text-blue-500 hover:underline'>detail</span>
+                  </Link>
                 </button>
               </td>
             </tr>

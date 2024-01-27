@@ -1,9 +1,9 @@
-import SidebarAdmin from '@/pages/component/sidebarAdmin'
+import SidebarAdmin from '@/components/sidebarAdmin'
 import React from 'react'
 import { Button, IconButton } from "@material-tailwind/react";
 import { ArrowRightIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
 import { useState } from 'react';
-import Modal from '@/pages/component/admin/modal';
+import Modal from '@/components/admin/modal';
 import useSWR from 'swr';
 
 export default function KelompokKkn() {
@@ -47,16 +47,17 @@ export default function KelompokKkn() {
   const searchFilter = (item) => {
     const { id, name, lokasi_kecamatan, lokasi_kota, dosen_nama, ketua_nama, dosen_nip, lokasi_id, mahasiswa_nim } = item;
     const searchText = searchTerm.toLowerCase();
+    const toStringIfNumber = (value) => (typeof value === 'number' ? value.toString() : value);
     return (
-      (typeof id === 'string' && id.toLowerCase().includes(searchText)) ||
+      (typeof id === 'number' && id.toString().includes(searchText)) ||
       (typeof name === 'string' && name.toLowerCase().includes(searchText)) ||
       (typeof lokasi_kecamatan === 'string' && lokasi_kecamatan.toLowerCase().includes(searchText)) ||
       (typeof lokasi_kota === 'string' && lokasi_kota.toLowerCase().includes(searchText)) ||
       (typeof dosen_nama === 'string' && dosen_nama.toLowerCase().includes(searchText)) ||
       (typeof ketua_nama === 'string' && ketua_nama.toLowerCase().includes(searchText)) ||
       (typeof dosen_nip === 'string' && dosen_nip.toLowerCase().includes(searchText)) ||
-      (typeof lokasi_id === 'string' && lokasi_id.toLowerCase().includes(searchText)) ||
-      (typeof mahasiswa_nim === 'string' && mahasiswa_nim.toLowerCase().includes(searchText))
+      (typeof lokasi_id === 'number' && lokasi_id.toString().includes(searchText)) ||
+      (typeof mahasiswa_nim === 'number' && mahasiswa_nim.toString().includes(searchText))
     );
   };
 
@@ -69,7 +70,7 @@ export default function KelompokKkn() {
    const [name, setName] = useState("");
    const [dosennip, setdosenNip] = useState("");
    const [lokasiid, setlokasiId] = useState("");
-   const [mahasiswanim, mahasiswaNim] = useState("");
+   const [mahasiswanim, setmahasiswaNim] = useState("");
    const [lokasi_kecamatan, setLokasiKecamatan] = useState("");
    const [lokasi_kota, setLokasiKota] = useState("");
    const [dosen_nama, setDosenNama] = useState("");
@@ -207,18 +208,61 @@ export default function KelompokKkn() {
           Tambah Data Kelompok
         </h3>
         <form class="space-y-4" action="#">
-          
           <div className=''>
             <label for="name" class="block text-lg font-medium text-gray-900 dark:text-white">Kelompok</label>
-            <input type="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"/>
+            <input 
+              type="name" 
+              id="name" 
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"/>
           </div>
+          {/* Lokasi */}
+          {/* <div className=''>
+            <label htmlFor="lokasi" className="block text-lg font-medium text-gray-900 dark:text-white">
+              Lokasi
+            </label>
+            <Select
+              options={lokasiData.map((lokasi) => ({ value: lokasi.id, label: lokasi.kelurahan }))}  // Adjust based on your data structure
+              value={lokasiid}
+              onChange={(selectedOption) => setlokasiId(selectedOption.value)}
+              isSearchable
+              isClearable
+              maxMenuHeight={200}  // Adjust based on your design
+              virtualized
+            />
+          </div> */}
+
+          {/* Dosen Pembimbing */}
           <div className=''>
-            <label for="nim" class="block text-lg font-medium text-gray-900 dark:text-white">Jenis</label>
-            <input type=""  id="nim"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" />
+            {/* <label htmlFor="dosen" className="block text-lg font-medium text-gray-900 dark:text-white">
+              Dosen Pembimbing
+            </label>
+            <Select
+              options={dosenData.map((dosen) => ({ value: dosen.nip, label: dosen.nama }))}  // Adjust based on your data structure
+              value={dosennip}
+              onChange={(selectedOption) => setdosenNip(selectedOption.value)}
+              isSearchable
+              isClearable
+              maxMenuHeight={200}  // Adjust based on your design
+              virtualized
+            /> */}
           </div>
-          <div>
-            <label for="nim" class="block text-lg font-medium text-gray-900 dark:text-white">Lokasi</label>
-            <input type=""  id="nim"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" />
+
+          {/* Ketua Kelompok */}
+          <div className=''>
+            {/* <label htmlFor="ketua" className="block text-lg font-medium text-gray-900 dark:text-white">
+              Ketua Kelompok
+            </label>
+            <Select
+              options={mahasiswaData.map((mahasiswa) => ({ value: mahasiswa.nim, label: mahasiswa.name }))}  // Adjust based on your data structure
+              value={mahasiswanim}
+              onChange={(selectedOption) => setmahasiswaNim(selectedOption.value)}
+              isSearchable
+              isClearable
+              maxMenuHeight={200}  // Adjust based on your design
+              virtualized
+            /> */}
           </div>
 
           <div className='flex justify-center space-x-5'>

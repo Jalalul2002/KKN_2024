@@ -1,11 +1,23 @@
-import SidebarAdmin from '@/pages/component/sidebarAdmin'
+import SidebarAdmin from '@/components/sidebarAdmin'
 import React from 'react'
 import { Button, IconButton } from "@material-tailwind/react";
 import { ArrowRightIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
 import { useState } from 'react';
 import { useRouter } from 'next/router';
+import useSWR from 'swr';
+import Link from 'next/link';
 
 export default function Laporan() {
+  const fetcher = (...args) => fetch(...args).then((res) => res.json());
+  const { data : tables = [], error } = useSWR('/api/admin/setting/kelompokQuery', fetcher);
+  
+  if (error ) {
+    return <div>Error loading group details</div>;
+  }
+
+  if (!tables ) {
+    return <div>Loading... Data Error</div>;
+  }
 
   const getItemProps = (index) =>
     ({
@@ -17,25 +29,6 @@ export default function Laporan() {
   const router = useRouter();
   const [active, setActive] = useState(1);
   const [itemsPerPage] = useState(10); // Jumlah item per halaman
-  const [tables] = useState(
-    [
-      {
-        id: "1",
-        kelompok: "Kelompok 230",
-        jenis: "Sisdamas ",
-        dosen: "Dr. Hari SE., M.Kom",
-        lokasi: "Desa Margamulya, Kec Pasir Jambu, Kabupaten Bandung, Jawa Barat",
-
-        
-      },
-      {
-        id: "1",
-        kelompok: "Kelompok 231",
-        jenis: "Tematik ",
-        dosen: "Dr. Sari SE., M.Pd",
-        lokasi: "Desa Margamulya, Kec Pasir Jambu, Kabupaten Bandung, Jawa Barat",
-      },
-  ]);
 
   // Fungsi untuk memotong data sesuai halaman aktif
   const displayData = () => {
@@ -62,15 +55,19 @@ export default function Laporan() {
   };
 
   const searchFilter = (item) => {
-    const { id, pertanyaan, jawaban} = item;
+    const { name, jenis_kelompok, dosen_nama, lokasi_kelurahan, lokasi_kecamatan, lokasi_kota, lokasi_provinsi } = item;
     const searchText = searchTerm.toLowerCase();
+
     return (
-      id.toLowerCase().includes(searchText) ||
-      pertanyaan.toLowerCase().includes(searchText) ||
-      jawaban.toLowerCase().includes(searchText) 
+        (name && name.toLowerCase().includes(searchText)) ||
+        (jenis_kelompok && jenis_kelompok.toLowerCase().includes(searchText)) ||
+        (dosen_nama && dosen_nama.toLowerCase().includes(searchText)) ||
+        (lokasi_kelurahan && lokasi_kelurahan.toLowerCase().includes(searchText)) ||
+        (lokasi_kecamatan && lokasi_kecamatan.toLowerCase().includes(searchText)) ||
+        (lokasi_kota && lokasi_kota.toLowerCase().includes(searchText)) ||
+        (lokasi_provinsi && lokasi_provinsi.toLowerCase().includes(searchText))
     );
-  };
-  
+};
 
   
   return (
@@ -121,28 +118,17 @@ export default function Laporan() {
           <tbody className='text-left'>
             {displayData().map((table, i) => (
               <tr key={i}>
-                <td scope='col' className='py-2 px-4'>{table.id}</td>
-                <td scope='col' className='py-2 px-4'>{table.kelompok}</td>
-                <td scope='col' className='py-2 px-4'>{table.jenis}</td>
-                <td scope='col' className='py-2 px-4'>{table.dosen}</td>
-                <td scope='col' className='py-2 px-4'>{table.lokasi}</td>
+                <td scope='col' className='py-2 px-4'>{i+1}</td>
+                <td scope='col' className='py-2 px-4'>{table.name}</td>
+                <td scope='col' className='py-2 px-4'>{table.jenis_kelompok}</td>
+                <td scope='col' className='py-2 px-4'>{table.dosen_nama}</td>
+                <td scope='col' className='py-2 px-4'>{`${table.lokasi_kelurahan}, ${table.lokasi_kecamatan}, ${table.lokasi_kota}, ${table.lokasi_provinsi}`}</td>
                 <td scope='col' className='py-2 px-4'>
-                  <button
-                    onClick={() => {
-                      router.push({
-                        pathname: `/admin/mahasiswa/detailLaporan/${table.id}`,
-                        query: {
-                          kelompok: table.kelompok,
-                          jenis: table.jenis,
-                          lokasi: table.lokasi,
-                          peserta: table.peserta,
-                          dosen: table.dosen,
-                        },
-                      });
-                    }}
-                  >
+                  <button>
+                    <Link href={`/admin/mahasiswa/detailLaporan/${table.id}`}>
                     <span className='font-medium text-blue-400 dark:text-blue-500 hover:underline'>detail</span>
-                  </button>                  
+                    </Link>
+                  </button>               
                 </td>
               </tr>
             ))}

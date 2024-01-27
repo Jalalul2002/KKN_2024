@@ -1,7 +1,7 @@
 import React from "react";
-import Header from "./component/header";
-import Copyright from "./component/copyright";
-import Map from "./component/Map/Map";
+import Header from "../components/header";
+import Copyright from "../components/copyright";
+import Map from "../components/Map/Map";
 import Head from "next/head";
 
 export default function Sebaran() {

@@ -1,7 +1,7 @@
 import Head from "next/head";
 import React from "react";
-import SidebarMahasiswa from "../component/sidebarMahasiswa";
-import Navbar from "../component/navbar";
+import SidebarMahasiswa from "../../components/sidebarMahasiswa";
+import Navbar from "../../components/navbar";
 import Link from "next/link";
 
 export default function EditProfil() {

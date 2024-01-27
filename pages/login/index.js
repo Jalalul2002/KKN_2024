@@ -1,4 +1,4 @@
-import Header from "../component/header";
+import Header from "../../components/header";
 import Link from "next/link";
 import MyImage from "../../public/images/Group 9.png";
 import Image from "next/image";
