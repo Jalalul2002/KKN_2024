@@ -68,9 +68,14 @@ export default function SidebarAdmin() {
                     link: "/admin/dosen/laporan",
                 },
                 {
-                    id: 1,
+                    id: 4,
                     menu: " Nilai ",
                     link: "/admin/dosen/nilai",
+                },
+                {
+                    id: 5,
+                    menu: " Ajuan Surat ",
+                    link: "/admin/dosen/ajuan",
                 }
             ],
         },

@@ -64,6 +64,19 @@ export default function Ajuan() {
                     </button>
                   </div>
                 </form>
+
+                <form className="flex justify-center items-center mt-9 ">
+                  <div className="text-center">
+                    <div className="text-xl font-bold">
+                      <label htmlFor="ajuan">
+                        Balasan Surat Ajuan Kegiatan
+                      </label>
+                    </div>
+                    <div className="text-md">
+                      <button className="text-blue-400 hover:underline">Download File</button>
+                    </div>
+                  </div>
+                </form>
               </div>
             </div>
           </div>
