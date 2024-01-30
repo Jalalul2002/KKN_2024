@@ -74,7 +74,123 @@ export default function Identitas() {
   const [ showModal2, setShowModal2 ] = useState(false);
   const [ showModal3, setShowModal3 ] = useState(false);
 
-  const [ editingData, setEditingData ] = useState(null)
+  const [ editingData, setEditingData ] = useState(null);
+
+    const [formValues, setFormValues] = useState({
+      name: '',
+      nim: '',
+      fakultas: '',
+      jurusan: '',
+      gender: '', // Set the default value for select
+      telpon: '',
+    });
+  
+    const handleInputChange = (e) => {
+      const { id, value } = e.target;
+      setFormValues((prevValues) => ({
+        ...prevValues,
+        [id]: value,
+      }));
+    };
+  
+    const handleSelectChange = (e) => {
+      const { id, value } = e.target;
+      setFormValues((prevValues) => ({
+        ...prevValues,
+        [id]: value,
+      }));
+    };
+
+  const addMahasiswa = async (mahasiswaData) => {
+    try {
+      // Make an API request to add mahasiswa
+      // Replace '/api/admin/mahasiswa/add' with your actual API endpoint
+      const response = await fetch('/api/admin/mahasiswa/identitasAdd', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          nim: mahasiswaData.nim,
+          name: mahasiswaData.name,
+          fakultas: mahasiswaData.fakultas,
+          jurusan: mahasiswaData.jurusan,
+          gender: mahasiswaData.gender,
+          telpon: mahasiswaData.telpon,
+          // Include any other fields you've added in your form
+        }),  
+      });
+
+      if (response.ok) {
+        // If the request is successful, you can update the data or refetch it
+        mutate('/api/admin/mahasiswa/mahasiswaQuery');
+        setShowModal(false);
+      } else {
+        // Handle error
+        console.error('Error adding mahasiswa:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error adding mahasiswa:', error.message);
+    }
+  };
+
+  const editMahasiswa = async () => {
+    try {
+      // Make an API request to edit mahasiswa
+      // Replace '/api/admin/mahasiswa/edit' with your actual API endpoint
+      const response = await fetch('/api/admin/mahasiswa/identitasEdit', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          nim: editingData.nim,
+          nama: editingData.name,
+          jurusan: editingData.jurusan || null,
+          fakultas: editingData.fakultas || null,
+          telpon: editingData.telpon || null,
+          gender: editingData.gender,
+          jenis_kkn: editingData.jenis_kkn || null,
+        }),
+      });
+
+      if (response.ok) {
+        // If the request is successful, you can update the data or refetch it
+        mutate('/api/admin/mahasiswa/mahasiswaQuery');
+        setShowModal2(false);
+      } else {
+        // Handle error
+        console.error('Error editing mahasiswa:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error editing mahasiswa:', error.message);
+    }
+  };
+
+  const deleteMahasiswa = async () => {
+    try {
+      // Make an API request to delete mahasiswa
+      // Replace '/api/admin/mahasiswa/delete' with your actual API endpoint
+      const response = await fetch('/api/admin/mahasiswa/identitasDelete', {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ nim: editingData.nim }),
+      });
+
+      if (response.ok) {
+        // If the request is successful, you can update the data or refetch it
+        mutate('/api/admin/mahasiswa/mahasiswaQuery');
+        setShowModal3(false);
+      } else {
+        // Handle error
+        console.error('Error deleting mahasiswa:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error deleting mahasiswa:', error.message);
+    }
+  };
   
   return (
     <>
@@ -215,22 +331,48 @@ export default function Identitas() {
           <div className='flex justify-between space-x-2'>
             <div className='w-2/3'>
               <label for="name" className="block text-lg font-medium text-gray-900 dark:text-white">Nama</label>
-              <input required type="name" id="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"/>
+              <input
+                required
+                type="text"
+                id="name"
+                value={formValues.name}
+                onChange={handleInputChange}
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+              />
             </div>
             <div className='w-1/3'>
               <label for="nim" className="block text-lg font-medium text-gray-900 dark:text-white">Nim</label>
-              <input required type="nim"  id="nim"  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" />
+              <input
+                required
+                type="text"
+                id="nim"
+                value={formValues.nim}
+                onChange={handleInputChange}
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+              />
             </div>
           </div>
                   
           <div className='flex justify-between space-x-2'>
             <div className='w-1/2'>
               <label for="fakultas" className="block  text-lg font-medium text-gray-900 dark:text-white">Fakultas</label>
-              <input type="fakultas" id="fakultas" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"/>
+              <input
+                type="text"
+                id="fakultas"
+                value={formValues.fakultas}
+                onChange={handleInputChange}
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+              />
             </div>
             <div className='w-1/2'>
               <label for="jurusan" className="block text-lg font-medium text-gray-900 dark:text-white">Jurusan</label>
-              <input type="jurusan"  id="jurusan"  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" />
+              <input
+                type="text"
+                id="jurusan"
+                value={formValues.jurusan}
+                onChange={handleInputChange}
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+              />
             </div>
           </div>
                   
@@ -239,6 +381,8 @@ export default function Identitas() {
               <label for="kelamin" className="block text-lg font-medium text-gray-900 dark:text-white">Jenis Kelamin</label>
               <select
                 id="kelamin"
+                value={formValues.kelamin}
+                onChange={handleSelectChange}
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
               >
                 <option value="male">Male</option>
@@ -252,6 +396,8 @@ export default function Identitas() {
                 id="telpon"
                 pattern="[0-9]{10,14}"  // Adjust the pattern based on your phone number format
                 title="Please enter a valid phone number"
+                value={formValues.telpon}
+                onChange={handleInputChange}
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
               />
             </div>
@@ -260,6 +406,7 @@ export default function Identitas() {
           <div className='flex justify-center space-x-5'>
             <button 
             type="submit" 
+            onClick={() => addMahasiswa(formValues)}
             class="w-[1/2]  text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-md text-lg px-5 py-1 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
               Tambah
             </button>
@@ -301,7 +448,7 @@ export default function Identitas() {
                   id="nim"
                   value={editingData.nim}
                   readOnly
-                  onChange={(e) => setEditingData({ ...editingData, nim: e.target.value })}
+                  
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                 />
               </div>
@@ -332,15 +479,16 @@ export default function Identitas() {
 
             <div className='flex justify-between space-x-2'>
               <div className='w-1/2'>
-                <label for="name" className="block text-lg font-medium text-gray-900 dark:text-white">Jenis Kelamin</label>
-                <input
-                  type="text"
+                <label htmlFor="kelamin" className="block text-lg font-medium text-gray-900 dark:text-white">Jenis Kelamin</label>
+                <select
                   id="kelamin"
                   value={editingData.gender}
-                  readOnly
                   onChange={(e) => setEditingData({ ...editingData, gender: e.target.value })}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                />
+                >
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                </select>
               </div>
               <div className='w-1/2'>
                 <label for="name" className="block text-lg font-medium text-gray-900 dark:text-white">No. Telpon</label>
@@ -363,6 +511,7 @@ export default function Identitas() {
                   onChange={(e) => setEditingData({ ...editingData, jenis_kkn: e.target.value })}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                 >
+                  <option value="">Belum Memilih</option>
                   <option value="SISDAMAS">SISDAMAS</option>
                   <option value="TEMATIK">TEMATIK</option>
                   <option value="Nusantara Moderasi Beragama">Nusantara Moderasi Beragama</option>
@@ -375,12 +524,7 @@ export default function Identitas() {
             <div className='flex justify-center space-x-5'>
               <button
                 type="button"
-                onClick={() => {
-                  // aksi yang diperlukan saat tombol Simpan ditekan
-                  // Misalnya, menyimpan data yang diedit ke server atau mengubah state lainnya
-                  // Kemudian tutup modal
-                  setShowModal2(false);
-                }}
+                onClick={editMahasiswa}
                 className="w-[1/2] mt-4 place-self-end text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-lg px-5 py-1 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
               >
                 Simpan
@@ -410,12 +554,7 @@ export default function Identitas() {
             </p>
             <div class="flex justify-end space-x-4">
               <button
-                onClick={() => {
-                  // Lakukan aksi penghapusan data di sini
-                  // Misalnya, panggil fungsi untuk menghapus data dari server atau mengubah state lainnya
-                  // Setelah itu, tutup modal
-                  setShowModal3(false);
-                }}
+                onClick={deleteMahasiswa}
                 className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 focus:outline-none focus:ring focus:ring-red-300"
               >
                 Hapus

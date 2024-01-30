@@ -108,7 +108,7 @@ export default function LokasiKkn() {
 
    const handleConfirmEdit = async () => {
     try {
-      const response = await fetch("/api/admin/setting/lokasiEdit ", {
+      const response = await fetch("/api/admin/mahasiswa/identitasEdit ", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -131,7 +131,7 @@ export default function LokasiKkn() {
 
    const handleDelete = async () => {
     try {
-      const response = await fetch("/api/admin/setting/lokasiDelete", {
+      const response = await fetch("/api/admin/mahasiswa/identitasDelete", {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
