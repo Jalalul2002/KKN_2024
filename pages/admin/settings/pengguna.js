@@ -303,7 +303,7 @@ export default function Pengguna() {
 
           </div>
           <div className='flex justify-center items-center mt-4'>
-            <button onClick={goBack} className="text-white bg-gray-500 hover:bg-gray-600 focus:ring-2 focus:outline-none focus:ring-gray-400 font-medium rounded-lg text-sm px-5 py-2 text-center dark:bg-gray-700 dark:hover:bg-gray-800 dark:focus:ring-gray-800 grid justify-center items-center">Back</button>
+            <button onClick={goBack} className="text-white bg-gray-500 hover:bg-gray-600 focus:ring-2 focus:outline-none focus:ring-gray-400 font-medium rounded-lg text-sm px-5 py-2 text-center grid justify-center items-center">Back</button>
           </div>
         </div>
       </div>

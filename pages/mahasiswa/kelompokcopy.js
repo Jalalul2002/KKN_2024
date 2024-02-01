@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import Navbar from "../../components/navbar";
-import SidebarMahasiswa from "../component/sidebarMahasiswa";
 import ReactModal from "react-modal";
 import Head from "next/head";
+import SidebarMahasiswa from "@/components/sidebarMahasiswa";
 
 export default function KelompokKKN() {
   const nama = "Jalalul Mu'ti";

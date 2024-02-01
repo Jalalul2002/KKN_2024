@@ -163,7 +163,7 @@ export default function SidebarMahasiswa() {
                   className={
                     mobileNav
                       ? "text-base ease-in-out duration-200"
-                      : "text-base lg:text-[0px] ease-in-out duration-200 hover:text-xs"
+                      : "text-base lg:text-[0px] ease-in-out duration-200"
                   }
                 >
                   {menus.menu}
