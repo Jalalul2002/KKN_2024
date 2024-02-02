@@ -23,7 +23,6 @@ export default function KelompokKkn() {
   // Fungsi untuk memotong data sesuai halaman aktif
   const displayData = () => {
     const filteredData = tables.filter(searchFilter)
-
     const startIndex = (active - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
     return filteredData.slice(startIndex, endIndex);
@@ -45,7 +44,7 @@ export default function KelompokKkn() {
   };
 
   const searchFilter = (item) => {
-    const { id, name, lokasi_kecamatan, lokasi_kota, dosen_nama, ketua_nama, dosen_nip, lokasi_id, mahasiswa_nim } = item;
+    const { id, name, lokasi_kecamatan, lokasi_kota, jenis_kelompok, dosen_nama, ketua_nama, dosen_nip, lokasi_id, mahasiswa_nim } = item;
     const searchText = searchTerm.toLowerCase();
     const toStringIfNumber = (value) => (typeof value === 'number' ? value.toString() : value);
     return (
@@ -53,6 +52,7 @@ export default function KelompokKkn() {
       (typeof name === 'string' && name.toLowerCase().includes(searchText)) ||
       (typeof lokasi_kecamatan === 'string' && lokasi_kecamatan.toLowerCase().includes(searchText)) ||
       (typeof lokasi_kota === 'string' && lokasi_kota.toLowerCase().includes(searchText)) ||
+      (typeof jenis_kelompok === 'string' && jenis_kelompok.toLowerCase().includes(searchText)) ||
       (typeof dosen_nama === 'string' && dosen_nama.toLowerCase().includes(searchText)) ||
       (typeof ketua_nama === 'string' && ketua_nama.toLowerCase().includes(searchText)) ||
       (typeof dosen_nip === 'string' && dosen_nip.toLowerCase().includes(searchText)) ||
@@ -70,6 +70,7 @@ export default function KelompokKkn() {
    const [name, setName] = useState("");
    const [dosennip, setdosenNip] = useState("");
    const [lokasiid, setlokasiId] = useState("");
+   const [jeniskelompok, setJenisKelompok] = useState("");
    const [mahasiswanim, setmahasiswaNim] = useState("");
    const [lokasi_kecamatan, setLokasiKecamatan] = useState("");
    const [lokasi_kota, setLokasiKota] = useState("");
@@ -95,7 +96,7 @@ export default function KelompokKkn() {
           <div className='relative mt-6'>
             <div class="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">
               <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
               </svg>
             </div>
             <input 
@@ -123,6 +124,7 @@ export default function KelompokKkn() {
             <tr className=''>
               <th scope='col' className='py-2 px-4'>No</th>
               <th scope='col' className='py-2 px-4'>ID / Nama Kelompok</th>
+              <th scope='col' className='py-2 px-4'>Jenis Kelompok</th>
               <th scope='col' className='py-2 px-4'>Dosen Pembimbing</th>
               <th scope='col' className='py-2 px-4'>Ketua Kelompok</th>
               <th scope='col' className='py-2 px-4'>Lokasi (Kecatama/Kota)</th>
@@ -134,6 +136,7 @@ export default function KelompokKkn() {
               <tr key={i}>
               <td scope='col' className='py-2 px-4'>{i+1}</td>
               <td scope='col' className='py-2 px-4'>{`${item.id} / ${item.name}`}</td>
+              <td scope='col' className='py-2 px-4'>{item.jenis_kelompok || '-'}</td>
               <td scope='col' className='py-2 px-4'>{item.dosen_nama || 'Belum Ditentukan'}</td>
               <td scope='col' className='py-2 px-4'>{item.ketua_nama || 'Belum Ditentukan'}</td>
               <td scope='col' className='py-2 px-4'>{`${item.lokasi_kecamatan || 'Belum Ditentukan'} / ${item.lokasi_kota || 'Belum Ditentukan'}`}</td>
@@ -143,7 +146,7 @@ export default function KelompokKkn() {
                   className='font-medium text-blue-400 dark:text-blue-500 hover:underline'
                   onClick={() => {
                     setShowModal2(true);
-                    setEditingData(table); //set data table
+                    setEditingData(tables); //set data table
                     }}
                   >
                     edit

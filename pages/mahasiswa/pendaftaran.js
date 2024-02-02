@@ -11,8 +11,17 @@ import {
 
 import Modal from "react-modal";
 import Head from "next/head";
+import useSWR from "swr";
+import { useSession } from "next-auth/react";
 
 export default function PendaftaranKKN() {
+  const { data : Session, status } = useSession();
+
+  const id = Session?.user?.username;
+
+  const fetcher = (...args) => fetch(...args).then((res) => res.json());
+  const { data : tables = [], error } = useSWR(`/api/mahasiswa/profilQuery?nim=${id}`, fetcher);
+
   const nim = "1207050055";
   const nama = "Jalalul Mu'ti";
   const prodi = "Teknik Informatika";
@@ -46,21 +55,7 @@ export default function PendaftaranKKN() {
           Kecamatan: "",
           kota: "Kinabalu Malaysia",
           peserta: 0,
-        },
-        {
-          id: "k2",
-          kelompok: "Kelompok 2",
-          Kecamatan: "",
-          kota: "Kuala Lumpur Malaysia",
-          peserta: 0,
-        },
-        {
-          id: "k3",
-          kelompok: "Kelompok 3",
-          Kecamatan: "",
-          kota: "KJRI Jepang",
-          peserta: 0,
-        },
+        }
       ],
     },
     {
@@ -446,6 +441,69 @@ export default function PendaftaranKKN() {
               <h1>Pendaftaran KKN</h1>
             </div>
             <div className="py-3 md:py-8 px-4 md:px-10 bg-iceGray rounded-xl">
+              {tables && tables.length > 0 ? (tables.map((item) => (
+                <div>
+                <h1 className="text-base md:text-3xl font-semibold pb-1">
+                  Data Pendaftar
+                </h1>
+                <div className="mt-2 text-sm md:text-lg px-3 md:px-7">
+                  <dl>
+                    <div className="px-0 md:px-4 md:py-2 grid grid-cols-3 md:grid-cols-6">
+                      <dt className="font-semibold leading-6 text-gray-900">
+                        Nama Pendaftar
+                      </dt>
+                      <dd className="leading-6 text-gray-700 font-medium col-span-2">
+                        {item.name}
+                      </dd>
+                    </div>
+                    <div className="md:px-4 md:py-2 grid grid-cols-3 md:grid-cols-6 px-0">
+                      <dt className="font-semibold leading-6 text-gray-900">
+                        Jenis Kelamin
+                      </dt>
+                      <dd className="leading-6 text-gray-700 font-medium col-span-2">
+                        {item.gender === 'male' ? 'Laki-laki' : item.gender === 'female' ? 'Perempuan' : "-"}
+                      </dd>
+                    </div>
+                    <div className="md:px-4 md:py-2 grid grid-cols-3 md:grid-cols-6 px-0">
+                      <dt className="font-semibold leading-6 text-gray-900">
+                        Program Studi
+                      </dt>
+                      <dd className="leading-6 text-gray-700 font-medium col-span-2">
+                        {item.jurusan}
+                      </dd>
+                    </div>
+                    <div className="md:px-4 md:py-2 grid grid-cols-3 md:grid-cols-6 px-0">
+                      <dt className="font-semibold leading-6 text-gray-900">
+                        Fakultas
+                      </dt>
+                      <dd className="mt-1 leading-6 text-gray-700 font-medium col-span-2">
+                        {item.fakultas}
+                      </dd>
+                    </div>
+                    <div className="md:px-4 md:py-2 grid grid-cols-3 md:grid-cols-6 px-0">
+                      <dt className="font-semibold leading-6 text-gray-900">
+                        Status
+                      </dt>
+                      {item.status_syarat === null && (
+                        <dd className="mt-1 leading-6 font-bold text-red-600 col-span-2">
+                          Belum Terdaftar | Tidak Memenuhi Syarat
+                        </dd>
+                      )}
+                      {item.status_syarat === 'ditolak' && (
+                        <dd className="mt-1 leading-6 font-bold text-red-600 col-span-2">
+                          Tidak Memenuhi Syarat
+                        </dd>
+                      )}
+                      {item.status_syarat === 'diterima' && (
+                        <dd className="mt-1 leading-6 font-bold text-green-600 col-span-2">
+                          Terdaftar | Memenuhi Syarat
+                        </dd>
+                      )}
+                    </div>
+                  </dl>
+                </div>
+              </div>
+              ))):(
               <div>
                 <h1 className="text-base md:text-3xl font-semibold pb-1">
                   Data Pendaftar
@@ -457,7 +515,7 @@ export default function PendaftaranKKN() {
                         Nama Pendaftar
                       </dt>
                       <dd className="leading-6 text-gray-700 font-medium col-span-2">
-                        {nama}
+                        -
                       </dd>
                     </div>
                     <div className="md:px-4 md:py-2 grid grid-cols-3 md:grid-cols-6 px-0">
@@ -465,7 +523,7 @@ export default function PendaftaranKKN() {
                         Jenis Kelamin
                       </dt>
                       <dd className="leading-6 text-gray-700 font-medium col-span-2">
-                        {gender}
+                        -
                       </dd>
                     </div>
                     <div className="md:px-4 md:py-2 grid grid-cols-3 md:grid-cols-6 px-0">
@@ -473,7 +531,7 @@ export default function PendaftaranKKN() {
                         Program Studi
                       </dt>
                       <dd className="leading-6 text-gray-700 font-medium col-span-2">
-                        {prodi}
+                        -
                       </dd>
                     </div>
                     <div className="md:px-4 md:py-2 grid grid-cols-3 md:grid-cols-6 px-0">
@@ -481,7 +539,7 @@ export default function PendaftaranKKN() {
                         Fakultas
                       </dt>
                       <dd className="mt-1 leading-6 text-gray-700 font-medium col-span-2">
-                        {fakultas}
+                        -
                       </dd>
                     </div>
                     <div className="md:px-4 md:py-2 grid grid-cols-3 md:grid-cols-6 px-0">
@@ -498,6 +556,8 @@ export default function PendaftaranKKN() {
                   </dl>
                 </div>
               </div>
+              )}
+              
 
               {/* Jika tidak memenuhi syarat */}
               <div className="w-full text-center mt-24 mb-12">

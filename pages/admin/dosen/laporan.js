@@ -9,7 +9,7 @@ import Link from 'next/link';
 
 export default function Laporann() {
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
-  const { data : tables = [], error } = useSWR('/api/admin/dosen/kelompokQuery', fetcher);
+  const { data : tables = [], error } = useSWR('/api/admin/dosen/laporanKelompok', fetcher);
 
   const getItemProps = (index) =>
     ({
@@ -109,10 +109,10 @@ export default function Laporann() {
               <tr key={i}>
               <td scope='col' className='py-1 px-2'>{i+1}</td>
               <td scope='col' className='py-1 px-2'>{table.dosen_name}</td>
-              <td scope='col' className='py-1 px-2'>{table.nip}</td>
+              <td scope='col' className='py-1 px-2'>{table.nip || "-"}</td>
               <td scope='col' className='py-1 px-2'>{table.telpon_dosen || "-"}</td>
-              <td scope='col' className='py-1 px-2'>{"Kelompok " + table.kelompok_ids}</td>
-              <td scope='col' className='py-1 px-2'>{table.jenis_kelompok}</td>
+              <td scope='col' className='py-1 px-2'>{table.kelompok || "-"}</td>
+              <td scope='col' className='py-1 px-2'>{table.jenis_kelompok || "-"}</td>
               <td scope='col' className='py-1 px-2'>
                 <button>
                   <Link href={`/admin/dosen/detailLaporan/${table.nip}`}>

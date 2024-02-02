@@ -1,37 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "../../components/navbar";
 import Link from "next/link";
 import SidebarMahasiswa from "../../components/sidebarMahasiswa";
 import Head from "next/head";
+import useSWR from "swr";
 
 export default function FrequentlyAQ() {
-  const questionsFaq = [
-    {
-      id: 1,
-      qe: "Logbook KKN ?",
-      ans: "Tidak tau ya, cari sendiri",
-    },
-    {
-      id: 2,
-      qe: "Dari mana saya bisa mendapatkan informasi mengenai KKN UIN Bandung ?",
-      ans: "Tidak tau ya, cari sendiri",
-    },
-    {
-      id: 3,
-      qe: "Bagaimana saya dapat menghubungi call center LP2M ?",
-      ans: "Tidak tau ya, cari sendiri",
-    },
-    {
-      id: 4,
-      qe: "Bagaimana timeline kegiatan KKN UIN Bandung ?",
-      ans: "Tidak tau ya, cari sendiri",
-    },
-    {
-      id: 5,
-      qe: "Ada berapa jenis Kuliah Kerja Nyata (KKN) UIN Bandung ?",
-      ans: "Tidak tau ya, cari sendiri",
-    },
-  ];
+  const fetcher = (...args) => fetch(...args).then((res) => res.json());
+  const { data: questionsFaq = [], error } = useSWR(
+    "/api/admin/mahasiswa/faqQuery",
+    fetcher
+  );
+  const [currentPage, setCurrentPage] = useState(1);
+
+  if (error) {
+    return <div>Error loading group details</div>;
+  }
+
+  if (!questionsFaq) {
+    return <div>Loading... Data Error</div>;
+  }
+
+  // Calculate pagination
+  const itemsPerPage = 5;
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = questionsFaq.slice(indexOfFirstItem, indexOfLastItem);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
     <>
@@ -48,29 +44,43 @@ export default function FrequentlyAQ() {
           <Navbar />
           <div className="px-6 pb-5 w-auto">
             <div className="mt-20 mb-5 md:mt-28 md:mb-10 font-bold text-2xl md:text-5xl text-white">
-              <h1>Frequently Ask Question (FAQ)</h1>
+              <h1>Frequently Asked Questions (FAQ)</h1>
             </div>
             <div className="p-3 md:p-6 bg-iceGray rounded-xl">
               <ul role="list" className="divide-y divide-white">
-                {questionsFaq.map((question) => (
-                  <li
-                    key={questionsFaq.id}
-                    className="flex justify-between py-2"
-                  >
+                {currentItems.map((question, index) => (
+                  <li key={index} className="flex justify-between py-2">
                     <div>
                       <div className="flex min-w-0 gap-x-4">
                         <div className="min-w-0 flex-auto">
                           <p className="text-lg font-semibold text-gray-900">
-                            {question.qe}
+                            {question.pertanyaan}
                           </p>
                         </div>
                       </div>
                       <div>
-                        <p className="text-lg text-gray-900">{question.ans}</p>
+                        <p className="text-lg text-gray-900">{question.jawaban}</p>
                       </div>
                     </div>
                   </li>
                 ))}
+              </ul>
+              {/* Pagination */}
+              <ul className="flex justify-center mt-4">
+                {Array.from({ length: Math.ceil(questionsFaq.length / itemsPerPage) }).map(
+                  (_, index) => (
+                    <li key={index} className="mx-2">
+                      <button
+                        onClick={() => paginate(index + 1)}
+                        className={`px-3 py-1 rounded-md ${
+                          currentPage === index + 1 ? "bg-gray-800 text-white" : "bg-gray-300"
+                        }`}
+                      >
+                        {index + 1}
+                      </button>
+                    </li>
+                  )
+                )}
               </ul>
             </div>
           </div>

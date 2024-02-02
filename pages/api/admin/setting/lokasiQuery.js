@@ -9,7 +9,8 @@ export default async function handler(req, res) {
       kelurahan: row.kelurahan, 
       kecamatan: row.kecamatan, 
       kota: row.kota, 
-      provinsi: row.provinsi 
+      provinsi: row.provinsi,
+      negara: row.negara
     }));
     res.status(200).json(data);
   } catch (error) {

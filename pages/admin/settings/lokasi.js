@@ -44,14 +44,15 @@ export default function LokasiKkn() {
   };
 
   const searchFilter = (item) => {
-    const { id, kelurahan, kecamatan, kota, provinsi } = item || {};
+    const { id, kelurahan, kecamatan, kota, provinsi, negara } = item || {};
     const searchText = searchTerm.toLowerCase();
     return (
       (typeof id === 'string' && id.toLowerCase().includes(searchText)) ||
       kelurahan?.toLowerCase().includes(searchText) ||
       kecamatan?.toLowerCase().includes(searchText) ||
       kota?.toLowerCase().includes(searchText) ||
-      provinsi?.toLowerCase().includes(searchText) 
+      provinsi?.toLowerCase().includes(searchText) ||
+      negara?.toLowerCase().includes(searchText) 
     );
   };
 
@@ -64,6 +65,7 @@ export default function LokasiKkn() {
    const [kecamatan, setKecamatan] = useState("");
    const [kota, setKota] = useState("");
    const [provinsi, setProvinsi] = useState("");
+   const [negara, setNegara] = useState("");
  
    const [ editingData, setEditingData ] = useState(null);
 
@@ -79,6 +81,7 @@ export default function LokasiKkn() {
           kecamatan: kecamatan,
           kota: kota,
           provinsi: provinsi,
+          negara: negara,
         }),
       });
   
@@ -91,6 +94,7 @@ export default function LokasiKkn() {
         setKecamatan("");
         setKota("");
         setProvinsi("");
+        setNegara("");
 
         // Refresh the page
         window.location.reload();
@@ -108,7 +112,7 @@ export default function LokasiKkn() {
 
    const handleConfirmEdit = async () => {
     try {
-      const response = await fetch("/api/admin/mahasiswa/identitasEdit ", {
+      const response = await fetch("/api/admin/setting/lokasiEdit ", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -131,7 +135,7 @@ export default function LokasiKkn() {
 
    const handleDelete = async () => {
     try {
-      const response = await fetch("/api/admin/mahasiswa/identitasDelete", {
+      const response = await fetch("/api/admin/setting/lokasiDelete", {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -211,6 +215,7 @@ export default function LokasiKkn() {
               <th scope='col' className='py-2 px-4'>Kecamatan</th>
               <th scope='col' className='py-2 px-4'>Kabupaten/Kota</th>
               <th scope='col' className='py-2 px-4'>Provinsi</th>
+              <th scope='col' className='py-2 px-4'>Negara</th>
               <th scope='col' className='py-2 px-4'>Action</th>
             </tr>
           </thead>
@@ -218,11 +223,12 @@ export default function LokasiKkn() {
             {displayData().map((item, i) => (
               <tr key={item.id}>
               <td scope='col' className='py-2 px-4'>{i + 1}</td>
-              <td scope='col' className='py-2 px-4'>{item.id}</td>
-              <td scope='col' className='py-2 px-4'>{item.kelurahan}</td>
-              <td scope='col' className='py-2 px-4'>{item.kecamatan}</td>
-              <td scope='col' className='py-2 px-4'>{item.kota}</td>
-              <td scope='col' className='py-2 px-4'>{item.provinsi}</td>
+              <td scope='col' className='py-2 px-4'>{item.id || "-"}</td>
+              <td scope='col' className='py-2 px-4'>{item.kelurahan || "-"}</td>
+              <td scope='col' className='py-2 px-4'>{item.kecamatan || "-"}</td>
+              <td scope='col' className='py-2 px-4'>{item.kota || "-"}</td>
+              <td scope='col' className='py-2 px-4'>{item.provinsi || "-"}</td>
+              <td scope='col' className='py-2 px-4'>{item.negara|| "-"}</td>
               <td scope='col' className='py-2 px-4'>
                 <div className='space-x-2'>
                   <button 
@@ -333,6 +339,15 @@ export default function LokasiKkn() {
               onChange={(e) => setProvinsi(e.target.value)}
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"/>
           </div>
+          <div>
+            <label for="nim" className="block text-lg font-medium text-gray-900 dark:text-white">Negara</label>
+            <input 
+              type="text" 
+              id="negara"
+              value={negara}
+              onChange={(e) => setNegara(e.target.value)}
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" />
+          </div>
 
           <div className='flex justify-center space-x-5'>
             <button 
@@ -401,6 +416,16 @@ export default function LokasiKkn() {
                   id="lokasi"
                   value={editingData.provinsi}
                   onChange={(e) => setEditingData({ ...editingData, provinsi: e.target.value })}
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                />
+              </div>
+              <div className=''>
+                <label for="name" className="block text-lg font-medium text-gray-900 dark:text-white">Negara</label>
+                <input
+                  type="text"
+                  id="lokasi"
+                  value={editingData.negara}
+                  onChange={(e) => setEditingData({ ...editingData, negara: e.target.value })}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                 />
               </div>

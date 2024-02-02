@@ -4,9 +4,13 @@ import {
 } from "@heroicons/react/24/solid";
 import Link from "next/link";
 import React, { useState } from "react";
+import { useSession, signOut } from "next-auth/react";
 
 export default function Navbar() {
+  const { data: Session, status } = useSession();
   const [profileNav, setProfileNav] = useState(false);
+
+  const id = Session?.user?.username;
 
   const handleProfilNav = () => {
     setProfileNav(!profileNav);
@@ -14,6 +18,11 @@ export default function Navbar() {
 
   const nama = "Jalalul Mu'ti";
   const image = "/images/1.jpeg";
+
+  // Logout function
+  const handleLogout = async () => {
+    await signOut({ callbackUrl: '/login' }); // This will sign the user out
+  };
 
   return (
     <>
@@ -41,12 +50,24 @@ export default function Navbar() {
                 <span className="leading-3">Profil</span>
               </li>
             </Link>
-            <Link href={"/"}>
-              <li className="px-4 py-3 hover:bg-slate-200 inline-flex items-center w-full hover:rounded-lg">
-                <AdjustmentsHorizontalIcon className="w-5 h-5 mr-3" />
-                <span className="leading-3">Logout</span> 
-              </li>
-            </Link>
+            {Session && Session ? (
+              <Link href={"/login"}>
+                <li
+                  className="px-4 py-3 hover:bg-slate-200 inline-flex items-center w-full hover:rounded-lg cursor-pointer"
+                  onClick={handleLogout}
+                >
+                  <AdjustmentsHorizontalIcon className="w-5 h-5 mr-3" />
+                  <span className="leading-3">Logout</span>
+                </li>
+              </Link>
+            ):(
+              <Link href={"/"}>
+                <li className="px-4 py-3 hover:bg-slate-200 inline-flex items-center w-full hover:rounded-lg">
+                  <AdjustmentsHorizontalIcon className="w-5 h-5 mr-3" />
+                  <span className="leading-3">Logout</span> 
+                </li>
+              </Link>
+            )}
           </ul>
         </div>
         <div
