@@ -5,7 +5,7 @@ export default async function handler(req, res) {
     const {mahasiswa_id,  hari, jenis, kelompok, dosen, lokasi, kegiatan, target, link, mahasiswa } = req.body;
 
     // Validate input (adjust the validation based on your actual requirements)
-    if (!mahasiswa_id || !hari || !jenis || !kelompok || !dosen || !lokasi || !kegiatan || !target || !link || !mahasiswa) {
+    if (!mahasiswa_id || !hari || !jenis || !kelompok || !dosen || !lokasi || !link || !mahasiswa) {
       return res.status(400).json({ success: false, message: "All fields are required." });
     }
 

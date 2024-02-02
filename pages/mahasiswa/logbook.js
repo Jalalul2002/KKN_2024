@@ -36,8 +36,6 @@ export default function LogbookKKN() {
     return <div>Loading... Data Error</div>;
   }
   
-  
-
   const handleDelete = async (id) => {
     // const confirmed = window.confirm("Are you sure you want to delete this data?");
   
@@ -54,8 +52,9 @@ export default function LogbookKKN() {
         if (response.ok) {
           console.log("Data deleted successfully.");
           console.log('Before mutate:', tables);
-          mutate('/mahasiswa/logbookQuery');
+          mutate('/mahasiswa/logbook');
           console.log('After mutate:', tables);
+          router.reload();
         } else {
           console.error("Error deleting data:", response.statusText);
         }
@@ -70,6 +69,7 @@ export default function LogbookKKN() {
 
   const itemsPerPage = 10;
   const [currentPage, setCurrentPage] = useState(1);
+
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItem = tables2.slice(indexOfFirstItem, indexOfLastItem);
@@ -79,6 +79,7 @@ export default function LogbookKKN() {
   };
 
   const [isInputModal, setInputModal] = useState(false);
+  const [selectedItem, setSelectedItem] = useState(null);
 
   const openInputModal = () => {
     setInputModal(true);
@@ -89,8 +90,13 @@ export default function LogbookKKN() {
   const handleOpenModal = () => {
     openInputModal();
   };
+
   const handleCloseModal = () => {
-    setIsOpen(false)
+    setIsOpen(false);
+  }
+  const handleOpenModal2 = (id) => {
+    setIsOpen(true);
+    setSelectedItem(id);
   }
 
   const [currentDateTime, setCurrentDateTime] = useState(new Date());
@@ -167,6 +173,9 @@ const handleAddSubmit = async (e) => {
     console.error("Terjadi kesalahan:", error);
   }
 };
+
+// Nomor Halaman
+let index = (currentPage - 1) * itemsPerPage;
 
   return (
     <>
@@ -387,16 +396,16 @@ const handleAddSubmit = async (e) => {
                   <tbody className="text-center">
                     {currentItem.map((item, i) => (
                       <tr key={i} className="border-y border-slate-300">
-                        <td className="py-1 px-0 lg:p-3">{i + 1}</td>
+                        <td className="py-1 px-0 lg:p-3">{index+i+1}</td>
                         <td className="py-1 px-1 lg:p-3">{item.hari}</td>
                         <td className="py-1 px-2 lg:p-3">{item.lokasi}</td>
                         <td className="py-1 px-2 lg:p-3">{item.kegiatan}</td>
                         <td className="py-1 px-2 lg:p-3">{item.target}</td>
-                        <td className="py-1 px-2 lg:p-3">{item.link}</td>
+                        <td className="py-1 px-2 lg:p-3 text-blue-600 hover:underline hover:text-blue-800"><Link href={item.link}> {item.link} </Link></td>
                         <td className="py-1 px-3 lg:p-3">
                           <div
-                            className="bg-red-600 hover:bg-red-700 flex items-center p-2 text-white cursor-pointer rounded-lg"
-                            onClick={setIsOpen(true)}
+                            className="lg:w-9 bg-red-600 hover:bg-red-700 flex items-center p-2 text-white cursor-pointer rounded-lg"
+                            onClick={() => handleOpenModal2(item.id)}
                            // Tampilkan dialog konfirmasi saat tombol diklik
                           >
                             <TrashIcon
@@ -484,7 +493,7 @@ const handleAddSubmit = async (e) => {
                 <div className="mt-4">
                   <button
                     className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-                    onClick={() => handleDelete(item.id)}
+                    onClick={() => handleDelete(selectedItem)}
                   >
                     Delete
                   </button>

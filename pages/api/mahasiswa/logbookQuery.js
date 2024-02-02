@@ -6,7 +6,7 @@ export default async function handler(req, res) {
 
     try {
       // Gunakan connection.query langsung tanpa menggunakan promise()
-      const [result] = await condb.promise().query("SELECT l.* FROM logbook l WHERE mahasiswa_id = ?", [mahasiswaId]);
+      const [result] = await condb.promise().query("SELECT l.* FROM logbook l WHERE mahasiswa_id = ?  ORDER BY l.hari DESC", [mahasiswaId]);
 
       // Log tambahan setelah query berhasil dieksekusi
       
