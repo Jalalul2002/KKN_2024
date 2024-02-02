@@ -26,9 +26,9 @@ export default function DetailLaporan() {
     return <div>{data === null ? 'No data available' : 'Loading...'}</div>;
   }
 
-  const handleDownload = async (file_patch) => {
+  const handleDownload = async (laporan) => {
     try {
-      const downloadUrl = `/api/download?laporan=${encodeURIComponent(file_patch)}`;
+      const downloadUrl = `/api/download?laporan=${encodeURIComponent(laporan)}`;
       console.log('Download URL:', downloadUrl);
   
       const response = await fetch(downloadUrl);
@@ -37,7 +37,7 @@ export default function DetailLaporan() {
       if (response.ok) {
         const link = document.createElement('a');
         link.href = downloadUrl;
-        link.download = file_patch;
+        link.download = laporan;
         document.body.appendChild(link);
   
         link.click();
