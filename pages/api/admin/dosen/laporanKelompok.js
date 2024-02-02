@@ -10,7 +10,7 @@ export default async function handler(req, res) {
         d.telpon_dosen AS telpon,
         k.id AS kelompok_ids,
         k.name AS kelompok,
-        k.jenis AS jenis_kelompok
+        k.jenis_kelompok AS jenis_kelompok
       FROM
         dosen d
       LEFT JOIN

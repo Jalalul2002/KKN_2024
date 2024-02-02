@@ -3,8 +3,51 @@ import SidebarMahasiswa from "../../components/sidebarMahasiswa";
 import Navbar from "../../components/navbar";
 import Link from "next/link";
 import Head from "next/head";
+import useSWR from "swr";
+import { useSession } from "next-auth/react";
+import { useState } from "react";
 
 export default function UploadSyarat() {
+  const { data : Session, status } = useSession();
+
+  const id = Session?.user?.username;
+
+  const [file, setFile] = useState(null);
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    setFile(file);
+  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!file) {
+      alert('Pilih file laporan terlebih dahulu.');
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('id', id);
+    formData.append('file', file);
+
+    try {
+      const response = await fetch("/api/mahasiswa/uploadSyarat", {
+        method: "POST",
+        body: formData, // Gunakan formData untuk upload file
+      });
+        
+      if (response.ok) {
+        const data = await response.json();
+        alert(`File ${tables[0].fileName} berhasil diunggah.`);
+        // Tambahkan logika lain yang diperlukan setelah unggah berhasil
+      } else {
+        alert('Gagal mengunggah file laporan.');
+      }
+    } catch (error) {
+      console.error('Terjadi kesalahan:', error);
+      alert('Terjadi kesalahan. Silakan coba lagi.');
+    }
+  };
+
   return (
     <>
       <Head>
@@ -65,8 +108,23 @@ export default function UploadSyarat() {
                   Upload surat pernyataan dengan nama file SP_NIM.pdf contoh:
                   SP_1207050002.pdf
                 </p>
-                <form className="mt-5 flex flex-row justify-center items-center">
-                  <input type="file"></input>
+                <form className="mt-5 flex flex-row justify-center items-center" onSubmit={handleSubmit}>
+                <div class="mb-1 flex items-center text-base">
+                  <input
+                    type="hidden"
+                    id="nim"
+                    className="w-full text-sm shadow-sm bg-gray-50 border border-gray-300 text-gray-900 rounded-sm focus:ring-blue-500 focus:border-blue-500"
+                    required
+                    value={id}
+                    readOnly
+                  />
+                </div>
+                  <input 
+                      id="file"
+                      type="file"
+                      accept=".pdf"
+                      onChange={handleFileChange}>
+                  </input>
                   <button
                     type="submit"
                     className="bg-green-500 hover:bg-green-700 px-5 py-1 rounded-sm text-white font-bold"

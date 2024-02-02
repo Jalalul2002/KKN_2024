@@ -9,8 +9,7 @@ import useSWR from "swr";
 
 export default function DetailLaporan() {
 
-    // const router = useRouter();
-    // const { id, kelompok, ketua, anggota, telpon} = router.query;
+
   const router = useRouter();
   const { id } = router.query; // Mengakses nilai dari query parameter 'id'
 
@@ -100,13 +99,13 @@ export default function DetailLaporan() {
                                         <td scope='col' className='px-4'>
                                             <div className='flex justify-between space-x-2'>
                                                 <button 
-                                                className='font-medium text-blue-400 dark:text-blue-500 hover:underline'
+                                                className='font-medium text-blue-400 hover:underline'
                                                 onClick={() => handleDownload(items.laporan)}
                                                 >
                                                     Download
                                                 </button>
                                                 <button 
-                                                className='font-medium text-blue-400 dark:text-blue-500 hover:underline'
+                                                className='font-medium text-blue-400 hover:underline'
                                                 onClick={'/'}
                                                 >
                                                     View

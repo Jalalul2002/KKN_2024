@@ -234,7 +234,7 @@ export default function Identitas() {
         <table className='text-lg text-gray-500 w-full'>
           <thead className=' text-gray-700 bg-gray-50 text-center'>
             <tr className=''>
-              <th scope='col' className='py-2 px-2'>No</th>
+              <th scope='col' className='py-2 px-2'>NIM</th>
               <th scope='col' className='py-2 px-2'>Nama</th>
               <th scope='col' className='py-2 px-2'>Gender</th>
               <th scope='col' className='py-2 px-2'>Jurusan</th>
