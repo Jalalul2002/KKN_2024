@@ -61,13 +61,15 @@ export default function KelompokKKN() {
                     <h1 className="font-bold text-base border-b-[1px] border-slate-400 mb-1">
                       Ketua Kelompok
                     </h1>
-                    {data2.map((data2, i) => (
+                    {data2 && data2.length > 0 ? (data2.map((data2, i) => (
                       <div key={i}>
                         <p className="font-semibold text-sm">
                           {data2.ketua_name||"-"} - {data2.ketua_jurusan||"-"} - {data2.ketua_telpon||"-"}
                         </p>
                       </div>
-                    ))}
+                    ))):(
+                      <p className="font-semibold text-sm">Nama Ketua:- / Jurusan:- / Telpon:-</p>
+                    )}
                   </div>
                   <button
                     type="button"
@@ -80,23 +82,33 @@ export default function KelompokKKN() {
                     <h1 className="font-bold text-base border-b-[1px] border-slate-400 mb-1">
                       Dosen Pembimbing
                     </h1>
-                    {data2.map((data2, i) => (
+                    {data2 && data2.length > 0 ? (data2.map((data2, i) => (
                       <div key={i}>
                     <p className="text-sm">{data2.dosen_name || "-"}</p>
                     <p className="text-sm">Kontak: {data2.telpon_dosen || "-"}</p>
                     </div>
-                    ))}
+                    ))):(
+                      <div>
+                        <p className="text-sm">Dosen Pembimbing: -</p>
+                        <p className="text-sm">Kontak: - </p>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
               <div className="p-3 md:p-6 bg-iceGray rounded-xl md:w-4/5">
                 <div className="box-border mb-3">
-                {data2.map((data2, i) => (
+                {data2 && data2.length>0 ? (data2.map((data2, i) => (
                       <div key={i}>
                   <h1 className="text-lg md:text-3xl font-bold">{data2.jenis_kelompok || "-"}</h1>
                   <h2 className="md:text-xl font-semibold">{data2.kelompok_name|| "-"}</h2>
                   </div>
-                    ))}
+                    ))):(
+                      <div>
+                        <h1 className="text-lg md:text-3xl font-bold">Jenis Kelompok : -</h1>
+                        <h2 className="md:text-xl font-semibold">Kelompok : -</h2>
+                      </div>
+                    )}
                 </div>
                 <div className="box-border md:py-3 mb-3 lg:text-base text-sm overflow-x-auto">
                   <table className="w-full rounded-xl">
@@ -111,7 +123,7 @@ export default function KelompokKKN() {
                       </tr>
                     </thead>
                     <tbody className="text-center">
-                      {peserta.map((item, i) => (
+                      {peserta && peserta.length>0 ? (peserta.map((item, i) => (
                         <tr key={i} className="border-y border-slate-300">
                           <td className="py-1 px-1 lg:p-3">{i + 1}</td>
                           <td className="py-2 lg:p-3 flex justify-center">
@@ -125,14 +137,27 @@ export default function KelompokKKN() {
                           <td className="py-1 px-3 lg:p-3">{item.fakultas}</td>
                           <td className="py-1 px-3 lg:p-3">{item.telpon || "-"}</td>
                         </tr>
-                      ))}
+                      ))):(
+                        <tr className="border-y border-slate-300">
+                          <td className="py-1 px-1 lg:p-3">-</td>
+                          <td className="py-2 lg:p-3 flex justify-center">
+                            <img
+                              className="w-9 h-9 rounded-full"
+                            />
+                          </td>
+                          <td className="py-1 px-3 lg:p-3">-</td>
+                          <td className="py-1 px-3 lg:p-3">-</td>
+                          <td className="py-1 px-3 lg:p-3">-</td>
+                          <td className="py-1 px-3 lg:p-3">-</td>
+                        </tr>
+                      )}
                     </tbody>
                   </table>
                 </div>
               </div>
               <div className="hidden p-4 lg:p-5 bg-iceGray md:w-1/5 lg:2/5 rounded-xl md:flex flex-col items-center">
                 <div className="mt-5 lg:mt-10 flex flex-col justify-center w-full">
-                  {data2.map((data2, i) => (
+                  {data2&&data2.length>0? (data2.map((data2, i) => (
                     <div key={i}>
                       <button
                         type="button"
@@ -162,7 +187,29 @@ export default function KelompokKKN() {
                         <p className="text-sm">Kontak: {data2.telpon_dosen}</p>
                       </div>
                       </div>
-                    ))}
+                    ))):(
+                      <div>                        
+                        <div className="border border-slate-500 mt-3 rounded-lg text-center text-base lg:text-xl p-3">
+                          <h1 className="font-bold mb-2 border-b-[1px] border-slate-400">
+                            Ketua Kelompok
+                          </h1>
+                          <p className="font-semibold text-sm">Nama: -</p>
+                          <p className="font-semibold text-sm">
+                            Jurusan: -
+                          </p>
+                          <p className="font-semibold text-sm">
+                            Kontak: -
+                          </p>
+                        </div>
+                        <div className="border border-slate-500 mt-3 rounded-lg text-center text-base lg:text-xl font-semibold p-3">
+                          <h1 className="font-bold mb-2 border-b-[1px] border-slate-400">
+                            Dosen Pembimbing
+                          </h1>
+                          <p className="text-sm">-</p>
+                          <p className="text-sm">Kontak: -</p>
+                        </div>
+                      </div>
+                    )}
                 </div>
               </div>
             </div>

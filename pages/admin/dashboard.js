@@ -25,84 +25,6 @@ export default function Admin() {
 
   const [selectedLocation, setSelectedLocation] = useState(null);
 
-  const totDosen = " Total Dosen Pembimbing"
-  const totmahasiswa = " Total Jumlah Mahasiswa"
-  const mahasiswaPria = " Mahasiswa Laki-Laki"
-  const mahasiswaWanita = " Mahasiswa Perempuan"
-
-  const jmlDosen = 800
-  const jmlMahasiswa = 6000
-  const jmlPria = 2500
-  const jmlWanita = 3500
-
-  const lokasiKkn=[
-    {
-      id: 1,
-      lokasi: "Malaysia",
-      titik: "2 Titik "
-    },
-    {
-      id: 2,
-      lokasi: "Jepang",
-      titik: "1 Titik "
-    },
-    {
-      id: 3,
-      lokasi: "Medan ",
-      titik: "4 Titik "
-    },
-    {
-      id: 4,
-      lokasi: "Jambi",
-      titik: "3 Titik "
-    },
-    {
-      id: 5,
-      lokasi: "Banten",
-      titik: "3 Titik "
-    },
-    {
-      id: 6,
-      lokasi: "Cirebon",
-      titik: "6 Titik "
-    },
-    {
-      id: 7,
-      lokasi: "Semarang",
-      titik: "4 Titik "
-    },
-    {
-      id: 8,
-      lokasi: "Yogjakarta",
-      titik: "8 Titik "
-    },
-    {
-      id: 9,
-      lokasi: "Lombok",
-      titik: "2 Titik "
-    },
-    {
-      id: 10,
-      lokasi: "Tana Toraja",
-      titik: "2 Titik "
-    },
-    {
-      id: 11,
-      lokasi: "Kabupaten Bandung",
-      titik: "30 Titik "
-    },
-    {
-      id: 12,
-      lokasi: "Kabupaten Bandung Barat",
-      titik: "23 Titik "
-    },
-    {
-      id: 13,
-      lokasi: "Subang",
-      titik: "18 Titik "
-    },
-  ]
-
   return (
     <> 
     <Navbar />
@@ -306,7 +228,8 @@ export default function Admin() {
                 <div key={item2.lokasi_id} className='flex items-center space-x-2 py-2'>
                   <FaLocationDot className='text-blue-500' />
                   <div className="flex justify-center">
-                  <h3 className='font-medium pr-1'>{item2.lokasi_kecamatan + ", " + item2.lokasi_provinsi || item2.lokasi_negara || "-"}: </h3>
+                  {/* <h3 className='font-medium pr-1'>{item2.lokasi_kecamatan && item2.lokasi_provinsi ? item2.lokasi_kecamatan + ", " + item2.lokasi_provinsi : item2.lokasi_negara ? item2.lokasi_negara : "-"}: </h3> */}
+                  <h3 className='font-medium pr-1'>{item2.lokasi_kota ? item2.lokasi_kota : "-"}: </h3>
                   <p>{item2.jumlah_kelompok} Kelompok</p>
                   </div>
                 </div>

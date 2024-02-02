@@ -2,15 +2,15 @@ import condb from "../../../lib/connectDatabase";
 
 export default async function handler(req, res) {
   if (req.method === "PUT") {
-    const { id, kelurahan, kecamatan, kota, provinsi } = req.body;
+    const { id, kelurahan, kecamatan, kota, provinsi, negara } = req.body;
 
     try {
       // Update the data in the database
       const [result] = await condb
         .promise()
         .query(
-          "UPDATE lokasi SET kelurahan = ?, kecamatan = ?, kota = ?, provinsi = ? WHERE id = ?",
-          [kelurahan, kecamatan, kota, provinsi, id]
+          "UPDATE lokasi SET kelurahan = ?, kecamatan = ?, kota = ?, provinsi = ?, negara=? WHERE id = ?",
+          [kelurahan, kecamatan, kota, provinsi, negara, id]
         );
 
       res.status(200).json({ success: true, message: "Data updated successfully." });

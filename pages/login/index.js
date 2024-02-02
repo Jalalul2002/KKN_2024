@@ -59,10 +59,11 @@ export default function Login() {
     if (!result.error) {
       // Successful login
       console.log("Session:", result.session);
-      window.location.href = "/mahasiswa/protected"; // Redirect to the protected page
+      window.location.href = "/login/success"; // Redirect to the protected page
     } else {
       // Handle login error
       console.error("Login error:", result.error);
+      window.location.href = "/login-failed"; // Redirect to the protected page
     }
   };
 
@@ -174,7 +175,7 @@ export default function Login() {
                   <div className="relative">
                     <div className="w-full">
                       <input
-                        type={open === true ? "password" : "text"}
+                        type={open === false ? "password" : "text"}
                         placeholder="Enter Your Password"
                         name="password"
                         value={password}

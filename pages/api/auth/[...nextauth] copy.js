@@ -1,6 +1,6 @@
   import NextAuth from "next-auth";
   import CredentialsProvider from "next-auth/providers/credentials";
-  import db from "../../lib/db";
+  import condb from "@/pages/lib/connectDatabase";
 
   export default NextAuth({
       secret: process.env.JWT_SECRET,
@@ -8,14 +8,14 @@
       CredentialsProvider({
         name: "Credentials",
         credentials: {
-          username: { label: "NIM", type: "text" },
-          password: { label: "Password", type: "password" },
+          username: { label: "username", type: "username" },
+          password: { label: "password", type: "password" },
         },
         authorize: async (credentials) => {
           const { username, password } = credentials;
 
           try {
-            const [rows] = await db.promise().query(
+            const [rows] = await condb.promise().query(
               'SELECT * FROM akun WHERE akun_nim = ? AND akun_pw = ?',
               [username, password]
             );
