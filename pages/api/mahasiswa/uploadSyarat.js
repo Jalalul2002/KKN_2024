@@ -4,7 +4,7 @@ import path from "path";
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    let uploadFolder = "./uploads/pdf/"; // Tentukan folder upload sesuai dengan kebutuhan
+    let uploadFolder = "./uploads/pdf/syarat/"; // Tentukan folder upload sesuai dengan kebutuhan
     const ext = path.extname(file.originalname);
     cb(null, uploadFolder);
   },
@@ -26,11 +26,11 @@ export default async function handler(req, res) {
         return res.status(400).json({ error: 'Gagal mengunggah file', details: err.message });
       }
 
-      const { mahasiswa_id, judul } = req.body;
+      const { id  } = req.body;
       const file = req.file;
 
       // Validate input (adjust the validation based on your actual requirements)
-      if (!mahasiswa_id || !judul || !file) {
+      if (!id || !file) {
         return res.status(400).json({ success: false, message: "All fields are required." });
       }
 
@@ -39,8 +39,8 @@ export default async function handler(req, res) {
         const [result] = await condb
           .promise()
           .query(
-            "INSERT INTO file (id_mahasiswa, judul, laporan) VALUES (?, ?, ?)",
-            [mahasiswa_id, judul, file.originalname] // Sesuaikan dengan nama file atau path yang sesuai
+            "UPDATE mahasiswa SET upload_syarat = ? WHERE nim = ?",
+            [id, file.originalname] // Sesuaikan dengan nama file atau path yang sesuai
           );
 
         res.status(201).json({ success: true, message: "Data added successfully.", data: result.insertId });
