@@ -48,9 +48,9 @@ export default function Logbook() {
                 <h3 className="text-sm md:text-xl font-semibold pb-1 md:pb-3 md:flex justify-end hidden ">
                   Lokasi: Kabupaten Bandung, Jawa Barat
                 </h3>
-                <div className="grid md:grid-cols-4 xl:grid-cols-4 font-medium px-4 gap-6">
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 font-medium px-4 gap-6">
                 {tables.map((item, i) => ( 
-                    <div className="bg-gray-50 rounded-xl shadow-md" key={i}>
+                    <div className="bg-gray-50 rounded-xl shadow-md flex flex-col justify-between" key={i}>
                       <div className="flex flex-row justify-between px-6 pt-4 pb-4">
                         <div>
                           <h1 className="text-2xl font-bold">

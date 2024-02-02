@@ -1,6 +1,6 @@
 import React from "react";
-import SidebarDosen from "../component/sidebarDosen";
-import Navbar from "../component/navbar";
+import SidebarDosen from "@/components/sidebarDosen";
+import Navbar from "@/components/navbar";
 import Link from "next/link";
 import { ArrowDownIcon } from "@heroicons/react/24/outline";
 import Head from "next/head";
@@ -65,7 +65,7 @@ export default function Kelompok() {
               )}
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 font-medium px-4 gap-6">
                   {tablesList && tablesList.length>0 ? (tablesList.map((item, i) => (
-                    <div className="bg-gray-50 rounded-xl shadow-md" key={item.kelompok_ids}>
+                    <div className="bg-gray-50 rounded-xl shadow-md flex flex-col justify-between" key={item.kelompok_ids}>
                       <div className="flex flex-row justify-between px-6 pt-4 pb-4">
                         <div>
                           <h1 className="text-2xl font-bold">
