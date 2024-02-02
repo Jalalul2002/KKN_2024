@@ -1,7 +1,7 @@
 import React from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import Navbar from "@/pages/component/navbar";
+import Navbar from "@/components/navbar";
 import Link from 'next/link';
 import { IoChevronBackOutline } from "react-icons/io5";
 import useSWR from "swr";

@@ -1,6 +1,6 @@
 import React from "react";
-import SidebarMahasiswa from "../component/sidebarMahasiswa";
-import Navbar from "../component/navbar";
+import SidebarMahasiswa from "@/components/sidebarMahasiswa";
+import Navbar from "@/components/navbar";
 import Link from "next/link";
 import { ArrowDownTrayIcon } from "@heroicons/react/24/solid";
 import Head from "next/head";

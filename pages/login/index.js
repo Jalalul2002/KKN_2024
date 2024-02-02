@@ -1,4 +1,4 @@
-import Header from "../component/header";
+import Header from "../../components/header";
 import Link from "next/link";
 import MyImage from "../../public/images/Group 9.png";
 import Image from "next/image";
@@ -59,10 +59,11 @@ export default function Login() {
     if (!result.error) {
       // Successful login
       console.log("Session:", result.session);
-      window.location.href = "/mahasiswa/protected"; // Redirect to the protected page
+      window.location.href = "/login/success"; // Redirect to the protected page
     } else {
       // Handle login error
       console.error("Login error:", result.error);
+      window.location.href = "/login-failed"; // Redirect to the protected page
     }
   };
 
@@ -174,7 +175,7 @@ export default function Login() {
                   <div className="relative">
                     <div className="w-full">
                       <input
-                        type={open === true ? "password" : "text"}
+                        type={open === false ? "password" : "text"}
                         placeholder="Enter Your Password"
                         name="password"
                         value={password}
@@ -269,11 +270,11 @@ export default function Login() {
           </div>
         </div>
 
-        <div className="fixed bottom-32 md:top-0 md:absolute z-10 md:translate-y-[300px] md:translate-x-20 lg:translate-x-32">
+        <div className="fixed bottom-32 md:top-0 md:absolute z-10 md:translate-x-20 lg:translate-x-32">
           <Image
             src={MyImage}
             alt=""
-            className="w-40 md:w-80 xl:w-[530px] xl:h-[394px]"
+            className="w-40 md:w-80 xl:w-[530px] xl:h-[394px] md:translate-y-[300px]"
           />
         </div>
       </div>

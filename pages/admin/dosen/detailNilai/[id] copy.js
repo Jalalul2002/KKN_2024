@@ -1,4 +1,4 @@
-import Modal from '@/pages/component/admin/modal';
+import Modal from '@/components/admin/modal';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import Link from 'next/link';
@@ -34,7 +34,7 @@ export default function DetailLaporan() {
 
     <>
       <div className='bg-IjoRumput w-screen h-screen flex justify-center'>
-        <div class="absolute px-5  w-full ">
+        <div className="absolute px-5  w-full ">
           <div className='absolute mx-2 mt-4 bg-white p-2 rounded-full drop-shadow-xl'>
             <Link href='/admin/dosen/nilai' className="text-xl"><IoChevronBackOutline /></Link>
           </div>

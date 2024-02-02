@@ -1,45 +1,106 @@
 import Head from "next/head";
-import React from "react";
-import SidebarMahasiswa from "../component/sidebarMahasiswa";
-import Navbar from "../component/navbar";
+import React, { useState, useEffect } from "react";
+import { useRouter } from "next/router";
+import SidebarMahasiswa from "../../components/sidebarMahasiswa";
+import Navbar from "../../components/navbar";
 import Link from "next/link";
+import useSWR from "swr";
+import { useSession } from "next-auth/react";
 
 export default function EditProfil() {
-  const nama = "Jalalul Mu'ti";
+  const router = useRouter(); // Initialize the useRouter hook
+  const { data: Session, status } = useSession();
+
+  const id = Session?.user?.username;
+
+  const fetcher = (...args) => fetch(...args).then((res) => res.json());
+  const { data = [], error } = useSWR(`/api/mahasiswa/fetchProfil?nim=${id}`, fetcher);
+
   const image = "/images/1.jpeg";
-  const nim = "1207050055";
-  const agama = "Islam";
-  const email = "jalalul2000@gmail.com";
-  const prodi = "Teknik Informatika";
-  const fakultas = "Sains dan Teknologi";
-  const gender = "Laki-laki";
-  const alamat =
-    "Perum Griya Karangtengah Asri 06/08 Ciheulang Tonggoh, Kecamatan Cibadak, Kab. Sukabumi";
-  const telp = "081357630782";
-  const angkatan = "2020";
-  const jenis = "KKN SISDAMAS";
-  const kelompok = "409";
-  const lokasi = "Pangalengan, Kab. Bandung";
+ 
+  // const [nim, setNim] = useState("");
+  // const [nama, setNama] = useState("");
+  // const [jk, setJk] = useState("");
+  // const [nama_jur, setNamaJur] = useState("");
+  // const [fakultas, setFakultas] = useState("");
+  // const [telepon_seluler, setTeleponSeluler] = useState("");
+
+  const [originalData, setOriginalData] = useState([]);
+  const [formData, setFormData] = useState({
+    nim: "",
+    nama: "",
+    jk: "",
+    nama_jur: "",
+    fakultas: "",
+    telepon_seluler: "",
+  });
+
+  useEffect(() => {
+    if (data && data.length > 0) {
+      setOriginalData(data);
+      setFormData(data[0]); // Set initial form data to the first item in the fetched data
+    }
+  }, [data]);
+
+  const handleChange = (e) => {
+    const { id, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [id]: value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch("/api/mahasiswa/profilSave", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        // Handle success, e.g., show a success message or redirect
+        console.log("Profile updated successfully!");
+        router.push("/mahasiswa/dashboard"); // Redirect to /mahasiswa/dashboard
+      } else {
+        // Handle error, e.g., show an error message
+        console.error("Failed to update profile");
+      }
+    } catch (error) {
+      console.error("Error updating profile:", error);
+    }
+  };
+
+  if (status === "loading") {
+    // Optional: You may want to show a loading indicator while checking authentication status
+    return <div>Loading...</div>;
+  }
+  
+  // Redirect to login if not authenticated
+  if (status === 'unauthenticated') {
+    // You may customize the login page route as needed
+    router.push('/login');
+    return null; // Halt further execution
+  }
 
   return (
     <>
       <Head>
-        <title>Edit Profil Mahasiswa</title>
+        <title>Profil Mahasiswa</title>
         <meta property="og:title" content="Profil Mahasiswa" key="title" />
       </Head>
       <div className="absolute bg-IjoRumput w-full h-72 -z-20"></div>
       <div className="flex flex-row justify-start">
-        <div className="md:w-auto h-screen">
-          <SidebarMahasiswa />
-        </div>
         <div className="h-screen w-screen overflow-auto grow">
-          <Navbar />
           <div className="px-6 pb-5 w-auto">
             <div className="mt-20 mb-5 md:mt-28 md:mb-10 font-bold text-2xl md:text-5xl text-white">
-              <h1>Edit Profil Mahasiswa</h1>
+              <h1>Profil Mahasiswa</h1>
             </div>
-            <div className="p-4 md:p-9 bg-iceGray rounded-3xl shadow-sm flex flex-col justify-between">
-              <form>
+            <div className="p-4 md:p-9 bg-iceGray rounded-3xl shadow-sm flex flex-col justify-between">              
+              <form onSubmit={handleSubmit}>
                 <div className="flex flex-col items-center md:px-4 md:flex-row md:flex-wrap md:place-items-end">
                   <div
                     className="w-32 h-32 rounded-full border-IjoRumput border-4 bg-cover text-right \"
@@ -71,7 +132,8 @@ export default function EditProfil() {
                     id="nim"
                     className="w-full text-sm shadow-sm bg-gray-50 border border-gray-300 text-gray-900 rounded-sm focus:ring-blue-500 focus:border-blue-500"
                     required
-                    value={nim}
+                    value={formData.nim}
+                    onChange={handleChange}
                   />
                 </div>
                 <div class="mb-1 flex items-center text-base">
@@ -86,25 +148,28 @@ export default function EditProfil() {
                     id="nama"
                     className="w-full text-sm shadow-sm bg-gray-50 border border-gray-300 text-gray-900 rounded-sm focus:ring-blue-500 focus:border-blue-500"
                     required
-                    value={nama}
+                    value={formData.nama}
+                    onChange={handleChange}
                   />
                 </div>
-                <div class="mb-1 flex items-center text-base">
+                <div className="mb-1 flex items-center text-base">
                   <label
-                    HTMLfor="gender"
+                    htmlFor="gender"
                     className="w-40 font-medium text-gray-900"
                   >
                     Jenis Kelamin
                   </label>
-                  <input
-                    type="text"
+                  <select
                     id="gender"
                     className="w-full text-sm shadow-sm bg-gray-50 border border-gray-300 text-gray-900 rounded-sm focus:ring-blue-500 focus:border-blue-500"
-                    required
-                    value={gender}
-                  />
+                    value={formData.jk || "male"} // Default to "male" if null
+                    onChange={handleChange}
+                  >
+                    <option value="male">Laki-laki</option>
+                    <option value="female">Perempuan</option>
+                  </select>
                 </div>
-                <div class="mb-1 flex items-center text-base">
+                {/* <div class="mb-1 flex items-center text-base">
                   <label
                     HTMLfor="agama"
                     className="w-40 font-medium text-gray-900"
@@ -118,7 +183,7 @@ export default function EditProfil() {
                     required
                     value={agama}
                   />
-                </div>
+                </div> */}
                 <div class="mb-1 flex items-center text-base">
                   <label
                     HTMLfor="jurusan"
@@ -131,7 +196,8 @@ export default function EditProfil() {
                     id="jurusan"
                     className="w-full text-sm shadow-sm bg-gray-50 border border-gray-300 text-gray-900 rounded-sm focus:ring-blue-500 focus:border-blue-500"
                     required
-                    value={prodi}
+                    value={formData.nama_jur}
+                    onChange={handleChange}
                   />
                 </div>
                 <div class="mb-1 flex items-center text-base">
@@ -146,10 +212,11 @@ export default function EditProfil() {
                     id="fakultas"
                     className="w-full text-sm shadow-sm bg-gray-50 border border-gray-300 text-gray-900 rounded-sm focus:ring-blue-500 focus:border-blue-500"
                     required
-                    value={fakultas}
+                    value={formData.fakultas}
+                    onChange={handleChange}
                   />
                 </div>
-                <div class="mb-2 flex items-center text-base">
+                {/* <div class="mb-2 flex items-center text-base">
                   <label
                     HTMLfor="angkatan"
                     className="w-40 font-medium text-gray-900"
@@ -163,8 +230,8 @@ export default function EditProfil() {
                     required
                     value={angkatan}
                   />
-                </div>
-                <div class="mb-2 flex items-center text-base">
+                </div> */}
+                {/* <div class="mb-2 flex items-center text-base">
                   <label
                     HTMLfor="email"
                     className="w-40 font-medium text-gray-900"
@@ -178,7 +245,7 @@ export default function EditProfil() {
                     required
                     value={email}
                   />
-                </div>
+                </div> */}
                 <div class="mb-2 flex items-center text-base">
                   <label
                     HTMLfor="telp"
@@ -191,10 +258,11 @@ export default function EditProfil() {
                     id="telp"
                     className="w-full text-sm shadow-sm bg-gray-50 border border-gray-300 text-gray-900 rounded-sm focus:ring-blue-500 focus:border-blue-500"
                     required
-                    value={telp}
+                    value={formData.telepon_seluler}
+                    onChange={handleChange}
                   />
                 </div>
-                <div class="mb-2 flex items-center text-base">
+                {/* <div class="mb-2 flex items-center text-base">
                   <label
                     HTMLfor="alamat"
                     className="w-40 font-medium text-gray-900"
@@ -208,8 +276,17 @@ export default function EditProfil() {
                     required
                     value={alamat}
                   />
+                </div> */}
+                <div className="mt-5">
+                    <button
+                      type="submit"
+                      className="px-4 py-2 bg-blue-500 text-white rounded-md"
+                    >
+                      SIMPAN
+                    </button>
                 </div>
               </form>
+              
             </div>
           </div>
         </div>

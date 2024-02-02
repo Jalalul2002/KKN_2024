@@ -1,7 +1,7 @@
 import Head from "next/head";
 import React from "react";
-import SidebarDosen from "../component/sidebarDosen";
-import Navbar from "../component/navbar";
+import SidebarDosen from "../../components/sidebarDosen";
+import Navbar from "../../components/navbar";
 
 export default function Ajuan() {
   return (
@@ -62,6 +62,19 @@ export default function Ajuan() {
                     >
                       Upload
                     </button>
+                  </div>
+                </form>
+
+                <form className="flex justify-center items-center mt-9 ">
+                  <div className="text-center">
+                    <div className="text-xl font-bold">
+                      <label htmlFor="ajuan">
+                        Balasan Surat Ajuan Kegiatan
+                      </label>
+                    </div>
+                    <div className="text-md">
+                      <button className="text-blue-400 hover:underline">Download File</button>
+                    </div>
                   </div>
                 </form>
               </div>

@@ -1,32 +1,157 @@
-import SidebarAdmin from '@/pages/component/sidebarAdmin'
+import SidebarAdmin from '@/components/sidebarAdmin'
 import React from 'react'
 import { Button, IconButton } from "@material-tailwind/react";
 import { ArrowRightIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
 import { useState } from 'react';
-import Modal from '@/pages/component/admin/modal';
+import Modal from '@/components/admin/modal';
+import useSWR from 'swr';
 
 export default function Faq() {
-  const tables =
-    [
-      {
-        id: "1",
-        pertanyaan: "Dimana saya bisa mendapatkan informasi mengenai tata cara pendaftaran KKN ?",
-        jawaban: "Di akun KKN ",
-      },
-      {
-        id: "2",
-        pertanyaan: "Daerah mana saja lokasi KKN mahasiswa jenis KKN Reguler Sisdamas ?",
-        jawaban: "Kabupaten Bandung, Kabupaten Bandung Barat, dan Subang",
-      },
-  ];
+  const fetcher = (...args) => fetch(...args).then((res) => res.json());
+  const { data : tables =[], error } = useSWR('/api/admin/mahasiswa/faqQuery', fetcher);
+
+  if (error ) {
+    return <div>Error loading group details</div>;
+  }
+
+  if (!tables ) {
+    return <div>Loading... Data Error</div>;
+  }
 
   //modal
   const [ showModal, setShowModal ] = useState(false);
   const [ showModal2, setShowModal2 ] = useState(false);
   const [ showModal3, setShowModal3 ] = useState(false);
 
-  const [ editingData, setEditingData ] = useState(null)
+  const [ editingData, setEditingData ] = useState(null);
 
+  // Add a new state for pagination
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 2;
+
+  // Add a new state for search query
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const filteredTables = tables.filter((table) => {
+    const searchTerm = searchQuery.toLowerCase();
+    return (
+      table.pertanyaan.toLowerCase().includes(searchTerm) ||
+      table.jawaban.toLowerCase().includes(searchTerm)
+    );
+  });
+
+  // Event handler for search input changes
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
+  // Calculate the total number of pages
+  const totalPages = Math.ceil(tables.length / itemsPerPage);
+
+  // Calculate the index range for the current page
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+
+  // Get the items for the current page
+  const currentItems = tables.slice(startIndex, endIndex);
+
+  // Event handler for page change
+  const handlePageChange = (newPage) => {
+    setCurrentPage(newPage);
+  };
+
+  const [formData, setFormData] = useState({
+    pertanyaan: '',
+    jawaban: '',
+  });
+
+  // Event handler for input changes
+  const handleInputChange = (e) => {
+    const { id, value } = e.target;
+    setFormData({ ...formData, [id]: value });
+  };
+
+  // Event handler for form submission
+  const handleSubmit = async (e) => {
+    e.preventDefault();  
+    try {
+      // Call your API to submit the form data
+      const response = await fetch('/api/admin/mahasiswa/faqAdd', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+  
+      if (response.ok) {
+        // Reset the form after successful submission
+        setFormData({
+          pertanyaan: '',
+          jawaban: '',
+        });
+  
+        // Close the modal (assuming setShowModal is a state variable)
+        setShowModal(false);
+      } else {
+        // Handle error
+        console.error('Error adding FAQ:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error adding FAQ:', error.message);
+    }
+  };
+
+  const handleEditSubmit = async () => {
+  try {
+    // Call your API to edit FAQ
+    const response = await fetch('/api/admin/mahasiswa/faqEdit', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(editingData),
+    });
+
+    if (response.ok) {      
+      // Reset the editing data
+      setEditingData(null);
+
+      // Close the modal (assuming setShowModal2 is a state variable)
+      setShowModal2(false);
+    } else {
+      // Handle error
+      console.error('Error editing FAQ:', response.statusText);
+    }
+  } catch (error) {
+    console.error('Error editing FAQ:', error.message);
+  }
+};
+
+const handleDelete = async () => {
+  try {
+    const response = await fetch('/api/admin/mahasiswa/faqDelete', {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ faq_id: editingData.faq_id }),
+    });
+
+    if (response.ok) {
+      // Trigger a re-fetch of the data and update the cache
+      mutate('/api/admin/mahasiswa/faqQuery');
+      
+      // Close the modal
+      setShowModal3(false);
+    } else {
+      // Handle error
+      console.error('Error deleting FAQ:', response.statusText);
+    }
+  } catch (error) {
+    console.error('Error deleting FAQ:', error.message);
+  }
+};
   
   return (
     <>
@@ -38,24 +163,26 @@ export default function Faq() {
       </div>
     </div>
 
-    <div class="absolute ml-32 px-3 md:left-32 md:right-12  md:top-24 pb-5 rounded-xl bg-iceGray">
+    <div className="absolute ml-32 px-3 md:left-32 md:right-12  md:top-24 pb-5 rounded-xl bg-iceGray">
       <div className='flex justify-between'>
 
-        <div className='static'>
-          <div className='relative mt-6'>
-            <div class="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">
-              <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
-              </svg>
-            </div>
-            <input 
-            type='text' 
-            id='table-search' 
-            className='block pt-1 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50  "' 
-            placeholder="Search for items"
-            />
+      <div className='static'>
+        <div className='relative mt-6'>
+          <div className="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">
+            <svg className="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+              <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+            </svg>
           </div>
+          <input
+            type='text'
+            id='table-search'
+            className='block pt-1 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50'
+            placeholder="Search for items"
+            value={searchQuery}
+            onChange={handleSearchChange}
+          />
         </div>
+      </div>
 
         <div className='mt-6 pr-3'>
           <button 
@@ -76,9 +203,9 @@ export default function Faq() {
             </tr>
           </thead>
           <tbody className='text-left'>
-            {tables.map((table, i) => (
+            {currentItems.map((table, i) => (
               <tr key={i}>
-              <td scope='col' className='py-2 px-4'>{table.id}</td>
+              <td scope='col' className='py-2 px-4'>{table.faq_id}</td>
               <td scope='col' className='py-2 px-4'>{table.pertanyaan}</td>
               <td scope='col' className='py-2 px-4'>{table.jawaban}</td>
               <td scope='col' className='py-2 px-4'>
@@ -108,38 +235,76 @@ export default function Faq() {
           </tbody>
         </table>
       </div>
-
+        {/* Pagination controls */}
+        <div className="flex justify-end mt-4">
+          <Button
+            disabled={currentPage === 1}
+            onClick={() => handlePageChange(currentPage - 1)}
+            color="black" // Set button color to black
+          >
+          </Button>
+          <div className="mx-2 text-lg">
+            Page {currentPage} of {totalPages}
+          </div>
+          <Button
+            disabled={currentPage === totalPages}
+            onClick={() => handlePageChange(currentPage + 1)}
+            color="black" // Set button color to black
+          >
+          </Button>
+        </div>
     </div>
 
     <Modal isVisible={showModal} onClose={() => setShowModal(false)}>
-      <div class="px-6 py-6 lg:px-8 text-left">
-        <h3 class="text-xl font-semibold text-gray-900 dark:text-white flex justify-center items-center">
+      <div className="px-6 py-6 lg:px-8 text-left">
+        <h3 className="text-xl font-semibold text-gray-900 dark:text-white flex justify-center items-center">
           Tambah Pertanyaan
         </h3>
-        <form class="space-y-4" action="#">
+        <form className="space-y-4" onSubmit={handleSubmit}>
           <div>
-            <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Pertanyaan</label>
-            <input type="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"   />
+            <label htmlFor="pertanyaan" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+              Pertanyaan
+            </label>
+            <input
+              type="text"
+              id="pertanyaan"
+              value={formData.pertanyaan}
+              onChange={handleInputChange}
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+            />
           </div>
           <div>
-            <label for="nim" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jawaban</label>
-            <input type=""  id="nim"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"  />
+            <label htmlFor="jawaban" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+              Jawaban
+            </label>
+            <input
+              type="text"
+              id="jawaban"
+              value={formData.jawaban}
+              onChange={handleInputChange}
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+            />
           </div>
-          <button type="submit" class="w-[1/2] text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Tambah</button>          
+          <button
+            type="submit"
+            className="w-[1/2] text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          >
+            Tambah
+          </button>
         </form>
       </div>
     </Modal>
 
     {/* Edit Mahasiswa */}
     <Modal isVisible={showModal2} onClose={() => setShowModal2(false)}>
-      <div class="px-6 pb-2 text-left">
-        <h3 class="text-xl font-semibold text-gray-900 dark:text-white flex justify-center items-center mb-4">
+      <div className="px-6 pb-2 text-left">
+        <h3 className="text-xl font-semibold text-gray-900 dark:text-white flex justify-center items-center mb-4">
           Edit Pertanyaan
         </h3>
         {editingData && (
           <form>
               <div className=''>
-                <label for="name" class="block text-lg font-medium text-gray-900 dark:text-white">Pertanyaan</label>
+                <label for="name" className="block text-lg font-medium text-gray-900 dark:text-white">Pertanyaan</label>
                 <input
                   type="text"
                   id="name"
@@ -149,7 +314,7 @@ export default function Faq() {
                 />
               </div>
               <div className=''>
-                <label for="name" class="block text-lg font-medium text-gray-900 dark:text-white">Jawaban</label>
+                <label for="name" className="block text-lg font-medium text-gray-900 dark:text-white">Jawaban</label>
                 <input
                   type="string"
                   id="nim"
@@ -161,12 +326,7 @@ export default function Faq() {
 
             <button
               type="button"
-              onClick={() => {
-                // aksi yang diperlukan saat tombol Simpan ditekan
-                // Misalnya, menyimpan data yang diedit ke server atau mengubah state lainnya
-                // Kemudian tutup modal
-                setShowModal2(false);
-              }}
+              onClick={handleEditSubmit}
               className="w-[1/2] mt-4 place-self-end text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-lg px-5 py-1 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
             >
               Simpan
@@ -179,30 +339,25 @@ export default function Faq() {
 
       {/* Hapus Mahasiswa */}
       <Modal isVisible={showModal3} onClose={() => setShowModal3(false)}>
-        <div class="px-6 pb-2 lg:px-8 text-left">
-          <h3 class="text-xl font-semibold text-gray-900 dark:text-white flex justify-center items-center mb-4">
+        <div className="px-6 pb-2 lg:px-8 text-left">
+          <h3 className="text-xl font-semibold text-gray-900 dark:text-white flex justify-center items-center mb-4">
             Hapus Pertanyaan
           </h3>
           {editingData && (
-            <div class="space-y-4">
-              <p class="text-gray-700 dark:text-gray-300">
+            <div className="space-y-4">
+              <p className="text-gray-700 dark:text-gray-300">
                 Apakah Anda yakin ingin menghapus pertanyaan ini?
               </p>
-              <div class="flex justify-end space-x-4">
+              <div className="flex justify-end space-x-4">
                 <button
-                  onClick={() => {
-                    // Lakukan aksi penghapusan data di sini
-                    // Misalnya, panggil fungsi untuk menghapus data dari server atau mengubah state lainnya
-                    // Setelah itu, tutup modal
-                    setShowModal3(false);
-                  }}
-                  class="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 focus:outline-none focus:ring focus:ring-red-300"
+                  onClick={handleDelete}
+                  className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 focus:outline-none focus:ring focus:ring-red-300"
                 >
                   Hapus
                 </button>
                 <button
                   onClick={() => setShowModal3(false)}
-                  class="px-4 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400 focus:outline-none focus:ring focus:ring-gray-200"
+                  className="px-4 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400 focus:outline-none focus:ring focus:ring-gray-200"
                 >
                   Batal
                 </button>
@@ -212,6 +367,7 @@ export default function Faq() {
         </div>
       </Modal>
 
+     
     </>
   )
 }

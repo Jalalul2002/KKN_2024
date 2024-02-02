@@ -13,6 +13,7 @@ export default async function handler(req, res) {
             m.telpon AS mahasiswa_telpon,
             m.jurusan AS mahasiswa_jurusan,
             m.fakultas AS mahasiswa_fakultas,
+            m.nilai AS mahasiswa_nilai,
             k.name AS kelompok_name,
             k.jenis_kelompok,
             l.kota,

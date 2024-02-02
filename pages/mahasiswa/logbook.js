@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import Navbar from "../component/navbar";
-import SidebarMahasiswa from "../component/sidebarMahasiswa";
+import Navbar from "../../components/navbar";
+import SidebarMahasiswa from "../../components/sidebarMahasiswa";
 import Link from "next/link";
 import { PlusIcon, TrashIcon } from "@heroicons/react/24/outline";
 import ReactModal from "react-modal";
