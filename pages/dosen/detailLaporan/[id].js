@@ -9,8 +9,7 @@ import useSWR from "swr";
 
 export default function DetailLaporan() {
 
-    // const router = useRouter();
-    // const { id, kelompok, ketua, anggota, telpon} = router.query;
+
   const router = useRouter();
   const { id } = router.query; // Mengakses nilai dari query parameter 'id'
 

@@ -11,6 +11,29 @@ export default function detailLaporan() {
   const { data : tables = [], error } = useSWR(id? `/api/admin/mahasiswa/laporanDetail?id=${id}`:null, fetcher);
   const { data : tables2 = [], error2 } = useSWR(id?`/api/admin/mahasiswa/laporanDetailkelompok?id=${id}`:null, fetcher);
 
+  const handleDownload = async (laporan) => {
+    try {
+      const downloadUrl = `/api/download?laporan=${encodeURIComponent(laporan)}`;
+      console.log('Download URL:', downloadUrl);
+  
+      const response = await fetch(downloadUrl);
+      console.log('Fetch Response:', response);
+  
+      if (response.ok) {
+        const link = document.createElement('a');
+        link.href = downloadUrl;
+        link.download = laporan;
+        document.body.appendChild(link);
+  
+        link.click();
+      } else {
+        console.error("Error downloading file:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error downloading file:", error);
+    }
+  };
+
   return (
     <>
     <div className='absolute bg-IjoRumput h-screen w-screen'>
@@ -65,7 +88,7 @@ export default function detailLaporan() {
                     <div className='felx justify-between space-x-2'>
                         <button 
                         className='font-medium text-blue-400 dark:text-blue-500 hover:underline'
-                        onClick={'/'}
+                        onClick={() => handleDownload(item.laporan)}
                         >
                             Download
                         </button>

@@ -8,7 +8,7 @@ export default async function handler(req, res) {
     const [data] = await db.promise().query(`
       SELECT
         d.*,
-        k.jenis,
+        k.jenis_kelompok,
         k.name AS kelompok,
         CONCAT_WS(', ',
         l.kelurahan,
