@@ -66,7 +66,7 @@ export default function DetailLaporan() {
             {data.map((item) => (
             <div className="flex justify-center items-center">
             <div className="p-3 mx-6 md:mt-4 md:mx-20 md:p-4 bg-iceGray rounded-xl md:w-1/2">
-                <h1 class="text-lg md:text-2xl font-bold text-gray-900 dark:text-white flex justify-center items-center">
+                <h1 class="text-lg md:text-2xl font-bold text-gray-900 flex justify-center items-center">
                     {item.kelompok}
                 </h1>
                 <div className="md:flex md:justify-center md:items-center">
@@ -99,13 +99,13 @@ export default function DetailLaporan() {
                                         <td scope='col' className='px-4'>
                                             <div className='flex justify-between space-x-2'>
                                                 <button 
-                                                className='font-medium text-blue-400 dark:text-blue-500 hover:underline'
+                                                className='font-medium text-blue-400 hover:underline'
                                                 onClick={() => handleDownload(items.laporan)}
                                                 >
                                                     Download
                                                 </button>
                                                 <button 
-                                                className='font-medium text-blue-400 dark:text-blue-500 hover:underline'
+                                                className='font-medium text-blue-400 hover:underline'
                                                 onClick={'/'}
                                                 >
                                                     View

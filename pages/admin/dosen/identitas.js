@@ -192,7 +192,7 @@ export default function IdentitasDosen() {
         <div className='static'>
           <div className='relative mt-6'>
             <div className="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">
-              <svg className="w-4 h-4 text-gray-500 dark:text-gray-400" ariaHidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+              <svg className="w-4 h-4 text-gray-500" ariaHidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                 <path stroke="currentColor" strokeLinecap="round" strokeLineJoin="round" strokeWidth="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
               </svg>
             </div>
@@ -216,8 +216,8 @@ export default function IdentitasDosen() {
       </div>
 
       <div className='relative overflow-x-auto mt-4 bg-white '>
-        <table className=' text-lg text-gray-500 dark:text-gray-400 w-full '>
-          <thead className=' text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 text-center'>
+        <table className=' text-lg text-gray-500 w-full '>
+          <thead className=' text-gray-700 bg-gray-50 text-center'>
             <tr className=''>
               <th scope='col' className='py-2 px-4'>No</th>
               <th scope='col' className='py-2 px-4'>Nama</th>
@@ -246,7 +246,7 @@ export default function IdentitasDosen() {
               <td scope='col' className='py-1 px-4'>
                 <div className='space-x-2'>
                     <button 
-                    className='font-medium text-blue-400 dark:text-blue-500 hover:underline'
+                    className='font-medium text-blue-400 hover:underline'
                     onClick={() => {
                       setShowModal2(true);
                       setEditingData(table); //set data table
@@ -255,7 +255,7 @@ export default function IdentitasDosen() {
                       edit
                     </button>
                     <button 
-                    className='font-medium text-blue-400 dark:text-blue-500 hover:underline'
+                    className='font-medium text-blue-400 hover:underline'
                     onClick={() =>{
                     setShowModal3(true)
                     setEditingData(table)}} // set data to be deleted
@@ -311,61 +311,61 @@ export default function IdentitasDosen() {
       {/* Tambah Dosen */}
     <Modal isVisible={showModal} onClose={() => setShowModal(false)}>
       <div className="px-6 pb-2 lg:px-8 text-left">
-        <h3 className="text-xl font-semibold text-gray-900 dark:text-white flex justify-center items-center mb-4">
+        <h3 className="text-xl font-semibold text-gray-900 flex justify-center items-center mb-4">
           Tambah Data Dosen
         </h3>
         <form className="space-y-4" action="#">
           <div className=''>
-            <label HTMLfor="nip" className="block text-lg font-medium text-gray-900 dark:text-white">NIP</label>
+            <label HTMLfor="nip" className="block text-lg font-medium text-gray-900">NIP</label>
             <input 
               type="text" 
               id="nip"
               value={nip}
               onChange={(e) => setNip(e.target.value)}
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" />
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2" />
           </div>
           <div className=''>
-            <label HTMLfor="name" className="block text-lg font-medium text-gray-900 dark:text-white">Nama</label>
+            <label HTMLfor="name" className="block text-lg font-medium text-gray-900">Nama</label>
             <input 
               type="text" 
               id="name"
               value={nama}
               onChange={(e) => setNama(e.target.value)}
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" />
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2" />
           </div>
           <div>
-            <label HTMLfor="nim" className="block text-lg font-medium text-gray-900 dark:text-white">Fakultas</label>
+            <label HTMLfor="nim" className="block text-lg font-medium text-gray-900">Fakultas</label>
             <input 
               type="text" 
               id="nim"  
               value={fakultasDosen}
               onChange={(e) => setFakultasDosen(e.target.value)}
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" />
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2" />
           </div>
           <div>
-            <label HTMLfor="nim" className="block text-lg font-medium text-gray-900 dark:text-white">Jurusan</label>
+            <label HTMLfor="nim" className="block text-lg font-medium text-gray-900">Jurusan</label>
             <input 
               type="text" 
               id="nim"  
               value={jurusanDosen}
               onChange={(e) => setJurusanDosen(e.target.value)}
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" />
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2" />
           </div>
           <div>
-            <label HTMLfor="nim" className="block text-lg font-medium text-gray-900 dark:text-white">No Telepon</label>
+            <label HTMLfor="nim" className="block text-lg font-medium text-gray-900">No Telepon</label>
             <input 
               type="text" 
               id="nim"  
               value={telponDosen}
               onChange={(e) => setTelponDosen(e.target.value)}
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" />
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2" />
           </div>
 
           <div className='flex justify-center space-x-5'>
             <button 
               type="submit" 
               onClick={handleConfirmAdd}
-              className="w-[1/2] text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-md text-lg px-5 py-1 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+              className="w-[1/2] text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-md text-lg px-5 py-1 text-center">
               Tambah
             </button>
             <button
@@ -382,63 +382,63 @@ export default function IdentitasDosen() {
       {/* Edit Dosen */}
     <Modal isVisible={showModal2} onClose={() => setShowModal2(false)}>
       <div className="px-6 pb-2 text-left">
-        <h3 className="text-xl font-semibold text-gray-900 dark:text-white flex justify-center items-center mb-4">
+        <h3 className="text-xl font-semibold text-gray-900 flex justify-center items-center mb-4">
           Edit Data Dosen
         </h3>
         {editingData && (
           <form className='space-y-4'>
               <div className=''>
-                <label HTMLfor="name" className="block text-lg font-medium text-gray-900 dark:text-white">Nama</label>
+                <label HTMLfor="name" className="block text-lg font-medium text-gray-900">Nama</label>
                 <input
                   type="text"
                   id="name"
                   value={editingData.dosen_name}
                   onChange={(e) => setEditingData({ ...editingData, dosen_name: e.target.value })}
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2"
                 />
               </div>
 
               <div className=''>
-                <label HTMLfor="name" className="block text-lg font-medium text-gray-900 dark:text-white">NIP</label>
+                <label HTMLfor="name" className="block text-lg font-medium text-gray-900">NIP</label>
                 <input
                   type="string"
                   id="nim"
                   value={editingData.nip}
                   onChange={(e) => setEditingData({ ...editingData, nip: e.target.value })}
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2"
                 />
               </div>
             
             <div className=''>
-                <label HTMLfor="name" className="block text-lg font-medium text-gray-900 dark:text-white">Fakultas</label>
+                <label HTMLfor="name" className="block text-lg font-medium text-gray-900">Fakultas</label>
                 <input
                   type="text"
                   id="lokasi"
                   value={editingData.fakultas_dosen}
                   onChange={(e) => setEditingData({ ...editingData, fakultas_dosen: e.target.value })}
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2"
                 />
               </div>
 
               <div className=''>
-                <label HTMLfor="name" className="block text-lg font-medium text-gray-900 dark:text-white">Jurusan</label>
+                <label HTMLfor="name" className="block text-lg font-medium text-gray-900">Jurusan</label>
                 <input
                   type="text"
                   id="lokasi"
                   value={editingData.jurusan_dosen}
                   onChange={(e) => setEditingData({ ...editingData, jurusan_dosen: e.target.value })}
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2"
                 />
               </div>
 
               <div className=''>
-                <label HTMLfor="name" className="block text-lg font-medium text-gray-900 dark:text-white">No Telepon</label>
+                <label HTMLfor="name" className="block text-lg font-medium text-gray-900">No Telepon</label>
                 <input
                   type="text"
                   id="lokasi"
                   value={editingData.telpon_dosen}
                   onChange={(e) => setEditingData({ ...editingData, telpon_dosen: e.target.value })}
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2"
                 />
               </div>
 
@@ -446,7 +446,7 @@ export default function IdentitasDosen() {
               <button
                 type="button"
                 onClick={handleEdit}
-                className="w-[1/2] mt-4 place-self-end text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-lg px-5 py-1 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+                className="w-[1/2] mt-4 place-self-end text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-lg px-5 py-1 text-center"
               >
                 Simpan
               </button>
@@ -465,12 +465,12 @@ export default function IdentitasDosen() {
       {/* Hapus Mahasiswa */}
       <Modal isVisible={showModal3} onClose={() => setShowModal3(false)}>
       <div className="px-6 pb-2 lg:px-8 text-left">
-        <h3 className="text-xl font-semibold text-gray-900 dark:text-white flex justify-center items-center mb-4">
+        <h3 className="text-xl font-semibold text-gray-900 flex justify-center items-center mb-4">
           Hapus Data Dosen
         </h3>
         {/* {editingData && ( */}
           <div className="space-y-4">
-            <p className="text-gray-700 dark:text-gray-300">
+            <p className="text-gray-700">
               Apakah Anda yakin ingin menghapus data dosen ini?
             </p>
             <div className="flex justify-end space-x-4">

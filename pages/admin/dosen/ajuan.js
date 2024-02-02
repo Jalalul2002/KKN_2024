@@ -14,8 +14,8 @@ export default function AjuanSurat() {
 
     <div class="absolute ml-32 px-3 md:left-32 md:right-12  md:top-24 pb-5 rounded-xl bg-iceGray">
     <div className='relative mt-4 overflow-x-auto'>
-        <table className=' text-lg text-gray-500 dark:text-gray-400 w-full '>
-          <thead className=' text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 text-left'>
+        <table className=' text-lg text-gray-500 w-full '>
+          <thead className=' text-gray-700 bg-gray-50 text-left'>
             <tr className=''>
               <th scope='col' className='py-2 px-2'>No</th>
               <th scope='col' className='py-2 px-2'>Hari/Tanggal</th>

@@ -53,7 +53,7 @@ return (
               .filter((item2) => item2.kelompok_id === Number(router.query.id))
               .map((item2) => (
               <div className="p-3 md:py-4 md:px-8 mx-4  bg-iceGray rounded-xl md:w-auto">                  
-                <h1 class="text-xl font-bold text-gray-900 dark:text-white flex justify-center items-center">
+                <h1 class="text-xl font-bold text-gray-900 flex justify-center items-center">
                     {item2.kelompok_name}
                 </h1>
                   <div className=" pb-2 text-left">
@@ -107,7 +107,7 @@ return (
           ))):(
             <div className="p-3 md:py-4 md:px-8 mx-4  bg-iceGray rounded-xl md:w-auto">
                 
-                <h1 class="text-xl font-bold text-gray-900 dark:text-white flex justify-center items-center">
+                <h1 class="text-xl font-bold text-gray-900 flex justify-center items-center">
                     -
                 </h1>
                   <div class=" pb-2 text-left">

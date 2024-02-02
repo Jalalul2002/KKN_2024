@@ -21,6 +21,11 @@ export default function SidebarAdmin() {
                     link: "/admin/mahasiswa/identitas"
                 },
                 {
+                    id: 6,
+                    menu: " Status Pendaftar KKN ",
+                    link: "/admin/mahasiswa/statuskkn",
+                },
+                {
                     id: 2,
                     menu: " Kelompok KKN ",
                     link: "/admin/mahasiswa/kelompok"

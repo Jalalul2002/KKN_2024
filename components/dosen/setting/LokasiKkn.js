@@ -89,7 +89,7 @@ export default function LokasiKkn() {
         <div className='static'>
           <div className='relative mt-6'>
             <div class="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">
-              <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+              <svg class="w-4 h-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
               </svg>
             </div>
@@ -113,8 +113,8 @@ export default function LokasiKkn() {
       </div>
 
       <div className=' mt-4 bg-white overflow-x-auto'>
-        <table className=' text-lg text-gray-500 dark:text-gray-400 min-w-full'>
-          <thead className=' text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 text-center'>
+        <table className=' text-lg text-gray-500 min-w-full'>
+          <thead className=' text-gray-700 uppercase bg-gray-50 text-center'>
             <tr className=''>
               <th scope='col' className='py-2 px-4'>No</th>
               <th scope='col' className='py-2 px-4'>Desa</th>
@@ -135,7 +135,7 @@ export default function LokasiKkn() {
               <td scope='col' className='py-2 px-4'>
                 <div className='space-x-2'>
                   <button 
-                  className='font-medium text-blue-400 dark:text-blue-500 hover:underline'
+                  className='font-medium text-blue-400 hover:underline'
                   onClick={() => {
                     setShowModal2(true);
                     setEditingData(table); //set data table
@@ -144,7 +144,7 @@ export default function LokasiKkn() {
                     edit
                   </button>
                   <button 
-                  className='font-medium text-blue-400 dark:text-blue-500 hover:underline'
+                  className='font-medium text-blue-400 hover:underline'
                   onClick={() =>
                     setShowModal3(true)}
                   >
@@ -199,32 +199,32 @@ export default function LokasiKkn() {
          {/* Tambah kelompok */}
       <Modal isVisible={showModal} onClose={() => setShowModal(false)}>
       <div class="px-6 pb-2 lg:px-8 text-left">
-        <h3 class="text-xl font-semibold text-gray-900 dark:text-white flex justify-center items-center mb-4">
+        <h3 class="text-xl font-semibold text-gray-900 flex justify-center items-center mb-4">
           Tambah Data Lokasi
         </h3>
         <form class="space-y-4" action="#">
           
           <div className=''>
-            <label for="name" class="block text-lg font-medium text-gray-900 dark:text-white">Desa</label>
-            <input type="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"/>
+            <label for="name" class="block text-lg font-medium text-gray-900">Desa</label>
+            <input type="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2"/>
           </div>
           <div className=''>
-            <label for="nim" class="block text-lg font-medium text-gray-900 dark:text-white">Kecamatan</label>
-            <input type=""  id="nim"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" />
+            <label for="nim" class="block text-lg font-medium text-gray-900">Kecamatan</label>
+            <input type=""  id="nim"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2" />
           </div>
           <div>
-            <label for="nim" class="block text-lg font-medium text-gray-900 dark:text-white">Kabupaten/Kota</label>
-            <input type=""  id="nim"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" />
+            <label for="nim" class="block text-lg font-medium text-gray-900">Kabupaten/Kota</label>
+            <input type=""  id="nim"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2" />
           </div>
           <div>
-            <label for="nim" class="block text-lg font-medium text-gray-900 dark:text-white">Provinsi</label>
-            <input type=""  id="nim"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" />
+            <label for="nim" class="block text-lg font-medium text-gray-900">Provinsi</label>
+            <input type=""  id="nim"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2" />
           </div>
 
           <div className='flex justify-center space-x-5'>
             <button 
             type="submit" 
-            class="w-[1/2]  text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-md text-lg px-5 py-1 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+            class="w-[1/2]  text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-md text-lg px-5 py-1 text-center">
               Tambah
             </button>
             <button
@@ -242,52 +242,52 @@ export default function LokasiKkn() {
       {/* Edit kelompok */}
     <Modal isVisible={showModal2} onClose={() => setShowModal2(false)}>
       <div class="px-6 pb-2 text-left">
-        <h3 class="text-xl font-semibold text-gray-900 dark:text-white flex justify-center items-center mb-4">
+        <h3 class="text-xl font-semibold text-gray-900 flex justify-center items-center mb-4">
           Edit Data Lokasi
         </h3>
         {editingData && (
           <form className='space-y-4'>
               <div className=''>
-                <label for="name" class="block text-lg font-medium text-gray-900 dark:text-white">Desa</label>
+                <label for="name" class="block text-lg font-medium text-gray-900">Desa</label>
                 <input
                   type="text"
                   id="name"
                   value={editingData.desa}
                   onChange={(e) => setEditingData({ ...editingData, desa: e.target.value })}
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2"
                 />
               </div>
 
               <div className=''>
-                <label for="name" class="block text-lg font-medium text-gray-900 dark:text-white">Kecamatan</label>
+                <label for="name" class="block text-lg font-medium text-gray-900">Kecamatan</label>
                 <input
                   type="string"
                   id="nim"
                   value={editingData.kec}
                   onChange={(e) => setEditingData({ ...editingData, kec: e.target.value })}
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2"
                 />
               </div>
             
             <div className=''>
-                <label for="name" class="block text-lg font-medium text-gray-900 dark:text-white">Kabupaten/Kota</label>
+                <label for="name" class="block text-lg font-medium text-gray-900">Kabupaten/Kota</label>
                 <input
                   type="text"
                   id="lokasi"
                   value={editingData.kabkot}
                   onChange={(e) => setEditingData({ ...editingData, kabkot: e.target.value })}
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2"
                 />
               </div>
 
               <div className=''>
-                <label for="name" class="block text-lg font-medium text-gray-900 dark:text-white">Provinsi</label>
+                <label for="name" class="block text-lg font-medium text-gray-900">Provinsi</label>
                 <input
                   type="text"
                   id="lokasi"
                   value={editingData.prov}
                   onChange={(e) => setEditingData({ ...editingData, prov: e.target.value })}
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2"
                 />
               </div>
 
@@ -300,7 +300,7 @@ export default function LokasiKkn() {
                   // Kemudian tutup modal
                   setShowModal2(false);
                 }}
-                className="w-[1/2] mt-4 place-self-end text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-lg px-5 py-1 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+                className="w-[1/2] mt-4 place-self-end text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-lg px-5 py-1 text-center"
               >
                 Simpan
               </button>
@@ -319,12 +319,12 @@ export default function LokasiKkn() {
       {/* Hapus kelompok */}
       <Modal isVisible={showModal3} onClose={() => setShowModal3(false)}>
       <div class="px-6 pb-2 lg:px-8 text-left">
-        <h3 class="text-xl font-semibold text-gray-900 dark:text-white flex justify-center items-center mb-4">
+        <h3 class="text-xl font-semibold text-gray-900 flex justify-center items-center mb-4">
           Hapus Data Lokasi
         </h3>
         {/* {editingData && ( */}
           <div class="space-y-4">
-            <p class="text-gray-700 dark:text-gray-300">
+            <p class="text-gray-700">
               Apakah Anda yakin ingin menghapus data lokasi ini?
             </p>
             <div class="flex justify-end space-x-4">

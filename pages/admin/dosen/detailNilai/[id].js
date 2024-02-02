@@ -107,7 +107,7 @@ export default function DetailLaporan() {
                   <div className='bg-white grid justify-center items-center py-8 mt-4 rounded-xl'>
                       <h1 className='font-bold text-4xl mb-3 text-center'>{item2.kelompok_name}</h1>
                       <button 
-                  className='font-semibold text-blue-400 dark:text-blue-500 hover:underline' 
+                  className='font-semibold text-blue-400 hover:underline' 
                   onClick={() => handleDetailClick(item2)}>
                   Detail
                   </button>
@@ -129,8 +129,8 @@ export default function DetailLaporan() {
       <div className='bg-white w-full grid justify-center items-center py-4 rounded-xl'>
       {selectedKelompok && (
           <div className='relative overflow-x-auto overflow-y-auto bg-white max-h-80 w-full'>
-            <table className=' text-lg text-gray-500 dark:text-gray-400 min-w-full w-full text-left rtl:text-right '>
-              <thead className=' text-gray-700  bg-gray-50 dark:bg-gray-700 dark:text-gray-400 text-center'>
+            <table className=' text-lg text-gray-500 min-w-full w-full text-left rtl:text-right '>
+              <thead className=' text-gray-700  bg-gray-50 text-center'>
                 <tr className=''>
                   <th scope='col' className='py-2 px-4'>No</th>
                   <th scope='col' className='py-2 px-4'>Nama</th>

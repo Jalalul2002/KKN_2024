@@ -77,8 +77,8 @@ export default function DetailNilai() {
 
         <div className='bg-white w-2/3 grid justify-center items-center ml-8 py-8 my-8 rounded-xl'>
           <div className='relative overflow-x-auto overflow-y-auto bg-white max-h-80'>
-            <table className=' text-lg text-gray-500 dark:text-gray-400 min-w-full w-full text-left rtl:text-right '>
-              <thead className=' text-gray-700  bg-gray-50 dark:bg-gray-700 dark:text-gray-400 text-center'>
+            <table className=' text-lg text-gray-500 min-w-full w-full text-left rtl:text-right '>
+              <thead className=' text-gray-700  bg-gray-50 text-center'>
                 <tr className=''>
                   <th scope='col' className='py-2 px-4'>No</th>
                   <th scope='col' className='py-2 px-4'>Nama</th>
