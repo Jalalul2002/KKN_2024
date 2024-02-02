@@ -10,7 +10,7 @@ import useSWR from "swr";
 
 export default function Laporan() {
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
-  const { data: tables = [], error } = useSWR(`/api/dosen/laporanData?nip=197206091999031003`, fetcher, {
+  const { data: tables = [], error } = useSWR(`/api/dosen/laporanData?nip=197611212009121004`, fetcher, {
     initialData: [],
   });  // const { data: tables2 = [], error: error2 } = useSWR(mahasiswaId ? `/api/mahasiswa/logbookQuery?mahasiswaId=${mahasiswaId}` : null, fetcher);
 

@@ -76,7 +76,7 @@ export default function DetailLaporan() {
                             <h3>Ketua : {item.ketua}</h3>
                             <h3>Kontak Ketua : {item.telpon_ketua || "-"}</h3>
                             <h3>Lokasi : {item.lokasi}</h3>
-                            <h3>Lokasi : {item.anggota}</h3>
+                            <h3>Anggota : {item.anggota}</h3>
                         </div>
                         <div className=' mx-2 md:mx-4 md:w-auto'>
                             <div className='relative overflow-x-auto overflow-y-auto bg-white md:w-full max-h-80'>
