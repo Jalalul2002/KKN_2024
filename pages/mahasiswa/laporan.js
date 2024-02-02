@@ -5,7 +5,7 @@ import Head from "next/head";
 import useSWR from "swr";
 import { useState } from "react";
 
-const mahasiswaId = 7;
+const mahasiswaId = 1203010100;
 export default function LaporanKKN() {
   const [nim, setNim] = useState("");
   const fetcher = (...args) => fetch(...args).then((res) => res.json());

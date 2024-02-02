@@ -8,8 +8,10 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import useSWR from 'swr';
 import { mutate } from "swr";
+import { Dialog, Transition } from '@headlessui/react'
+import { Fragment } from 'react'
 
-const mahasiswaId = 7;
+const mahasiswaId = 1203010100;
 export default function LogbookKKN() {  
   const [mahasiswaData, setMahasiswaData] = useState({});
   const [nim, setNim] = useState("");
@@ -20,6 +22,7 @@ export default function LogbookKKN() {
   const [dosen, setDosen] = useState(""); 
   const [items, setItems] = useState("");
   const [lokasi, setLokasi] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
  
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
   const { data: tables = [], error } = useSWR(`/api/mahasiswa/logbookData?nim=${mahasiswaId}`,fetcher);
@@ -36,9 +39,9 @@ export default function LogbookKKN() {
   
 
   const handleDelete = async (id) => {
-    const confirmed = window.confirm("Are you sure you want to delete this data?");
+    // const confirmed = window.confirm("Are you sure you want to delete this data?");
   
-    if (confirmed) {
+    // if (confirmed) {
       try {
         const response = await fetch("/api/mahasiswa/logbookDelete", {
           method: "DELETE",
@@ -59,20 +62,17 @@ export default function LogbookKKN() {
       } catch (error) {
         console.error("Error deleting data:", error);
       }
-    }
+    // }
   };
 
   const router = useRouter();
   const [active, setActive] = useState(1);
-  const [itemsPerPage] = useState(10); // Jumlah item per halaman
 
-  const displayData = () => {
-    const filteredData = tables2.filter(searchFilter)
-
-    const startIndex = (active - 1) * itemsPerPage;
-    const endIndex = startIndex + itemsPerPage;
-    return filteredData.slice(startIndex, endIndex);
-  };
+  const itemsPerPage = 10;
+  const [currentPage, setCurrentPage] = useState(1);
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItem = tables2.slice(indexOfFirstItem, indexOfLastItem);
 
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -89,6 +89,9 @@ export default function LogbookKKN() {
   const handleOpenModal = () => {
     openInputModal();
   };
+  const handleCloseModal = () => {
+    setIsOpen(false)
+  }
 
   const [currentDateTime, setCurrentDateTime] = useState(new Date());
 
@@ -382,7 +385,7 @@ const handleAddSubmit = async (e) => {
                     </tr>
                   </thead>
                   <tbody className="text-center">
-                    {tables2.map((item, i) => (
+                    {currentItem.map((item, i) => (
                       <tr key={i} className="border-y border-slate-300">
                         <td className="py-1 px-0 lg:p-3">{i + 1}</td>
                         <td className="py-1 px-1 lg:p-3">{item.hari}</td>
@@ -393,7 +396,8 @@ const handleAddSubmit = async (e) => {
                         <td className="py-1 px-3 lg:p-3">
                           <div
                             className="bg-red-600 hover:bg-red-700 flex items-center p-2 text-white cursor-pointer rounded-lg"
-                            onClick={() => handleDelete(item.id)} // Tampilkan dialog konfirmasi saat tombol diklik
+                            onClick={setIsOpen(true)}
+                           // Tampilkan dialog konfirmasi saat tombol diklik
                           >
                             <TrashIcon
                               className="w-3 h-3 md:w-5 md:h-5"
@@ -409,7 +413,7 @@ const handleAddSubmit = async (e) => {
                   <nav className="block">
                     <ul className="flex pl-0 rounded list-none flex-wrap">
                       {Array.from({
-                        length: Math.ceil(displayData.length / itemsPerPage),
+                        length: Math.ceil(tables2.length / itemsPerPage),
                       }).map((item, index) => (
                         <li key={index}>
                           <a
@@ -433,6 +437,69 @@ const handleAddSubmit = async (e) => {
           </div>
         </div>
       </div>
+      <Transition appear show={isOpen} as={Fragment}>
+        <Dialog
+          as="div"
+          className="fixed inset-0 z-50 overflow-y-auto"
+          onClose={handleCloseModal}
+        >
+          <div className="min-h-screen text-center">
+            <Transition.Child
+              as={Fragment}
+              enter="ease-out duration-300"
+              enterFrom="opacity-0"
+              enterTo="opacity-100"
+              leave="ease-in duration-200"
+              leaveFrom="opacity-100"
+              leaveTo="opacity-0"
+            >
+              <Dialog.Overlay className="fixed inset-0 bg-black opacity-50" />
+            </Transition.Child>
+
+            <span
+              className="inline-block h-screen align-middle"
+              aria-hidden="true"
+            >
+              &#8203;
+            </span>
+            <Transition.Child
+              as={Fragment}
+              enter="ease-out duration-300"
+              enterFrom="opacity-0 scale-95"
+              enterTo="opacity-100 scale-100"
+              leave="ease-in duration-200"
+              leaveFrom="opacity-100 scale-100"
+              leaveTo="opacity-0 scale-95"
+            >
+              <div className="inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
+                <Dialog.Title as="h3" className="text-lg font-medium leading-6 text-gray-900">
+                  Apakah anda yakin ingin menghapus Logbook Ini?
+                </Dialog.Title>
+                <div className="mt-2">
+                  <p className="text-sm text-gray-500">
+                    Anda tidak dapat mengembalikan item yang sudah dihapus.
+                  </p>
+                </div>
+
+                <div className="mt-4">
+                  <button
+                    className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                    onClick={() => handleDelete(item.id)}
+                  >
+                    Delete
+                  </button>
+                  <button
+                    className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded ml-2"
+                    onClick={handleCloseModal}
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </div>
+            </Transition.Child>
+          </div>
+        </Dialog>
+      </Transition>
     </>
   );
 }
