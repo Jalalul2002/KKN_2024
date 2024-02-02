@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import Navbar from "@/pages/component/navbar";
+import Navbar from "@/components/navbar";
 import Link from 'next/link';
 import { IoChevronBackOutline } from "react-icons/io5";
 import { PlusIcon, TrashIcon } from "@heroicons/react/24/outline";
-import Modal from "@/pages/component/admin/modal";
+import Modal from "@/components/admin/modal";
 import useSWR from "swr";
 
 export default function DetailKelompok() {
@@ -97,7 +97,7 @@ return (
             .filter((item2) => item2.kelompok_id === Number(router.query.id))
             .map((item2) => (
             <div className="p-3 md:py-4 md:px-8 mx-4  bg-iceGray rounded-xl md:w-auto">                  
-              <h1 class="text-xl font-bold text-gray-900 dark:text-white flex justify-center items-center">
+              <h1 class="text-xl font-bold text-gray-900 flex justify-center items-center">
                   {item2.kelompok_name}
               </h1>
                 <div className=" pb-2 text-left">
@@ -161,7 +161,7 @@ return (
         ))):(
           <div className="p-3 md:py-4 md:px-8 mx-4  bg-iceGray rounded-xl md:w-auto">
               
-              <h1 class="text-xl font-bold text-gray-900 dark:text-white flex justify-center items-center">
+              <h1 class="text-xl font-bold text-gray-900 flex justify-center items-center">
                   -
               </h1>
                 <div class=" pb-2 text-left">
@@ -210,7 +210,7 @@ return (
 
   <Modal isVisible={isVisible} onClose={() => setShowModal(false)} nim={nim}>
   <div class="px-6 pb-2 lg:px-8 text-left">
-    <h3 class="text-xl font-semibold text-gray-900 dark:text-white flex justify-center items-center mb-4">
+    <h3 class="text-xl font-semibold text-gray-900 flex justify-center items-center mb-4">
       Masukan Nilai
     </h3>
     <form class="space-y-4" action="#">
@@ -236,7 +236,7 @@ return (
                 }
               }
             }}
-            class="w-full h-full bg-gray-50 border border-gray-300 text-lg text-center rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+            class="w-full h-full bg-gray-50 border border-gray-300 text-lg text-center rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2"
           />
         </div>
       </div>
@@ -245,7 +245,7 @@ return (
           <button
             type="button"
             onClick={handleSimpan}
-            className="w-[1/2] mt-4 place-self-end text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-lg px-5 py-1 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+            className="w-[1/2] mt-4 place-self-end text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-lg px-5 py-1 text-center"
           >
             Simpan
           </button>

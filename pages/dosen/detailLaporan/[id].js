@@ -67,7 +67,7 @@ export default function DetailLaporan() {
             {data.map((item) => (
             <div className="flex justify-center items-center">
             <div className="p-3 mx-6 md:mt-4 md:mx-20 md:p-4 bg-iceGray rounded-xl md:w-1/2">
-                <h1 class="text-lg md:text-2xl font-bold text-gray-900 dark:text-white flex justify-center items-center">
+                <h1 class="text-lg md:text-2xl font-bold text-gray-900 flex justify-center items-center">
                     {item.kelompok}
                 </h1>
                 <div className="md:flex md:justify-center md:items-center">
