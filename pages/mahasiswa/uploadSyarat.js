@@ -37,7 +37,7 @@ export default function UploadSyarat() {
         
       if (response.ok) {
         const data = await response.json();
-        alert(`File ${tables[0].fileName} berhasil diunggah.`);
+        alert(`File ${file.name} berhasil diunggah.`);
         // Tambahkan logika lain yang diperlukan setelah unggah berhasil
       } else {
         alert('Gagal mengunggah file laporan.');

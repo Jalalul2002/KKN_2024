@@ -18,7 +18,10 @@ export default async function handler(req, res) {
     JOIN
       kelompok k ON km.kelompok_id = k.id
     WHERE
-      k.id = ?;
+      k.id = ?
+    ORDER BY
+      l.hari
+      DESC; 
 
     `, [id]);
 

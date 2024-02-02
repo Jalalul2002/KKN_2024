@@ -39,8 +39,8 @@ export default async function handler(req, res) {
         const [result] = await condb
           .promise()
           .query(
-            "UPDATE mahasiswa SET upload_syarat = ? WHERE nim = ?",
-            [id, file.originalname] // Sesuaikan dengan nama file atau path yang sesuai
+            "UPDATE mahasiswa SET bukti_syarat = ? WHERE nim = ?",
+            [file.originalname, id] // Sesuaikan dengan nama file atau path yang sesuai
           );
 
         res.status(201).json({ success: true, message: "Data added successfully.", data: result.insertId });
