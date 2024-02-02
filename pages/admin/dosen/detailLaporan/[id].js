@@ -74,7 +74,7 @@ export default function DetailLaporan() {
                 <div className='bg-white grid justify-center items-center py-8 mt-4 rounded-xl'>
                     <h1 className='font-bold text-4xl mb-3 text-center'>{itemm.kelompok}</h1>
                     <button 
-                className='font-semibold text-blue-400 dark:text-blue-500 hover:underline' 
+                className='font-semibold text-blue-400 hover:underline' 
                 onClick={() => {
                 setSelectedGroup(itemm.id);
                 setShowModal(true);
@@ -90,7 +90,7 @@ export default function DetailLaporan() {
       </div>
       <Modal isVisible={showModal} onClose={() => setShowModal(false)}>
       <div class="px-6 pb-2 lg:px-8 text-left">
-        <h1 class="text-xl font-semibold text-gray-900 dark:text-white flex justify-center items-center mb-4">
+        <h1 class="text-xl font-semibold text-gray-900 flex justify-center items-center mb-4">
           Detail Laporan
         </h1>
         {tables.map((itemms) => (
@@ -102,8 +102,8 @@ export default function DetailLaporan() {
         </div>
         ))}
         <div className='relative overflow-x-auto mt-4 bg-white '>
-          <table className='text-lg text-gray-500 dark:text-gray-400 w-full'>
-            <thead className=' text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 text-center'>
+          <table className='text-lg text-gray-500 w-full'>
+            <thead className=' text-gray-700 bg-gray-50 text-center'>
               <tr className=''>
                 <th scope='col' className='py-2 px-2'>No</th>
                 <th scope='col' className='py-2 px-2'>Judul Laporan</th>
@@ -120,13 +120,13 @@ export default function DetailLaporan() {
                     <td scope='col' className='py-1 px-2'>
                         <div className='space-x-1'>
                             <button 
-                            className='font-medium text-blue-400 dark:text-blue-500 hover:underline'
+                            className='font-medium text-blue-400 hover:underline'
                             onClick={'/'}
                             >
                                 Download
                             </button>
                             <button 
-                            className='font-medium text-blue-400 dark:text-blue-500 hover:underline'
+                            className='font-medium text-blue-400 hover:underline'
                             onClick={'/'}
                             >
                                 View

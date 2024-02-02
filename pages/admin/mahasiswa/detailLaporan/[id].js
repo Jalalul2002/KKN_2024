@@ -46,8 +46,8 @@ export default function detailLaporan() {
         </div>
         ))}; 
           <div className='flex justify-center items-center w-2/3 rounded-lg'>
-            <table className='bg-white text-lg text-gray-500 dark:text-gray-400 text-center w-full h-auto '>
-              <thead className=' text-gray-700  bg-gray-50 dark:bg-gray-700 dark:text-gray-400 text-center'>
+            <table className='bg-white text-lg text-gray-500  text-center w-full h-auto '>
+              <thead className=' text-gray-700  bg-gray-50 text-center'>
                 <tr className=''>
                   <th scope='col' className='py-4 px-2'>No</th>
                   <th scope='col' className='py-4 px-2'>Judul Laporan</th>
@@ -64,13 +64,13 @@ export default function detailLaporan() {
                   <td scope='col' className='py-2 px-2'>
                     <div className='felx justify-between space-x-2'>
                         <button 
-                        className='font-medium text-blue-400 dark:text-blue-500 hover:underline'
+                        className='font-medium text-blue-400 hover:underline'
                         onClick={'/'}
                         >
                             Download
                         </button>
                         <button 
-                        className='font-medium text-blue-400 dark:text-blue-500 hover:underline'
+                        className='font-medium text-blue-400 hover:underline'
                         onClick={'/'}
                         >
                             View

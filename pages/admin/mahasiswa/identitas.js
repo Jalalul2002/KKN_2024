@@ -207,7 +207,7 @@ export default function Identitas() {
         <div className='static'>
           <div className='relative mt-6'>
             <div className="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">
-              <svg className="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+              <svg className="w-4 h-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                 <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
               </svg>
             </div>
@@ -231,8 +231,8 @@ export default function Identitas() {
       </div>
 
       <div className='relative overflow-x-auto mt-4 bg-white '>
-        <table className='text-lg text-gray-500 dark:text-gray-400 w-full'>
-          <thead className=' text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 text-center'>
+        <table className='text-lg text-gray-500 w-full'>
+          <thead className=' text-gray-700 bg-gray-50 text-center'>
             <tr className=''>
               <th scope='col' className='py-2 px-2'>No</th>
               <th scope='col' className='py-2 px-2'>Nama</th>
@@ -261,7 +261,7 @@ export default function Identitas() {
               <td scope='col' className='py-1 px-2'>
                 <div className='space-x-1'>
                     <button 
-                    className='font-medium text-blue-400 dark:text-blue-500 hover:underline'
+                    className='font-medium text-blue-400 hover:underline'
                     onClick={() => {
                       setShowModal2(true);
                       setEditingData(table); //set data table
@@ -270,7 +270,7 @@ export default function Identitas() {
                       edit
                     </button>
                     <button 
-                    className='font-medium text-blue-400 dark:text-blue-500 hover:underline'
+                    className='font-medium text-blue-400 hover:underline'
                     onClick={() =>
                     setShowModal3(true)}
                     >
@@ -324,73 +324,73 @@ export default function Identitas() {
       {/* Tambah Mahasiswa */}
     <Modal isVisible={showModal} onClose={() => setShowModal(false)}>
       <div class="px-6 pb-2 lg:px-8 text-left">
-        <h3 class="text-xl font-semibold text-gray-900 dark:text-white flex justify-center items-center mb-4">
+        <h3 class="text-xl font-semibold text-gray-900 flex justify-center items-center mb-4">
           Tambah Mahasiswa
         </h3>
         <form className="space-y-4" action="#">
           <div className='flex justify-between space-x-2'>
             <div className='w-2/3'>
-              <label for="name" className="block text-lg font-medium text-gray-900 dark:text-white">Nama</label>
+              <label for="name" className="block text-lg font-medium text-gray-900">Nama</label>
               <input
                 required
                 type="text"
                 id="name"
                 value={formValues.name}
                 onChange={handleInputChange}
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2"
               />
             </div>
             <div className='w-1/3'>
-              <label for="nim" className="block text-lg font-medium text-gray-900 dark:text-white">Nim</label>
+              <label for="nim" className="block text-lg font-medium text-gray-900">Nim</label>
               <input
                 required
                 type="text"
                 id="nim"
                 value={formValues.nim}
                 onChange={handleInputChange}
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2"
               />
             </div>
           </div>
                   
           <div className='flex justify-between space-x-2'>
             <div className='w-1/2'>
-              <label for="fakultas" className="block  text-lg font-medium text-gray-900 dark:text-white">Fakultas</label>
+              <label for="fakultas" className="block  text-lg font-medium text-gray-900">Fakultas</label>
               <input
                 type="text"
                 id="fakultas"
                 value={formValues.fakultas}
                 onChange={handleInputChange}
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2"
               />
             </div>
             <div className='w-1/2'>
-              <label for="jurusan" className="block text-lg font-medium text-gray-900 dark:text-white">Jurusan</label>
+              <label for="jurusan" className="block text-lg font-medium text-gray-900">Jurusan</label>
               <input
                 type="text"
                 id="jurusan"
                 value={formValues.jurusan}
                 onChange={handleInputChange}
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2"
               />
             </div>
           </div>
                   
           <div className='flex space-x-2'>
             <div className='w-1/4'>
-              <label for="kelamin" className="block text-lg font-medium text-gray-900 dark:text-white">Jenis Kelamin</label>
+              <label for="kelamin" className="block text-lg font-medium text-gray-900">Jenis Kelamin</label>
               <select
                 id="kelamin"
                 value={formValues.kelamin}
                 onChange={handleSelectChange}
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2"
               >
                 <option value="male">Male</option>
                 <option value="female">Female</option>
               </select>
             </div>
             <div className='w-1/3'>
-              <label for="telpon" className="block text-lg font-medium text-gray-900 dark:text-white">Telpon</label>
+              <label for="telpon" className="block text-lg font-medium text-gray-900">Telpon</label>
               <input
                 type="tel"
                 id="telpon"
@@ -398,7 +398,7 @@ export default function Identitas() {
                 title="Please enter a valid phone number"
                 value={formValues.telpon}
                 onChange={handleInputChange}
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2"
               />
             </div>
           </div>                    
@@ -407,7 +407,7 @@ export default function Identitas() {
             <button 
             type="submit" 
             onClick={() => addMahasiswa(formValues)}
-            class="w-[1/2]  text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-md text-lg px-5 py-1 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+            class="w-[1/2]  text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-md text-lg px-5 py-1 text-center">
               Tambah
             </button>
             <button
@@ -425,91 +425,91 @@ export default function Identitas() {
       {/* Edit Mahasiswa */}
     <Modal isVisible={showModal2} onClose={() => setShowModal2(false)}>
       <div class="px-6 pb-2 text-left">
-        <h3 class="text-xl font-semibold text-gray-900 dark:text-white flex justify-center items-center mb-4">
+        <h3 class="text-xl font-semibold text-gray-900 flex justify-center items-center mb-4">
           Edit Mahasiswa
         </h3>
         {editingData && (
           <form>
             <div className='flex justify-between space-x-2'>
               <div className='w-1/2'>
-                <label for="name" class="block text-lg font-medium text-gray-900 dark:text-white">Nama</label>
+                <label for="name" class="block text-lg font-medium text-gray-900">Nama</label>
                 <input
                   type="text"
                   id="name"
                   value={editingData.name}
                   onChange={(e) => setEditingData({ ...editingData, name: e.target.value })}
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2"
                 />
               </div>
               <div className='w-1/2'>
-                <label for="name" className="block text-lg font-medium text-gray-900 dark:text-white">NIM</label>
+                <label for="name" className="block text-lg font-medium text-gray-900">NIM</label>
                 <input
                   type="string"
                   id="nim"
                   value={editingData.nim}
                   readOnly
                   
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2"
                 />
               </div>
             </div>
 
             <div className='flex justify-between space-x-2'>
               <div className='w-1/2'>
-                <label for="name" className="block text-lg font-medium text-gray-900 dark:text-white">Fakultas</label>
+                <label for="name" className="block text-lg font-medium text-gray-900">Fakultas</label>
                 <input
                   type="text"
                   id="fakultas"
                   value={editingData.fakultas}
                   onChange={(e) => setEditingData({ ...editingData, fakultas: e.target.value })}
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2"
                 />
               </div>
               <div className='w-1/2'>
-                <label for="name" className="block text-lg font-medium text-gray-900 dark:text-white">Jurusan</label>
+                <label for="name" className="block text-lg font-medium text-gray-900">Jurusan</label>
                 <input
                   type="text"
                   id="jurusan"
                   value={editingData.jurusan}
                   onChange={(e) => setEditingData({ ...editingData, jurusan: e.target.value })}
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2"
                 />
               </div>
             </div>
 
             <div className='flex justify-between space-x-2'>
               <div className='w-1/2'>
-                <label htmlFor="kelamin" className="block text-lg font-medium text-gray-900 dark:text-white">Jenis Kelamin</label>
+                <label htmlFor="kelamin" className="block text-lg font-medium text-gray-900">Jenis Kelamin</label>
                 <select
                   id="kelamin"
                   value={editingData.gender}
                   onChange={(e) => setEditingData({ ...editingData, gender: e.target.value })}
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2"
                 >
                   <option value="male">Male</option>
                   <option value="female">Female</option>
                 </select>
               </div>
               <div className='w-1/2'>
-                <label for="name" className="block text-lg font-medium text-gray-900 dark:text-white">No. Telpon</label>
+                <label for="name" className="block text-lg font-medium text-gray-900">No. Telpon</label>
                 <input
                   type="text"
                   id="telpon"
                   value={editingData.telpon}
                   onChange={(e) => setEditingData({ ...editingData, telpon: e.target.value })}
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2"
                 />
               </div>
             </div>
 
             <div className='flex justify-between space-x-2'>
               <div className='w-1/2'>
-                <label htmlFor="jeniskkn" className="block text-lg font-medium text-gray-900 dark:text-white">Jenis KKN</label>
+                <label htmlFor="jeniskkn" className="block text-lg font-medium text-gray-900">Jenis KKN</label>
                 <select
                   id="jeniskkn"
                   value={editingData.jenis_kkn}
                   onChange={(e) => setEditingData({ ...editingData, jenis_kkn: e.target.value })}
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2"
                 >
                   <option value="">Belum Memilih</option>
                   <option value="SISDAMAS">SISDAMAS</option>
@@ -525,7 +525,7 @@ export default function Identitas() {
               <button
                 type="button"
                 onClick={editMahasiswa}
-                className="w-[1/2] mt-4 place-self-end text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-lg px-5 py-1 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+                className="w-[1/2] mt-4 place-self-end text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-lg px-5 py-1 text-center"
               >
                 Simpan
               </button>
@@ -544,12 +544,12 @@ export default function Identitas() {
       {/* Hapus Mahasiswa */}
     <Modal isVisible={showModal3} onClose={() => setShowModal3(false)}>
       <div className="px-6 pb-2 lg:px-8 text-left">
-        <h3 className="text-xl font-semibold text-gray-900 dark:text-white flex justify-center items-center mb-4">
+        <h3 className="text-xl font-semibold text-gray-900 flex justify-center items-center mb-4">
           Hapus Mahasiswa
         </h3>
         {/* {editingData && ( */}
           <div className="space-y-4">
-            <p className="text-gray-700 dark:text-gray-300">
+            <p className="text-gray-700">
               Apakah Anda yakin ingin menghapus data mahasiswa ini?
             </p>
             <div class="flex justify-end space-x-4">

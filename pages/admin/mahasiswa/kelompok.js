@@ -86,7 +86,7 @@ export default function Kelompok() {
         <div className='static'>
           <div className='relative mt-6'>
             <div class="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">
-              <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+              <svg class="w-4 h-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
               </svg>
             </div>
@@ -103,8 +103,8 @@ export default function Kelompok() {
       </div>
 
       <div className='relative mt-4 bg-white overflow-x-auto'>
-        <table className=' text-lg text-gray-500 dark:text-gray-400 min-w-full'>
-          <thead className=' text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 text-center'>
+        <table className=' text-lg text-gray-500 min-w-full'>
+          <thead className=' text-gray-700 uppercase bg-gray-50  text-center'>
             <tr className=''>
               <th scope='col' className='py-2 px-4'>No</th>
               <th scope='col' className='py-2 px-4'>Kelompok</th>
@@ -135,7 +135,7 @@ export default function Kelompok() {
               <td scope='col' className='py-2 px-4'>
                 <button>
                   <Link href={`/admin/mahasiswa/detailKelompok/${table.id}`}>
-                  <span className='font-medium text-blue-400 dark:text-blue-500 hover:underline'>detail</span>
+                  <span className='font-medium text-blue-400 hover:underline'>detail</span>
                   </Link>
                 </button>
               </td>

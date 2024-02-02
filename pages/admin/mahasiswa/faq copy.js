@@ -44,7 +44,7 @@ export default function Faq() {
         <div className='static'>
           <div className='relative mt-6'>
             <div class="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">
-              <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+              <svg class="w-4 h-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
               </svg>
             </div>
@@ -66,8 +66,8 @@ export default function Faq() {
       </div>
 
       <div className=' mt-4 bg-white overflow-x-auto'>
-        <table className=' text-lg text-gray-500 dark:text-gray-400 min-w-full'>
-          <thead className=' text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 text-left'>
+        <table className=' text-lg text-gray-500 min-w-full'>
+          <thead className=' text-gray-700 uppercase bg-gray-50 text-left'>
             <tr className=''>
               <th scope='col' className='py-2 px-4'>No</th>
               <th scope='col' className='py-2 px-4'>Pertanyaan</th>
@@ -84,7 +84,7 @@ export default function Faq() {
               <td scope='col' className='py-2 px-4'>
                 <div className='space-x-2'>
                     <button 
-                    className='font-medium text-blue-400 dark:text-blue-500 hover:underline '
+                    className='font-medium text-blue-400 hover:underline '
                     onClick={() => {
                       setShowModal2(true);
                       setEditingData(table); //set data table
@@ -93,7 +93,7 @@ export default function Faq() {
                       edit
                     </button>
                     <button 
-                    className='font-medium text-blue-400 dark:text-blue-500 hover:underline '
+                    className='font-medium text-blue-400 hover:underline '
                     onClick={() => {
                       setShowModal3(true);
                       setEditingData(table); //set data table
@@ -113,19 +113,19 @@ export default function Faq() {
 
     <Modal isVisible={showModal} onClose={() => setShowModal(false)}>
       <div class="px-6 py-6 lg:px-8 text-left">
-        <h3 class="text-xl font-semibold text-gray-900 dark:text-white flex justify-center items-center">
+        <h3 class="text-xl font-semibold text-gray-900 flex justify-center items-center">
           Tambah Pertanyaan
         </h3>
         <form class="space-y-4" action="#">
           <div>
-            <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Pertanyaan</label>
-            <input type="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"   />
+            <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Pertanyaan</label>
+            <input type="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"   />
           </div>
           <div>
-            <label for="nim" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jawaban</label>
-            <input type=""  id="nim"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"  />
+            <label for="nim" class="block mb-2 text-sm font-medium text-gray-900">Jawaban</label>
+            <input type=""  id="nim"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"  />
           </div>
-          <button type="submit" class="w-[1/2] text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Tambah</button>          
+          <button type="submit" class="w-[1/2] text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Tambah</button>          
         </form>
       </div>
     </Modal>
@@ -133,29 +133,29 @@ export default function Faq() {
     {/* Edit Mahasiswa */}
     <Modal isVisible={showModal2} onClose={() => setShowModal2(false)}>
       <div class="px-6 pb-2 text-left">
-        <h3 class="text-xl font-semibold text-gray-900 dark:text-white flex justify-center items-center mb-4">
+        <h3 class="text-xl font-semibold text-gray-900 flex justify-center items-center mb-4">
           Edit Pertanyaan
         </h3>
         {editingData && (
           <form>
               <div className=''>
-                <label for="name" class="block text-lg font-medium text-gray-900 dark:text-white">Pertanyaan</label>
+                <label for="name" class="block text-lg font-medium text-gray-900">Pertanyaan</label>
                 <input
                   type="text"
                   id="name"
                   value={editingData.pertanyaan}
                   onChange={(e) => setEditingData({ ...editingData, pertanyaan: e.target.value })}
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2"
                 />
               </div>
               <div className=''>
-                <label for="name" class="block text-lg font-medium text-gray-900 dark:text-white">Jawaban</label>
+                <label for="name" class="block text-lg font-medium text-gray-900">Jawaban</label>
                 <input
                   type="string"
                   id="nim"
                   value={editingData.jawaban}
                   onChange={(e) => setEditingData({ ...editingData, jawaban: e.target.value })}
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2"
                 />
               </div>
 
@@ -167,7 +167,7 @@ export default function Faq() {
                 // Kemudian tutup modal
                 setShowModal2(false);
               }}
-              className="w-[1/2] mt-4 place-self-end text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-lg px-5 py-1 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+              className="w-[1/2] mt-4 place-self-end text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-lg px-5 py-1 text-center"
             >
               Simpan
             </button>
@@ -180,12 +180,12 @@ export default function Faq() {
       {/* Hapus Mahasiswa */}
       <Modal isVisible={showModal3} onClose={() => setShowModal3(false)}>
         <div class="px-6 pb-2 lg:px-8 text-left">
-          <h3 class="text-xl font-semibold text-gray-900 dark:text-white flex justify-center items-center mb-4">
+          <h3 class="text-xl font-semibold text-gray-900 flex justify-center items-center mb-4">
             Hapus Pertanyaan
           </h3>
           {editingData && (
             <div class="space-y-4">
-              <p class="text-gray-700 dark:text-gray-300">
+              <p class="text-gray-700">
                 Apakah Anda yakin ingin menghapus pertanyaan ini?
               </p>
               <div class="flex justify-end space-x-4">
