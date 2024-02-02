@@ -81,6 +81,9 @@ export default function LogbookKKN() {
     setCurrentPage(pageNumber);
   }; 
 
+// Nomor Halaman
+let index = (currentPage - 1) * itemsPerPage;
+
   return (
     <>
       <div className="absolute bg-IjoRumput w-full h-72 -z-20"></div>
@@ -118,13 +121,13 @@ export default function LogbookKKN() {
                   <tbody className="text-center">
                     {currentItem.map((item, i) => (
                       <tr key={i} className="border-y border-slate-300">
-                        <td className="py-1 px-0 lg:p-3">{i + 1}</td>
+                        <td className="py-1 px-0 lg:p-3">{index + i + 1}</td>
                         <td className="py-1 px-1 lg:p-3">{item.hari}</td>
                         <td className="py-1 px-1 lg:p-3">{item.mahasiswa}</td>
                         <td className="py-1 px-2 lg:p-3">{item.lokasi}</td>
                         <td className="py-1 px-2 lg:p-3">{item.kegiatan}</td>
                         <td className="py-1 px-2 lg:p-3">{item.target}</td>
-                        <td className="py-1 px-2 lg:p-3">{item.link}</td>
+                        <td className="py-1 px-2 lg:p-3 text-blue-500 hover:text-blue-800 hover:underline"> <Link href={item.link}> {item.link} </Link></td>
                       </tr>
                     ))}
                   </tbody>
