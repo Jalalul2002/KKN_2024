@@ -5,57 +5,22 @@ import Link from "next/link";
 import { ArrowDownIcon } from "@heroicons/react/24/outline";
 import Head from "next/head";
 import { useRouter } from "next/router";
+import useSWR from "swr";
 
 
 export default function Laporan() {
-  const downloadMenu = [
-    {
-      item: "Unduh Juknis KKN",
-      link: "/",
-      color: "bg-[#C70039]",
-    },
-    {
-      item: "Unduh Timeline KKN",
-      link: "/",
-      color: "bg-[#F39F5A]",
-    },
-    {
-      item: "Unduh Juknis Pelaporan KKN",
-      link: "/",
-      color: "bg-[#26577C]",
-    },
-  ];
+  const fetcher = (...args) => fetch(...args).then((res) => res.json());
+  const { data: tables = [], error } = useSWR(`/api/dosen/laporanData?nip=197206091999031003`, fetcher, {
+    initialData: [],
+  });  // const { data: tables2 = [], error: error2 } = useSWR(mahasiswaId ? `/api/mahasiswa/logbookQuery?mahasiswaId=${mahasiswaId}` : null, fetcher);
 
-  const dataKelompok = [
-    {
-      id: "K1",
-      namakelompok: "Kelompok 1",
-      ketua: "Ucup Slankie",
-      telp: "081356765432",
-      anggota: "15",
-    },
-    {
-      id: "K2",
-      namakelompok: "Kelompok 2",
-      ketua: "Ucup Slankie",
-      telp: "081356765432",
-      anggota: "15",
-    },
-    {
-      id: "K3",
-      namakelompok: "Kelompok 3",
-      ketua: "Ucup Slankie",
-      telp: "081356765432",
-      anggota: "15",
-    },
-    {
-      id: "K4",
-      namakelompok: "Kelompok 4",
-      ketua: "Ucup Slankie",
-      telp: "081356765432",
-      anggota: "15",
-    }
-  ];
+  if (error ) {
+    return <div>Error loading group details</div>;
+  }
+
+  if (!tables ) {
+    return <div>Loading... Data Error</div>;
+  }
 
   const router = useRouter();
 
@@ -85,12 +50,12 @@ export default function Laporan() {
                   Lokasi: Kabupaten Bandung, Jawa Barat
                 </h3>
                 <div className="grid md:grid-cols-4 xl:grid-cols-4 font-medium px-4 gap-6">
-                  {dataKelompok.map((item, i) => (
+                  {tables.map((item, i) => (
                     <div className="bg-gray-50 rounded-xl shadow-md" key={i}>
                       <div className="flex flex-row justify-between px-6 pt-4 pb-4">
                         <div>
                           <h1 className="text-2xl font-bold">
-                            {item.namakelompok}
+                            {item.kelompok}
                           </h1>
                           <h2>
                             Ketua:{" "}
@@ -105,7 +70,7 @@ export default function Laporan() {
                           <h2>
                             Lokasi:{" "}
                             <span className="font-semibold">
-                              Desa Cibodas, Kecamatan Ibun
+                              {item.lokasi}
                             </span>
                           </h2>
                         </div>
@@ -117,7 +82,7 @@ export default function Laporan() {
                       </div>
                       <div className="flex flex-row justify-between border-t">
                         <div className="w-2/3 text-center py-2">
-                          <p>Telp. {item.telp}</p>
+                          <p>Telp. {item.telpon}</p>
                         </div>
                         <div className="w-1/3 text-center bg-[#9d892f] py-2 rounded-ee-lg text-white hover:bg-[#bea63a]/80">
                             <button
@@ -125,11 +90,11 @@ export default function Laporan() {
                                     router.push({
                                     pathname: `/dosen/detailLaporan/${item.id}`,
                                     query: {
-                                        namakelompok: item.namakelompok,
+                                        namakelompok: item.kelompok,
                                         ketua: item.ketua,
                                         anggota: item.anggota,
                                         id: item.id,
-                                        telp: item.telp,
+                                        telp: item.telpon,
                                     },
                                     });
                                 }}

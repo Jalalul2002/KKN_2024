@@ -6,36 +6,100 @@ import { PlusIcon, TrashIcon } from "@heroicons/react/24/outline";
 import ReactModal from "react-modal";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import useSWR from 'swr';
-import { mutate } from "swr";
 
-const mahasiswaId = 7;
-export default function LogbookKKN() {  
-  const [mahasiswaData, setMahasiswaData] = useState({});
+const mahasiswaId = "7";
+export default function LogbookKKN() {
   const [nim, setNim] = useState("");
-  const [name, setName] = useState("");
+  const [logbookData, setLogbookData] = useState([]);
   const [showConfirmation, setShowConfirmation] = useState(false);
-  const [jenis_kkn, setJenis] = useState("");
-  const [kelompok, setKelompok] = useState("");
-  const [dosen, setDosen] = useState(""); 
-  const [items, setItems] = useState("");
-  const [lokasi, setLokasi] = useState("");
- 
-  const fetcher = (...args) => fetch(...args).then((res) => res.json());
-  const { data: tables = [], error } = useSWR(`/api/mahasiswa/logbookData?nim=${mahasiswaId}`,fetcher);
-  const { data: tables2 = [], error: error2 } = useSWR(mahasiswaId ? `/api/mahasiswa/logbookQuery?mahasiswaId=${mahasiswaId}` : null, fetcher);
+  const jenisKKN = "KKN Sisdamas";
+  const kelompok = "Kelompok 1";
+  const mahasiswa = "Ari";
+  const lokasi = "Desa Cibiru Hilir, Kec. Cileunyi, Kab. Bandung";
+  const ketua = "Ubed";
+  const dosen = "Dr. Sriyanti, S.T., M.Kom.";
+  // const logbook = [
+  //   {
+  //     hari: "Senin, 1/1/2024",
+  //     nama: "Ahmad",
+  //     lokasi: "Desa Cibiru Hilir, Kec. Cileunyi, Kab. Bandung",
+  //     judul: "Pembukaan KKN",
+  //     target: "Masysarakat Desa",
+  //     link: "https://",
+  //     anggotahadir: "Opet, Saritem, Mandala, Sahira",
+  //     dok: "/images/1.jpeg",
+  //   },
+  //   {
+  //     hari: "Senin, 1/1/2024",
+  //     nama: "Ahmad",
+  //     lokasi: "Desa Cibiru Hilir, Kec. Cileunyi, Kab. Bandung",
+  //     judul: "Pembukaan KKN",
+  //     target: "Masysarakat Desa",
+  //     link: "https://youtbute.com",
+  //     anggotahadir: "Opet, Saritem, Mandala, Sahira",
+  //     dok: "/images/1.jpeg",
+  //   },
+  //   {
+  //     hari: "Senin, 1/1/2024",
+  //     nama: "Ahmad",
+  //     lokasi: "Desa Cibiru Hilir, Kec. Cileunyi, Kab. Bandung",
+  //     judul: "Pembukaan KKN",
+  //     target: "Masysarakat Desa",
+  //     link: "https://",
+  //     anggotahadir: "Opet, Saritem, Mandala, Sahira",
+  //     dok: "/images/1.jpeg",
+  //   },
+  //   {
+  //     hari: "Senin, 1/1/2024",
+  //     nama: "Ahmad",
+  //     lokasi: "Desa Cibiru Hilir, Kec. Cileunyi, Kab. Bandung",
+  //     judul: "Pembukaan KKN",
+  //     target: "Masysarakat Desa",
+  //     link: "https://",
+  //     anggotahadir: "Opet, Saritem, Mandala, Sahira",
+  //     dok: "/images/1.jpeg",
+  //   },
+  // ];
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`/api/mahasiswa/logbookData?nim=${mahasiswaId}`);
+        if (response.ok) {
+          const data = await response.json();
+          setNim(data.nim);
+          setFormData((prevData) => ({ ...prevData, ...data }));
+          setFormData((prevData) => ({ ...prevData, ...data, hari: formattedDateTime }));
+          setLogbookData(data.logbookData);
+        } else {
+          console.error('Failed to fetch mahasiswa data', response.statusText);
+        }
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    };
 
-  if (error || error2 ) {
-    return <div>Error loading group details</div>;
-  }
+    fetchData();
+  }, [mahasiswaId]);
 
-  if (!tables || !tables2) {
-    return <div>Loading... Data Error</div>;
-  }
-  
-  
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`/api/mahasiswa/logbookData?nim=${mahasiswaId}`);
+        if (response.ok) {
+          const data = await response.json();
+          setLogbookData(data);
+        } else {
+          console.error('Failed to fetch logbook data', response.statusText);
+        }
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    };
 
-  const handleDelete = async (id) => {
+    fetchData();
+  }, [nim]);
+
+  const handleDelete = async () => {
     const confirmed = window.confirm("Are you sure you want to delete this data?");
   
     if (confirmed) {
@@ -45,14 +109,11 @@ export default function LogbookKKN() {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ mahasiswaId, id}), // Mengirim ID Dosen ke API penghapusan
+          body: JSON.stringify({ mahasiswaId }), // Mengirim ID Dosen ke API penghapusan
         });
   
         if (response.ok) {
           console.log("Data deleted successfully.");
-          console.log('Before mutate:', tables);
-          mutate('/mahasiswa/logbookQuery');
-          console.log('After mutate:', tables);
         } else {
           console.error("Error deleting data:", response.statusText);
         }
@@ -62,17 +123,11 @@ export default function LogbookKKN() {
     }
   };
 
-  const router = useRouter();
-  const [active, setActive] = useState(1);
-  const [itemsPerPage] = useState(10); // Jumlah item per halaman
-
-  const displayData = () => {
-    const filteredData = tables2.filter(searchFilter)
-
-    const startIndex = (active - 1) * itemsPerPage;
-    const endIndex = startIndex + itemsPerPage;
-    return filteredData.slice(startIndex, endIndex);
-  };
+  const itemsPerPage = 10;
+  const [currentPage, setCurrentPage] = useState(1);
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItem = logbookData.slice(indexOfFirstItem, indexOfLastItem);
 
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -115,16 +170,16 @@ export default function LogbookKKN() {
     setFormData((prevData) => ({ ...prevData, [id]: value }));
 };
 const [formData, setFormData] = useState({
-  hari: "", // pastikan untuk mengganti ini sesuai kebutuhan
-  jenis: "",
-  kelompok: "",
-  dosen: "",
-  lokasi: "",
+  hari: formattedDateTime,
+  jenis: jenisKKN,
+  kelompok: kelompok,
+  dosen: dosen,
+  lokasi: lokasi,
   kegiatan: "",
   target: "",
   link: "",
-  mahasiswa: "",
-  mahasiswa_id: "",
+  mahasiswa: mahasiswa,
+  mahasiswa_id: mahasiswaId,
 });
 const handleAddSubmit = async (e) => {
   e.preventDefault();
@@ -137,27 +192,15 @@ const handleAddSubmit = async (e) => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        hari: formattedDateTime,
-        jenis: tables[0].jenis_kkn,  // Ganti ke tables[0] karena Anda mengambil data dari tables
-        kelompok: tables[0].kelompok,
-        dosen: tables[0].nip,
-        lokasi: tables[0].lokasi,
-        kegiatan: formData.kegiatan,  // Ganti ke formData
-        target: formData.target,      // Ganti ke formData
-        link: formData.link,          // Ganti ke formData
-        mahasiswa: tables[0].name,
-        mahasiswa_id: tables[0].nim,
-      }),
+      body: JSON.stringify(formData),
     });
 
     if (response.ok) {
       // Handle sukses pengiriman ke API
       console.log("Data berhasil dikirim ke API");
-      window.location.href = '/mahasiswa/logbook';
     } else {
       // Handle kesalahan dari API
-      console.error("Gagal mengirim data ke API ");
+      console.error("Gagal mengirim data ke API");
     }
   } catch (error) {
     // Handle kesalahan umum
@@ -194,8 +237,6 @@ const handleAddSubmit = async (e) => {
           </div>
           <form className="mx-auto"
           onSubmit={handleAddSubmit}>
-            {tables.map((items, i) => ( 
-            <div key={i}>
             <div className="flex justify-center space-x-2 mb-3 md:px-5">
               <div className="max-w-xs w-full">
                 <label htmlFor="tanggal" className="block mb-1 font-semibold">
@@ -205,7 +246,7 @@ const handleAddSubmit = async (e) => {
                   id="tanggal"
                   className="disabled w-full rounded-md text-xs md:text-base"
                   value={formattedDateTime}
-                  readOnly
+                  onChange={handleChange}
                 ></input>
               </div>
               <div>
@@ -215,8 +256,8 @@ const handleAddSubmit = async (e) => {
                 <input
                   id="jenis"
                   className="disabled w-full rounded-md text-xs md:text-base"
-                  value={items.jenis_kkn}
-                  readOnly
+                  value={jenisKKN}
+                  onChange={handleChange}
                 ></input>
               </div>
             </div>
@@ -228,8 +269,8 @@ const handleAddSubmit = async (e) => {
                 <input
                   id="nama"
                   className="disabled w-full rounded-md text-xs md:text-base"
-                  value={items.kelompok}
-                  readOnly
+                  value={kelompok}
+                  onChange={handleChange}
                 ></input>
               </div>
               <div className="max-w-xs w-full">
@@ -239,8 +280,8 @@ const handleAddSubmit = async (e) => {
                 <input
                   id="dosen"
                   className="disabled w-full rounded-md text-xs md:text-base"
-                  value={items.dosen}
-                  readOnly
+                  value={dosen}
+                  onChange={handleChange}
                 ></input>
               </div>
             </div>
@@ -251,8 +292,8 @@ const handleAddSubmit = async (e) => {
               <input
                 id="mahasiswa"
                 className="disabled w-full rounded-md text-xs md:text-base"
-                value={items.name}
-                readOnly
+                value={mahasiswa}
+                onChange={handleChange}
               ></input>
             </div>
             <div className="max-w-lg mx-auto mb-3">
@@ -262,8 +303,8 @@ const handleAddSubmit = async (e) => {
               <input
                 id="lokasi"
                 className="disabled w-full rounded-md text-xs md:text-base"
-                value={items.lokasi}
-                readOnly
+                value={lokasi}
+                onChange={handleChange}
               ></input>
             </div>
             <div className="flex justify-center space-x-2 mb-3 md:px-5">
@@ -300,18 +341,17 @@ const handleAddSubmit = async (e) => {
                 value={formData.link}
                 onChange={handleChange}
               ></textarea>
+            </div>
+            <div className="max-w-lg mx-auto mb-3">
+              <label htmlFor="lokasi" className="block mb-1 font-semibold">
+                Id mahasiswa
+              </label>
               <input
-                type="hidden"
-                  id="mahasiswa_id"
-                  className="disabled w-full rounded-md text-xs md:text-base"
-                  value={items.nim}
-                ></input>
-              <input
-                type="hidden"
-                  id="dosen"
-                  className="disabled w-full rounded-md text-xs md:text-base"
-                  value={items.nip}
-                ></input>
+                id="mahasiswaId"
+                className="disabled w-full rounded-md text-xs md:text-base"
+                value={mahasiswaId}
+                onChange={handleChange}
+              ></input>
             </div>
             <div className="flex flex-row space-x-3 justify-center mt-6">
               <button
@@ -328,8 +368,6 @@ const handleAddSubmit = async (e) => {
                 Tambah
               </button>
             </div>
-            </div>
-              ))}
           </form>
         </div>
       </ReactModal>
@@ -346,12 +384,9 @@ const handleAddSubmit = async (e) => {
             </div>
             <div className="p-3 md:p-6 bg-iceGray rounded-xl">
               <div className="mt-3 ml-4 md:ml-5 flex flex-row justify-between">
-                <div className="box-border mb-3">{tables.map((itemm, i) => (
-                <div key={i}>
-                  <h1 className="text-lg md:text-3xl font-bold">KKN {itemm.jenis_kkn}</h1>
-                  <h2 className="md:text-xl font-semibold">{itemm.kelompok}</h2>
-                  </div>
-              ))}
+                <div className="box-border mb-3">
+                  <h1 className="text-lg md:text-3xl font-bold">{jenisKKN}</h1>
+                  <h2 className="md:text-xl font-semibold">{kelompok}</h2>
                 </div>
                 <div className="flex flex-col justify-center md:justify-end px-2 py-1">
                   <button
@@ -382,7 +417,7 @@ const handleAddSubmit = async (e) => {
                     </tr>
                   </thead>
                   <tbody className="text-center">
-                    {tables2.map((item, i) => (
+                    {currentItem.map((item, i) => (
                       <tr key={i} className="border-y border-slate-300">
                         <td className="py-1 px-0 lg:p-3">{i + 1}</td>
                         <td className="py-1 px-1 lg:p-3">{item.hari}</td>
@@ -393,13 +428,22 @@ const handleAddSubmit = async (e) => {
                         <td className="py-1 px-3 lg:p-3">
                           <div
                             className="bg-red-600 hover:bg-red-700 flex items-center p-2 text-white cursor-pointer rounded-lg"
-                            onClick={() => handleDelete(item.id)} // Tampilkan dialog konfirmasi saat tombol diklik
+                            onClick={() => setShowConfirmation(true)} // Tampilkan dialog konfirmasi saat tombol diklik
                           >
                             <TrashIcon
                               className="w-3 h-3 md:w-5 md:h-5"
                               style={{ strokeWidth: 2 }}
                             />
                           </div>
+
+                          {/* Dialog konfirmasi penghapusan */}
+                          {showConfirmation && (
+                            <div>
+                              <p>Anda yakin ingin menghapus data?</p>
+                              <button onClick={handleDelete}>Ya</button>
+                              <button onClick={() => setShowConfirmation(false)}>Batal</button>
+                            </div>
+                          )}
                         </td>
                       </tr>
                     ))}
@@ -409,7 +453,7 @@ const handleAddSubmit = async (e) => {
                   <nav className="block">
                     <ul className="flex pl-0 rounded list-none flex-wrap">
                       {Array.from({
-                        length: Math.ceil(displayData.length / itemsPerPage),
+                        length: Math.ceil(logbookData.length / itemsPerPage),
                       }).map((item, index) => (
                         <li key={index}>
                           <a

@@ -2,66 +2,80 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { IoChevronBackOutline } from "react-icons/io5";
 import { useRouter } from "next/router";
+import useSWR from "swr";
 
 
 export default function LogbookKKN() {
 
-    const router = useRouter();
-    const { id, namakelompok, ketua, anggota, telp} = router.query;
+    // const router = useRouter();
+    // const { id, namakelompok, ketua, anggota, telp} = router.query;
 
-  const jenisKKN = "KKN Sisdamas";
-  const kelompok = "Kelompok 1";
-  const lokasi = "Desa Cibiru Hilir, Kec. Cileunyi, Kab. Bandung";
-  const dosen = "Dr. Sriyanti, S.T., M.Kom.";
-  const logbook = [
-    {
-      hari: "Senin, 1/1/2024",
-      nama: "Ahmad",
-      lokasi: "Desa Cibiru Hilir, Kec. Cileunyi, Kab. Bandung",
-      judul: "Pembukaan KKN",
-      target: "Masysarakat Desa",
-      link: "https://",
-      anggotahadir: "Opet, Saritem, Mandala, Sahira",
-      dok: "/images/1.jpeg",
-    },
-    {
-      hari: "Senin, 1/1/2024",
-      nama: "Ahmad",
-      lokasi: "Desa Cibiru Hilir, Kec. Cileunyi, Kab. Bandung",
-      judul: "Pembukaan KKN",
-      target: "Masysarakat Desa",
-      link: "https://",
-      anggotahadir: "Opet, Saritem, Mandala, Sahira",
-      dok: "/images/1.jpeg",
-    },
-    {
-      hari: "Senin, 1/1/2024",
-      nama: "Ahmad",
-      lokasi: "Desa Cibiru Hilir, Kec. Cileunyi, Kab. Bandung",
-      judul: "Pembukaan KKN",
-      target: "Masysarakat Desa",
-      link: "https://",
-      anggotahadir: "Opet, Saritem, Mandala, Sahira",
-      dok: "/images/1.jpeg",
-    },
-    {
-      hari: "Senin, 1/1/2024",
-      nama: "Ahmad",
-      lokasi: "Desa Cibiru Hilir, Kec. Cileunyi, Kab. Bandung",
-      judul: "Pembukaan KKN",
-      target: "Masysarakat Desa",
-      link: "https://",
-      anggotahadir: "Opet, Saritem, Mandala, Sahira",
-      dok: "/images/1.jpeg",
-    },
-  ];
+  // const jenisKKN = "KKN Sisdamas";
+  // const kelompok = "Kelompok 1";
+  // const lokasi = "Desa Cibiru Hilir, Kec. Cileunyi, Kab. Bandung";
+  // const dosen = "Dr. Sriyanti, S.T., M.Kom.";
+  // const logbook = [
+  //   {
+  //     hari: "Senin, 1/1/2024",
+  //     nama: "Ahmad",
+  //     lokasi: "Desa Cibiru Hilir, Kec. Cileunyi, Kab. Bandung",
+  //     judul: "Pembukaan KKN",
+  //     target: "Masysarakat Desa",
+  //     link: "https://",
+  //     anggotahadir: "Opet, Saritem, Mandala, Sahira",
+  //     dok: "/images/1.jpeg",
+  //   },
+  //   {
+  //     hari: "Senin, 1/1/2024",
+  //     nama: "Ahmad",
+  //     lokasi: "Desa Cibiru Hilir, Kec. Cileunyi, Kab. Bandung",
+  //     judul: "Pembukaan KKN",
+  //     target: "Masysarakat Desa",
+  //     link: "https://",
+  //     anggotahadir: "Opet, Saritem, Mandala, Sahira",
+  //     dok: "/images/1.jpeg",
+  //   },
+  //   {
+  //     hari: "Senin, 1/1/2024",
+  //     nama: "Ahmad",
+  //     lokasi: "Desa Cibiru Hilir, Kec. Cileunyi, Kab. Bandung",
+  //     judul: "Pembukaan KKN",
+  //     target: "Masysarakat Desa",
+  //     link: "https://",
+  //     anggotahadir: "Opet, Saritem, Mandala, Sahira",
+  //     dok: "/images/1.jpeg",
+  //   },
+  //   {
+  //     hari: "Senin, 1/1/2024",
+  //     nama: "Ahmad",
+  //     lokasi: "Desa Cibiru Hilir, Kec. Cileunyi, Kab. Bandung",
+  //     judul: "Pembukaan KKN",
+  //     target: "Masysarakat Desa",
+  //     link: "https://",
+  //     anggotahadir: "Opet, Saritem, Mandala, Sahira",
+  //     dok: "/images/1.jpeg",
+  //   },
+  // ];
+  const router = useRouter();
+  const { id } = router.query; // Mengakses nilai dari query parameter 'id'
 
+  const fetcher = (...args) => fetch(...args).then((res) => res.json());
+  const { data : data = [], error } = useSWR(id? `/api/dosen/logbookDetail?id=${id}`:null, fetcher);
+  const { data : data2 = [], error2 } = useSWR(id?`/api/dosen/logbookDetailkelompok?id=${id}`:null, fetcher);
+
+  if (error || error2 ) {
+    return <div>Error loading group details</div>;
+  }
+
+  if (!data || !data2 ) {
+    return <div>{data === null ? 'No data available' : 'Loading...'}</div>;
+  }
   const itemsPerPage = 10;
   const [currentPage, setCurrentPage] = useState(1);
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItem = logbook.slice(indexOfFirstItem, indexOfLastItem);
+  const currentItem = data.slice(indexOfFirstItem, indexOfLastItem);
 
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -80,12 +94,14 @@ export default function LogbookKKN() {
               <h1 className="md:text-center">Logbook KKN</h1>
             </div>
             <div className="p-3 md:p-6 bg-iceGray rounded-xl">
+            {data2.map((items) => (
               <div className="mt-3 ml-4 md:ml-5 flex flex-row justify-center items-center md:flex md:justify-center md:items-center">
                 <div className="box-border mb-3">
-                  <h1 className="text-lg md:text-3xl font-bold grid justify-center md:grid md:justify-center md:items-center">{jenisKKN}</h1>
-                  <h2 className="md:text-xl font-semibold grid justify-center items-center md:grid md:justify-center md:items-center">{kelompok}</h2>
+                  <h1 className="text-lg md:text-3xl font-bold grid justify-center md:grid md:justify-center md:items-center">{items.jenis}</h1>
+                  <h2 className="md:text-xl font-semibold grid justify-center items-center md:grid md:justify-center md:items-center">{items.kelompok}</h2>
                 </div> 
               </div>
+              ))}
               <div className="box-border md:py-3 md:px-2 mb-3 lg:text-base text-xs md:text-sm overflow-x-auto rounded-lg font-medium">
                 <table className="w-full rounded-xl bg-white">
                   <thead className="bg-gray-50">
@@ -97,7 +113,6 @@ export default function LogbookKKN() {
                       <th className="px-6 p-3 lg:p-4">Kegiatan</th>
                       <th className="px-6 p-3 lg:p-4">Target</th>
                       <th className="px-6 p-3 lg:p-4">Link</th>
-                      <th className="px-6 p-3 lg:p-4">Anggota Hadir</th>
                     </tr>
                   </thead>
                   <tbody className="text-center">
@@ -105,12 +120,11 @@ export default function LogbookKKN() {
                       <tr key={i} className="border-y border-slate-300">
                         <td className="py-1 px-0 lg:p-3">{i + 1}</td>
                         <td className="py-1 px-1 lg:p-3">{item.hari}</td>
-                        <td className="py-1 px-1 lg:p-3">{item.nama}</td>
+                        <td className="py-1 px-1 lg:p-3">{item.mahasiswa}</td>
                         <td className="py-1 px-2 lg:p-3">{item.lokasi}</td>
-                        <td className="py-1 px-2 lg:p-3">{item.judul}</td>
+                        <td className="py-1 px-2 lg:p-3">{item.kegiatan}</td>
                         <td className="py-1 px-2 lg:p-3">{item.target}</td>
                         <td className="py-1 px-2 lg:p-3">{item.link}</td>
-                        <td className="py-1 px-2 lg:p-3">{item.anggotahadir}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -119,7 +133,7 @@ export default function LogbookKKN() {
                   <nav className="block">
                     <ul className="flex pl-0 rounded list-none flex-wrap">
                       {Array.from({
-                        length: Math.ceil(logbook.length / itemsPerPage),
+                        length: Math.ceil(data.length / itemsPerPage),
                       }).map((item, index) => (
                         <li key={index}>
                           <a

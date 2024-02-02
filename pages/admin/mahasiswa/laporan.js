@@ -7,10 +7,10 @@ import { useRouter } from 'next/router';
 import useSWR from 'swr';
 import Link from 'next/link';
 
-export default function Laporan() {
+export default function Logbook() {
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
-  const { data : tables = [], error } = useSWR('/api/admin/setting/kelompokQuery', fetcher);
-  
+  const { data : tables = [], error } = useSWR('/api/admin/mahasiswa/laporanQuery', fetcher);
+
   if (error ) {
     return <div>Error loading group details</div>;
   }
@@ -55,17 +55,14 @@ export default function Laporan() {
   };
 
   const searchFilter = (item) => {
-    const { name, jenis_kelompok, dosen_nama, lokasi_kelurahan, lokasi_kecamatan, lokasi_kota, lokasi_provinsi } = item;
+    const { kelompok, jenis, dosen, lokasi} = item;
     const searchText = searchTerm.toLowerCase();
 
     return (
-        (name && name.toLowerCase().includes(searchText)) ||
-        (jenis_kelompok && jenis_kelompok.toLowerCase().includes(searchText)) ||
-        (dosen_nama && dosen_nama.toLowerCase().includes(searchText)) ||
-        (lokasi_kelurahan && lokasi_kelurahan.toLowerCase().includes(searchText)) ||
-        (lokasi_kecamatan && lokasi_kecamatan.toLowerCase().includes(searchText)) ||
-        (lokasi_kota && lokasi_kota.toLowerCase().includes(searchText)) ||
-        (lokasi_provinsi && lokasi_provinsi.toLowerCase().includes(searchText))
+        (kelompok && kelompok.toLowerCase().includes(searchText)) ||
+        (jenis && jenis.toLowerCase().includes(searchText)) ||
+        (dosen && dosen.toLowerCase().includes(searchText)) ||
+        (lokasi && lokasi.toLowerCase().includes(searchText))
     );
 };
 
@@ -119,16 +116,16 @@ export default function Laporan() {
             {displayData().map((table, i) => (
               <tr key={i}>
                 <td scope='col' className='py-2 px-4'>{i+1}</td>
-                <td scope='col' className='py-2 px-4'>{table.name}</td>
-                <td scope='col' className='py-2 px-4'>{table.jenis_kelompok}</td>
-                <td scope='col' className='py-2 px-4'>{table.dosen_nama}</td>
-                <td scope='col' className='py-2 px-4'>{`${table.lokasi_kelurahan}, ${table.lokasi_kecamatan}, ${table.lokasi_kota}, ${table.lokasi_provinsi}`}</td>
+                <td scope='col' className='py-2 px-4'>{table.kelompok}</td>
+                <td scope='col' className='py-2 px-4'>{table.jenis}</td>
+                <td scope='col' className='py-2 px-4'>{table.dosen}</td>
+                <td scope='col' className='py-2 px-4'>{table.lokasi}</td>
                 <td scope='col' className='py-2 px-4'>
-                  <button>
+                <button>
                     <Link href={`/admin/mahasiswa/detailLaporan/${table.id}`}>
                     <span className='font-medium text-blue-400 dark:text-blue-500 hover:underline'>detail</span>
                     </Link>
-                  </button>               
+                  </button>            
                 </td>
               </tr>
             ))}

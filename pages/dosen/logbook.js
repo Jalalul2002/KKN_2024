@@ -5,41 +5,22 @@ import Link from "next/link";
 import { ArrowDownIcon } from "@heroicons/react/24/outline";
 import Head from "next/head";
 import { useRouter } from "next/router";
+import useSWR from "swr";
 
 
 export default function Logbook() {
+  const fetcher = (...args) => fetch(...args).then((res) => res.json());
+  const { data: tables = [], error } = useSWR(`/api/dosen/logbookData?nip=197206091999031003`, fetcher, {
+    initialData: [],
+  });  // const { data: tables2 = [], error: error2 } = useSWR(mahasiswaId ? `/api/mahasiswa/logbookQuery?mahasiswaId=${mahasiswaId}` : null, fetcher);
 
-  const dataKelompok = [
-    {
-      id: "K1",
-      namakelompok: "Kelompok 1",
-      ketua: "Ucup Slankie",
-      telp: "081356765432",
-      anggota: "15",
-    },
-    {
-      id: "K2",
-      namakelompok: "Kelompok 2",
-      ketua: "Ucup Slankie",
-      telp: "081356765432",
-      anggota: "15",
-    },
-    {
-      id: "K3",
-      namakelompok: "Kelompok 3",
-      ketua: "Ucup Slankie",
-      telp: "081356765432",
-      anggota: "15",
-    },
-    {
-      id: "K4",
-      namakelompok: "Kelompok 4",
-      ketua: "Ucup Slankie",
-      telp: "081356765432",
-      anggota: "15",
-    }
-  ];
+  if (error ) {
+    return <div>Error loading group details</div>;
+  }
 
+  if (!tables ) {
+    return <div>Loading... Data Error</div>;
+  }
   const router = useRouter();
 
   return (
@@ -68,12 +49,12 @@ export default function Logbook() {
                   Lokasi: Kabupaten Bandung, Jawa Barat
                 </h3>
                 <div className="grid md:grid-cols-4 xl:grid-cols-4 font-medium px-4 gap-6">
-                  {dataKelompok.map((item, i) => (
+                {tables.map((item, i) => ( 
                     <div className="bg-gray-50 rounded-xl shadow-md" key={i}>
                       <div className="flex flex-row justify-between px-6 pt-4 pb-4">
                         <div>
                           <h1 className="text-2xl font-bold">
-                            {item.namakelompok}
+                            {item.kelompok}
                           </h1>
                           <h2>
                             Ketua:{" "}
@@ -83,24 +64,24 @@ export default function Logbook() {
                             Jumlah Anggota:{" "}
                             <span className="font-semibold">
                               {item.anggota}
-                            </span>
+                            </span> 
                           </h2>
                           <h2>
                             Lokasi:{" "}
                             <span className="font-semibold">
-                              Desa Cibodas, Kecamatan Ibun
+                              {item.lokasi}
                             </span>
                           </h2>
                         </div>
                         <div className="flex justify-center items-center">
                           <div className="bg-[#b36f38] text-center flex justify-center items-center font-extrabold text-white rounded-full text-3xl py-6 px-6">
-                            <h1>{item.id}</h1>
+                            <h1>K{item.id}</h1>
                           </div>
                         </div>
                       </div>
                       <div className="flex flex-row justify-between border-t">
                         <div className="w-2/3 text-center py-2">
-                          <p>Telp. {item.telp}</p>
+                          <p>Telp. {item.telpon}</p>
                         </div>
                         <div className="w-1/3 text-center bg-[#b36f38] py-2 rounded-ee-lg text-white hover:bg-[#b36f38]/80">
                             <button
@@ -108,11 +89,11 @@ export default function Logbook() {
                                     router.push({
                                     pathname: `/dosen/detailLogbook/${item.id}`,
                                     query: {
-                                        namakelompok: item.namakelompok,
+                                        kelompok: item.kelompok,
                                         ketua: item.ketua,
                                         anggota: item.anggota,
                                         id: item.id,
-                                        telp: item.telp,
+                                        telp: item.telpon,
                                     },
                                     });
                                 }}
