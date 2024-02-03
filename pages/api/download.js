@@ -21,7 +21,7 @@ export default async (req, res) => {
         res.setHeader('Content-Type', 'application/pdf');
 
         // Baca file dari sistem file dan kirimkan sebagai respons
-        const fileStream = fs.createReadStream(path.join(process.cwd(),'uploads', 'pdf', filePath));
+        const fileStream = fs.createReadStream(path.join(process.cwd(),'uploads', 'pdf', 'laporan', filePath));
         fileStream.pipe(res);
 
       } else {

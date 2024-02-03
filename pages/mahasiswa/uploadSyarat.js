@@ -46,6 +46,8 @@ export default function UploadSyarat() {
         setModalSuccess(true);
 
         // Tambahkan logika lain yang diperlukan setelah unggah berhasil
+        const router = useRouter();
+        router.push('/mahasiswa/syaratCompleted');
       } else {
         // alert("Gagal mengunggah file laporan.");
         setModalFail(true);
