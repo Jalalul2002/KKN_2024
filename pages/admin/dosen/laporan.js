@@ -20,16 +20,12 @@ export default function Laporann() {
   
   const router = useRouter();
   const [active, setActive] = useState(1);
-  const [itemsPerPage] = useState(10); // Jumlah item per halaman
+  const itemsPerPage = 10;
+  const [currentPage, setCurrentPage] = useState(1);
 
-  // Fungsi untuk memotong data sesuai halaman aktif
-  const displayData = () => {
-    const filteredData = tables.filter(searchFilter)
-
-    const startIndex = (active - 1) * itemsPerPage;
-    const endIndex = startIndex + itemsPerPage;
-    return filteredData.slice(startIndex, endIndex);
-  };
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItem = Array.isArray(tables) ? tables.slice(indexOfFirstItem, indexOfLastItem) : [];
 
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -105,10 +101,10 @@ export default function Laporann() {
             </tr>
           </thead>
           <tbody className='text-center'>
-            {displayData().map((table, i) => (
+            {currentItem.length > 0 && currentItem.map((table, i) => (
               <tr key={i}>
               <td scope='col' className='py-1 px-2'>{i+1}</td>
-              <td scope='col' className='py-1 px-2'>{table.dosen_name}</td>
+              <td scope='col' className='py-1 px-2'>{table.dosen_name || "-"}</td>
               <td scope='col' className='py-1 px-2'>{table.nip || "-"}</td>
               <td scope='col' className='py-1 px-2'>{table.telpon_dosen || "-"}</td>
               <td scope='col' className='py-1 px-2'>{table.kelompok || "-"}</td>

@@ -4,17 +4,20 @@ import db from "@/pages/lib/connectDatabase";
 export default async function handler(req, res) {
   try {
     const [data] = await db.promise().query(`
-      SELECT
-        d.nip,
-        d.nama AS dosen_name,
-        d.telpon_dosen AS telpon,
-        k.id AS kelompok_ids,
-        k.name AS kelompok,
-        k.jenis_kelompok AS jenis_kelompok
-      FROM
-        dosen d
-      LEFT JOIN
-        kelompok k ON d.nip = k.id_dosen
+    SELECT
+  d.nip,
+  d.nama AS dosen_name,
+  d.telpon_dosen AS telpon,
+  GROUP_CONCAT(k.name) AS kelompok,
+  MAX(k.jenis_kelompok) AS jenis_kelompok
+FROM
+  dosen d
+LEFT JOIN
+  kelompok k ON d.nip = k.id_dosen
+GROUP BY
+  d.nip, d.nama, d.telpon_dosen;
+
+  
     `);
 
     if (!data || data.length === 0) {

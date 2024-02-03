@@ -79,7 +79,7 @@ export default function LaporanKKN() {
             </div>
             <div className="p-3 md:p-6 bg-iceGray rounded-xl">
               <div className="mt-3 ml-4 md:ml-5 flex flex-row">
-                <div className="box-border mb-3">{tables.map((items, i) => (
+                <div className="box-border mb-3">{tables.length > 0 && tables.map((items, i) => (
                 <div key={i}>
                   <h1 className="text-lg md:text-3xl font-bold">KKN {items.jenis_kkn}</h1>
                   <h2 className="md:text-xl font-semibold">{items.kelompok}</h2>
@@ -89,7 +89,7 @@ export default function LaporanKKN() {
               </div>
               <div className="w-full font-medium text-sm md:text-lg px-4 md:px-0">
                 <form className="max-w-lg mx-auto my-3" onSubmit={handleSubmit} >
-                {tables.map((items, i) => ( 
+                {tables.length > 0 && tables.map((items, i) => ( 
                 <div key={i}>
                 <div className="my-2">
                     <label htmlFor="laporan">

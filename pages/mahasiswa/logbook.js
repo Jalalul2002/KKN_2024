@@ -11,7 +11,7 @@ import { mutate } from "swr";
 import { Dialog, Transition } from '@headlessui/react'
 import { Fragment } from 'react'
 
-const mahasiswaId = 1203010100;
+const mahasiswaId = 8;
 export default function LogbookKKN() {  
   const [mahasiswaData, setMahasiswaData] = useState({});
   const [nim, setNim] = useState("");
@@ -68,7 +68,7 @@ export default function LogbookKKN() {
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItem = tables2.slice(indexOfFirstItem, indexOfLastItem);
+  const currentItem = Array.isArray(tables2) ? tables2.slice(indexOfFirstItem, indexOfLastItem) : [];
 
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);

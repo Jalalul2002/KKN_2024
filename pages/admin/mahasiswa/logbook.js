@@ -28,16 +28,12 @@ export default function Logbook() {
 
   const router = useRouter();
   const [active, setActive] = useState(1);
-  const [itemsPerPage] = useState(10); // Jumlah item per halaman
+  const itemsPerPage = 10;
+  const [currentPage, setCurrentPage] = useState(1);
 
-  // Fungsi untuk memotong data sesuai halaman aktif
-  const displayData = () => {
-    const filteredData = tables.filter(searchFilter)
-
-    const startIndex = (active - 1) * itemsPerPage;
-    const endIndex = startIndex + itemsPerPage;
-    return filteredData.slice(startIndex, endIndex);
-  };
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItem = Array.isArray(tables) ? tables.slice(indexOfFirstItem, indexOfLastItem) : [];
 
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -113,7 +109,7 @@ export default function Logbook() {
             </tr>
           </thead>
           <tbody className='text-left'>
-            {displayData().map((table, i) => (
+            {currentItem.length > 0 && currentItem.map((table, i) => (
               <tr key={i}>
                 <td scope='col' className='py-2 px-4'>{i+1}</td>
                 <td scope='col' className='py-2 px-4'>{table.kelompok}</td>

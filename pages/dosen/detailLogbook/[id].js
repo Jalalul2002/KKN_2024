@@ -75,7 +75,7 @@ export default function LogbookKKN() {
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItem = data.slice(indexOfFirstItem, indexOfLastItem);
+  const currentItem = Array.isArray(data) ? data.slice(indexOfFirstItem, indexOfLastItem) : [];
 
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);

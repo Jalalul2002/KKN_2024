@@ -110,7 +110,7 @@ export default function DetailLaporan() {
           ))}
           ;
           <div className=" grid justify-center items-center grid-cols-4 font-medium px-4 gap-6 mt-8">
-            {tables.map((itemm, i) => (
+            {tables.length > 0 && tables.map((itemm, i) => (
               <div className="bg-white grid justify-center items-center py-8 mt-4 rounded-xl">
                 <h1 className="font-bold text-4xl mb-3 text-center">
                   {itemm.kelompok}
