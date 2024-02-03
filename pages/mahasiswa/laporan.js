@@ -35,9 +35,6 @@ export default function LaporanKKN() {
     return <div>Loading... Data Error</div>;
   }
 
-  const [judul, setJudul] = useState("");
-  const [file, setFile] = useState(null);
-
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     setFile(file);
@@ -100,7 +97,7 @@ export default function LaporanKKN() {
 
   const handleCloseErrorModal = () => {
     setModalError(false);
-
+  }
   
   const handleDelete = async () => {
     // const confirmed = window.confirm("Are you sure you want to delete this data?");
@@ -194,7 +191,7 @@ export default function LaporanKKN() {
                           <td className="py-1 px-0 lg:p-3">{i+1}</td>
                           <td className="py-1 px-1 lg:p-3">{item.judul}</td>
                           <td className="py-1 px-2 lg:p-3">{item.laporan}</td>
-                          <td className="py-1 px-3 lg:p-3">
+                          <td className="py-1 px-3 lg:p-3 flex items-center justify-center">
                             <div
                               className="lg:w-9 bg-red-600 hover:bg-red-700 flex items-center p-2 text-white cursor-pointer rounded-lg"
                               onClick={() => handleOpenModal2(item.id)}
@@ -211,10 +208,10 @@ export default function LaporanKKN() {
                     </tbody>
                   </table>
                 ) : (
-                  <form className="max-w-lg mx-auto my-3" onSubmit={handleSubmit} >
+                <form className="max-w-lg mx-auto my-3" onSubmit={handleSubmit} >
                 {tables.length > 0 && tables.map((items, i) => ( 
-                <div key={i}>
-                <div className="my-2">
+                  <div key={i}>
+                  <div className="my-2">
                     <label htmlFor="laporan">
                       Judul Artikel
                     </label>
