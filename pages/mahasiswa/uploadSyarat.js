@@ -6,9 +6,12 @@ import Head from "next/head";
 import useSWR from "swr";
 import { useSession } from "next-auth/react";
 import { useState } from "react";
+import SuccessModal from "../../components/modalsuccess";
+import FailedModal from "../../components/modalfail";
+import ErrorModal from "../../components/modalerror";
 
 export default function UploadSyarat() {
-  const { data : Session, status } = useSession();
+  const { data: Session, status } = useSession();
 
   const id = Session?.user?.username;
 
@@ -18,34 +21,55 @@ export default function UploadSyarat() {
     const file = e.target.files[0];
     setFile(file);
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!file) {
-      alert('Pilih file laporan terlebih dahulu.');
+      // alert("Pilih file laporan terlebih dahulu.");
+      setModalError(true);
       return;
     }
 
     const formData = new FormData();
-    formData.append('id', id);
-    formData.append('file', file);
+    formData.append("id", id);
+    formData.append("file", file);
 
     try {
       const response = await fetch("/api/mahasiswa/uploadSyarat", {
         method: "POST",
         body: formData, // Gunakan formData untuk upload file
       });
-        
+
       if (response.ok) {
         const data = await response.json();
-        alert(`File ${file.name} berhasil diunggah.`);
+        // alert(`File ${file.name} berhasil diunggah.`);
+        setModalSuccess(true);
+
         // Tambahkan logika lain yang diperlukan setelah unggah berhasil
       } else {
-        alert('Gagal mengunggah file laporan.');
+        // alert("Gagal mengunggah file laporan.");
+        setModalFail(true);
       }
     } catch (error) {
-      console.error('Terjadi kesalahan:', error);
-      alert('Terjadi kesalahan. Silakan coba lagi.');
+      console.error("Terjadi kesalahan:", error);
+      alert("Terjadi kesalahan. Silakan coba lagi.");
     }
+  };
+
+  const [isModalSuccess, setModalSuccess] = useState(false);
+  const [isModalFail, setModalFail] = useState(false);
+  const [isModalError, setModalError] = useState(false);
+
+  const handleCloseSuccessModal = () => {
+    setModalSuccess(false);
+  };
+
+  const handleCloseFailModal = () => {
+    setModalFail(false);
+  };
+
+  const handleCloseErrorModal = () => {
+    setModalError(false);
   };
 
   return (
@@ -54,7 +78,25 @@ export default function UploadSyarat() {
         <title>Upload Syarat</title>
         <meta property="og:title" content="Upload Syarat" key="title" />
       </Head>
-      <div className="absolute bg-IjoRumput w-full h-72 -z-20"></div>
+      <SuccessModal
+        isOpen={isModalSuccess}
+        onClose={handleCloseSuccessModal}
+        onRefresh={() => window.location.reload()}
+        isMessage={"File Syarat Berhasil Diunggah"}
+      />
+      <FailedModal
+        isOpen={isModalFail}
+        onClose={handleCloseFailModal}
+        onRefresh={() => window.location.reload()}
+        isMessage={"File Syarat Gagal Diunggah"}
+      />
+      <ErrorModal
+        isOpen={isModalError}
+        onClose={handleCloseErrorModal}
+        onRefresh={() => window.location.reload()}
+        isMessage={"Pilih File Syarat Terlebih Dahulu"}
+      />
+      ;<div className="absolute bg-IjoRumput w-full h-72 -z-20"></div>
       <div className="flex flex-row justify-start">
         <div className="md:w-auto h-screen">
           <SidebarMahasiswa />
@@ -108,23 +150,26 @@ export default function UploadSyarat() {
                   Upload surat pernyataan dengan nama file SP_NIM.pdf contoh:
                   SP_1207050002.pdf
                 </p>
-                <form className="mt-5 flex flex-row justify-center items-center" onSubmit={handleSubmit}>
-                <div class="mb-1 flex items-center text-base">
+                <form
+                  className="mt-5 flex flex-row justify-center items-center"
+                  onSubmit={handleSubmit}
+                >
+                  <div class="mb-1 flex items-center text-base">
+                    <input
+                      type="hidden"
+                      id="nim"
+                      className="w-full text-sm shadow-sm bg-gray-50 border border-gray-300 text-gray-900 rounded-sm focus:ring-blue-500 focus:border-blue-500"
+                      required
+                      value={id}
+                      readOnly
+                    />
+                  </div>
                   <input
-                    type="hidden"
-                    id="nim"
-                    className="w-full text-sm shadow-sm bg-gray-50 border border-gray-300 text-gray-900 rounded-sm focus:ring-blue-500 focus:border-blue-500"
-                    required
-                    value={id}
-                    readOnly
-                  />
-                </div>
-                  <input 
-                      id="file"
-                      type="file"
-                      accept=".pdf"
-                      onChange={handleFileChange}>
-                  </input>
+                    id="file"
+                    type="file"
+                    accept=".pdf"
+                    onChange={handleFileChange}
+                  ></input>
                   <button
                     type="submit"
                     className="bg-green-500 hover:bg-green-700 px-5 py-1 rounded-sm text-white font-bold"
