@@ -1,4 +1,4 @@
-import Modal from '@/pages/component/admin/modal';
+import Modal from '@/components/admin/modal';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { IoChevronBackOutline } from 'react-icons/io5';
@@ -9,7 +9,7 @@ import useSWR from 'swr';
 export default function DetailLaporan() {
   const router = useRouter();
   const [showModal, setShowModal] = useState(false);
-  const [selectedGroup, setSelectedGroup] = useState(null);
+  const [selectedItem, setSelectedItem] = useState(null);
   const { id } = router.query; // Mengakses nilai dari query parameter 'nip'
 
   if (!id) {
@@ -19,7 +19,9 @@ export default function DetailLaporan() {
 
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
   const { data: tables = [], error } = useSWR(id? `/api/admin/dosen/laporanDatadosen?nip=${id}`:null, fetcher );
-  const { data: tables2 = [], error2 } = useSWR(showModal && selectedGroup? `/api/admin/dosen/laporanDataDetail?id=${selectedGroup}`:null, fetcher );
+  const { data: tables2 = [], error2 } = useSWR(selectedItem? `/api/admin/dosen/laporanDataDetail?id=${selectedItem}`:null, fetcher );
+  const { data: tables3 = [], error3 } = useSWR(id? `/api/admin/dosen/laporanDatakelompok?nip=${id}`:null, fetcher );
+  
 
 
   if (error) {
@@ -29,7 +31,11 @@ export default function DetailLaporan() {
   if (!tables) {
     return <div>Loading... Data Error</div>;
   }
-  
+
+  const handleOpenModal2 = (id) => {
+    setShowModal(true);
+    setSelectedItem(id);
+  }
   return (
     <>
       <div className='bg-IjoRumput w-screen h-screen flex justify-center'>
@@ -38,7 +44,7 @@ export default function DetailLaporan() {
             <Link href='/admin/dosen/laporan' className="text-xl"><IoChevronBackOutline /></Link>
           </div>
           <h1 className='flex justify-center items-center text-white text-4xl font-bold mt-8'>Detail Laporan</h1> 
-          {tables.map((items) => (
+          {tables3.map((items) => (
             <div>
             <div className='bg-white h-auto w-auto flex justify-between items-center rounded-lg px-8 my-4'>
               <div className='font-bold text-3xl flex items-center justify-center my-4'>
@@ -75,10 +81,7 @@ export default function DetailLaporan() {
                     <h1 className='font-bold text-4xl mb-3 text-center'>{itemm.kelompok}</h1>
                     <button 
                 className='font-semibold text-blue-400 hover:underline' 
-                onClick={() => {
-                setSelectedGroup(itemm.id);
-                setShowModal(true);
-                }}>
+                onClick={() => handleOpenModal2(itemm.id)}>
                 Detail
                 </button>
                 </div>
@@ -94,12 +97,14 @@ export default function DetailLaporan() {
           Detail Laporan
         </h1>
         {tables.map((itemms) => (
-        <div>
+           itemms.id === selectedItem && (
+        <div key={itemms.id}>
           <h3>Kelompok: {itemms.kelompok} </h3>
           <h3>Ketua: {itemms.ketua}</h3>
           <h3>Kontak Ketua: {itemms.telpon}</h3>
           <h3>Laporan:</h3>
         </div>
+           )
         ))}
         <div className='relative overflow-x-auto mt-4 bg-white '>
           <table className='text-lg text-gray-500 w-full'>
@@ -112,8 +117,8 @@ export default function DetailLaporan() {
               </tr>
             </thead>
             <tbody className='text-center'>
-            {tables2.map((items, i) => (
-                <tr key={i}>
+            {tables2.length > 0 && tables2.map((items, i) => (
+                <tr key={items.id}>
                     <td scope='col' className='py-1 px-2'>{i + 1}</td>
                     <td scope='col' className='py-1 px-2'>{items.judul}</td>
                     <td scope='col' className='py-1 px-2'>{items.laporan}</td>

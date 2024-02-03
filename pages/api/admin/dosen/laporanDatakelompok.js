@@ -8,7 +8,7 @@ export default async function handler(req, res) {
       SELECT
         k.id AS id,
         m.telpon AS telpon,
-        k.name AS kelompok,
+        GROUP_CONCAT(k.name) AS kelompok,
         k.id_ketua AS ketua,
         d.nip AS nip_dosen,
         d.nama AS nama_dosen,

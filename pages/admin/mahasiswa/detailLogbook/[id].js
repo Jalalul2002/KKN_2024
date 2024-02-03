@@ -81,7 +81,7 @@ export default function DetailLogbook() {
                     </tr>
                   </thead>
                   <tbody className="text-center">
-                    {currentItem.map((item, i) => (
+                    {currentItem.length > 0 && currentItem.map((item, i) => (
                       <tr key={i} className="border-y border-slate-300">
                         <td className="py-1 px-0 lg:p-3">{i + 1}</td>
                         <td className="py-1 px-1 lg:p-3">{item.hari || "-"}</td>

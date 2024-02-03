@@ -4,7 +4,7 @@ import path from "path";
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    let uploadFolder = "./uploads/pdf/"; // Tentukan folder upload sesuai dengan kebutuhan
+    let uploadFolder = "./uploads/pdf/laporan/"; // Tentukan folder upload sesuai dengan kebutuhan
     const ext = path.extname(file.originalname);
     cb(null, uploadFolder);
   },

@@ -79,7 +79,7 @@ export default function detailLaporan() {
                 </tr>
               </thead>
               <tbody className='text-center'>
-              {tables.map((item, i) => (
+              {tables.length > 0 && tables.map((item, i) => (
                 <tr key={i}>
                   <td scope='col' className='py-2 px-2'>{i + 1}</td>
                   <td scope='col' className='py-2 px-2'>{item.judul}</td>

@@ -50,10 +50,6 @@ export default function LogbookKKN() {
         });
   
         if (response.ok) {
-          console.log("Data deleted successfully.");
-          console.log('Before mutate:', tables);
-          mutate('/mahasiswa/logbook');
-          console.log('After mutate:', tables);
           router.reload();
         } else {
           console.error("Error deleting data:", response.statusText);
@@ -394,7 +390,7 @@ let index = (currentPage - 1) * itemsPerPage;
                     </tr>
                   </thead>
                   <tbody className="text-center">
-                    {currentItem.map((item, i) => (
+                    {currentItem.length > 0 && currentItem.map((item, i) => (
                       <tr key={i} className="border-y border-slate-300">
                         <td className="py-1 px-0 lg:p-3">{index+i+1}</td>
                         <td className="py-1 px-1 lg:p-3">{item.hari}</td>
