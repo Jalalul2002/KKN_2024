@@ -11,7 +11,7 @@ import { mutate } from "swr";
 import { Dialog, Transition } from '@headlessui/react'
 import { Fragment } from 'react'
 
-const mahasiswaId = 8;
+const mahasiswaId = 1203010100;
 export default function LogbookKKN() {  
   const [mahasiswaData, setMahasiswaData] = useState({});
   const [nim, setNim] = useState("");
@@ -159,7 +159,7 @@ const handleAddSubmit = async (e) => {
     if (response.ok) {
       // Handle sukses pengiriman ke API
       console.log("Data berhasil dikirim ke API");
-      window.location.href = '/mahasiswa/logbook';
+      router.reload();
     } else {
       // Handle kesalahan dari API
       console.error("Gagal mengirim data ke API ");

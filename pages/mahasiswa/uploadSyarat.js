@@ -39,6 +39,8 @@ export default function UploadSyarat() {
         const data = await response.json();
         alert(`File ${file.name} berhasil diunggah.`);
         // Tambahkan logika lain yang diperlukan setelah unggah berhasil
+        const router = useRouter();
+        router.push('/mahasiswa/syaratCompleted');
       } else {
         alert('Gagal mengunggah file laporan.');
       }
