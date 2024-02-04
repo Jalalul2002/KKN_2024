@@ -88,7 +88,7 @@ export default function DetailLogbook() {
                         <td className="py-1 px-1 lg:p-3">{item.mahasiswa || "-"}</td>
                         <td className="py-1 px-2 lg:p-3">{item.lokasi || "-"}</td>
                         <td className="py-1 px-2 lg:p-3">{item.target || "-"}</td>
-                        <td className="py-1 px-2 lg:p-3">{item.link || "-"}</td>
+                        <td className="py-1 px-2 lg:p-3 text-blue-500 hover:text-blue-800 hover:underline"> <Link href={item.link} target="_blank"> {item.link || "-"} </Link></td>
                       </tr>
                     ))}
                   </tbody>

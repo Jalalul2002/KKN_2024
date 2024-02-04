@@ -7,56 +7,56 @@ import ReactModal from "react-modal";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import useSWR from 'swr';
-import { mutate } from "swr";
 import { Dialog, Transition } from '@headlessui/react'
 import { Fragment } from 'react'
+import SuccessModal from "@/components/modalsuccess";
 
 const mahasiswaId = 1203010100;
-export default function LogbookKKN() {  
+export default function LogbookKKN() {
   const [mahasiswaData, setMahasiswaData] = useState({});
   const [nim, setNim] = useState("");
   const [name, setName] = useState("");
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [jenis_kkn, setJenis] = useState("");
   const [kelompok, setKelompok] = useState("");
-  const [dosen, setDosen] = useState(""); 
+  const [dosen, setDosen] = useState("");
   const [items, setItems] = useState("");
   const [lokasi, setLokasi] = useState("");
   const [isOpen, setIsOpen] = useState(false);
- 
+
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
-  const { data: tables = [], error } = useSWR(`/api/mahasiswa/logbookData?nim=${mahasiswaId}`,fetcher);
+  const { data: tables = [], error } = useSWR(`/api/mahasiswa/logbookData?nim=${mahasiswaId}`, fetcher);
   const { data: tables2 = [], error: error2 } = useSWR(mahasiswaId ? `/api/mahasiswa/logbookQuery?mahasiswaId=${mahasiswaId}` : null, fetcher);
 
-  if (error || error2 ) {
+  if (error || error2) {
     return <div>Error loading group details</div>;
   }
 
   if (!tables || !tables2) {
     return <div>Loading... Data Error</div>;
   }
-  
+
   const handleDelete = async (id) => {
     // const confirmed = window.confirm("Are you sure you want to delete this data?");
-  
+
     // if (confirmed) {
-      try {
-        const response = await fetch("/api/mahasiswa/logbookDelete", {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ mahasiswaId, id}), // Mengirim ID Dosen ke API penghapusan
-        });
-  
-        if (response.ok) {
-          router.reload();
-        } else {
-          console.error("Error deleting data:", response.statusText);
-        }
-      } catch (error) {
-        console.error("Error deleting data:", error);
+    try {
+      const response = await fetch("/api/mahasiswa/logbookDelete", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ mahasiswaId, id }), // Mengirim ID Dosen ke API penghapusan
+      });
+
+      if (response.ok) {
+        router.reload();
+      } else {
+        console.error("Error deleting data:", response.statusText);
       }
+    } catch (error) {
+      console.error("Error deleting data:", error);
+    }
     // }
   };
 
@@ -118,60 +118,89 @@ export default function LogbookKKN() {
   const handleChange = (event) => {
     const { id, value } = event.target;
     setFormData((prevData) => ({ ...prevData, [id]: value }));
-};
-const [formData, setFormData] = useState({
-  hari: "", // pastikan untuk mengganti ini sesuai kebutuhan
-  jenis: "",
-  kelompok: "",
-  dosen: "",
-  lokasi: "",
-  kegiatan: "",
-  target: "",
-  link: "",
-  mahasiswa: "",
-  mahasiswa_id: "",
-});
-const handleAddSubmit = async (e) => {
-  e.preventDefault();
-  setNim(mahasiswaId);
+  };
+  const [formData, setFormData] = useState({
+    hari: "", // pastikan untuk mengganti ini sesuai kebutuhan
+    jenis: "",
+    kelompok: "",
+    dosen: "",
+    lokasi: "",
+    kegiatan: "",
+    target: "",
+    link: "",
+    mahasiswa: "",
+    mahasiswa_id: "",
+  });
+  const handleAddSubmit = async (e) => {
+    e.preventDefault();
+    setNim(mahasiswaId);
 
-  try {
-    // Menggunakan fetch untuk mengirim data ke API
-    const response = await fetch("/api/mahasiswa/logbookAdd", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        hari: formattedDateTime,
-        jenis: tables[0].jenis_kkn,  // Ganti ke tables[0] karena Anda mengambil data dari tables
-        kelompok: tables[0].kelompok,
-        dosen: tables[0].nip,
-        lokasi: tables[0].lokasi,
-        kegiatan: formData.kegiatan,  // Ganti ke formData
-        target: formData.target,      // Ganti ke formData
-        link: formData.link,          // Ganti ke formData
-        mahasiswa: tables[0].name,
-        mahasiswa_id: tables[0].nim,
-      }),
-    });
+    try {
+      // Menggunakan fetch untuk mengirim data ke API
+      const response = await fetch("/api/mahasiswa/logbookAdd", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          hari: formattedDateTime,
+          jenis: tables[0].jenis_kkn,  // Ganti ke tables[0] karena Anda mengambil data dari tables
+          kelompok: tables[0].kelompok,
+          dosen: tables[0].nip,
+          lokasi: tables[0].lokasi,
+          kegiatan: formData.kegiatan,  // Ganti ke formData
+          target: formData.target,      // Ganti ke formData
+          link: formData.link,          // Ganti ke formData
+          mahasiswa: tables[0].name,
+          mahasiswa_id: tables[0].nim,
+        }),
+      });
 
-    if (response.ok) {
-      // Handle sukses pengiriman ke API
-      console.log("Data berhasil dikirim ke API");
-      router.reload();
-    } else {
-      // Handle kesalahan dari API
-      console.error("Gagal mengirim data ke API ");
+      if (response.ok) {
+        // Handle sukses pengiriman ke API
+        console.log("Data berhasil dikirim ke API");
+        setModalSuccess(true);
+      } else {
+        // Handle kesalahan dari API
+        console.error("Gagal mengirim data ke API ");
+      }
+    } catch (error) {
+      // Handle kesalahan umum
+      console.error("Terjadi kesalahan:", error);
     }
-  } catch (error) {
-    // Handle kesalahan umum
-    console.error("Terjadi kesalahan:", error);
-  }
-};
+  };
 
-// Nomor Halaman
-let index = (currentPage - 1) * itemsPerPage;
+  // Nomor Halaman
+  let index = (currentPage - 1) * itemsPerPage;
+
+  //Modal SUccess,FAil, Error
+  const [isModalSuccess, setModalSuccess] = useState(false);
+  const [isModalFail, setModalFail] = useState(false);
+  const [isModalError, setModalError] = useState(false);
+
+  useEffect(() => {
+    if (isModalSuccess) {
+      const timeoutId = setTimeout(() => {
+        router.reload();
+      }, 1500); // close and refresh after 2 seconds
+
+      return () => {
+        clearTimeout(timeoutId);
+      };
+    }
+  }, [isModalSuccess]);
+
+  const handleCloseSuccessModal = () => {
+    setModalSuccess(false);
+  };
+
+  const handleCloseFailModal = () => {
+    setModalFail(false);
+  };
+
+  const handleCloseErrorModal = () => {
+    setModalError(false);
+  }
 
   return (
     <>
@@ -179,13 +208,19 @@ let index = (currentPage - 1) * itemsPerPage;
         <title>Logbook Mahasiswa</title>
         <meta property="og:title" content="Logbook Mahasiswa" key="title" />
       </Head>
+      <SuccessModal
+        isOpen={isModalSuccess}
+        onClose={handleCloseSuccessModal}
+        onRefresh={() => router.reload()}
+        isMessage={"Logbook Berhasil Ditambahkan"}
+      />
       <ReactModal
         isOpen={isInputModal}
         onRequestClose={closeInputModal}
         contentLabel="Konfirmasi Pendaftaran"
         style={{
           overlay: {
-            zIndex: 1000,
+            zIndex: 100,
           },
           content: {
             width: "auto",
@@ -201,143 +236,145 @@ let index = (currentPage - 1) * itemsPerPage;
             <h1 className="font-bold text-lg md:text-3xl">Tambah Logbook</h1>
           </div>
           <form className="mx-auto"
-          onSubmit={handleAddSubmit}>
-            {tables.map((items, i) => ( 
-            <div key={i}>
-            <div className="flex justify-center space-x-2 mb-3 md:px-5">
-              <div className="max-w-xs w-full">
-                <label htmlFor="tanggal" className="block mb-1 font-semibold">
-                  Hari, Tanggal
-                </label>
-                <input
-                  id="tanggal"
-                  className="disabled w-full rounded-md text-xs md:text-base"
-                  value={formattedDateTime}
-                  readOnly
-                ></input>
+            onSubmit={handleAddSubmit}>
+            {tables.map((items, i) => (
+              <div key={i}>
+                <div className="flex justify-center space-x-2 mb-3 md:px-5">
+                  <div className="max-w-xs w-full">
+                    <label htmlFor="tanggal" className="block mb-1 font-semibold">
+                      Hari, Tanggal
+                    </label>
+                    <input
+                      id="tanggal"
+                      className="disabled w-full rounded-md text-xs md:text-base"
+                      value={formattedDateTime}
+                      readOnly
+                    ></input>
+                  </div>
+                  <div>
+                    <label htmlFor="jenis" className="block mb-1 font-semibold">
+                      Jenis KKN
+                    </label>
+                    <input
+                      id="jenis"
+                      className="disabled w-full rounded-md text-xs md:text-base"
+                      value={items.jenis_kkn}
+                      readOnly
+                    ></input>
+                  </div>
+                </div>
+                <div className="flex justify-center space-x-2 mb-3 md:px-5">
+                  <div>
+                    <label htmlFor="nama" className="block mb-1 font-semibold">
+                      Nama Kelompok
+                    </label>
+                    <input
+                      id="nama"
+                      className="disabled w-full rounded-md text-xs md:text-base"
+                      value={items.kelompok}
+                      readOnly
+                    ></input>
+                  </div>
+                  <div className="max-w-xs w-full">
+                    <label htmlFor="dosen" className="block mb-1 font-semibold">
+                      Dosen Pembimbing
+                    </label>
+                    <input
+                      id="dosen"
+                      className="disabled w-full rounded-md text-xs md:text-base"
+                      value={items.dosen}
+                      readOnly
+                    ></input>
+                  </div>
+                </div>
+                <div className="max-w-lg mx-auto mb-3">
+                  <label htmlFor="name" className="block mb-1 font-semibold">
+                    Nama
+                  </label>
+                  <input
+                    id="mahasiswa"
+                    className="disabled w-full rounded-md text-xs md:text-base"
+                    value={items.name}
+                    readOnly
+                  ></input>
+                </div>
+                <div className="max-w-lg mx-auto mb-3">
+                  <label htmlFor="lokasi" className="block mb-1 font-semibold">
+                    Lokasi KKN
+                  </label>
+                  <input
+                    id="lokasi"
+                    className="disabled w-full rounded-md text-xs md:text-base"
+                    value={items.lokasi}
+                    readOnly
+                  ></input>
+                </div>
+                <div className="flex justify-center space-x-2 mb-3 md:px-5">
+                  <div className="max-w-xs w-full">
+                    <label htmlFor="Kegiatan" className="block mb-1 font-semibold">
+                      Nama Kegiatan
+                    </label>
+                    <input
+                      id="kegiatan"
+                      className="w-full rounded-md text-xs md:text-base"
+                      value={formData.kegiatan}
+                      onChange={handleChange}
+                    ></input>
+                  </div>
+                  <div>
+                    <label htmlFor="target" className="block mb-1 font-semibold">
+                      Target KKN
+                    </label>
+                    <input
+                      id="target"
+                      className="w-full rounded-md text-xs md:text-base"
+                      value={formData.target}
+                      onChange={handleChange}
+                    ></input>
+                  </div>
+                </div>
+                <div className="max-w-lg mx-auto mb-3">
+                  <label htmlFor="kegiatan" className="block mb-1 font-semibold">
+                    Link Logbook
+                  </label>
+                  <input
+                    type="url"
+                    placeholder="https://www.example.com"
+                    id="link"
+                    className=" w-full rounded-md text-xs md:text-base"
+                    value={formData.link}
+                    onChange={handleChange}
+                  ></input>
+                  <input
+                    type="hidden"
+                    id="mahasiswa_id"
+                    className="disabled w-full rounded-md text-xs md:text-base"
+                    value={items.nim}
+                  ></input>
+                  <input
+                    type="hidden"
+                    id="dosen"
+                    className="disabled w-full rounded-md text-xs md:text-base"
+                    value={items.nip}
+                  ></input>
+                </div>
+                <div className="flex flex-row space-x-3 justify-center mt-6">
+                  <button
+                    type="button"
+                    onClick={closeInputModal}
+                    className="bg-red-600 hover:bg-red-700 px-8 py-2 text-white rounded-sm"
+                  >
+                    Batal
+                  </button>
+                  <button
+                    type="submit"
+                    className="bg-green-600 hover:bg-green-700 px-8 py-2 text-white rounded-sm"
+                  >
+                    Tambah
+                  </button>
+                </div>
               </div>
-              <div>
-                <label htmlFor="jenis" className="block mb-1 font-semibold">
-                  Jenis KKN
-                </label>
-                <input
-                  id="jenis"
-                  className="disabled w-full rounded-md text-xs md:text-base"
-                  value={items.jenis_kkn}
-                  readOnly
-                ></input>
-              </div>
-            </div>
-            <div className="flex justify-center space-x-2 mb-3 md:px-5">
-              <div>
-                <label htmlFor="nama" className="block mb-1 font-semibold">
-                  Nama Kelompok
-                </label>
-                <input
-                  id="nama"
-                  className="disabled w-full rounded-md text-xs md:text-base"
-                  value={items.kelompok}
-                  readOnly
-                ></input>
-              </div>
-              <div className="max-w-xs w-full">
-                <label htmlFor="dosen" className="block mb-1 font-semibold">
-                  Dosen Pembimbing
-                </label>
-                <input
-                  id="dosen"
-                  className="disabled w-full rounded-md text-xs md:text-base"
-                  value={items.dosen}
-                  readOnly
-                ></input>
-              </div>
-            </div>
-            <div className="max-w-lg mx-auto mb-3">
-              <label htmlFor="name" className="block mb-1 font-semibold">
-                Nama
-              </label>
-              <input
-                id="mahasiswa"
-                className="disabled w-full rounded-md text-xs md:text-base"
-                value={items.name}
-                readOnly
-              ></input>
-            </div>
-            <div className="max-w-lg mx-auto mb-3">
-              <label htmlFor="lokasi" className="block mb-1 font-semibold">
-                Lokasi KKN
-              </label>
-              <input
-                id="lokasi"
-                className="disabled w-full rounded-md text-xs md:text-base"
-                value={items.lokasi}
-                readOnly
-              ></input>
-            </div>
-            <div className="flex justify-center space-x-2 mb-3 md:px-5">
-              <div className="max-w-xs w-full">
-                <label htmlFor="Kegiatan" className="block mb-1 font-semibold">
-                  Nama Kegiatan
-                </label>
-                <input
-                  id="kegiatan"
-                  className="w-full rounded-md text-xs md:text-base"
-                  value={formData.kegiatan}
-                  onChange={handleChange}
-                ></input>
-              </div>
-              <div>
-                <label htmlFor="target" className="block mb-1 font-semibold">
-                  Target KKN
-                </label>
-                <input
-                  id="target"
-                  className="w-full rounded-md text-xs md:text-base"
-                  value={formData.target}
-                  onChange={handleChange}
-                ></input>
-              </div>
-            </div>
-            <div className="max-w-lg mx-auto mb-3">
-              <label htmlFor="kegiatan" className="block mb-1 font-semibold">
-                Link Logbook
-              </label>
-              <textarea
-                id="link"
-                className=" w-full rounded-md text-xs md:text-base"
-                value={formData.link}
-                onChange={handleChange}
-              ></textarea>
-              <input
-                type="hidden"
-                  id="mahasiswa_id"
-                  className="disabled w-full rounded-md text-xs md:text-base"
-                  value={items.nim}
-                ></input>
-              <input
-                type="hidden"
-                  id="dosen"
-                  className="disabled w-full rounded-md text-xs md:text-base"
-                  value={items.nip}
-                ></input>
-            </div>
-            <div className="flex flex-row space-x-3 justify-center mt-6">
-              <button
-                type="button"
-                onClick={closeInputModal}
-                className="bg-red-600 hover:bg-red-700 px-8 py-2 text-white rounded-sm"
-              >
-                Batal
-              </button>
-              <button
-                type="submit"
-                className="bg-green-600 hover:bg-green-700 px-8 py-2 text-white rounded-sm"
-              >
-                Tambah
-              </button>
-            </div>
-            </div>
-              ))}
+            ))}
           </form>
         </div>
       </ReactModal>
@@ -355,11 +392,11 @@ let index = (currentPage - 1) * itemsPerPage;
             <div className="p-3 md:p-6 bg-iceGray rounded-xl">
               <div className="mt-3 ml-4 md:ml-5 flex flex-row justify-between">
                 <div className="box-border mb-3">{tables.map((itemm, i) => (
-                <div key={i}>
-                  <h1 className="text-lg md:text-3xl font-bold">KKN {itemm.jenis_kkn}</h1>
-                  <h2 className="md:text-xl font-semibold">{itemm.kelompok}</h2>
+                  <div key={i}>
+                    <h1 className="text-lg md:text-3xl font-bold">KKN {itemm.jenis_kkn}</h1>
+                    <h2 className="md:text-xl font-semibold">{itemm.kelompok}</h2>
                   </div>
-              ))}
+                ))}
                 </div>
                 <div className="flex flex-col justify-center md:justify-end px-2 py-1">
                   <button
@@ -392,17 +429,17 @@ let index = (currentPage - 1) * itemsPerPage;
                   <tbody className="text-center">
                     {currentItem.length > 0 && currentItem.map((item, i) => (
                       <tr key={i} className="border-y border-slate-300">
-                        <td className="py-1 px-0 lg:p-3">{index+i+1}</td>
+                        <td className="py-1 px-0 lg:p-3">{index + i + 1}</td>
                         <td className="py-1 px-1 lg:p-3">{item.hari}</td>
                         <td className="py-1 px-2 lg:p-3">{item.lokasi}</td>
                         <td className="py-1 px-2 lg:p-3">{item.kegiatan}</td>
                         <td className="py-1 px-2 lg:p-3">{item.target}</td>
-                        <td className="py-1 px-2 lg:p-3 text-blue-600 hover:underline hover:text-blue-800"><Link href={item.link}> {item.link} </Link></td>
+                        <td className="py-1 px-2 lg:p-3 text-blue-600 hover:underline hover:text-blue-800"><Link href={item.link} target="_blank"> {item.link} </Link></td>
                         <td className="py-1 px-3 lg:p-3">
                           <div
                             className="lg:w-9 bg-red-600 hover:bg-red-700 flex items-center p-2 text-white cursor-pointer rounded-lg"
                             onClick={() => handleOpenModal2(item.id)}
-                           // Tampilkan dialog konfirmasi saat tombol diklik
+                          // Tampilkan dialog konfirmasi saat tombol diklik
                           >
                             <TrashIcon
                               className="w-3 h-3 md:w-5 md:h-5"

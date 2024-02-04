@@ -13,7 +13,7 @@ import ErrorModal from "@/components/modalerror";
 import { useRouter } from 'next/router';
 
 
-const mahasiswaId = 1203010100;
+const mahasiswaId = 1;
 export default function LaporanKKN() {
   const [nim, setNim] = useState("");
   const [isOpen, setIsOpen] = useState(false);
@@ -61,7 +61,6 @@ export default function LaporanKKN() {
     formData.append("mahasiswa_id", tables[0].nim);
     formData.append("judul", judul);
     formData.append("file", file);
-
     try {
       const response = await fetch("/api/mahasiswa/laporan", {
         method: "POST",
@@ -80,6 +79,7 @@ export default function LaporanKKN() {
     } catch (error) {
       console.error("Terjadi kesalahan:", error);
       alert("Terjadi kesalahan. Silakan coba lagi.");
+      setModalError(true);
     }
   };
 
@@ -211,6 +211,13 @@ export default function LaporanKKN() {
                 <form className="max-w-lg mx-auto my-3" onSubmit={handleSubmit} >
                 {tables.length > 0 && tables.map((items, i) => ( 
                   <div key={i}>
+                    <input
+                      type="hidden"
+                      id="mahasiswa_id"
+                      className="disabled w-full rounded-md text-xs md:text-base"
+                      value={items.nim}
+                />  </div>
+                ))}
                   <div className="my-2">
                     <label htmlFor="laporan">
                       Judul Artikel
@@ -222,12 +229,6 @@ export default function LaporanKKN() {
                       value={judul}
                       onChange={(e) => setJudul(e.target.value)}
                     />
-                    <input
-                      type="hidden"
-                      id="mahasiswa_id"
-                      className="disabled w-full rounded-md text-xs md:text-base"
-                      value={items.nim}
-                ></input>
                   </div>
                   <div className="my-2 hidden">
                     <label htmlFor="laporan">Link Google Drive</label>
@@ -248,8 +249,6 @@ export default function LaporanKKN() {
                       onChange={handleFileChange}
                     />
                   </div>
-                  </div>
-              ))}
                   <div className="text-center mt-5">
                     <button
                       type="submit"
