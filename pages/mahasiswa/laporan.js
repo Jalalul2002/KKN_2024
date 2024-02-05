@@ -3,29 +3,33 @@ import Navbar from "../../components/navbar";
 import SidebarMahasiswa from "../../components/sidebarMahasiswa";
 import Head from "next/head";
 import { PlusIcon, TrashIcon } from "@heroicons/react/24/outline";
-import { Dialog, Transition } from '@headlessui/react'
-import { Fragment } from 'react'
+import { Dialog, Transition } from "@headlessui/react";
+import { Fragment } from "react";
 import useSWR from "swr";
 import { useState } from "react";
 import SuccessModal from "../../components/modalsuccess";
 import FailedModal from "@/components/modalfail";
 import ErrorModal from "@/components/modalerror";
-import { useRouter } from 'next/router';
+import { useRouter } from "next/router";
 
-
-const mahasiswaId = 1;
+const mahasiswaId = 1201010100;
 export default function LaporanKKN() {
   const [nim, setNim] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
-  const [judul, setJudul] = useState('');
+  const [judul, setJudul] = useState("");
   const [file, setFile] = useState(null);
   const router = useRouter();
 
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
-  const { data: tables = [], error } = useSWR(`/api/mahasiswa/logbookData?nim=${mahasiswaId}`,fetcher);
-  const { data: tables2 = [], error2 } = useSWR(`/api/mahasiswa/laporanQuery?mahasiswaId=${mahasiswaId}`,fetcher);
-
+  const { data: tables = [], error } = useSWR(
+    `/api/mahasiswa/logbookData?nim=${mahasiswaId}`,
+    fetcher
+  );
+  const { data: tables2 = [], error2 } = useSWR(
+    `/api/mahasiswa/laporanQuery?mahasiswaId=${mahasiswaId}`,
+    fetcher
+  );
 
   if (error) {
     return <div>Error loading group details</div>;
@@ -42,12 +46,12 @@ export default function LaporanKKN() {
 
   const handleCloseModal = () => {
     setIsOpen(false);
-  }
+  };
 
   const handleOpenModal2 = (id) => {
     setIsOpen(true);
     setSelectedItem(id);
-  }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -97,29 +101,29 @@ export default function LaporanKKN() {
 
   const handleCloseErrorModal = () => {
     setModalError(false);
-  }
-  
+  };
+
   const handleDelete = async () => {
     // const confirmed = window.confirm("Are you sure you want to delete this data?");
-  
+
     // if (confirmed) {
-      try {
-        const response = await fetch("/api/mahasiswa/laporanDelete", {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ mahasiswaId}), // Mengirim ID Dosen ke API penghapusan
-        });
-  
-        if (response.ok) {
-          router.reload();
-        } else {
-          console.error("Error deleting data:", response.statusText);
-        }
-      } catch (error) {
-        console.error("Error deleting data:", error);
+    try {
+      const response = await fetch("/api/mahasiswa/laporanDelete", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ mahasiswaId }), // Mengirim ID Dosen ke API penghapusan
+      });
+
+      if (response.ok) {
+        router.reload();
+      } else {
+        console.error("Error deleting data:", response.statusText);
       }
+    } catch (error) {
+      console.error("Error deleting data:", error);
+    }
     // }
   };
 
@@ -175,8 +179,8 @@ export default function LaporanKKN() {
                 </div>
               </div>
               <div className="w-full font-medium text-sm md:text-lg px-4 md:px-0">
-                { tables2 && tables2.length > 0 ?(  
-                    <table className="w-full rounded-xl">
+                {tables2 && tables2.length > 0 ? (
+                  <table className="w-full rounded-xl">
                     <thead>
                       <tr className="bg-IjoRumput">
                         <th className="rounded-tl-lg p-1 lg:p-4">No</th>
@@ -188,14 +192,14 @@ export default function LaporanKKN() {
                     <tbody className="text-center">
                       {tables2.map((item, i) => (
                         <tr key={i} className="border-y border-slate-300">
-                          <td className="py-1 px-0 lg:p-3">{i+1}</td>
+                          <td className="py-1 px-0 lg:p-3">{i + 1}</td>
                           <td className="py-1 px-1 lg:p-3">{item.judul}</td>
                           <td className="py-1 px-2 lg:p-3">{item.laporan}</td>
                           <td className="py-1 px-3 lg:p-3 flex items-center justify-center">
                             <div
                               className="lg:w-9 bg-red-600 hover:bg-red-700 flex items-center p-2 text-white cursor-pointer rounded-lg"
                               onClick={() => handleOpenModal2(item.id)}
-                             // Tampilkan dialog konfirmasi saat tombol diklik
+                              // Tampilkan dialog konfirmasi saat tombol diklik
                             >
                               <TrashIcon
                                 className="w-3 h-3 md:w-5 md:h-5"
@@ -208,57 +212,61 @@ export default function LaporanKKN() {
                     </tbody>
                   </table>
                 ) : (
-                <form className="max-w-lg mx-auto my-3" onSubmit={handleSubmit} >
-                {tables.length > 0 && tables.map((items, i) => ( 
-                  <div key={i}>
-                    <input
-                      type="hidden"
-                      id="mahasiswa_id"
-                      className="disabled w-full rounded-md text-xs md:text-base"
-                      value={items.nim}
-                />  </div>
-                ))}
-                  <div className="my-2">
-                    <label htmlFor="laporan">
-                      Judul Artikel
-                    </label>
-                    <input
-                      className="block w-full text-gray-900 border border-gray-300 bg-gray-50 rounded-md"
-                      id="judul"
-                      type="text"
-                      value={judul}
-                      onChange={(e) => setJudul(e.target.value)}
-                    />
-                  </div>
-                  <div className="my-2 hidden">
-                    <label htmlFor="laporan">Link Google Drive</label>
-                    <input
-                      type="text"
-                      className="block w-full text-gray-900 border border-gray-300 bg-gray-50 rounded-md"
-                    />
-                  </div>
-                  <div className="my-2">
-                    <label htmlFor="laporan">
-                      Laporan Berupa Artikel Pengabdian atau Artikel Penelitian
-                    </label>
-                    <input
-                      className="block w-full text-gray-900 border border-gray-300 cursor-pointer bg-gray-50 rounded-md"
-                      id="file"
-                      type="file"
-                      accept=".pdf"
-                      onChange={handleFileChange}
-                    />
-                  </div>
-                  <div className="text-center mt-5">
-                    <button
-                      type="submit"
-                      className="px-8 py-2 bg-green-600 hover:bg-green-800 text-white font-bold rounded-lg"
-                    >
-                      Upload
-                    </button>
-                  </div>
-                </form>
-                ) }
+                  <form
+                    className="max-w-lg mx-auto my-3"
+                    onSubmit={handleSubmit}
+                  >
+                    {tables.length > 0 &&
+                      tables.map((items, i) => (
+                        <div key={i}>
+                          <input
+                            type="hidden"
+                            id="mahasiswa_id"
+                            className="disabled w-full rounded-md text-xs md:text-base"
+                            value={items.nim}
+                          />{" "}
+                        </div>
+                      ))}
+                    <div className="my-2">
+                      <label htmlFor="laporan">Judul Artikel</label>
+                      <input
+                        className="block w-full text-gray-900 border border-gray-300 bg-gray-50 rounded-md"
+                        id="judul"
+                        type="text"
+                        value={judul}
+                        onChange={(e) => setJudul(e.target.value)}
+                      />
+                    </div>
+                    {/* <div className="my-2 hidden">
+                      <label htmlFor="laporan">Link Google Drive</label>
+                      <input
+                        type="text"
+                        className="block w-full text-gray-900 border border-gray-300 bg-gray-50 rounded-md"
+                      />
+                    </div> */}
+                    <div className="my-2">
+                      <label htmlFor="laporan">
+                        Laporan Berupa Artikel Pengabdian atau Artikel
+                        Penelitian
+                      </label>
+                      <input
+                        className="block w-full text-gray-900 border border-gray-300 cursor-pointer bg-gray-50 rounded-md"
+                        id="file"
+                        type="file"
+                        accept=".pdf"
+                        onChange={handleFileChange}
+                      />
+                    </div>
+                    <div className="text-center mt-5">
+                      <button
+                        type="submit"
+                        className="px-8 py-2 bg-green-600 hover:bg-green-800 text-white font-bold rounded-lg"
+                      >
+                        Upload
+                      </button>
+                    </div>
+                  </form>
+                )}
               </div>
             </div>
           </div>
@@ -299,7 +307,10 @@ export default function LaporanKKN() {
               leaveTo="opacity-0 scale-95"
             >
               <div className="inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
-                <Dialog.Title as="h3" className="text-lg font-medium leading-6 text-gray-900">
+                <Dialog.Title
+                  as="h3"
+                  className="text-lg font-medium leading-6 text-gray-900"
+                >
                   Apakah anda yakin ingin menghapus Laporan Ini?
                 </Dialog.Title>
                 <div className="mt-2">

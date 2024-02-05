@@ -344,6 +344,7 @@ export default function LogbookKKN() {
                     className=" w-full rounded-md text-xs md:text-base"
                     value={formData.link}
                     onChange={handleChange}
+                    required
                   ></input>
                   <input
                     type="hidden"

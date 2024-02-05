@@ -319,7 +319,7 @@ export default function statusKkn() {
       <Modal isVisible={showModal2} onClose={() => setShowModal2(false)}>
         <div class="px-6 pb-2 text-left">
           <h3 class="text-xl font-semibold text-gray-900 flex justify-center items-center mb-4">
-            Edit Mahasiswa
+            Edit Status KKN Mahasiswa
           </h3>
           {editingData && (
             <form>
