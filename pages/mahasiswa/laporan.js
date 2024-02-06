@@ -12,6 +12,7 @@ import FailedModal from "@/components/modalfail";
 import ErrorModal from "@/components/modalerror";
 import { useRouter } from "next/router";
 
+
 const mahasiswaId = 1201010100;
 export default function LaporanKKN() {
   const [nim, setNim] = useState("");
