@@ -1,5 +1,5 @@
 import Map from "../components/Map";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Header from "../components/header";
 import Link from "next/link";
 import instagramIcon from "../components/svgs/instagram";
@@ -29,6 +29,7 @@ export default function Home() {
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [autoSLideInterval, setAutoSlideInterval] = useState(null);
+  const backgroundRef = useRef(null);
 
   const nextSlide = () => {
     const isLastSlide = currentIndex === imageSlides.length - 1;
@@ -46,6 +47,10 @@ export default function Home() {
     return () => {
       clearInterval(autoSLideInterval);
     };
+  }, [currentIndex]);
+
+  useEffect(() => {
+    backgroundRef.current.style.backgroundImage = `url(${imageSlides[currentIndex].url})`;
   }, [currentIndex]);
 
   const icons = [
@@ -92,7 +97,8 @@ export default function Home() {
         <section>
           <div className="h-[240px] w-full bg-gradient-to-b from-IjoRumput to-transparent absolute z-10"></div>
           <div
-            style={{ backgroundImage: `url(${imageSlides[currentIndex].url})` }}
+            // style={{ backgroundImage: `url(${imageSlides[currentIndex].url})` }}
+            ref={backgroundRef}
             className="text-left p-4 md:text-right pt-32 md:pt-[360px] w-full bg-center bg-cover duration-300 relative"
           >
             <div className="absolute w-[300px] h-[220px]  bg-[#80B156]/30 blur-3xl md:w-[860px] md:h-[320px] md:ml-auto md:right-0 rounded-[10%]"></div>
@@ -173,11 +179,13 @@ export default function Home() {
         <div className="bg-IjoRumput flex flex-row flex-wrap px-6 py-10 space-y-6 md:space-y-0 xl:space-y-4 md:px-20 xl:px-32 xl:py-16 justify-between ">
           <div className="w-1/7 flex justify-start">
             <div>
-              <img
-                src="/logo-uin.png"
-                alt="Logo Uin Bandung"
-                className="w-24 md:w-40 "
-              />
+              <picture>
+                <img
+                  src="/logo-uin.png"
+                  alt="Logo Uin Bandung"
+                  className="w-24 md:w-40 "
+                />
+              </picture>
             </div>
           </div>
           <div className="md:w-1/3 xl:w-1/2 md:pl-10 space-y-2 xl:space-y-4">

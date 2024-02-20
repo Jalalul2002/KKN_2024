@@ -23,7 +23,7 @@ export default function Admin() {
     return <div>Loading... Second Data Error</div>;
   }
 
-  const [selectedLocation, setSelectedLocation] = useState(null);
+  // const [selectedLocation, setSelectedLocation] = useState(null);
 
   return (
     <> 
@@ -38,8 +38,8 @@ export default function Admin() {
 
     <div className=" absolute ml-32 px-3 md:left-32 md:right-12 md:top-40 pb-5 rounded-xl bg-iceGray">
 
-    {tables && tables.length > 0 ? (tables.map((item) =>(
-      <div className="grid gap-y-10 gap-x-6 md:grid-cols-2 xl:grid-cols-4 px-8">
+    {tables && tables.length > 0 ? (tables.map((item, i) =>(
+      <div key={i} className="grid gap-y-10 gap-x-6 md:grid-cols-2 xl:grid-cols-4 px-8">
 
         <div className="relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 shadow-md  h-[70%] mt-8 ">
           <div className="bg-clip-border mx-4 rounded-xl overflow-hidden bg-gradient-to-tr from-blue-600 to-blue-400 text-white shadow-blue-500/40 shadow-lg absolute -mt-4 grid h-16 w-16 place-items-center">

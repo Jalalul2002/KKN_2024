@@ -71,6 +71,48 @@ export default function Sebaran() {
                     </a>
                   </td>
                 </tr>
+                <tr class="bg-white border-b">
+                  <th
+                    scope="row"
+                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
+                  >
+                    KKN Kolaborasi Nusantara Mandiri
+                  </th>
+                  <td class="px-6 py-4">Banten, Cirebon, Semarang, Yogyakarta, Mataram, Medan, Jambi</td>
+                  <td class="px-6 py-4">
+                    KKN kolaborasi PTKIN
+                  </td>
+                  <td class="px-6 py-4">50 Orang Perwakilan UIN Bandung</td>
+                  <td class="px-6 py-4 text-right">
+                    <a
+                      href="#"
+                      class="font-medium text-blue-600 hover:underline"
+                    >
+                      Download
+                    </a>
+                  </td>
+                </tr>
+                <tr class="bg-white border-b">
+                  <th
+                    scope="row"
+                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
+                  >
+                    KKN Kolaborasi Luar Negeri Mandiri
+                  </th>
+                  <td class="px-6 py-4">Malaysia, Jepang</td>
+                  <td class="px-6 py-4">
+                    KKN kolaborasi PTKIN
+                  </td>
+                  <td class="px-6 py-4">30 Orang Perwakilan UIN Bandung</td>
+                  <td class="px-6 py-4 text-right">
+                    <a
+                      href="#"
+                      class="font-medium text-blue-600 hover:underline"
+                    >
+                      Download
+                    </a>
+                  </td>
+                </tr>
               </tbody>
             </table>
           </div>
