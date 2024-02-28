@@ -6,7 +6,7 @@ export default NextAuth({
     CredentialsProvider({
       async authorize(credentials) {
         // console.log("credentials", credentials);
-        const authResponse = await fetch("https://api.uinsgd.ac.id/salam/v2/auth/mahasiswa/login", {
+        const authResponse = await fetch("", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

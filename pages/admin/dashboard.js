@@ -23,7 +23,7 @@ export default function Admin() {
     return <div>Loading... Second Data Error</div>;
   }
 
-  // const [selectedLocation, setSelectedLocation] = useState(null);
+  const [selectedLocation, setSelectedLocation] = useState(null);
 
   return (
     <> 
